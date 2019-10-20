@@ -316,16 +316,21 @@ void PrintInfo (List L)
 {
 	/* Kamus Lokal */
 	address P;
+	int i;
 
 	/* Algoritma */
-	printf("[");
 	if (!IsEmpty(L)) {
+		i = 1;
 		P = First(L);
+		printf("%d. ", i);
+		PrintLokasi(Info(P));
 		while (Next(P) != Nil) {
+			i++;
 			P = Next(P);
+			printf("%d. ", i);
+			PrintLokasi(Info(P));
 		}
 	}
-	printf("]");
 }
 
 int NbElmt (List L)
@@ -363,27 +368,17 @@ void Konkat1 (List *L1, List *L2, List *L3)
 	First(*L2) = Nil;
 }
 
-/*
-int main() {
-	address A,C;
-	infotype b;
-	List L,L2,L3;
+void UpdateAllBuildings(List *L) {
+	/* Kamus Lokal */
+	address P;
 
-	CreateEmpty(&L);
-	CreateEmpty(&L2);
-	b = 100;
-	A = Alokasi(b);
-	InsertFirst(&L2,A);
-	b = 333;
-	InsVLast(&L,b);
-	b = 55;
-	A = Alokasi(b);
-	InsertLast(&L,A);
-	printf("%d\n", Max(L));
-	Konkat1(&L,&L2,&L3);
-	DelAfter(&L3,&C,A);
-	DelLast(&L3,&A);
-	Dealokasi(&A);
-	PrintInfo(L3);
+	/* Algoritma */
+	if (!IsEmpty(*L)) {
+		P = First(*L);
+		UpdateBangunan(&Building(Info(P)));
+		while (Next(P) != Nil) {
+			P = Next(P);
+			UpdateBangunan(&Building(Info(P)));
+		}
+	}
 }
-*/

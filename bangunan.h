@@ -8,6 +8,7 @@
 
 typedef struct {
 	int Kepemilikan;
+	char Jenis;
 	int JumlahPasukan;
 	int Level;
 	int A; //Penambahan pasukan
@@ -16,6 +17,7 @@ typedef struct {
 } Bangunan;
 
 #define Kepemilikan(X) (X).Kepemilikan
+#define Jenis(X) (X).Jenis
 #define JumlahPasukan(X) (X).JumlahPasukan
 #define Level(X) (X).Level
 #define A(X) (X).A
