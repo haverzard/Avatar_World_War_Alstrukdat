@@ -17,6 +17,7 @@ typedef struct {
 	int Level;
 	int A; //Penambahan pasukan
 	int M; //Max penambahan pasukan
+	int U; //Pasukan Awal
 	boolean P; //Pertahanan
 } Bangunan;
 
@@ -28,6 +29,9 @@ typedef struct {
 #define M(X) (X).M
 #define P(X) (X).P
 #define U(X) (X).U
+
+boolean isJenisBangunanValid(JenisBangunan X);
+boolean isEQBangunan(Bangunan X1, Bangunan X2);
 
 void InitUndef(Bangunan *X);
 

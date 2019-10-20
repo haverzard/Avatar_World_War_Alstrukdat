@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include "boolean.h"
 #include "arraydinpos.h"
+#include "matriks.h"
 #include "lokasi.h"
 
 /* ********** KONSTRUKTOR ********** */
@@ -19,12 +20,11 @@ void MakeEmpty(TabInt *T, int maxel)
 {
 	/* Kamus Lokal */
 	IdxType i;
-	
 	/* Algoritma */
 	MaxEl(*T) = maxel;
 	TI(*T) = (int *) malloc ((maxel+1) * sizeof(int));
 	for (i = IdxMin; i <= maxel; i++) {
-		MakeUndefLoc(&Elmt(*T,i));
+		MakeUndefLoc(&ElmtArr(*T,i));
 	}
 }
 
@@ -39,7 +39,7 @@ void Dealokasi(TabInt *T)
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
-int NbElmt(TabInt T)
+int NbElmtArr(TabInt T)
 /* Mengirimkan banyaknya elemen efektif tabel */
 /* Mengirimkan nol jika tabel kosong */
 {
@@ -47,7 +47,7 @@ int NbElmt(TabInt T)
 	IdxType i;
 	/* Algoritma */
 	i = IdxMin;
-	while (i <= MaxEl(T) && !LOKASI_UNDEF(Elmt(T,i))) {
+	while (i <= MaxEl(T) && !LOKASI_UNDEF(ElmtArr(T,i))) {
 		i++;
 	}
 	i--;
@@ -75,7 +75,7 @@ IdxType GetLastIdx(TabInt T)
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen T terakhir */
 {
-	return NbElmt(T);
+	return NbElmtArr(T);
 }
 
 /* ********** Test Indeks yang valid ********** */
@@ -101,32 +101,39 @@ boolean IsEmpty(TabInt T)
 /* Mengirimkan true jika tabel T kosong, mengirimkan false jika tidak */
 /* *** Test tabel penuh *** */
 {
-	return (NbElmt(T) == 0);
+	return (NbElmtArr(T) == 0);
 }
 
 boolean IsFull(TabInt T)
 /* Mengirimkan true jika tabel T penuh, mengirimkan false jika tidak */
 {
 	/* Algoritma */
-	return (NbElmt(T) == MaxEl(T));
+	return (NbElmtArr(T) == MaxEl(T));
 }
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
 /* *** Mendefinisikan isi tabel dari pembacaan *** */
-void BacaIsiPeta(TabInt *T)
+void BacaIsiPeta(TabInt *T, MATRIKS Peta)
 /* I.S. T sembarang dan sudah dialokasikan sebelumnya */
 /* F.S. Tabel T terdefinisi */
 /* Proses : membaca banyaknya elemen T dari Peta dan mengisi nilainya */
 {
 	/* Kamus Lokal */
-	IdxType N, i;
+	IdxType i, j, k;
+	Loc temp;
 	
 	/* Algoritma */
-	
-	if (N > 0) {
-
-	} else {
-		MakeEmpty(T,MaxEl(*T));
+	k = GetFirstIdx(*T);
+	for (i = BrsMin; i <= NBrsEff(Peta); i++) {
+		for (j = KolMin; j <= NKolEff(Peta); j++) {
+			if (isJenisBangunanValid(Elmt(Peta, i, j))) {
+				InitBangunan(&Bangunan(temp), Elmt(Peta, i, j));
+				Absis(Koordinat(temp)) = i;
+				Ordinat(Koordinat(temp)) = j;
+				ElmtArr(*T, k) = temp;
+				k++; 
+			}
+		}
 	}
 }
 
@@ -163,13 +170,12 @@ boolean IsEQ(TabInt T1, TabInt T2)
 	if (GetLastIdx(T1) == GetLastIdx(T2) &&  GetFirstIdx(T1) == GetFirstIdx(T2)) {
 		i = 1;
 		while (sama && i <= GetLastIdx(T1)) {
-			sama = EQ_LOKASI(Elmt(T1,i), Elmt(T2,i));
+			sama = EQ_LOKASI(ElmtArr(T1,i), ElmtArr(T2,i));
 			i += 1;
 		}
 	} else {
 		sama = false;
 	}
-	
 	return sama;
 }
 
@@ -184,14 +190,13 @@ IdxType Search1(TabInt T, ElType X)
 {
 	/* Kamus Lokal */
 	IdxType i;
-	
 	/* Algoritma */
 	if (!IsEmpty(T)) {
 		i = GetFirstIdx(T);
-		while (!EQ_LOKASI(Elmt(T,i), X) && i < GetLastIdx(T)) {
+		while (!EQ_LOKASI(ElmtArr(T,i), X) && i < GetLastIdx(T)) {
 			i += 1;
 		}
-		if (EQ_LOKASI(Elmt(T,i), X)) {
+		if (EQ_LOKASI(ElmtArr(T,i), X)) {
 			return i;
 		}
 	}
@@ -220,7 +225,7 @@ void CopyTab(TabInt Tin, TabInt *Tout)
 	Dealokasi(Tout);
 	MakeEmpty(Tout,MaxEl(Tin));
 	for (i = GetFirstIdx(Tin); i <= GetLastIdx(Tin); i++) {
-		Elmt(*Tout,i) = Elmt(Tin,i);
+		ElmtArr(*Tout,i) = ElmtArr(Tin,i);
 	}
 }
 
@@ -236,50 +241,12 @@ int CountJenisBangunan(TabInt T, JenisBangunan X)
 	count = 0;
 	if (!IsEmpty(T)) {	
 		for (i = GetFirstIdx(T); i <= GetLastIdx(T); i++) {
-			if (Jenis(Bangunan(Elmt(T,i))) == X) {
+			if (Jenis(Bangunan(ElmtArr(T,i))) == X) {
 				count++;
 			}
 		}
 	}
 	return count;
-}
-
-/* ********** SORTING ********** */
-void Sort(TabInt *T, boolean asc)
-/* I.S. T boleh kosong */
-/* F.S. Jika asc = true, T terurut membesar */
-/*      Jika asc = false, T terurut mengecil */
-/* Proses : Mengurutkan T dengan salah satu algoritma sorting,
-   algoritma bebas */
-{
-	// /* Kamus Lokal */
-	// IdxType i, j;
-	// ElType temp;
-	
-	// /* Algoritma */
-	// if (!IsEmpty(*T)) {
-	// 	if (asc) {
-	// 		for (i = GetFirstIdx(*T)+1; i <= GetLastIdx(*T); i++) {
-	// 			j = i-1;
-	// 			temp = Elmt(*T,i);
-	// 			while (j >= GetFirstIdx(*T) && temp < Elmt(*T,j)) {
-	// 				Elmt(*T,j+1) = Elmt(*T,j);
-	// 				j -= 1;
-	// 			}
-	// 			Elmt(*T,j+1) = temp;
-	// 		}
-	// 	} else {
-	// 		for (i = GetFirstIdx(*T); i <= GetLastIdx(*T)-1; i++) {
-	// 			for (j = i; j <= GetLastIdx(*T); j++) {
-	// 				if (Elmt(*T,i) < Elmt(*T,j)) {
-	// 					temp = Elmt(*T,i);
-	// 					Elmt(*T,i) = Elmt(*T,j);
-	// 					Elmt(*T,j) = temp;
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// }
 }
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
@@ -291,9 +258,9 @@ void AddAsLastEl(TabInt *T, ElType X)
 {
 	/* Algoritma */
 	if (IsEmpty(*T)) {
-		Elmt(*T,IdxMin) = X;
+		ElmtArr(*T,IdxMin) = X;
 	} else {
-		Elmt(*T,GetLastIdx(*T)+1) = X;
+		ElmtArr(*T,GetLastIdx(*T)+1) = X;
 	}
 }
 
@@ -306,8 +273,8 @@ void DelLastEl(TabInt *T, ElType *X)
 /*      Tabel T mungkin menjadi kosong */
 {
 	/* Algoritma */
-	*X = Elmt(*T, GetLastIdx(*T));
-	MakeUndefLoc(&Elmt(*T, GetLastIdx(*T)));
+	*X = ElmtArr(*T, GetLastIdx(*T));
+	MakeUndefLoc(&ElmtArr(*T, GetLastIdx(*T)));
 }
 
 /* ********* MENGUBAH UKURAN ARRAY ********* */
@@ -351,4 +318,23 @@ void CompactTab(TabInt *T)
 	MakeEmpty(&TX,MaxEl(*T));
 	CopyTab(*T,&TX);
 	CopyTab(TX,T);
+}
+
+void DelEli (TabInt * T, IdxType i, ElType * X)
+/* Menghapus elemen ke-i tabel tanpa mengganggu kontiguitas */
+/* I.S. Tabel tidak kosong, i adalah indeks efektif yang valid */
+/* F.S. X adalah nilai elemen ke-i T sebelum penghapusan */
+/*      Banyaknya elemen tabel berkurang satu */
+/*      Tabel T mungkin menjadi kosong */
+/* Proses : Geser elemen ke-i+1 s.d. elemen terakhir */
+{
+    /* KAMUS LOKAL */
+    int j = i;
+    /* MENGGESER ELEMEN KE-i+1 S.D TERAKHIR */
+    *X = ElmtArr(*T, i);
+    while (j < NbElmt(*T)) {
+        ElmtArr(*T, j) = ElmtArr(*T, j+1);
+        j++;
+    }
+	MakeUndefLoc(&ElmtArr(*T, NbElmt(*T)));
 }

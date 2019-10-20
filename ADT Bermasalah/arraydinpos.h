@@ -9,6 +9,7 @@
 
 #include "boolean.h"
 #include "lokasi.h"
+#include "matriks.h"
 
 /*  Kamus Umum */
 #define IdxMin 1
@@ -38,7 +39,7 @@ typedef struct
 
 /* ********** SELEKTOR ********** */
 #define TI(T) (T).TI
-#define Elmt(T, i) (T).TI[(i)]
+#define ElmtArr(T, i) (T).TI[(i)]
 #define MaxEl(T) (T).MaxEl
 
 /* ********** KONSTRUKTOR ********** */
@@ -86,7 +87,7 @@ boolean IsFull(TabInt T);
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
 /* *** Mendefinisikan isi tabel dari pembacaan *** */
-void BacaIsiPeta(TabInt *T);
+void BacaIsiPeta(TabInt *T, MATRIKS Peta);
 /* I.S. T sembarang dan sudah dialokasikan sebelumnya */
 /* F.S. Tabel T terdefinisi */
 /* Proses : membaca banyaknya elemen T dari Peta dan mengisi nilainya */
@@ -126,14 +127,6 @@ int CountJenisBangunan(TabInt T, JenisBangunan X);
 /* Menghasilkan berapa banyak kemunculan JenisBangunan X di T */
 /* Jika T kosong menghasilkan 0 */
 
-/* ********** SORTING ********** */
-void Sort(TabInt *T, boolean asc);
-/* I.S. T boleh kosong */
-/* F.S. Jika asc = true, T terurut membesar */
-/*      Jika asc = false, T terurut mengecil */
-/* Proses : Mengurutkan T dengan salah satu algoritma sorting,
-   algoritma bebas */
-
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
 void AddAsLastEl(TabInt *T, ElType X);
@@ -163,5 +156,13 @@ void CompactTab(TabInt *T);
 /* Proses : Mengurangi max element sehingga Neff = MaxEl */
 /* I.S. Tabel tidak kosong */
 /* F.S. Ukuran MaxEl = Neff */
+
+void DelEli (TabInt * T, IdxType i, ElType * X);
+/* Menghapus elemen ke-i tabel tanpa mengganggu kontiguitas */
+/* I.S. Tabel tidak kosong, i adalah indeks efektif yang valid */
+/* F.S. X adalah nilai elemen ke-i T sebelum penghapusan */
+/*      Banyaknya elemen tabel berkurang satu */
+/*      Tabel T mungkin menjadi kosong */
+/* Proses : Geser elemen ke-i+1 s.d. elemen terakhir */
 
 #endif
