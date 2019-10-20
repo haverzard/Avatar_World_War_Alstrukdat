@@ -1,11 +1,17 @@
 /* File: point.h */
-/* Tanggal: 28 Agustus 2019 */
-/* *** Definisi ABSTRACT DATA TYPE POINT *** */
+/* *** Definisi ABSTRACT DATA TYPE POINT TERMODIFIKASI *** */
+/* Absis dan Ordinat selalu positif */
 
 #ifndef POINT_H
 #define POINT_H
 
 #include "boolean.h"
+
+/*  Kamus Umum */
+#define AbsisUndef -9999
+/* Indeks minimum array */
+#define OrdinatUndef -9999
+/* Indeks tak terdefinisi*/
 
 typedef struct {
 	int X; /* absis   */

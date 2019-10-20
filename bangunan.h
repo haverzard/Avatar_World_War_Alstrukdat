@@ -6,7 +6,12 @@
 
 #include "boolean.h"
 
+#define JenisUndef 'A'
+#define ValIntUndef -999
+
+typedef char JenisBangunan;
 typedef struct {
+	JenisBangunan Jenis;
 	int Kepemilikan;
 	int JumlahPasukan;
 	int Level;
@@ -15,6 +20,7 @@ typedef struct {
 	boolean P; //Pertahanan
 } Bangunan;
 
+#define Jenis(X) (X).Jenis
 #define Kepemilikan(X) (X).Kepemilikan
 #define JumlahPasukan(X) (X).JumlahPasukan
 #define Level(X) (X).Level
@@ -23,6 +29,8 @@ typedef struct {
 #define P(X) (X).P
 #define U(X) (X).U
 
+void InitUndef(Bangunan *X);
+
 void InitCastle(Bangunan *X);
 
 void InitTower(Bangunan *X);
@@ -30,6 +38,8 @@ void InitTower(Bangunan *X);
 void InitFort(Bangunan *X);
 
 void InitVillage(Bangunan *X);
+
+void InitBangunan(Bangunan *X, char jenisBangunan);
 
 void UpdateBangunan(Bangunan *X);
 

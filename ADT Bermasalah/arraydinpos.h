@@ -15,8 +15,6 @@
 /* Indeks minimum array */
 #define IdxUndef -999
 /* Indeks tak terdefinisi*/
-#define ValUndef 
-/* Nilai elemen tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
 typedef int IdxType; /* type indeks */
@@ -88,16 +86,10 @@ boolean IsFull(TabInt T);
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
 /* *** Mendefinisikan isi tabel dari pembacaan *** */
-void BacaIsi(TabInt *T);
+void BacaIsiPeta(TabInt *T);
 /* I.S. T sembarang dan sudah dialokasikan sebelumnya */
 /* F.S. Tabel T terdefinisi */
-/* Proses : membaca banyaknya elemen T dan mengisi nilainya */
-/* 1. Baca banyaknya elemen diakhiri enter, misalnya N */
-/*    Pembacaan diulangi sampai didapat N yang benar yaitu 0 <= N <= MaxElement(T) */
-/*    Jika N tidak valid, tidak diberikan pesan kesalahan */
-/* 2. Jika 0 < N <= MaxElement(T); Lakukan N kali: Baca elemen mulai dari indeks
-      IdxMin satu per satu diakhiri enter */
-/*    Jika N = 0; hanya terbentuk T kosong */
+/* Proses : membaca banyaknya elemen T dari Peta dan mengisi nilainya */
 void TulisIsiTab(TabInt T);
 /* Proses : Menuliskan isi tabel dengan traversal, tabel ditulis di antara kurung siku;
    antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan karakter di depan,
@@ -125,25 +117,14 @@ boolean SearchB(TabInt T, ElType X);
 /* Jika ada, menghasilkan true, jika tidak ada menghasilkan false */
 /* Skema searching yang digunakan bebas */
 
-/* ********** NILAI EKSTREM ********** */
-void MaxMin(TabInt T, ElType *Max, ElType *Min);
-/* I.S. Tabel T tidak kosong */
-/* F.S. Max berisi nilai maksimum T;
-        Min berisi nilai minimum T */
-
 /* ********** OPERASI LAIN ********** */
 void CopyTab(TabInt Tin, TabInt *Tout);
 /* I.S. Tin terdefinisi tidak kosong, Tout sembarang */
 /* F.S. Tout berisi salinan dari Tin (identik, Neff dan MaxEl sama) */
 /* Proses : Menyalin isi Tin ke Tout */
-ElType SumTab(TabInt T);
-/* Menghasilkan hasil penjumlahan semua elemen T */
+int CountJenisBangunan(TabInt T, JenisBangunan X);
+/* Menghasilkan berapa banyak kemunculan JenisBangunan X di T */
 /* Jika T kosong menghasilkan 0 */
-int CountX(TabInt T, ElType X);
-/* Menghasilkan berapa banyak kemunculan X di T */
-/* Jika T kosong menghasilkan 0 */
-boolean IsAllGenap(TabInt T);
-/* Menghailkan true jika semua elemen T genap. T boleh kosong */
 
 /* ********** SORTING ********** */
 void Sort(TabInt *T, boolean asc);
