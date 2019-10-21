@@ -11,7 +11,7 @@
 #define JenisUndef 'A'
 #define ValIntUndef -999
 
-#define JenisBangunan char
+typedef char JenisBangunan;
 
 typedef struct {
 	int Kepemilikan;
