@@ -5,15 +5,15 @@
 #define BANGUNAN_H
 
 #include "boolean.h"
+#include "point.h"
 
 #define JenisUndef 'A'
 #define ValIntUndef -999
 
-typedef char JenisBangunan;
 typedef struct {
-	JenisBangunan Jenis;
 	int Kepemilikan;
 	char Jenis;
+	POINT Koordinat;
 	int JumlahPasukan;
 	int Level;
 	int A; //Penambahan pasukan
@@ -22,9 +22,9 @@ typedef struct {
 	boolean P; //Pertahanan
 } Bangunan;
 
-#define Jenis(X) (X).Jenis
 #define Kepemilikan(X) (X).Kepemilikan
 #define Jenis(X) (X).Jenis
+#define Koordinat(X) (X).Koordinat
 #define JumlahPasukan(X) (X).JumlahPasukan
 #define Level(X) (X).Level
 #define A(X) (X).A
@@ -32,8 +32,11 @@ typedef struct {
 #define P(X) (X).P
 #define U(X) (X).U
 
-boolean isJenisBangunanValid(JenisBangunan X);
-boolean isEQBangunan(Bangunan X1, Bangunan X2);
+extern Bangunan BangunanUndef;
+
+boolean IsBangunanValid(Bangunan X);
+
+boolean EQ_Bangunan(Bangunan X1, Bangunan X2);
 
 void InitUndef(Bangunan *X);
 
@@ -53,5 +56,7 @@ void SerangBangunan(Bangunan *X, int N);
 
 void LevelUpBangunan(Bangunan *X);
 /* Prekondisi: JumlahPasukan(*X) >= M(*X)/2 */
+
+void PrintInfoBangunan(Bangunan X);
 
 #endif

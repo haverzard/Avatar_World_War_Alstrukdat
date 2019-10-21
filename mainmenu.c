@@ -101,11 +101,6 @@ void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
 	}
 }
 
-int PilihBangunan(int NoPemain, Player P1, Player P2) {
-	printl("Daftar Bangunan:");
-	
-}
-
 void ATTACK() {
 	printl("Bangunan yang digunakan untuk menyerang: ");
 }

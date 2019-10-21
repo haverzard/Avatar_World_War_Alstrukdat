@@ -9,4 +9,5 @@ void InitPlayer(int num, Player *P) {
 	Color(*P) = num;
 	NoPemain(*P) = num;
 	CreateEmpty(&Bangunan(*P));
+	First(Bangunan(*P)) = Alokasi(num); 
 }

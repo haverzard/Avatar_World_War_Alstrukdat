@@ -7,7 +7,7 @@
 #include "boolean.h"
 #include "mesinkar.h"
 #include "matriks.h"
-#include "lokasi.h"
+#include "arraydinpos.h"
 
 #define NMax_DATA 600
 #define ENDLINE '\r'
@@ -32,9 +32,9 @@ void INFOPETA(MATRIKS *Peta);
    I.S. : Peta belum terdefinisi
    F.S. : Peta terdefinisi dengan ukuran dari data */
 
-void INFOBANGUNAN();
+void INFOBANGUNAN(TabBangunan *TB);
 
-void LOKASIBANGUNAN(MATRIKS *Peta, Loc *P);
+void LOKASIBANGUNAN(MATRIKS *Peta, TabBangunan *TB, int i);
 
 
 #endif

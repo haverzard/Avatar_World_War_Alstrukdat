@@ -7,7 +7,8 @@
 #include <stdlib.h>
 #include "listlinier.h"
 #include "boolean.h"
-#include "lokasi.h"
+#include "bangunan.h"
+#include "arraydinpos.h"
 
 /* Definisi list : */
 /* List kosong : First(L) = Nil */
@@ -60,7 +61,7 @@ void Dealokasi (address *P)
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
 
-address Search (List L, infotype X)
+address Search (List L, Bangunan X)
 /* Mencari apakah ada elemen list dengan Info(P)= X */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
@@ -71,10 +72,10 @@ address Search (List L, infotype X)
 
 	/* Algoritma */
 	P = First(L);
-	found = EQ_LOKASI(Info(P),X);
+	found = EQ_Bangunan(ElmtArr(TB,Info(P)),X);
 	while (Next(P) != Nil && !found) {
 		P = Next(P);
-		found  = EQ_LOKASI(Info(P),X);
+		found  = EQ_Bangunan(ElmtArr(TB,Info(P)),X);
 	}
 	if (found) { return P; } else { return Nil; }
 }
@@ -233,7 +234,7 @@ void DelFirst (List *L, address *P)
 	First(*L) = Next(P2);
 }
 
-void DelP (List *L, infotype X)
+void DelP (List *L, Bangunan X)
 /* I.S. Sembarang */
 /* F.S. Jika ada elemen list beraddress P, dengan Info(P)=X  */
 /* Maka P dihapus dari list dan di-dealokasi */
@@ -249,12 +250,12 @@ void DelP (List *L, infotype X)
 	/* Algoritma */
 	P = First(*L);
 	P2 = Nil;
-	while(Next(P) != Nil && !EQ_LOKASI(Info(P),X)) {
+	while(Next(P) != Nil && !EQ_Bangunan(ElmtArr(TB,Info(P)),X)) {
 		P2 = P;
 		P = Next(P);
 	}
 
-	if (EQ_LOKASI(Info(P),X)) {
+	if (EQ_Bangunan(ElmtArr(TB,Info(P)),X)) {
 		if (P2 == Nil) {
 			First(*L) = Next(P);
 		} else {
@@ -323,12 +324,12 @@ void PrintInfo (List L)
 		i = 1;
 		P = First(L);
 		printf("%d. ", i);
-		PrintLokasi(Info(P));
+		PrintInfoBangunan(ElmtArr(TB,Info(P)));
 		while (Next(P) != Nil) {
 			i++;
 			P = Next(P);
 			printf("%d. ", i);
-			PrintLokasi(Info(P));
+			PrintInfoBangunan(ElmtArr(TB,Info(P)));
 		}
 	}
 }
@@ -375,10 +376,10 @@ void UpdateAllBuildings(List *L) {
 	/* Algoritma */
 	if (!IsEmpty(*L)) {
 		P = First(*L);
-		UpdateBangunan(&Building(Info(P)));
+		UpdateBangunan(&ElmtArr(TB,Info(P)));
 		while (Next(P) != Nil) {
 			P = Next(P);
-			UpdateBangunan(&Building(Info(P)));
+			UpdateBangunan(&ElmtArr(TB,Info(P)));
 		}
 	}
 }

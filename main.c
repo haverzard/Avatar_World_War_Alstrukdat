@@ -10,28 +10,25 @@
 #include "player.h"
 #include "point.h"
 #include "listlinier.h"
-#include "lokasi.h"
 
 int main() {
 	/* Kamus */
 	int i;
 	MATRIKS Peta;
 	Player p1, p2;
-	Loc temp;
+
+	/* Inisiasi */
+	Jenis(BangunanUndef) = JenisUndef;
 	
 	/* Algoritma */
 	STARTGAME();
 	if (!EndGame) {
-		CREATEPLAYER(&p1, &p2);
 		INFOPETA(&Peta);
-		INFOBANGUNAN();
-		LOKASIBANGUNAN(&Peta, &temp);
-		InsVFirst(&Bangunan(p1), temp);
-		LOKASIBANGUNAN(&Peta, &temp);
-		InsVFirst(&Bangunan(p2), temp);
-		for (i = 1; i <= 15; i++) {
-			LOKASIBANGUNAN(&Peta, &temp);
+		INFOBANGUNAN(&TB);
+		for (i = 1; i <= MaxEl(TB); i++) {
+			LOKASIBANGUNAN(&Peta, &TB, i);
 		}
+		CREATEPLAYER(&p1, &p2);
 		i = 1;
 		while (!EndGame) {
 			while (!EndTurn) {

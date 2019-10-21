@@ -8,16 +8,17 @@
 
 #include "boolean.h"
 #include "point.h"
-#include "lokasi.h"
+#include "bangunan.h"
 
 #define Nil NULL
 
-typedef Loc infotype;
+typedef int infotype;
 typedef struct tElmtlist *address;
 typedef struct tElmtlist {
 	infotype info;
 	address next;
 } ElmtList;
+
 typedef struct {
 	address First;
 } List;
@@ -53,7 +54,7 @@ void Dealokasi (address *P);
 /* Melakukan dealokasi/pengembalian address P */
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-address Search (List L, infotype X);
+address Search (List L, Bangunan X);
 /* Mencari apakah ada elemen list dengan Info(P)= X */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
@@ -99,7 +100,7 @@ void DelFirst (List *L, address *P);
 /* F.S. P adalah alamat elemen pertama list sebelum penghapusan */
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* First element yg baru adalah suksesor elemen pertama yang lama */
-void DelP (List *L, infotype X);
+void DelP (List *L, Bangunan X);
 /* I.S. Sembarang */
 /* F.S. Jika ada elemen list beraddress P, dengan Info(P)=X  */
 /* Maka P dihapus dari list dan di-dealokasi */

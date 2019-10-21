@@ -6,7 +6,8 @@
 #include "boolean.h"
 #include "mesinkar.h"
 #include "matriks.h"
-#include "lokasi.h"
+#include "arraydinpos.h"
+#include "bangunan.h"
 #include "point.h"
 
 char Baris[NMax_DATA+1];
@@ -56,29 +57,26 @@ void INFOPETA(MATRIKS *Peta) {
 	NEXTDATA();
 }
 
-void INFOBANGUNAN() {
+void INFOBANGUNAN(TabBangunan *TB) {
 	/* Kamus Lokal */
-	ADV();
-	ADV();
+	int size;
+
+	/* Algoritma */
+	size = 0;
+	while (CC != ENDLINE && CC != BLANK) {
+		size = size * 10 + KarakterToInt(CC);
+		ADV();
+	}
+	MakeEmpty(TB, size);
 	NEXTDATA();
 }
 
-void LOKASIBANGUNAN(MATRIKS *Peta, Loc *P) {
+void LOKASIBANGUNAN(MATRIKS *Peta, TabBangunan *P, int i) {
 	/* Kamus Lokal */
 	int X, Y;
 
 	/* Algoritma */
-	if (CC == 'C') {
-		InitCastle(&Building(*P));
-	} else if (CC == 'T') {
-		InitTower(&Building(*P));
-	} else if (CC == 'F') {
-		InitFort(&Building(*P));
-	} else if (CC == 'V') {
-		InitVillage(&Building(*P));
-	} else {
-		printf("BANGUNAN INVALID! TOLONG RESTART ULANG!\n");
-	}
+	InitBangunan(&ElmtArr(*P,i), CC);
 	ADV();
 	IgnoreBlank_DATA();
 	X = 0;
@@ -92,7 +90,7 @@ void LOKASIBANGUNAN(MATRIKS *Peta, Loc *P) {
 		X = X * 10 + KarakterToInt(CC);
 		ADV();
 	}
-	Koordinat(*P) = MakePOINT(Y, X);
-	Elmt(*Peta,Y,X) = Jenis(Building(*P));
+	Koordinat(ElmtArr(*P,i)) = MakePOINT(Y, X);
+	ElmtMat(*Peta,Y,X) = Jenis(ElmtArr(*P,i));
 	NEXTDATA();
 }

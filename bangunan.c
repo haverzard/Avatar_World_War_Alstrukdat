@@ -4,23 +4,16 @@
 #include <stdio.h>
 #include "boolean.h"
 #include "bangunan.h"
+#include "point.h"
 
-boolean isJenisBangunanValid(JenisBangunan X) {
-	return (X == 'C' || X == 'T' || X == 'F' || X == 'V');
+Bangunan BangunanUndef;
+
+boolean IsBangunanValid(Bangunan X) {
+	return Jenis(X) != JenisUndef;
 }
 
-boolean isEQBangunan(Bangunan X1, Bangunan X2) {
-	return Jenis(X1) == Jenis(X2) && Kepemilikan(X1) == Kepemilikan(X2) && JumlahPasukan(X1) == JumlahPasukan(X2) && Level(X1) == Level(X2) && A(X1) == A(X2) && M(X1) == M(X2) && P(X1) == P(X2) && U(X1) == U(X2);
-}
-
-void InitUndef(Bangunan *X) {
-	Jenis(*X) = JenisUndef;
-	Kepemilikan(*X) = ValIntUndef;
-	JumlahPasukan(*X) = ValIntUndef;
-	Level(*X) = ValIntUndef;
-	A(*X) = ValIntUndef;
-	M(*X) = ValIntUndef;
-	P(*X) = false;
+boolean EQ_Bangunan(Bangunan X1, Bangunan X2) {
+	return Jenis(X1) == Jenis(X2) && EQ_POINT(Koordinat(X1),Koordinat(X2)) && Kepemilikan(X1) == Kepemilikan(X2) && JumlahPasukan(X1) == JumlahPasukan(X2) && Level(X1) == Level(X2) && A(X1) == A(X2) && M(X1) == M(X2) && P(X1) == P(X2) && U(X1) == U(X2);
 }
 
 void InitCastle(Bangunan *X) {
@@ -77,7 +70,7 @@ void InitBangunan(Bangunan *X, char jenisBangunan) {
 	} else if (jenisBangunan == 'V') {
 		InitVillage(X);
 	} else {
-		InitUndef(X);
+		printf("BANGUNAN TIDAK VALID! ULANG!");
 	}
 }
 
@@ -143,4 +136,18 @@ void LevelUpBangunan(Bangunan *X) {
 			M(*X) = 50;
 		}
 	}
+}
+
+void PrintInfoBangunan(Bangunan X) {
+	if (Jenis(X) == 'C') {
+		printf("Castle ");
+	} else  if (Jenis(X) == 'T') {
+		printf("Tower ");
+	} else  if (Jenis(X) == 'F') {
+		printf("Fort ");
+	} else  if (Jenis(X) == 'V') {
+		printf("Village ");
+	}
+	TulisPOINT(Koordinat(X));
+	printf(" %d lv.%d\n", JumlahPasukan(X), Level(X));
 }
