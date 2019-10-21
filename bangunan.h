@@ -13,6 +13,7 @@ typedef char JenisBangunan;
 typedef struct {
 	JenisBangunan Jenis;
 	int Kepemilikan;
+	char Jenis;
 	int JumlahPasukan;
 	int Level;
 	int A; //Penambahan pasukan
@@ -23,6 +24,7 @@ typedef struct {
 
 #define Jenis(X) (X).Jenis
 #define Kepemilikan(X) (X).Kepemilikan
+#define Jenis(X) (X).Jenis
 #define JumlahPasukan(X) (X).JumlahPasukan
 #define Level(X) (X).Level
 #define A(X) (X).A

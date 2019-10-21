@@ -4,8 +4,10 @@
 #include <stdio.h>
 #include "mainmenu.h"
 #include "boolean.h"
-#include "mesindata.h"
 #include "matriks.h"
+#include "player.h"
+#include "bangunan.h"
+#include "mesindata.h"
 #include "mesinkata.h"
 
 #define printl(x) printf("%s\n", x);
@@ -54,10 +56,21 @@ void LOADGAME() {
 	}
 }
 
-void TURN(int NoPemain, MATRIKS Peta) {
+void CREATEPLAYER(Player *P1, Player *P2) {
+	InitPlayer(1, P1);
+	InitPlayer(2, P2);
+}
+
+void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
 	TulisMATRIKSPETA(Peta);
 	printf("Player %d\n", NoPemain);
-	//TulisBangunanPlayer(NoPemain);
+	if (NoPemain == 1) {
+		PrintInfo(Bangunan(*P1));
+		UpdateAllBuildings(&Bangunan(*P1));
+	} else {
+		PrintInfo(Bangunan(*P2));
+		UpdateAllBuildings(&Bangunan(*P2));
+	}
 	printl("COMMAND YANG TERSEDIA:");
 	printl("1. ATTACK	5. END_TURN");
 	printl("2. LEVEL_UP	6. SAVE");
@@ -86,4 +99,13 @@ void TURN(int NoPemain, MATRIKS Peta) {
 	} else {
 		printl("Inputnya yang benar dong!");
 	}
+}
+
+int PilihBangunan(int NoPemain, Player P1, Player P2) {
+	printl("Daftar Bangunan:");
+	
+}
+
+void ATTACK() {
+	printl("Bangunan yang digunakan untuk menyerang: ");
 }

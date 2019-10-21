@@ -9,17 +9,14 @@
 
 typedef struct {
 	int Color;
+	int NoPemain;
 	List Bangunan;
 } Player;
 
-void STARTGAME();
-/* 	I.S. Menampilkan menu awal dan menerima masukan user 
-	F.S. Choice terisi dan game akan mulai di-load jika choice sesuai.
-		 Jika choice tidak sesuai, balik lagi ke menu utama.
-*/
-void LOADGAME();
-/*	I.S.
-	F.S.
-*/
+#define Color(X) (X).Color
+#define NoPemain(X) (X).NoPemain
+#define Bangunan(X) (X).Bangunan
+
+void InitPlayer(int num, Player *P);
 
 #endif

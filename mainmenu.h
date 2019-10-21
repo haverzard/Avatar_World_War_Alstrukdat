@@ -7,6 +7,7 @@
 #include "boolean.h"
 #include "mesindata.h"
 #include "matriks.h"
+#include "player.h"
 
 extern int choice;
 extern boolean EndGame;
@@ -22,6 +23,8 @@ void LOADGAME();
 	F.S.
 */
 
-void TURN(int NoPemain, MATRIKS Peta);
+void CREATEPLAYER(Player *P1, Player *P2);
+
+void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2);
 
 #endif

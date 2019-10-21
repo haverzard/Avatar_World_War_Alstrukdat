@@ -22,15 +22,20 @@ int main() {
 	/* Algoritma */
 	STARTGAME();
 	if (!EndGame) {
+		CREATEPLAYER(&p1, &p2);
 		INFOPETA(&Peta);
 		INFOBANGUNAN();
-		for (i = 1; i <= 17; i++) {
+		LOKASIBANGUNAN(&Peta, &temp);
+		InsVFirst(&Bangunan(p1), temp);
+		LOKASIBANGUNAN(&Peta, &temp);
+		InsVFirst(&Bangunan(p2), temp);
+		for (i = 1; i <= 15; i++) {
 			LOKASIBANGUNAN(&Peta, &temp);
 		}
 		i = 1;
 		while (!EndGame) {
 			while (!EndTurn) {
-				TURN(i, Peta);
+				TURN(i, Peta, &p1, &p2);
 			}
 			i = (i % 2 + 3) - 2;
 			EndTurn = false;
