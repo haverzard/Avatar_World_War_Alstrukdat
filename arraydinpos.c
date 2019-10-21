@@ -231,7 +231,7 @@ void CopyTab(TabBangunan Tin, TabBangunan *Tout)
 	}
 }
 
-int CountJenisBangunan(TabBangunan T, Bangunan X);
+int CountJenisBangunan(TabBangunan T, JenisBangunan X);
 /* Menghasilkan berapa banyak kemunculan JenisBangunan X di T */
 /* Jika T kosong menghasilkan 0 */
 /*
@@ -242,7 +242,7 @@ int CountJenisBangunan(TabBangunan T, Bangunan X);
 	count = 0;
 	if (!IsEmpty_Array(T)) {	
 		for (i = GetFirstIdx(T); i <= GetLastIdx(T); i++) {
-			if (Jenis(Bangunan(ElmtArr(T,i))) == X) {
+			if (Jenis(Building(ElmtArr(T,i))) == X) {
 				count++;
 			}
 		}

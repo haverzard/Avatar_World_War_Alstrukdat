@@ -7,12 +7,15 @@
 #include "boolean.h"
 #include "point.h"
 
+
 #define JenisUndef 'A'
 #define ValIntUndef -999
 
+#define JenisBangunan char
+
 typedef struct {
 	int Kepemilikan;
-	char Jenis;
+	JenisBangunan Jenis;
 	POINT Koordinat;
 	int JumlahPasukan;
 	int Level;
