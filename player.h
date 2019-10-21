@@ -10,7 +10,16 @@
 typedef struct {
 	int Color;
 	List Bangunan;
+	Queue Skill;
+	boolean Critical; // Ini untuk skill Critical Hit
+	//int skillDuration;
 } Player;
+
+#define Skill(P) P.Skill
+#define Bangunan(P) P.Bangunan
+#define Color(P)  P.Color
+#define Critical(P) P.Critical 
+
 
 void STARTGAME();
 /* 	I.S. Menampilkan menu awal dan menerima masukan user 
