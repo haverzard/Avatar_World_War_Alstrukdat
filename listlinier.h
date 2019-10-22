@@ -34,11 +34,11 @@ typedef struct {
 
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
-boolean IsEmpty (List L);
+boolean IsEmpty_LL (List L);
 /* Mengirim true jika list kosong */
 
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateEmpty (List *L);
+void CreateEmpty_LL (List *L);
 /* I.S. sembarang             */
 /* F.S. Terbentuk list kosong */
 
@@ -145,5 +145,15 @@ void Konkat1 (List *L1, List *L2, List *L3);
 void UpdateAllBuildings(List L);
 
 void IndexLevelUp(List L, int idx);
+
+void LevelUpAll(List L);
+
+void ShieldOn(List L);
+
+void ShieldOff(List L);
+
+void ReinforceAll(List L);
+
+void BarrageAll(List L);
 
 #endif

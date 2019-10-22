@@ -17,7 +17,7 @@
 
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
-boolean IsEmpty (List L)
+boolean IsEmpty_LL (List L)
 /* Mengirim true jika list kosong */
 {
 	/* Algoritma */
@@ -25,7 +25,7 @@ boolean IsEmpty (List L)
 }
 
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateEmpty (List *L)
+void CreateEmpty_LL (List *L)
 /* I.S. sembarang             */
 /* F.S. Terbentuk list kosong */
 {
@@ -93,7 +93,7 @@ void InsVFirst (List *L, infotype X)
 
 	/* Algoritma */
 	P = Alokasi(X);
-	if (IsEmpty(*L)) {
+	if (IsEmpty_LL(*L)) {
 		First(*L) = P;
 	} else {
 		P2 = First(*L);
@@ -114,7 +114,7 @@ void InsVLast (List *L, infotype X)
 
 	/* Algoritma */
 	P = Alokasi(X);
-	if (IsEmpty(*L)) {
+	if (IsEmpty_LL(*L)) {
 		First(*L) = P;
 	} else {
 		P2 = First(*L);
@@ -176,7 +176,7 @@ void InsertFirst (List *L, address P)
 	address Paf;
 
 	/* Algoritma */
-	if (IsEmpty(*L)) {
+	if (IsEmpty_LL(*L)) {
 		First(*L) = P;
 	} else {
 		Paf = First(*L);
@@ -207,7 +207,7 @@ void InsertLast (List *L, address P)
 	address P2;
 
 	/* Algoritma */
-	if (IsEmpty(*L)) {
+	if (IsEmpty_LL(*L)) {
 		First(*L) = P;
 	} else {
 		P2 = First(*L);
@@ -320,7 +320,7 @@ void PrintInfo (List L)
 	int i;
 
 	/* Algoritma */
-	if (!IsEmpty(L)) {
+	if (!IsEmpty_LL(L)) {
 		i = 1;
 		P = First(L);
 		printf("Daftar bangunan: \n");
@@ -343,7 +343,7 @@ int NbElmt (List L)
 	address P;
 
 	/* Algoritma */
-	if (IsEmpty(L)) { return 0; }
+	if (IsEmpty_LL(L)) { return 0; }
 	count = 1;
 	P = First(L);
 	while (Next(P) != Nil) {
@@ -363,7 +363,7 @@ void Konkat1 (List *L1, List *L2, List *L3)
 /* Tidak ada alokasi/dealokasi pada prosedur ini */
 {
 	/* Algoritma */
-	CreateEmpty(L3);
+	CreateEmpty_LL(L3);
 	InsertFirst(L3,First(*L1));
 	InsertLast(L3,First(*L2));
 	First(*L1) = Nil;
@@ -375,7 +375,7 @@ void UpdateAllBuildings(List L) {
 	address P;
 
 	/* Algoritma */
-	if (!IsEmpty(L)) {
+	if (!IsEmpty_LL(L)) {
 		P = First(L);
 		UpdateBangunan(&ElmtArr(TB,Info(P)));
 		while (Next(P) != Nil) {
@@ -426,7 +426,7 @@ void LevelUpAll(List L) {
 	address P;
 
 	/* Algoritma */
-	if (!IsEmpty(L)) {
+	if (!IsEmpty_LL(L)) {
 		P = First(L);
 		LevelUpBangunan(&ElmtArr(TB,Info(P)));
 		while (Next(P) != Nil) {
@@ -441,7 +441,7 @@ void ShieldOn(List L) {
 	address P;
 
 	/* Algoritma */
-	if (!IsEmpty(L)) {
+	if (!IsEmpty_LL(L)) {
 		P = First(L);
 		P(ElmtArr(TB,Info(P))) = true;
 		while (Next(P) != Nil) {
@@ -457,7 +457,7 @@ void ShieldOff(List L) {
 	address P;
 
 	/* Algoritma */
-	if (!IsEmpty(L)) {
+	if (!IsEmpty_LL(L)) {
 		P = First(L);
 		if (Jenis(ElmtArr(TB,Info(P))) != 'T') {
 			P(ElmtArr(TB,Info(P))) = false;
@@ -476,7 +476,7 @@ void ReinforceAll(List L) {
 	address P;
 
 	/* Algoritma */
-	if (!IsEmpty(L)) {
+	if (!IsEmpty_LL(L)) {
 		P = First(L);
 		JumlahPasukan(ElmtArr(TB,Info(P))) += 5;
 		while (Next(P) != Nil) {
@@ -491,7 +491,7 @@ void BarrageAll(List L) {
 	address P;
 
 	/* Algoritma */
-	if (!IsEmpty(L)) {
+	if (!IsEmpty_LL(L)) {
 		P = First(L);
 		if (JumlahPasukan(ElmtArr(TB,Info(P))) >= 10) {
 			JumlahPasukan(ElmtArr(TB,Info(P))) -= 10;

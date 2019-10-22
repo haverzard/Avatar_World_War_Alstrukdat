@@ -15,28 +15,28 @@ TabBangunan TB;
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong  */
-void MakeEmpty(TabBangunan *T, int maxel)
-/* I.S. T sembarang, maxel > 0 */
-/* F.S. Terbentuk tabel T kosong dengan kapasitas maxel + 1 */
+void MakeEmpty(TabBangunan *T, int MaxElArr)
+/* I.S. T sembarang, MaxElArr > 0 */
+/* F.S. Terbentuk tabel T kosong dengan kapasitas MaxElArr + 1 */
 /* Proses: Inisialisasi semua elemen tabel T dengan LocUndef */
 {
 	/* Kamus Lokal */
 	IdxType i;
 	/* Algoritma */
-	MaxEl(*T) = maxel;
-	TI(*T) = (Bangunan *) malloc ((maxel+1) * sizeof(Bangunan));
-	for (i = IdxMin; i <= maxel; i++) {
+	MaxElArr(*T) = MaxElArr;
+	TI(*T) = (Bangunan *) malloc ((MaxElArr+1) * sizeof(Bangunan));
+	for (i = IdxMin; i <= MaxElArr; i++) {
 		ElmtArr(*T,i) = BangunanUndef;
 	}
 }
 
 void Dealokasi_Array(TabBangunan *T)
 /* I.S. T terdefinisi; */
-/* F.S. TI(T) dikembalikan ke system, MaxEl(T)=0; Neff(T)=0 */
+/* F.S. TI(T) dikembalikan ke system, MaxElArr(T)=0; Neff(T)=0 */
 {
 	/* Algoritma */
 	free(TI(*T));
-	MaxEl(*T) = 0;
+	MaxElArr(*T) = 0;
 }
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
@@ -49,7 +49,7 @@ int NBElmt_Array(TabBangunan T)
 	IdxType i;
 	/* Algoritma */
 	i = IdxMin;
-	while (i <= MaxEl(T) && IsBangunanValid(ElmtArr(T,i))) {
+	while (i <= MaxElArr(T) && IsBangunanValid(ElmtArr(T,i))) {
 		i++;
 	}
 	i--;
@@ -57,11 +57,11 @@ int NBElmt_Array(TabBangunan T)
 }
 
 /* *** Daya tampung container *** */
-int MaxElement(TabBangunan T)
+int MaxElArrement(TabBangunan T)
 /* Mengirimkan maksimum elemen yang dapat ditampung oleh tabel */
 {
 	/* Algoritma */
-	return MaxEl(T);
+	return MaxElArr(T);
 }
 
 /* *** Selektor INDEKS *** */
@@ -86,7 +86,7 @@ boolean IsIdxValid_Array(TabBangunan T, IdxType i)
 /* yaitu antara indeks yang terdefinisi utk container*/
 {
 	/* Algoritma */
-	return (i >= IdxMin) && (i <= MaxEl(T));
+	return (i >= IdxMin) && (i <= MaxElArr(T));
 }
 
 boolean IsIdxEff_Array(TabBangunan T, IdxType i)
@@ -106,11 +106,11 @@ boolean IsEmpty_Array(TabBangunan T)
 	return (NBElmt_Array(T) == 0);
 }
 
-boolean IsFull(TabBangunan T)
+boolean IsFull_Array(TabBangunan T)
 /* Mengirimkan true jika tabel T penuh, mengirimkan false jika tidak */
 {
 	/* Algoritma */
-	return (NBElmt_Array(T) == MaxEl(T));
+	return (NBElmt_Array(T) == MaxElArr(T));
 }
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
@@ -217,7 +217,7 @@ boolean SearchB(TabBangunan T, ElType_Array X)
 /* ********** OPERASI LAIN ********** */
 void CopyTab(TabBangunan Tin, TabBangunan *Tout)
 /* I.S. Tin terdefinisi tidak kosong, Tout sembarang */
-/* F.S. Tout berisi salinan dari Tin (identik, Neff dan MaxEl sama) */
+/* F.S. Tout berisi salinan dari Tin (identik, Neff dan MaxElArr sama) */
 /* Proses : Menyalin isi Tin ke Tout */
 {
 	/* Kamus Lokal */
@@ -225,7 +225,7 @@ void CopyTab(TabBangunan Tin, TabBangunan *Tout)
 	
 	/* Algoritma */
 	Dealokasi_Array(Tout);
-	MakeEmpty(Tout,MaxEl(Tin));
+	MakeEmpty(Tout,MaxElArr(Tin));
 	for (i = GetFirstIdx(Tin); i <= GetLastIdx(Tin); i++) {
 		ElmtArr(*Tout,i) = ElmtArr(Tin,i);
 	}
@@ -287,36 +287,36 @@ void GrowTab(TabBangunan *T, int num)
 	/* Kamus Lokal */
 	TabBangunan TX;
 	/* Algoritma */
-	MaxEl(*T) += num;
-	MakeEmpty(&TX,MaxEl(*T));
+	MaxElArr(*T) += num;
+	MakeEmpty(&TX,MaxElArr(*T));
 	CopyTab(*T,&TX);
 	CopyTab(TX,T);
 }
 
 void ShrinkTab(TabBangunan *T, int num)
 /* Proses : Mengurangi max element sebanyak num */
-/* I.S. Tabel sudah terdefinisi, ukuran MaxEl > num, dan Neff < MaxEl - num. */
+/* I.S. Tabel sudah terdefinisi, ukuran MaxElArr > num, dan Neff < MaxElArr - num. */
 /* F.S. Ukuran tabel berkurang sebanyak num. */
 {
 	/* Kamus Lokal */
 	TabBangunan TX;
 	/* Algoritma */
-	MaxEl(*T) -= num;
-	MakeEmpty(&TX,MaxEl(*T));
+	MaxElArr(*T) -= num;
+	MakeEmpty(&TX,MaxElArr(*T));
 	CopyTab(*T,&TX);
 	CopyTab(TX,T);
 }
 
 void CompactTab(TabBangunan *T)
-/* Proses : Mengurangi max element sehingga Neff = MaxEl */
+/* Proses : Mengurangi max element sehingga Neff = MaxElArr */
 /* I.S. Tabel tidak kosong */
-/* F.S. Ukuran MaxEl = Neff */
+/* F.S. Ukuran MaxElArr = Neff */
 {
 	/* Kamus Lokal */
 	TabBangunan TX;
 	/* Algoritma */
-	MaxEl(*T) = GetLastIdx(*T);
-	MakeEmpty(&TX,MaxEl(*T));
+	MaxElArr(*T) = GetLastIdx(*T);
+	MakeEmpty(&TX,MaxElArr(*T));
 	CopyTab(*T,&TX);
 	CopyTab(TX,T);
 }

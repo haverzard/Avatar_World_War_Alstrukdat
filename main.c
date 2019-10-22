@@ -25,7 +25,7 @@ int main() {
 	if (!EndGame) {
 		INFOPETA(&Peta);
 		INFOBANGUNAN(&TB);
-		for (i = 1; i <= MaxEl(TB); i++) {
+		for (i = 1; i <= MaxElArr(TB); i++) {
 			LOKASIBANGUNAN(&Peta, &TB, i);
 		}
 		CREATEPLAYER(&p1, &p2);

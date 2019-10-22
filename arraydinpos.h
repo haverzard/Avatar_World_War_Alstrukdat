@@ -23,9 +23,9 @@ typedef Bangunan ElType_Array;  /* type elemen tabel */
 typedef struct
 {
   ElType_Array *TI; /* memori tempat penyimpan elemen (container) */
-  int MaxEl;  /* ukuran elemen */
+  int MaxElArr;  /* ukuran elemen */
 } TabBangunan;
-/* Indeks yang digunakan [IdxMin..MaxEl] */
+/* Indeks yang digunakan [IdxMin..MaxElArr] */
 /* Jika T adalah TabBangunan, cara deklarasi dan akses: */
 /* Deklarasi : T : TabBangunan */
 /* Maka cara akses:
@@ -40,20 +40,20 @@ typedef struct
 /* ********** SELEKTOR ********** */
 #define TI(T) (T).TI
 #define ElmtArr(T, i) (T).TI[(i)]
-#define MaxEl(T) (T).MaxEl
+#define MaxElArr(T) (T).MaxElArr
 
 extern TabBangunan TB;
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong  */
-void MakeEmpty(TabBangunan *T, int maxel);
-/* I.S. T sembarang, maxel > 0 */
-/* F.S. Terbentuk tabel T kosong dengan kapasitas maxel + 1 */
+void MakeEmpty(TabBangunan *T, int MaxElArr);
+/* I.S. T sembarang, MaxElArr > 0 */
+/* F.S. Terbentuk tabel T kosong dengan kapasitas MaxElArr + 1 */
 /* Proses: Inisialisasi semua elemen tabel T dengan ValUndef */
 
 void Dealokasi_Array(TabBangunan *T);
 /* I.S. T terdefinisi; */
-/* F.S. TI(T) dikembalikan ke system, MaxEl(T)=0; Neff(T)=0 */
+/* F.S. TI(T) dikembalikan ke system, MaxElArr(T)=0; Neff(T)=0 */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
@@ -61,7 +61,7 @@ int NBElmt_Array(TabBangunan T);
 /* Mengirimkan banyaknya elemen efektif tabel */
 /* Mengirimkan nol jika tabel kosong */
 /* *** Daya tampung container *** */
-int MaxElement(TabBangunan T);
+int MaxElArrement(TabBangunan T);
 /* Mengirimkan maksimum elemen yang dapat ditampung oleh tabel */
 /* *** Selektor INDEKS *** */
 IdxType GetFirstIdx(TabBangunan T);
@@ -84,7 +84,7 @@ boolean IsIdxEff_Array(TabBangunan T, IdxType i);
 boolean IsEmpty_Array(TabBangunan T);
 /* Mengirimkan true jika tabel T kosong, mengirimkan false jika tidak */
 /* *** Test tabel penuh *** */
-boolean IsFull(TabBangunan T);
+boolean IsFull_Array(TabBangunan T);
 /* Mengirimkan true jika tabel T penuh, mengirimkan false jika tidak */
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
@@ -123,7 +123,7 @@ boolean SearchB(TabBangunan T, ElType_Array X);
 /* ********** OPERASI LAIN ********** */
 void CopyTab(TabBangunan Tin, TabBangunan *Tout);
 /* I.S. Tin terdefinisi tidak kosong, Tout sembarang */
-/* F.S. Tout berisi salinan dari Tin (identik, Neff dan MaxEl sama) */
+/* F.S. Tout berisi salinan dari Tin (identik, Neff dan MaxElArr sama) */
 /* Proses : Menyalin isi Tin ke Tout */
 
 int CountJenisBangunan(TabBangunan T, JenisBangunan X);
@@ -152,13 +152,13 @@ void GrowTab(TabBangunan *T, int num);
 
 void ShrinkTab(TabBangunan *T, int num);
 /* Proses : Mengurangi max element sebanyak num */
-/* I.S. Tabel sudah terdefinisi, ukuran MaxEl > num, dan Neff < MaxEl - num. */
+/* I.S. Tabel sudah terdefinisi, ukuran MaxElArr > num, dan Neff < MaxElArr - num. */
 /* F.S. Ukuran tabel berkurang sebanyak num. */
 
 void CompactTab(TabBangunan *T);
-/* Proses : Mengurangi max element sehingga Neff = MaxEl */
+/* Proses : Mengurangi max element sehingga Neff = MaxElArr */
 /* I.S. Tabel tidak kosong */
-/* F.S. Ukuran MaxEl = Neff */
+/* F.S. Ukuran MaxElArr = Neff */
 
 void DelEli (TabBangunan * T, IdxType i, ElType_Array * X);
 /* Menghapus elemen ke-i tabel tanpa mengganggu kontiguitas */

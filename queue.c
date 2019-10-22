@@ -6,20 +6,20 @@
 #include <stdlib.h>
 #include "queue.h"
 
-// #define Nil 0
-// /* Konstanta untuk mendefinisikan address tak terdefinisi */
+// #define NilQ 0
+// /* Konstanta untuk mendefinisikan addressQ tak terdefinisi */
 
-// /* Definisi elemen dan address */
+// /* Definisi elemen dan addressQ */
 // typedef int infotype;
-// typedef int address;   /* indeks tabel */
+// typedef int addressQ;   /* indeks tabel */
 // /* Contoh deklarasi variabel bertype Queue : */
 // /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
 // typedef struct { skilltype * T;   /* tabel penyimpan elemen */
-//                  address HEAD;  /* alamat penghapusan */
-//                  address TAIL;  /* alamat penambahan */
-//                  int MaxEl;     /* Max elemen queue */
+//                  addressQ HEAD;  /* alamat penghapusan */
+//                  addressQ TAIL;  /* alamat penambahan */
+//                  int MaxElQ;     /* Max elemen queue */
 //                } Queue;
-// /* Definisi Queue kosong: HEAD=Nil; TAIL=Nil. */
+// /* Definisi Queue kosong: HEAD=NilQ; TAIL=NilQ. */
 // /* Catatan implementasi: T[0] tidak pernah dipakai */
 
 // /* ********* AKSES (Selektor) ********* */
@@ -28,22 +28,22 @@
 // #define Tail(Q) (Q).TAIL
 // #define InfoHead(Q) (Q).T[(Q).HEAD]
 // #define InfoTail(Q) (Q).T[(Q).TAIL]
-// #define MaxEl(Q) (Q).MaxEl
+// #define MaxElQ(Q) (Q).MaxElQ
 
 /* ********* Prototype ********* */
-boolean IsEmpty (Queue Q){
-    return (Head(Q)==Nil && Tail(Q)==Nil);
+boolean IsEmpty_Queue (Queue Q){
+    return (Head(Q)==NilQ && Tail(Q)==NilQ);
 }
 /* Mengirim true jika Q kosong: lihat definisi di atas */
 
-boolean IsFull (Queue Q){
-    return (NBElmt(Q) == MaxEl(Q));
+boolean IsFull_Queue (Queue Q){
+    return (NBElmt(Q) == MaxElQ(Q));
 }
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
-/* yaitu mengandung elemen sebanyak MaxEl */
+/* yaitu mengandung elemen sebanyak MaxElQ */
 
 int NBElmt (Queue Q){
-    // return (((Tail(Q)-Head(Q))%MaxEl(Q)) +1);
+    // return (((Tail(Q)-Head(Q))%MaxElQ(Q)) +1);
     int x = Tail(Q)-Head(Q);
     if (x>0){
         return (x+1);
@@ -51,46 +51,46 @@ int NBElmt (Queue Q){
         if (x==0){
             return 0;
         } else {
-            return (x+MaxEl(Q)+1);
+            return (x+MaxElQ(Q)+1);
         }
     }
 }
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
 
 /* *** Kreator *** */
-void CreateEmpty (Queue * Q, int Max){
-    (*Q).T = (infotype*) malloc ((Max+1)*sizeof(infotype));
-    if ((*Q).T != NULL){
-        MaxEl(*Q)= Max;
+void CreateEmpty_Queue (Queue * Q, int Max){
+    (*Q).S = (skilltype*) malloc ((Max+1)*sizeof(skilltype));
+    if ((*Q).S != NULL){
+        MaxElQ(*Q)= Max;
         Head(*Q)=0;
         Tail(*Q)=0;
     } else {
-        MaxEl(*Q) = 0;
+        MaxElQ(*Q) = 0;
     }
 }
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
 /* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max+1 */
-/* atau : jika alokasi gagal, Q kosong dg MaxEl=0 */
+/* atau : jika alokasi gagal, Q kosong dg MaxElQ=0 */
 /* Proses : Melakukan alokasi, membuat sebuah Q kosong */
 
 /* *** Destruktor *** */
 void DeAlokasi(Queue * Q){
-    free((*Q).T);
-    MaxEl(*Q) = 0;
+    free((*Q).S);
+    MaxElQ(*Q) = 0;
 }
 /* Proses: Mengembalikan memori Q */
 /* I.S. Q pernah dialokasi */
-/* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
+/* F.S. Q menjadi tidak terdefinisi lagi, MaxElQ(Q) diset 0 */
 
 /* *** Primitif Add/Delete *** */
 void Add (Queue * Q, skilltype X){
-    if (IsEmpty(*Q)){
+    if (IsEmpty_Queue(*Q)){
         Head(*Q)     = 1;
         Tail(*Q)     = 1;
         InfoTail(*Q) = X;
     } else { //Not Empty
-        Tail(*Q) = (Tail(*Q) % MaxEl(*Q)) +1;
+        Tail(*Q) = (Tail(*Q) % MaxElQ(*Q)) +1;
         InfoTail(*Q) = X;
     }
 }
@@ -101,13 +101,14 @@ void Add (Queue * Q, skilltype X){
 void Del (Queue * Q, skilltype * X){
     *X = InfoHead(*Q);
     if (Tail(*Q)==Head(*Q)) { //Tail(*Q)=1 karena prekondisi tidak mungkin kosong
-        Head(*Q) = Nil;
-        Tail(*Q) = Nil;
+        Head(*Q) = NilQ;
+        Tail(*Q) = NilQ;
     } else {
-        Head(*Q) =(Head(*Q)%MaxEl(*Q)+1);
+        Head(*Q) =(Head(*Q)%MaxElQ(*Q)+1);
     }
 }
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
-/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
+/* F.S. X = NilQai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
         Q mungkin kosong */
+
