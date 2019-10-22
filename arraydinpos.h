@@ -125,7 +125,8 @@ void CopyTab(TabBangunan Tin, TabBangunan *Tout);
 /* I.S. Tin terdefinisi tidak kosong, Tout sembarang */
 /* F.S. Tout berisi salinan dari Tin (identik, Neff dan MaxEl sama) */
 /* Proses : Menyalin isi Tin ke Tout */
-int CountJenisBangunan(TabBangunan T, Bangunan X);
+
+int CountJenisBangunan(TabBangunan T, JenisBangunan X);
 /* Menghasilkan berapa banyak kemunculan JenisBangunan X di T */
 /* Jika T kosong menghasilkan 0 */
 

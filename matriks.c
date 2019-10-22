@@ -147,15 +147,19 @@ void TulisMATRIKSPETA (MATRIKS M) //Modified
 		printf("=");
 	}
 	printf("\n");
+	for (j = GetFirstIdxKol(M); j <= GetLastIdxKol(M)+2; j++) {
+		printf("*");
+	}
+	printf("\n");
 	for (i = GetFirstIdxBrs(M); i <= GetLastIdxBrs(M); i++) {
-		printf("=");
+		printf("*");
 		for (j = GetFirstIdxKol(M); j < GetLastIdxKol(M); j++) {
 			printf("%c", ElmtMat(M,i,j));
 		}
-		printf("%c=\n", ElmtMat(M,i,GetLastIdxKol(M)));
+		printf("%c*\n", ElmtMat(M,i,GetLastIdxKol(M)));
 	}
 	for (j = GetFirstIdxKol(M); j <= GetLastIdxKol(M)+2; j++) {
-		printf("=");
+		printf("*");
 	}
 	printf("\n");
 }
