@@ -19,24 +19,17 @@ boolean EndTurn = false;
 
 void STARTGAME() {
 	/* Algoritma */
-	printf("\033[01;33m");
-	printl("================================================================================================================================");
-	printl("================================================================================================================================");
-	printl("==                                                                                                                            ==");
-	printl("==              █████                                                                                                         ==");
-	printl("==             ███████        ███              ███                                                                            ==");
-	printl("==            █████████      █████            █████       ████████           ████            ████████         ████            ==");
-	printl("==           ███████████      █████          █████     █████████████        █████         █████████████      █████████        ==");
-	printl("==          █████   █████       ████        █████    █████       █████      █████       █████       █████   █████████████     ==");
-	printl("==         █████     █████       ████      ████     ████           ███   ███████████   ████           ███   █████    █████    ==");
-	printl("==       ███████     ██████       ████    ████      ████           ███  ███████████    ████           ███   █████     ███     ==");
-	printl("==      ███████████████████        ████  ████        ████          ███      █████       ████          ███   █████             ==");
-	printl("==     ██████         ██████        ████████           █████     █████       █████        █████     █████   █████             ==");
-	printl("==    ██████          ██████         █████                ████████████       ██████          ████████████   █████             ==");
-	printl("==    █████            ████           ███                         ███         ███████                ███     ███              ==");
-	printl("==                                                                                                                            ==");
-	printl("================================================================================================================================");
-	printl("================================================================================================================================");
+	printf("\033[02;30m");
+	printl("█████████████████████████████████████████████████████");
+	printl("██                                                 ██");
+	printl("██       ███  █   █  ███  █████  ███  ███          ██");
+	printl("██      █   █ █   █ █   █   █   █   █ █  █         ██");
+	printl("██      █████  █ █  █████   █   █████ ███          ██");
+	printl("██      █   █   █   █   █   █   █   █ █  █         ██");
+	printl("██                    Where the world war          ██");
+	printl("██                                  begins.....    ██");
+	printl("█████████████████████████████████████████████████████");
+	printl("");
 	printl("Selamat datang di Game Avatar World War!");
 	printl("Silahkan pilih menu yang diinginkan:");
 	printl("1. Start New Game");
@@ -64,13 +57,7 @@ void CREATEPLAYER(Player *P1, Player *P2) {
 void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
 	TulisMATRIKSPETA(Peta);
 	printf("Player %d\n", NoPemain);
-	if (NoPemain == 1) {
-		PrintInfo(Bangunan(*P1));
-		UpdateAllBuildings(&Bangunan(*P1));
-	} else {
-		PrintInfo(Bangunan(*P2));
-		UpdateAllBuildings(&Bangunan(*P2));
-	}
+	PrintListBangunan(NoPemain, *P1, *P2);
 	printl("COMMAND YANG TERSEDIA:");
 	printl("1. ATTACK	5. END_TURN");
 	printl("2. LEVEL_UP	6. SAVE");
@@ -79,9 +66,9 @@ void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
 	printf("ENTER COMMAND: ");
 	SCANKATA();
 	if (EQ_KATA(CKata, "ATTACK")) {
-		printl("ATTACK!");
+		ATTACK(NoPemain, P1, P2);
 	} else if (EQ_KATA(CKata, "LEVEL_UP")) {
-		printl("LEVEL_UP!");
+		LEVELUP(NoPemain, *P1, *P2);
 	} else if (EQ_KATA(CKata, "SKILL")) {
 		printl("SKILL!");
 	} else if (EQ_KATA(CKata, "UNDO")) {
@@ -101,6 +88,23 @@ void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
 	}
 }
 
-void ATTACK() {
-	printl("Bangunan yang digunakan untuk menyerang: ");
+void ATTACK(int NoPemain, Player *P1, Player *P2) {
+	/* Kamus Lokal */
+	int choice;
+
+	/* Algoritma */
+	PrintListBangunan(NoPemain, *P1, *P2);
+	printf("Bangunan yang digunakan untuk menyerang: "); scanf("%d", &choice);
+	SCAN();
+}
+
+void LEVELUP(int NoPemain, Player P1, Player P2) {
+	/* Kamus Lokal */
+	int choice;
+
+	/* Algoritma */
+	PrintListBangunan(NoPemain, P1, P2);
+	printf("Bangunan yang akan di level up: "); scanf("%d", &choice);
+	LevelUpBP(NoPemain, P1, P2, choice);
+	SCAN();
 }

@@ -31,6 +31,7 @@ int main() {
 		CREATEPLAYER(&p1, &p2);
 		i = 1;
 		while (!EndGame) {
+			UpdateListBangunan(i, p1, p2);
 			while (!EndTurn) {
 				TURN(i, Peta, &p1, &p2);
 			}

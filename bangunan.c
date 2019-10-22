@@ -89,52 +89,63 @@ void SerangBangunan(Bangunan *X, int N) {
 }
 
 void LevelUpBangunan(Bangunan *X) {
-	JumlahPasukan(*X) -= M(*X)/2;
-	Level(*X) += 1;
-	if (Jenis(*X) == 'C') {
-		if (Level(*X) == 2) {
-			A(*X) = 15;
-			M(*X) = 60;
-		} else if (Level(*X) == 3) {
-			A(*X) = 20;
-			M(*X) = 80;
-		} else if (Level(*X) == 4) {
-			A(*X) = 25;
-			M(*X) = 100;
+	if (JumlahPasukan(*X) > M(*X)/2) {
+		JumlahPasukan(*X) -= M(*X)/2;
+		Level(*X) += 1;
+		if (Jenis(*X) == 'C') {
+			if (Level(*X) == 2) {
+				A(*X) = 15;
+				M(*X) = 60;
+			} else if (Level(*X) == 3) {
+				A(*X) = 20;
+				M(*X) = 80;
+			} else if (Level(*X) == 4) {
+				A(*X) = 25;
+				M(*X) = 100;
+			}
+		} else if (Jenis(*X) == 'T') {
+			if (Level(*X) == 2) {
+				A(*X) = 10;
+				M(*X) = 30;
+			} else if (Level(*X) == 3) {
+				A(*X) = 20;
+				M(*X) = 40;
+			} else if (Level(*X) == 4) {
+				A(*X) = 30;
+				M(*X) = 50;
+			}
+		} else if (Jenis(*X) == 'F') {
+			if (Level(*X) == 2) {
+				A(*X) = 20;
+				M(*X) = 40;
+			} else if (Level(*X) == 3) {
+				A(*X) = 30;
+				M(*X) = 60;
+			} else if (Level(*X) == 4) {
+				A(*X) = 40;
+				M(*X) = 80;
+			}
+		} else if (Jenis(*X) == 'V') {
+			if (Level(*X) == 2) {
+				A(*X) = 10;
+				M(*X) = 30;
+			} else if (Level(*X) == 3) {
+				A(*X) = 15;
+				M(*X) = 40;
+			} else if (Level(*X) == 4) {
+				A(*X) = 20;
+				M(*X) = 50;
+			}
 		}
-	} else if (Jenis(*X) == 'T') {
-		if (Level(*X) == 2) {
-			A(*X) = 10;
-			M(*X) = 30;
-		} else if (Level(*X) == 3) {
-			A(*X) = 20;
-			M(*X) = 40;
-		} else if (Level(*X) == 4) {
-			A(*X) = 30;
-			M(*X) = 50;
+	} else {
+		printf("Jumlah pasukan ");
+		switch(Jenis(*X)) {
+		 	case 'C': printf("Castle"); break;
+		 	case 'T': printf("Tower"); break;
+		 	case 'F': printf("Fort"); break;
+		 	case 'V': printf("Village"); break;
 		}
-	} else if (Jenis(*X) == 'F') {
-		if (Level(*X) == 2) {
-			A(*X) = 20;
-			M(*X) = 40;
-		} else if (Level(*X) == 3) {
-			A(*X) = 30;
-			M(*X) = 60;
-		} else if (Level(*X) == 4) {
-			A(*X) = 40;
-			M(*X) = 80;
-		}
-	} else if (Jenis(*X) == 'V') {
-		if (Level(*X) == 2) {
-			A(*X) = 10;
-			M(*X) = 30;
-		} else if (Level(*X) == 3) {
-			A(*X) = 15;
-			M(*X) = 40;
-		} else if (Level(*X) == 4) {
-			A(*X) = 20;
-			M(*X) = 50;
-		}
+		printf(" kurang untuk level up\n");
 	}
 }
 

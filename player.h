@@ -10,13 +10,19 @@
 typedef struct {
 	int Color;
 	int NoPemain;
-	List Bangunan;
+	List ListBangunan;
 } Player;
 
 #define Color(X) (X).Color
 #define NoPemain(X) (X).NoPemain
-#define Bangunan(X) (X).Bangunan
+#define ListBangunan(X) (X).ListBangunan
 
 void InitPlayer(int num, Player *P);
+
+void PrintListBangunan(int num, Player P1, Player P2);
+
+void UpdateListBangunan(int num, Player P1, Player P2);
+
+void LevelUpBP (int num, Player P1, Player P2, int idx);
 
 #endif

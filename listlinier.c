@@ -323,6 +323,7 @@ void PrintInfo (List L)
 	if (!IsEmpty(L)) {
 		i = 1;
 		P = First(L);
+		printf("Daftar bangunan: \n");
 		printf("%d. ", i);
 		PrintInfoBangunan(ElmtArr(TB,Info(P)));
 		while (Next(P) != Nil) {
@@ -369,17 +370,34 @@ void Konkat1 (List *L1, List *L2, List *L3)
 	First(*L2) = Nil;
 }
 
-void UpdateAllBuildings(List *L) {
+void UpdateAllBuildings(List L) {
 	/* Kamus Lokal */
 	address P;
 
 	/* Algoritma */
-	if (!IsEmpty(*L)) {
-		P = First(*L);
+	if (!IsEmpty(L)) {
+		P = First(L);
 		UpdateBangunan(&ElmtArr(TB,Info(P)));
 		while (Next(P) != Nil) {
 			P = Next(P);
 			UpdateBangunan(&ElmtArr(TB,Info(P)));
 		}
+	}
+}
+
+void IndexLevelUp(List L, int idx) {
+	/* Kamus Lokal */
+	address P;
+	int i;
+
+	/* Algoritma */
+	if (idx <= NbElmt(L)) {
+		P = First(L);
+		for (i = 1; i < idx; i++) {
+			P = Next(P);
+		}
+		LevelUpBangunan(&ElmtArr(TB,Info(P)));
+	} else {
+		printf("Upgrade gagal!\n");
 	}
 }
