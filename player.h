@@ -9,6 +9,7 @@
 
 typedef struct {
 	int Color;
+	int NoPemain;
 	List Bangunan;
 	Queue Skill;
 	boolean Critical; // Ini untuk skill Critical Hit
@@ -19,6 +20,7 @@ typedef struct {
 #define Bangunan(P) P.Bangunan
 #define Color(P)  P.Color
 #define Critical(P) P.Critical 
+#define NoPemain(P) (P).NoPemain
 
 
 void STARTGAME();
@@ -30,5 +32,8 @@ void LOADGAME();
 /*	I.S.
 	F.S.
 */
+
+
+void InitPlayer(int num, Player *P);
 
 #endif

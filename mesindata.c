@@ -7,6 +7,7 @@
 #include "mesinkar.h"
 #include "matriks.h"
 #include "lokasi.h"
+#include "point.h"
 
 char Baris[NMax_DATA+1];
 
@@ -65,10 +66,19 @@ void INFOBANGUNAN() {
 void LOKASIBANGUNAN(MATRIKS *Peta, Loc *P) {
 	/* Kamus Lokal */
 	int X, Y;
-	char jenis;
 
 	/* Algoritma */
-	jenis = CC;
+	if (CC == 'C') {
+		InitCastle(&Building(*P));
+	} else if (CC == 'T') {
+		InitTower(&Building(*P));
+	} else if (CC == 'F') {
+		InitFort(&Building(*P));
+	} else if (CC == 'V') {
+		InitVillage(&Building(*P));
+	} else {
+		printf("BANGUNAN INVALID! TOLONG RESTART ULANG!\n");
+	}
 	ADV();
 	IgnoreBlank_DATA();
 	X = 0;
@@ -82,6 +92,7 @@ void LOKASIBANGUNAN(MATRIKS *Peta, Loc *P) {
 		X = X * 10 + KarakterToInt(CC);
 		ADV();
 	}
-	Elmt(*Peta,Y,X) = jenis;
+	Koordinat(*P) = MakePOINT(Y, X);
+	Elmt(*Peta,Y,X) = Jenis(Building(*P));
 	NEXTDATA();
 }
