@@ -29,6 +29,8 @@ int main() {
 			LOKASIBANGUNAN(&Peta, &TB, i);
 		}
 		CREATEPLAYER(&p1, &p2);
+		KeepSkill(&p1,'U');
+		KeepSkill(&p2,'U');
 		i = 1;
 		while (!EndGame) {
 			UpdateListBangunan(i, p1, p2);

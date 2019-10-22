@@ -112,17 +112,17 @@ void UseSkill(Player *user, Player *enemy) {
     skilltype X;
 
     //Algoritma
-    if ((Name(InfoHead(Skill(*user))) == 'U') || (Name(InfoHead(Skill(*user))) == 'u')) {
+    if ((InfoHead(Skill(*user)) == 'U') || (InfoHead(Skill(*user)) == 'u')) {
         InstantUpgrade(user);//ini belum tau parameternya bakalan player atau list
-    } else if ((Name(InfoHead(Skill(*user))) == 'S') || (Name(InfoHead(Skill(*user))) == 's')){
+    } else if ((InfoHead(Skill(*user)) == 'S') || (InfoHead(Skill(*user)) == 's')){
         Shield(user);
-    } else if ((Name(InfoHead(Skill(*user))) == 'E') || (Name(InfoHead(Skill(*user))) == 'e')){
+    } else if ((InfoHead(Skill(*user)) == 'E') || (InfoHead(Skill(*user)) == 'e')){
         ExtraTurn(user);
-    } else if ((Name(InfoHead(Skill(*user))) == 'A') || (Name(InfoHead(Skill(*user))) == 'a')){
+    } else if ((InfoHead(Skill(*user)) == 'A') || (InfoHead(Skill(*user)) == 'a')){
         AttackUp(user,enemy);
-    } else if ((Name(InfoHead(Skill(*user))) == 'H') || (Name(InfoHead(Skill(*user))) == 'h')){
+    } else if ((InfoHead(Skill(*user)) == 'H') || (InfoHead(Skill(*user)) == 'h')){
         CriticalHit(user);
-    } else if ((Name(InfoHead(Skill(*user))) == 'R') || (Name(InfoHead(Skill(*user))) == 'r')){
+    } else if ((InfoHead(Skill(*user)) == 'R') || (InfoHead(Skill(*user)) == 'r')){
         InstantReinforcement(user);
     } else {
         Barrage(user);

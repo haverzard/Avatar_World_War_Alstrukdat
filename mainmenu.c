@@ -93,6 +93,7 @@ void ATTACK(int NoPemain, Player *P1, Player *P2) {
 	int choice;
 
 	/* Algoritma */
+	printf("Daftar bangunan: \n");
 	PrintListBangunan(NoPemain, *P1, *P2);
 	printf("Bangunan yang digunakan untuk menyerang: "); scanf("%d", &choice);
 	// Critical

@@ -66,7 +66,7 @@ void Barrage (Player *P);
 //FS looping dari list bangunan pemain 
 
 /* *** Keep Skill *** */
-void KeepSkill (Player *user, Skill skillName);
+void KeepSkill (Player *user, skilltype skillName);
     //IS
     //FS
     //Add()

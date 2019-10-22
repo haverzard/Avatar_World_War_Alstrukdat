@@ -323,7 +323,6 @@ void PrintInfo (List L)
 	if (!IsEmpty_LL(L)) {
 		i = 1;
 		P = First(L);
-		printf("Daftar bangunan: \n");
 		printf("%d. ", i);
 		PrintInfoBangunan(ElmtArr(TB,Info(P)));
 		while (Next(P) != Nil) {

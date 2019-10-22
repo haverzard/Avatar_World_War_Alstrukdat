@@ -10,9 +10,6 @@
 #define NilQ 0
 /* Konstanta untuk mendefinisikan addressQ tak terdefinisi */
 
-typedef struct {
-    char Name;
-} Skill;
 //Nama Skill
 //Instant Upgrade       U atau u
 //Shield                S atau s
@@ -23,7 +20,7 @@ typedef struct {
 //Barrage               B atau b
 
 /* Definisi elemen dan addressQ */
-typedef Skill skilltype;
+typedef char skilltype;
 typedef int addressQ;   /* indeks tabel */
 /* Contoh deklarasi variabel bertype Queue : */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
