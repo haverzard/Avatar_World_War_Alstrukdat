@@ -6,6 +6,7 @@
 
 #include "boolean.h"
 #include "listlinier.h"
+#include "queue.h"
 
 typedef struct {
 	int Color;

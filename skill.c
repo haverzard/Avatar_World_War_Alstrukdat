@@ -4,6 +4,7 @@
 #include "skill.h"
 #include "queue.h"
 #include "player.h"
+#include "listlinier.h"
 
 void InstantUpgrade(Player *P){ 
 //IS: .......................Cara peroleh: Hanya di awal permainan
@@ -14,24 +15,12 @@ void InstantUpgrade(Player *P){
 void Shield (Player *P){
 //IS .............................Cara peroleh: pemain diserang ,bangunannya berkurang 1 dan bersisa 2
 //FS: Pertahanan Bangunan selama 2 kali turn, jika digunakan dua kali berturut-turut,durasi tidak bertambah,namun menjadi nilai maksimum 
-    
-    //Kamus
-    address addr;
-
-    //Algoritma
-    addr = First(Bangunan(*P));
-
-    //tambahin skillDuration sbg atribut player, jika digunakan 2 kali jadi maksimum
-    while (addr != Nil){
-        P(Bangunan(Info(addr))) = true;
-    }
-
+    ShieldOn(ListBangunan(*P));
 }
 
 void ExtraTurn (Player *P){
 //IS.........................Cara peroleh:Fort pemain tersebut direbut lawan
 //FS: Player dapat turn 2 kali
-
     //diset up di menu
 }
 
@@ -39,14 +28,14 @@ void AttackUp ( Player *attacker, Player *defender){
 //IS: ...................................Cara peroleh skill ini : pemain menyerang tower lawan dan jumlah towernya menjadi 3
 //FS: Pertahanan musuh tidak akan mempengaruhi penyerangan pd giliran ini setelah skill diaktifkan
     //Kamus
-    address addr;
+    // address addr;
 
     //Algoritma
-    addr = First(Bangunan(*defender));
-    while (addr != Nil){
-        P(Bangunan(Info(addr))) = false;
-        addr = Next(addr);
-    }
+    // addr = First(Bangunan(*defender));
+    // while (addr != Nil){
+    //     P(Bangunan(Info(addr))) = false;
+    //     addr = Next(addr);
+    // }
     //Untuk turn berikutnya yang bangunan yg dulunya ada pertahanan harus diaktifkan balek
 }
 
@@ -64,31 +53,13 @@ void InstantReinforcement (Player *P){
 //FS: Seluruh bangunan mendapatkan tambahan 5 pasukan
 
     //Setiap endturn harus cek
-    
-    //Kamus
-    address addr;
-
-    //Algoritma
-    addr = First(Bangunan(*P));
-    while (addr != Nil){
-        P(Bangunan(Info(addr))) = false;
-        addr = Next(addr);
-    }
+    ReinforceAll(ListBangunan(*P));
 }
 
 void Barrage (Player *P){
 //IS..............................Pemain mendapat skill ini jika lawan baru saja bertaambah bangunannya menjadi 10 bangunan
 //FS Jumlah pasukan pada seluruh bangunan musuh akan berkurang sebanyak 10 pasukan 
-
-    //Kamus
-    address addr;
-
-    //Algoritma
-    addr = First(Bangunan(*P));
-    while (addr != Nil){
-        P(Bangunan(Info(addr))) = false;
-        addr = Next(addr);
-    }
+    BarrageAll(ListBangunan(*P));
 }
 
 /* *** Keep Skill *** */
