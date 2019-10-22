@@ -396,8 +396,111 @@ void IndexLevelUp(List L, int idx) {
 		for (i = 1; i < idx; i++) {
 			P = Next(P);
 		}
-		LevelUpBangunan(&ElmtArr(TB,Info(P)));
+		if (JumlahPasukan(ElmtArr(TB,Info(P))) >= M(ElmtArr(TB,Info(P)))/2) {
+			LevelUpBangunan(&ElmtArr(TB,Info(P)));
+			printf("Level ");
+			switch(Jenis(ElmtArr(TB,Info(P)))) {
+			 	case 'C': printf("Castle"); break;
+			 	case 'T': printf("Tower"); break;
+			 	case 'F': printf("Fort"); break;
+			 	case 'V': printf("Village"); break;
+			}
+			printf("-mu meningkat menjadi %d.\n", Level(ElmtArr(TB,Info(P))));
+		} else {
+			printf("Jumlah pasukan ");
+			switch(Jenis(ElmtArr(TB,Info(P)))) {
+			 	case 'C': printf("Castle"); break;
+			 	case 'T': printf("Tower"); break;
+			 	case 'F': printf("Fort"); break;
+			 	case 'V': printf("Village"); break;
+			}
+			printf(" kurang untuk level up\n");
+		}
 	} else {
 		printf("Upgrade gagal!\n");
+	}
+}
+
+void LevelUpAll(List L) {
+	/* Kamus Lokal */
+	address P;
+
+	/* Algoritma */
+	if (!IsEmpty(L)) {
+		P = First(L);
+		LevelUpBangunan(&ElmtArr(TB,Info(P)));
+		while (Next(P) != Nil) {
+			P = Next(P);
+			LevelUpBangunan(&ElmtArr(TB,Info(P)));
+		}
+	}
+}
+
+void ShieldOn(List L) {
+	/* Kamus Lokal */
+	address P;
+
+	/* Algoritma */
+	if (!IsEmpty(L)) {
+		P = First(L);
+		P(ElmtArr(TB,Info(P))) = true;
+		while (Next(P) != Nil) {
+			P = Next(P);
+			P(ElmtArr(TB,Info(P))) = true;
+		}
+	}
+}
+
+
+void ShieldOff(List L) {
+	/* Kamus Lokal */
+	address P;
+
+	/* Algoritma */
+	if (!IsEmpty(L)) {
+		P = First(L);
+		if (Jenis(ElmtArr(TB,Info(P))) != 'T') {
+			P(ElmtArr(TB,Info(P))) = false;
+		}
+		while (Next(P) != Nil) {
+			P = Next(P);
+			if (Jenis(ElmtArr(TB,Info(P))) != 'T') {
+				P(ElmtArr(TB,Info(P))) = false;
+			}
+		}
+	}
+}
+
+void ReinforceAll(List L) {
+	/* Kamus Lokal */
+	address P;
+
+	/* Algoritma */
+	if (!IsEmpty(L)) {
+		P = First(L);
+		JumlahPasukan(ElmtArr(TB,Info(P))) += 5;
+		while (Next(P) != Nil) {
+			P = Next(P);
+			JumlahPasukan(ElmtArr(TB,Info(P))) += 5;
+		}
+	}
+}
+
+void BarrageAll(List L) {
+	/* Kamus Lokal */
+	address P;
+
+	/* Algoritma */
+	if (!IsEmpty(L)) {
+		P = First(L);
+		if (JumlahPasukan(ElmtArr(TB,Info(P))) >= 10) {
+			JumlahPasukan(ElmtArr(TB,Info(P))) -= 10;
+		}
+		while (Next(P) != Nil) {
+			P = Next(P);
+			if (JumlahPasukan(ElmtArr(TB,Info(P))) >= 10) {
+				JumlahPasukan(ElmtArr(TB,Info(P))) -= 10;
+			}
+		}
 	}
 }

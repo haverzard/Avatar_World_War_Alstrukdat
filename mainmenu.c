@@ -95,6 +95,7 @@ void ATTACK(int NoPemain, Player *P1, Player *P2) {
 	/* Algoritma */
 	PrintListBangunan(NoPemain, *P1, *P2);
 	printf("Bangunan yang digunakan untuk menyerang: "); scanf("%d", &choice);
+	// Critical
 	SCAN();
 }
 
