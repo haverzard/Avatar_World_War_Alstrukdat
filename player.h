@@ -11,11 +11,17 @@ typedef struct {
 	int Color;
 	int NoPemain;
 	List ListBangunan;
+	Queue Skill;
+	boolean Critical; // Ini untuk skill Critical Hit
+	//int skillDuration;
 } Player;
 
-#define Color(X) (X).Color
-#define NoPemain(X) (X).NoPemain
-#define ListBangunan(X) (X).ListBangunan
+#define Skill(P) P.Skill
+#define ListBangunan(P) P.ListBangunan
+#define Color(P)  P.Color
+#define Critical(P) P.Critical 
+#define NoPemain(P) (P).NoPemain
+
 
 void InitPlayer(int num, Player *P);
 
