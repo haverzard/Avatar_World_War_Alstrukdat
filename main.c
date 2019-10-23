@@ -23,6 +23,7 @@ int main() {
 	/* Algoritma */
 	STARTGAME();
 	if (!EndGame) {
+		printf("HEHE");
 		INFOPETA(&Peta);
 		INFOBANGUNAN(&TB);
 		for (i = 1; i <= MaxElArr(TB); i++) {
@@ -33,10 +34,10 @@ int main() {
 		KeepSkill(&p2,'U');
 		i = 1;
 		while (!EndGame) {
-			UpdateListBangunan(i, p1, p2);
 			while (!EndTurn) {
 				TURN(i, Peta, &p1, &p2);
 			}
+			UpdateListBangunan(i, p1, p2);
 			i = (i % 2 + 3) - 2;
 			EndTurn = false;
 		}

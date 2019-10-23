@@ -35,6 +35,7 @@ void STARTGAME() {
 	printl("1. Start New Game");
 	printl("2. Load Game");
 	printf("Masukkan Anda: "); scanf("%d", &choice);
+	printl("HUHU -_-");
 	SCAN();
 	LOADGAME();
 }
@@ -58,6 +59,7 @@ void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
 	TulisMATRIKSPETA(Peta);
 	printf("Player %d\n", NoPemain);
 	PrintListBangunan(NoPemain, *P1, *P2);
+	ShowSkill(NoPemain, *P1, *P2);
 	printl("COMMAND YANG TERSEDIA:");
 	printl("1. ATTACK	5. END_TURN");
 	printl("2. LEVEL_UP	6. SAVE");

@@ -20,7 +20,7 @@ void InitCastle(Bangunan *X) {
 	Jenis(*X) = 'C';
 	Kepemilikan(*X) = 0;
 	Jenis(*X) = 'C';
-	JumlahPasukan(*X) = 40-10;
+	JumlahPasukan(*X) = 40;
 	Level(*X) = 1;
 	A(*X) = 10;
 	M(*X) = 40;
@@ -31,7 +31,7 @@ void InitTower(Bangunan *X) {
 	Jenis(*X) = 'T';
 	Kepemilikan(*X) = 0;
 	Jenis(*X) = 'T';
-	JumlahPasukan(*X) = 30-5;
+	JumlahPasukan(*X) = 30;
 	Level(*X) = 1;
 	A(*X) = 5;
 	M(*X) = 20;
@@ -42,7 +42,7 @@ void InitFort(Bangunan *X) {
 	Jenis(*X) = 'F';
 	Kepemilikan(*X) = 0;
 	Jenis(*X) = 'F';
-	JumlahPasukan(*X) = 80-10;
+	JumlahPasukan(*X) = 80;
 	Level(*X) = 1;
 	A(*X) = 10;
 	M(*X) = 20;
@@ -53,7 +53,7 @@ void InitVillage(Bangunan *X) {
 	Jenis(*X) = 'V';
 	Kepemilikan(*X) = 0;
 	Jenis(*X) = 'V';
-	JumlahPasukan(*X) = 20-5;
+	JumlahPasukan(*X) = 20;
 	Level(*X) = 1;
 	A(*X) = 5;
 	M(*X) = 20;
