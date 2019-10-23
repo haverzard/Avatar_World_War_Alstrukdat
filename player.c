@@ -1,6 +1,7 @@
 /* ADT Player */
 /* Menyimpan data pemain dan kepemilikannya */
 
+#include <stdio.h>
 #include "boolean.h"
 #include "player.h"
 #include "listlinier.h"
@@ -10,7 +11,8 @@ void InitPlayer(int num, Player *P) {
 	Color(*P) = num;
 	NoPemain(*P) = num;
 	CreateEmpty_LL(&ListBangunan(*P));
-	First(ListBangunan(*P)) = Alokasi(num); 
+	CreateEmpty_Queue(&Skill(*P), 100);
+	First(ListBangunan(*P)) = Alokasi(num);
 }
 
 void PrintListBangunan(int num, Player P1, Player P2) {
@@ -128,4 +130,35 @@ void UseSkill(Player *user, Player *enemy) {
         Barrage(user);
     }
     Del(&Skill(*user),&X);
+}
+
+void PrintSkill(Player P) {
+	switch(InfoHead(Skill(P))) {
+		case 'U': printf("Instant Upgrade"); break;
+		case 'u': printf("Instant Upgrade"); break;
+		case 'S': printf("Shield"); break;
+		case 's': printf("Shield"); break;
+		case 'E': printf("Extra Turn"); break;
+		case 'e': printf("Extra Turn"); break;
+		case 'A': printf("Attack Up"); break;
+		case 'a': printf("Attack Up"); break;
+		case 'H': printf("Critical Hit"); break;
+		case 'h': printf("Critical Hit"); break;
+		case 'R': printf("Instant Reinforcement"); break;
+		case 'r': printf("Instant Reinforcement"); break;
+		case 'B': printf("Barrage"); break;
+		case 'b': printf("Barrage"); break;
+	}
+}
+
+void ShowSkill(int num, Player P1, Player P2) {
+	printf("Skill Available: ");
+	if (NoPemain(P1) == num && !IsEmpty_Queue(Skill(P1))) {
+		PrintSkill(P1);
+	} else if (NoPemain(P2) == num && !IsEmpty_Queue(Skill(P2))) {
+		PrintSkill(P2);
+	} else {
+		printf("-");
+	}
+	printf("\n");
 }

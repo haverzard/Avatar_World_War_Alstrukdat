@@ -78,4 +78,6 @@ void UseSkill(Player *user, Player *enemy);
     //If (Player.S.Name == 's' or Player.S.name == 'S') then Shield()
     //Pake counter untuk track jumlah pemakaian suatu skill berturut''
 
+void ShowSkill(int num, Player P1, Player P2);
+
 #endif
