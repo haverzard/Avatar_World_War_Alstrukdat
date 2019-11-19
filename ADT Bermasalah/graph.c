@@ -4,154 +4,163 @@
 
 #include <stdlib.h>
 #include "graph.h"
-#include "listlinier.h"
 
-/****************** PEMBUATAN GRAPH KOSONG ******************/
-void CreateGraph(Graph *G)
+/****************** PEMBUATAN GRAPH ******************/
+void CreateGraph(int X, Graph* G)
 /* I.S. G sembarang */
-/* F.S. Terbentuk graph kosong */
+/* F.S. Terbentuk graph G */
 {
-    FirstG(*G) = Nil;
-}
-
-/****************** TEST GRAPH KOSONG ******************/
-boolean IsEmptyGraph(Graph G)
-/* mengeluarkan true jika graph G kosong */
-{
-    return FirstG(*G) == Nil;
+    /* Kamus Lokal */
+    adrNode temp;
+    /* Algoritma */
+    First(*G) = NodeUndef;
+    InsertNode(G, X, &temp);
 }
 
 /****************** Manajemen Memori ******************/
-addressG AlokasiGraph (infotypeG X)
-/* Mengirimkan address hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
-/* menghasilkan P, maka Info(P)=X, Next(P)=Nil */
+adrNode AlokNodeGraph(int X)
+/* Mengirimkan address hasil alokasi sebuah node */
+/* Jika alokasi berhasil, maka address tidak nil */
 /* Jika alokasi gagal, mengirimkan Nil */
 {
-    /* KAMUS LOKAL */
-    addressG P;
-    /* ALGORITMA */
-    P = (addressG *) malloc(sizeof(ElmtGraph));
-    if (P != Nil) {
-        Info(P) = X;
-        Next(P) = Nil;
-    } 
+    /* Kamus Lokal */
+    adrNode P = (adrNode) malloc (sizeof(NodeGraph));
+    /* Algoritma */
+    if (P != NodeUndef) {
+        NoBangunan(P) = X;
+        Trail(P) = NodeUndef;
+        Next(P) = NodeUndef;
+	}
     return P;
 }
-void DealokasiGraph (addressG *P)
+void DealokNodeGraph(adrNode P)
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
 /* Melakukan dealokasi/pengembalian address P */
 {
-    free(*P);
+    free(P);
 }
-
-/*** PENAMBAHAN ELEMEN ***/
-void InsVFirstGraph (Graph *G, infotypeG X)
-/* I.S. G mungkin kosong */
-/* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen pertama dengan list X jika alokasi berhasil */
+adrSuccNode AlokSuccNode(adrNode Pn)
+/* Mengirimkan address hasil alokasi sebuah SuccNode */
+/* Jika alokasi berhasil, maka address tidak nil */
+/* Jika alokasi gagal, mengirimkan Nil */
 {
-    /* KAMUS LOKAL */
-    addressG P;
-    /* ALGORITMA */
-    P = AlokasiGraph(X);
-    if (P != Nil) {
-        Next(X) = FirstG(*G);
-        FirstG(*G) = X;
+    adrSuccNode P = (adrSuccNode) malloc (sizeof(SuccNode));
+    if(P != NodeUndef) {
+        Succ(P) = Pn;
+        Next(P) = NodeUndef;
     }
+    return P;
 }
-void InsVLastGraph(Graph *G, infotypeG X)
-/* I.S. G mungkin kosong */
-/* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen graph di akhir: elemen terakhir yang baru */
-/* merupakan list X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
+void DealokSuccNode(adrSuccNode P)
+/* I.S. P terdefinisi */
+/* F.S. P dikembalikan ke sistem */
+/* Melakukan dealokasi/pengembalian address P */
 {
-    /* KAMUS LOKAL */
-    addressG P, temp;
-    /* ALGORITMA */
-    P = AlokasiGraph(X);
-    if (IsEmptyGraph(*G)) {
-        InsVFirstGraph(G, X);
-    } else {
-        temp = FirstG(*G);
-        while (Next(temp) != Nil) {
-            temp = Next(temp);
-        }
-        Next(temp) = P;
-        Next(P) = Nil;
-    }
-}
-
-void ResetGraph(Graph *G, int n)
-/* I.S. Graph G sembarang */
-/* F.S. Terbentuk Graph dengan n node dengan belum ada edge */
-{
-    
-}
-
-/*** JUMLAH ELEMEN ***/
-int NbElmtGraph(Graph G)
-/* mengeluarkan jumlah node pada graph G */
-{
-    /* KAMUS LOKAL */
-    addressG P;
-    int count;
-    /* ALGORITMA */
-    count = 0;
-    P = FirstG(G);
-    while (P != Nil) {
-        count++;
-        P = Next(P);
-    }
-    return count;
+    free(P);
 }
 
 /*** PENCARIAN ELEMEN ***/
-infotypeG SearchGraph(Graph G, int n)
-/* NbElmtGraph(G) lebih besar dari n, mengeluarkan list yang merupakan info dari elemen ke n graph G */
+adrNode SearchNode(Graph G, int X)
+/* Mengembalikan adrNode dari graph G dengan NoBangunan bernilai X */
 {
-    /* KAMUS LOKAL */
-    addressG P;
-    int NbElmt, count;
-    /* ALGORITMA */
-    NbElmt = NbElmtGraph(G);
-    P = FirstG(G);
-    count = 1;
-    while (count < n && count < NbElmt) {
-        count++;
-        P = Next(P);
-    }
-    return Info(P);
-}
-int SearchInfoGraph(infotypeG L, infotypeL i)
-/* mengeluarkan posisi dimana list L bernilai i, mengeluarkan 0 jika tidak ada */
-{
-    /* KAMUS LOKAL */
-    addressG P;
-    int count, NbElmt;
-    /* ALGORITMA */
-    if (IsEmptyGraph(L)) {
-        return 0;
-    } else {
-        P = FirstG(L);
-        count = 1; NbElmt = NbElmtGraph(L);
-        while (Info(P) != i && count <= NbElmt) {
-            count++;
+    adrNode P = First(G);
+    while(P != NodeUndef){
+		if (NoBangunan(P) == X) {
+            return P;
+        } else {
             P = Next(P);
         }
-        if (count > NbElmt) {
-            return 0;
+	}
+    return P;
+}
+
+adrSuccNode SearchEdge(Graph G, int prec, int succ)
+/* Mengembalikan adrSuccNode dari NoBangunan prec dengan NoBangunan bernilai succ */
+{
+    /* Kamus Lokal */
+    adrNode Pn;
+    /* Algoritma */
+    Pn = SearchNode(G, prec);
+    if (Pn == NodeUndef) {
+        return NodeUndef;
+    } else {
+        adrSuccNode PSucc = Trail(Pn);
+        while (PSucc != NodeUndef) {
+            if (NoBangunan(Succ(PSucc)) == succ) {
+                return PSucc;
+            } else {
+                PSucc = Next(PSucc);
+            }
+        }
+        return PSucc;
+    }
+}
+
+
+/*** PENAMBAHAN ELEMEN ***/
+void InsertNode(Graph* G, int X, adrNode* Pn)
+/* I.S. G terdefinisi */
+/* F.S. adrNode Pn terdapat pada Graph G dengan infotype X */
+{
+    /* Kamus Lokal */
+    adrNode P;
+    /* Algoritma */
+    P = First(*G);
+    *Pn = AlokNodeGraph(X);
+    if (P == NodeUndef) {
+        First(*G) = *Pn;
+    } else {
+        while (Next(P) != NodeUndef) {
+            P = Next(P);
+        }
+        Next(P) = *Pn;
+    }
+       
+}
+void InsertEdge(Graph* G, int prec, int succ)
+{
+    /* Kamus Lokal */
+    adrNode PPrec, PSucc;
+    /* Algoritma */
+    if(SearchNode(*G, prec) == NodeUndef) {
+        InsertNode(G, prec, &PPrec);
+    } else {
+        PPrec = SearchNode(*G, prec);
+    }
+
+    if(SearchNode(*G,succ) == NodeUndef)
+    {
+        InsertNode(G, succ, &PSucc);
+    } else {
+        PSucc = SearchNode(*G, succ);
+    }
+
+    if (SearchEdge(*G, NoBangunan(PPrec), NoBangunan(PSucc)) == NodeUndef) {
+        adrSuccNode Pn = Trail(PPrec);
+        if (Pn == NodeUndef) {
+            Trail(PPrec) = AlokSuccNode(PSucc);
         } else {
-            return count;
+            while (Next(Pn) != NodeUndef) {
+                Pn = Next(Pn);
+            }
+            Next(Pn) = AlokSuccNode(PSucc);
         }
     }
 }
 
-void GenerateRandomGraph(Graph *G,int n)
-/* I.S. G sembarang */
-/* F.S. G adalah connected graph dengan n node */
-/* G didapat melalui hasil generate secara random */
+void GenerateHubunganBangunan(Graph *G, MATRIKSInt Hubungan)
+/* I.S. G terdefinisi */
+/* F.S. Graph berisi keterhubungan setiap NoBangunan terbentuk dari InfoKeterhubungan */
 {
-
+    /* Kamus Lokal */
+    int i, j;
+    /* Algoritma */
+    for (i = GetFirstIdxBrs(Hubungan); i <= GetLastIdxBrs(Hubungan), i++) {
+        for (j = GetFirstIdxBrs(Hubungan); j <= GetLastIdxKol(Hubungan); j++) {
+            if (ElmtMat(Hubungan, i, j) == 1) {
+                InsertEdge(G, i, j);
+            }
+        }
+    }
 }

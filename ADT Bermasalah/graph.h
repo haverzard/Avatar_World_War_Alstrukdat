@@ -6,73 +6,76 @@
 #define GRAPH_H
 
 #include "boolean.h"
-#include "listlinier.h"
 
-#define NodeUndef 0
+#define NodeUndef NULL
 
-typedef List infotypeG; /* tipe info */
-typedef struct tElmtGraph *addressG;
-typedef struct tElmtGraph {
-    infotypeG info;
-    addressG next;
-} ElmtGraph;
+typedef struct tNodeGraph* adrNode;
+typedef struct tSuccNode* adrSuccNode;
+
+typedef struct tNodeGraph {
+    int NoBangunan;
+    adrSuccNode Trail;
+    adrNode Next;
+} NodeGraph;
+
+typedef struct tSuccNode {
+    adrNode Succ;
+    adrSuccNode Next;
+} SuccNode;
+
 typedef struct {
-    addressG FirstG;
+    adrNode First;
 } Graph;
 
-/* SELEKTOR */
-#define Info(P) (P)->info
-#define Next(P) (P)->next
-#define FirstG(G) (G).FirstG
+//Selektor
+#define First(G) (G).First
+#define NoBangunan(Pn) (Pn)->NoBangunan
+#define Trail(Pn) (Pn)->Trail
+#define Asal(Pn) (Pn)->asal
+#define Tujuan(Pn) (Pn)->tujuan
+#define Succ(Pn) (Pn)->Succ
+#define NPred(Pn) (Pn)->NPred
+#define Next(Pn) (Pn)->Next
 
-/****************** PEMBUATAN GRAPH KOSONG ******************/
-void CreateEmptyGraph(Graph *G);
+/****************** PEMBUATAN GRAPH ******************/
+void CreateGraph(int X, Graph* G);
 /* I.S. G sembarang */
-/* F.S. Terbentuk graph kosong */
-
-/****************** TEST GRAPH KOSONG ******************/
-boolean IsEmptyGraph(Graph G);
-/* mengeluarkan true jika graph G kosong */
+/* F.S. Terbentuk graph G */
 
 /****************** Manajemen Memori ******************/
-addressG AlokasiGraph (infotypeG X);
-/* Mengirimkan address hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
-/* menghasilkan P, maka Info(P)=X, Next(P)=Nil */
+adrNode AlokNodeGraph(int X);
+/* Mengirimkan address hasil alokasi sebuah node */
+/* Jika alokasi berhasil, maka address tidak nil */
 /* Jika alokasi gagal, mengirimkan Nil */
-void DealokasiGraph (addressG *P);
+void DealokNodeGraph(adrNode P);
+/* I.S. P terdefinisi */
+/* F.S. P dikembalikan ke sistem */
+/* Melakukan dealokasi/pengembalian address P */
+adrSuccNode AlokSuccNode(adrNode Pn);
+/* Mengirimkan address hasil alokasi sebuah SuccNode */
+/* Jika alokasi berhasil, maka address tidak nil */
+/* Jika alokasi gagal, mengirimkan Nil */
+void DealokSuccNode(adrSuccNode P);
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
 /* Melakukan dealokasi/pengembalian address P */
 
-/*** PENAMBAHAN ELEMEN ***/
-void InsVFirstGraph (Graph *G, infotypeG X);
-/* I.S. G mungkin kosong */
-/* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen pertama dengan list X jika alokasi berhasil */
-void InsVLastGraph(Graph *G, infotypeG X);
-/* I.S. G mungkin kosong */
-/* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen graph di akhir: elemen terakhir yang baru */
-/* merupakan list X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
-
-void ResetGraph(Graph *G, int n);
-/* I.S. Graph G sembarang */
-/* F.S. Terbentuk Graph dengan n node dengan belum ada edge */
-
-/*** JUMLAH ELEMEN ***/
-int NbElmtGraph(Graph G);
-/* mengeluarkan jumlah node pada graph G */
-
 /*** PENCARIAN ELEMEN ***/
-infotypeG SearchGraph(Graph G, int n);
-/* NbElmtGraph(G) lebih besar dari n, mengeluarkan list yang merupakan info dari elemen ke n graph G */
-int SearchInfoGraph(infotypeG L, infotypeL i);
-/* mengeluarkan posisi dimana list L bernilai i, mengeluarkan 0 jika tidak ada */
+adrNode SearchNode(Graph G, int X);
+/* Mengembalikan adrNode dari graph G dengan NoBangunan bernilai X */
+adrSuccNode SearchEdge(Graph G, int prec, int succ);
+/* Mengembalikan adrSuccNode dari NoBangunan prec dengan NoBangunan bernilai succ */
 
-void GenerateRandomGraph(Graph *G,int n);
-/* I.S. G sembarang */
-/* F.S. G adalah connected graph dengan n node */
-/* G didapat melalui hasil generate secara random */
+/*** PENAMBAHAN ELEMEN ***/
+void InsertNode(Graph* G, int X, adrNode* Pn);
+/* I.S. G terdefinisi */
+/* F.S. adrNode Pn terdapat pada Graph G dengan infotype X */
+void InsertEdge(Graph* G, int prec, int succ);
+/* I.S. G terdefinisi */
+/* F.S. adrNode Pn terdapat pada Graph G dengan infotype X */
+
+void GenerateHubunganBangunan(Graph *G, MATRIKSInt Hubungan);
+/* I.S. G terdefinisi */
+/* F.S. Graph berisi keterhubungan setiap NoBangunan terbentuk dari InfoKeterhubungan */
 
 #endif // GRAPH_H
