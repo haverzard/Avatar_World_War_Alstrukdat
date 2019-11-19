@@ -10,7 +10,7 @@
 #include "arraydinpos.h"
 
 #define NMax_DATA 600
-#define ENDLINE '\n'
+#define ENDLINE '\r'
 #define BLANK ' '
 
 extern char Baris[NMax_DATA+1];

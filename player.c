@@ -6,6 +6,7 @@
 #include "player.h"
 #include "listlinier.h"
 #include "queue.h"
+#include "arraydinpos.h"
 
 void InitPlayer(int num, Player *P) {
 	Color(*P) = num;
@@ -13,6 +14,7 @@ void InitPlayer(int num, Player *P) {
 	CreateEmpty_LL(&ListBangunan(*P));
 	CreateEmpty_Queue(&Skill(*P), 100);
 	First(ListBangunan(*P)) = Alokasi(num);
+	Kepemilikan(ElmtArr(TB,num)) = num;
 }
 
 void PrintListBangunan(int num, Player P1, Player P2) {

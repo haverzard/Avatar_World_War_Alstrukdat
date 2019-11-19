@@ -32,9 +32,7 @@ void STARTDATA() {
 
 void NEXTDATA() {
 	/* Algoritma */
-	if (CC == '\r') {
-		ADV(); // ENDLINE
-	}
+	ADV(); // ENDLINE
 	ADV(); // ENDLINE2
 	IgnoreBlank_DATA();
 }
@@ -54,9 +52,6 @@ void INFOPETA(MATRIKS *Peta) {
 	while (CC != ENDLINE && CC != BLANK) {
 		NK = NK * 10 + KarakterToInt(CC);
 		ADV();
-		if (CC == '\r') {
-			ADV(); // ENDLINE
-		}
 	}
 	MakeMATRIKS(NB,NK,Peta);
 	NEXTDATA();
@@ -94,9 +89,6 @@ void LOKASIBANGUNAN(MATRIKS *Peta, TabBangunan *P, int i) {
 	while (CC != ENDLINE) {
 		X = X * 10 + KarakterToInt(CC);
 		ADV();
-		if (CC == '\r') {
-			ADV(); // ENDLINE
-		}
 	}
 	Koordinat(ElmtArr(*P,i)) = MakePOINT(Y, X);
 	ElmtMat(*Peta,Y,X) = Jenis(ElmtArr(*P,i));

@@ -155,16 +155,16 @@ void TulisMATRIKSPETA (MATRIKS M) //Modified
 	printf("\n");
 	for (i = GetFirstIdxBrs(M); i <= GetLastIdxBrs(M); i++) {
 		printf("*");
-		for (j = GetFirstIdxKol(M); j < GetLastIdxKol(M); j++) {
-			if (CheckOwnerByPosition(TB, i, j) == 1) {
-				print_red(ElmtMat(M,i,j));
-			} else if (CheckOwnerByPosition(TB, i, j) == 1) {
+		for (j = GetFirstIdxKol(M); j <= GetLastIdxKol(M); j++) {
+			if (ElmtMat(M,i,j) != ' ' && CheckOwnerByPosition(TB, i, j) == 1) {
 				print_blue(ElmtMat(M,i,j));
+			} else if (ElmtMat(M,i,j) != ' ' && CheckOwnerByPosition(TB, i, j) == 2)  {
+				print_red(ElmtMat(M,i,j));
 			} else {
 				printf("%c", ElmtMat(M,i,j));
 			}
 		}
-		printf("%c*\n", ElmtMat(M,i,GetLastIdxKol(M)));
+		printf("*\n");
 	}
 	for (j = GetFirstIdxKol(M); j <= GetLastIdxKol(M)+2; j++) {
 		printf("*");

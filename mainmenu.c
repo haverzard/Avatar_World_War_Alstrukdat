@@ -19,7 +19,7 @@ boolean EndTurn = false;
 
 void STARTGAME() {
 	/* Algoritma */
-	printf("\033[01;33m");
+	//printf("\033[01;33m");
 	printl("█████████████████████████████████████████████████████");
 	printl("██                                                 ██");
 	printl("██       ███  █   █  ███  █████  ███  ███          ██");

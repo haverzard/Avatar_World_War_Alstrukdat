@@ -350,6 +350,6 @@ int CheckOwnerByPosition(TabBangunan T, int X, int Y) {
 	i = 0;
 	do {
 		i++;
-	} while (!EQ_POINT(Koordinat(ElmtArr(T,i)),temp));
+	} while (!EQ_POINT(Koordinat(ElmtArr(T,i)),temp) && i < MaxElArr(T));
 	return Kepemilikan(ElmtArr(T,i));
 }

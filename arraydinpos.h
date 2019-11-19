@@ -168,4 +168,6 @@ void DelEli (TabBangunan * T, IdxType i, ElType_Array * X);
 /*      Tabel T mungkin menjadi kosong */
 /* Proses : Geser elemen ke-i+1 s.d. elemen terakhir */
 
+int CheckOwnerByPosition(TabBangunan T, int X, int Y);
+
 #endif
