@@ -31,6 +31,12 @@ void SCANKATA()
 	IgnoreBlank();
 	if (CC == ENDCOMMAND) { 
 		EndKata = true;
+	} else if (feof(stdin)) {
+		CKata.TabKata[1] = 'E';
+		CKata.TabKata[2] = 'X';
+		CKata.TabKata[3] = 'I';
+		CKata.TabKata[4] = 'T';
+		CKata.Length = 4;
 	} else { 
 		EndKata = false; 
 		SalinKata(); 

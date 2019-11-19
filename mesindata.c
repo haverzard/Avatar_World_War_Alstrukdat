@@ -6,6 +6,7 @@
 #include "boolean.h"
 #include "mesinkar.h"
 #include "matriks.h"
+#include "matriksint.h"
 #include "arraydinpos.h"
 #include "bangunan.h"
 #include "point.h"
@@ -93,4 +94,29 @@ void LOKASIBANGUNAN(MATRIKS *Peta, TabBangunan *P, int i) {
 	Koordinat(ElmtArr(*P,i)) = MakePOINT(Y, X);
 	ElmtMat(*Peta,Y,X) = Jenis(ElmtArr(*P,i));
 	NEXTDATA();
+}
+
+void HUBUNGANBANGUNAN (MATRIKS_INT *Hubungan, FILE * pita) {
+	/* Kamus Lokal */ 
+	int i, j;
+	/* Algoritma */
+	ADV();
+	IgnoreBlank_DATA();
+	MakeMATRIKS_INT(100, 100, Hubungan);
+	i = GetFirstIdxBrs(*Hubungan);
+	while (!feof(pita)) {
+		j = GetFirstIdxBrs(*Hubungan);
+		while (CC != ENDLINE) {
+			while (CC != BLANK) {
+				ElmtMatInt(*Hubungan, i, j) = KarakterToInt(CC);
+			}
+			j++;
+			ADV();
+		}
+		i++;
+		NEXTDATA();
+	}
+	NBrsEff(*Hubungan) = i-1;
+	NKolEff(*Hubungan) = j-1;
+	
 }
