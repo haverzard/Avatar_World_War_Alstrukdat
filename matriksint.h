@@ -4,12 +4,13 @@
 #define MATRIKS_INT_H
 
 #include "boolean.h"
+#include "matriks.h"
 
 /* Ukuran minimum dan maksimum baris dan kolom */
-#define BrsMin 1
-#define BrsMax 100
-#define KolMin 1
-#define KolMax 100
+// #define BrsMin 1
+// #define BrsMax 100
+// #define KolMin 1
+// #define KolMax 100
 
 typedef int indeks; /* indeks baris, kolom */
 typedef int ElType;
@@ -30,27 +31,9 @@ void MakeMATRIKS_INT (int NB, int NK, MATRIKS_INT * M);
 /* F.S. Matriks M sesuai dengan definisi di atas terbentuk */
 
 /* *** Selektor *** */
-#define NBrsEff(M) (M).NBrsEff
-#define NKolEff(M) (M).NKolEff
+// #define NBrsEff(M) (M).NBrsEff
+// #define NKolEff(M) (M).NKolEff
 #define ElmtMatInt(M,i,j) (M).Mem[(i)][(j)]
-
-/* *** Selektor "DUNIA MATRIKS" *** */
-boolean IsIdxValid (int i, int j);
-/* Mengirimkan true jika i, j adalah indeks yang valid untuk matriks apa pun */
-
-/* *** Selektor: Untuk sebuah matriks M yang terdefinisi: *** */
-indeks GetFirstIdxBrs (MATRIKS_INT M);
-/* Mengirimkan indeks baris terkecil M */
-indeks GetFirstIdxKol (MATRIKS_INT M);
-/* Mengirimkan indeks kolom terkecil M */
-indeks GetLastIdxBrs (MATRIKS_INT M);
-/* Mengirimkan indeks baris terbesar M */
-indeks GetLastIdxKol (MATRIKS_INT M);
-/* Mengirimkan indeks kolom terbesar M */
-boolean IsIdxEff (MATRIKS_INT M, indeks i, indeks j);
-/* Mengirimkan true jika i, j adalah indeks efektif bagi M */
-ElType GetElmtDiagonal (MATRIKS_INT M, indeks i);
-/* Mengirimkan elemen M(i,i) */
 
 /* ********** Assignment  MATRIKS ********** */
 void CopyMATRIKS_INT (MATRIKS_INT MIn, MATRIKS_INT * MHsl);
