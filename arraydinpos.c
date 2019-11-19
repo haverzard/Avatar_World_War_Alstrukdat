@@ -339,3 +339,17 @@ void DelEli (TabBangunan * T, IdxType i, ElType_Array * X)
     }
 	ElmtArr(*T, NBElmt_Array(*T)) = BangunanUndef;
 }
+
+int CheckOwnerByPosition(TabBangunan T, int X, int Y) {
+	/* Kamus Lokal */
+	int i;
+	POINT temp;
+
+	/* Algoritma */
+	temp = MakePOINT(X,Y);
+	i = 0;
+	do {
+		i++;
+	} while (!EQ_POINT(Koordinat(ElmtArr(T,i)),temp));
+	return Kepemilikan(ElmtArr(T,i));
+}

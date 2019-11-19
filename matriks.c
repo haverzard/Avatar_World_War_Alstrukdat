@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include "matriks.h"
 #include "boolean.h"
+#include "pcolor.h"
+#include "arraydinpos.h"
 
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
 /* *** Konstruktor membentuk MATRIKS *** */
@@ -154,7 +156,13 @@ void TulisMATRIKSPETA (MATRIKS M) //Modified
 	for (i = GetFirstIdxBrs(M); i <= GetLastIdxBrs(M); i++) {
 		printf("*");
 		for (j = GetFirstIdxKol(M); j < GetLastIdxKol(M); j++) {
-			printf("%c", ElmtMat(M,i,j));
+			if (CheckOwnerByPosition(TB, i, j) == 1) {
+				print_red(ElmtMat(M,i,j));
+			} else if (CheckOwnerByPosition(TB, i, j) == 1) {
+				print_blue(ElmtMat(M,i,j));
+			} else {
+				printf("%c", ElmtMat(M,i,j));
+			}
 		}
 		printf("%c*\n", ElmtMat(M,i,GetLastIdxKol(M)));
 	}

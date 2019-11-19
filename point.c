@@ -153,14 +153,3 @@ void Mirror(POINT *P, boolean SbX) {
 		(*P).X *= -1;
 	}
 }
-
-void Putar(POINT *P, int Sudut) {
-	/* Kamus Lokal */
-	int temp_x, temp_y;
-	
-	/* Algoritma */
-	temp_x = -Ordinat(*P)*sin(toRads(-Sudut)) + Absis(*P)*cos(toRads(-Sudut));
-	temp_y = Absis(*P)*sin(toRads(-Sudut)) + Ordinat(*P)*cos(toRads(-Sudut));
-	SetAbsis(P,temp_x);
-	SetOrdinat(P,temp_y);
-}
