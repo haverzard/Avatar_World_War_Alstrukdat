@@ -7,11 +7,14 @@
 #include "boolean.h"
 #include "mesinkar.h"
 #include "matriks.h"
+#include "matriksint.h"
 #include "arraydinpos.h"
 
 #define NMax_DATA 600
 #define ENDLINE '\r'
 #define BLANK ' '
+
+extern FILE * pita;
 
 extern char Baris[NMax_DATA+1];
 
@@ -36,5 +39,6 @@ void INFOBANGUNAN(TabBangunan *TB);
 
 void LOKASIBANGUNAN(MATRIKS *Peta, TabBangunan *TB, int i);
 
+void HUBUNGANBANGUNAN (MATRIKS_INT *Hubungan, FILE * pita);
 
 #endif

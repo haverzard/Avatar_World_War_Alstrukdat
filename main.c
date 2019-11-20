@@ -11,13 +11,12 @@
 #include "player.h"
 #include "point.h"
 #include "listlinier.h"
-#include "mesinkar.h"
 
 int main() {
 	/* Kamus */
 	int i;
 	MATRIKS Peta;
-	MATRIKS_INT HubunganBangunan; 
+	MATRIKS_INT Hubungan; 
 	Player p1, p2;
 
 	/* Inisiasi */
@@ -32,9 +31,7 @@ int main() {
 		for (i = 1; i <= MaxElArr(TB); i++) {
 			LOKASIBANGUNAN(&Peta, &TB, i);
 		}
-		INFOHUBUNGAN(&HubunganBangunan, pita);
-		CREATEPLAYER(&p1, &p2);
-		KeepSkill(&p1,'U');
+		HUBUNGANBANGUNAN(&Hubungan, pita);
 		CREATEPLAYER(&p1, &p2);
 		KeepSkill(&p1,'U');
 		CREATEPLAYER(&p1, &p2);

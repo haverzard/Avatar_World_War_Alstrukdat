@@ -34,6 +34,21 @@ void MakeMATRIKS_INT (int NB, int NK, MATRIKS_INT * M);
 // #define NBrsEff(M) (M).NBrsEff
 // #define NKolEff(M) (M).NKolEff
 #define ElmtMatInt(M,i,j) (M).Mem[(i)][(j)]
+/* *** Selektor "DUNIA MATRIKS" *** */
+boolean IsIdxValid (int i, int j);
+/* Mengirimkan true jika i, j adalah indeks yang valid untuk matriks apa pun */
+
+/* *** Selektor: Untuk sebuah matriks M yang terdefinisi: *** */
+indeks GetFirstIdxBrsMatInt (MATRIKS_INT M);
+/* Mengirimkan indeks baris terkecil M */
+indeks GetFirstIdxKolMatInt (MATRIKS_INT M);
+/* Mengirimkan indeks kolom terkecil M */
+indeks GetLastIdxBrsMatInt (MATRIKS_INT M);
+/* Mengirimkan indeks baris terbesar M */
+indeks GetLastIdxKolMatInt (MATRIKS_INT M);
+/* Mengirimkan indeks kolom terbesar M */
+boolean IsIdxEffMatInt (MATRIKS_INT M, indeks i, indeks j);
+/* Mengirimkan true jika i, j adalah indeks efektif bagi M */
 
 /* ********** Assignment  MATRIKS ********** */
 void CopyMATRIKS_INT (MATRIKS_INT MIn, MATRIKS_INT * MHsl);
@@ -76,12 +91,5 @@ boolean EQSize_MATRIKS_INT (MATRIKS_INT M1, MATRIKS_INT M2);
 /* ********** Operasi lain ********** */
 int NBElmt_MATRIKS_INT (MATRIKS_INT M);
 /* Mengirimkan banyaknya elemen M */
-
-/* ********** KELOMPOK TEST TERHADAP MATRIKS ********** */
-boolean IsBujurSangkar_MATRIKS_INT (MATRIKS_INT M);
-/* Mengirimkan true jika M adalah matriks dg ukuran baris dan kolom sama */
-boolean IsSimetri_MATRIKS_INT (MATRIKS_INT M);
-/* Mengirimkan true jika M adalah matriks simetri : IsBujurSangkar(M)
-   dan untuk setiap elemen M, M(i,j)=M(j,i) */
 
 #endif

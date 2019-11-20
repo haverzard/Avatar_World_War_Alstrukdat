@@ -1,6 +1,7 @@
 /* ********** Implementasi Body TYPE MATRIKS dengan indeks dan elemen integer ********** */
 #include <stdio.h>
 #include "matriksint.h"
+#include "matriks.h"
 
 /* *** Konstruktor membentuk MATRIKS *** */
 void MakeMATRIKS_INT (int NB, int NK, MATRIKS_INT * M)
@@ -20,35 +21,30 @@ boolean IsIdxValid (int i, int j)
 }
 
 /* *** Selektor: Untuk sebuah matriks M yang terdefinisi: *** */
-indeks GetFirstIdxBrs (MATRIKS_INT M)
+indeks GetFirstIdxBrsMatInt (MATRIKS_INT M)
 /* Mengirimkan indeks baris terkecil M */
 {
     return BrsMin;
 }
-indeks GetFirstIdxKol (MATRIKS_INT M)
+indeks GetFirstIdxKolMatInt (MATRIKS_INT M)
 /* Mengirimkan indeks kolom terkecil M */
 {
     return KolMin;
 }
-indeks GetLastIdxBrs (MATRIKS_INT M)
+indeks GetLastIdxBrsMatInt (MATRIKS_INT M)
 /* Mengirimkan indeks baris terbesar M */
 {
     return NBrsEff(M);
 }
-indeks GetLastIdxKol (MATRIKS_INT M)
+indeks GetLastIdxKolMatInt (MATRIKS_INT M)
 /* Mengirimkan indeks kolom terbesar M */
 {
     return NKolEff(M);
 }
-boolean IsIdxEff (MATRIKS_INT M, indeks i, indeks j)
+boolean IsIdxEffMatInt (MATRIKS_INT M, indeks i, indeks j)
 /* Mengirimkan true jika i, j adalah indeks efektif bagi M */
 {
-    return ((i >= GetFirstIdxBrs(M) && i <= GetLastIdxBrs(M))  &&(j >= GetFirstIdxKol(M) && j <= GetLastIdxKol(M)));
-}
-ElType GetElmtDiagonal (MATRIKS_INT M, indeks i)
-/* Mengirimkan elemen M(i,i) */
-{
-    return ElmtMatInt(M, i, i);
+    return ((i >= BrsMin && i <= NBrsEff(M))  &&(j >= KolMin && j <= NKolEff(M)));
 }
 
 /* ********** Assignment  MATRIKS ********** */
@@ -59,8 +55,8 @@ void CopyMATRIKS_INT (MATRIKS_INT MIn, MATRIKS_INT * MHsl)
     indeks i, j;
     /* ALGORITMA */
     MakeMATRIKS_INT(NBrsEff(MIn), NKolEff(MIn), MHsl);
-    for (i = GetFirstIdxBrs(MIn); i <= GetLastIdxBrs(MIn); i++) {
-		for (j = GetFirstIdxKol(MIn); j <= GetLastIdxKol(MIn); j++) {
+    for (i = GetFirstIdxBrsMatInt(MIn); i <= GetLastIdxBrsMatInt(MIn); i++) {
+		for (j = GetFirstIdxKolMatInt(MIn); j <= GetLastIdxKolMatInt(MIn); j++) {
             ElmtMatInt(*MHsl, i, j) = ElmtMatInt(MIn, i, j);
         }
     }
@@ -82,8 +78,8 @@ void BacaMATRIKS_INT (MATRIKS_INT * M, int NB, int NK)
     indeks i, j;
     /* ALGORITMA */
     MakeMATRIKS_INT(NB, NK, M);
-	for (i = GetFirstIdxBrs(*M); i <= NB; i++) {
-		for (j = GetFirstIdxKol(*M); j <= NK; j++) {
+	for (i = GetFirstIdxBrsMatInt(*M); i <= NB; i++) {
+		for (j = GetFirstIdxKolMatInt(*M); j <= NK; j++) {
             scanf("%d", &ElmtMatInt(*M, i, j));
         }
     }
@@ -102,26 +98,26 @@ void TulisMATRIKS_INT (MATRIKS_INT M)
     /* KAMUS LOKAL */
     indeks i, j;
     /* ALGORITMA */
-    for (i = GetFirstIdxBrs(M); i < GetLastIdxBrs(M); i++) {
-		for (j = GetFirstIdxKol(M); j < GetLastIdxKol(M); j++) {
-            printf("%d ", Elmt(M, i, j));
+    for (i = GetFirstIdxBrsMatInt(M); i < GetLastIdxBrsMatInt(M); i++) {
+		for (j = GetFirstIdxKolMatInt(M); j < GetLastIdxKolMatInt(M); j++) {
+            printf("%d ", ElmtMatInt(M, i, j));
         }
-        printf("%d", Elmt(M, i, j));
+        printf("%d", ElmtMatInt(M, i, j));
         printf("\n");
     }
-    i = GetLastIdxBrs(M);
-    for (j = GetFirstIdxKol(M); j < GetLastIdxKol(M); j++) {
-        printf("%d ", Elmt(M, i, j));
+    i = GetLastIdxBrsMatInt(M);
+    for (j = GetFirstIdxKolMatInt(M); j < GetLastIdxKolMatInt(M); j++) {
+        printf("%d ", ElmtMatInt(M, i, j));
     }
-    printf("%d", Elmt(M, i, j));
+    printf("%d", ElmtMatInt(M, i, j));
 }
 
 /* ********** KELOMPOK OPERASI RELASIONAL TERHADAP MATRIKS ********** */
 boolean EQ_MATRIKS_INT (MATRIKS_INT M1, MATRIKS_INT M2)
 /* Mengirimkan true jika M1 = M2, yaitu NBElmt_MATRIKS_INT(M1) = NBElmt_MATRIKS_INT(M2) dan */
 /* untuk setiap i,j yang merupakan indeks baris dan kolom M1(i,j) = M2(i,j) */
-/* Juga merupakan strong EQ karena GetFirstIdxBrs(M1) = GetFirstIdxBrs(M2)
-   dan GetLastIdxKol(M1) = GetLastIdxKol(M2) */
+/* Juga merupakan strong EQ karena GetFirstIdxBrsMatInt(M1) = GetFirstIdxBrsMatInt(M2)
+   dan GetLastIdxKolMatInt(M1) = GetLastIdxKolMatInt(M2) */
 {   
     /* KAMUS LOKAL */
     boolean found = false;
@@ -134,7 +130,7 @@ boolean EQ_MATRIKS_INT (MATRIKS_INT M1, MATRIKS_INT M2)
         while (!found && i <= NBrsEff(M1)) {
             j = KolMin;
             while (!found && j <= NKolEff(M1)) {
-                if (Elmt(M1, i, j) != Elmt(M2, i, j)) {
+                if (ElmtMatInt(M1, i, j) != ElmtMatInt(M2, i, j)) {
                     found = true;
                 } else {
                     j++;
@@ -155,46 +151,12 @@ boolean EQSize_MATRIKS_INT (MATRIKS_INT M1, MATRIKS_INT M2)
 /* Mengirimkan true jika ukuran efektif matriks M1 sama dengan ukuran efektif M2 */
 /* yaitu GetBrsEff(M1) = GetNBrsEff (M2) dan GetNKolEff (M1) = GetNKolEff (M2) */
 {
-    return ((GetLastIdxBrs(M1) == GetLastIdxBrs(M2)) && (GetLastIdxKol(M1) == GetLastIdxKol(M2)));
+    return ((GetLastIdxBrsMatInt(M1) == GetLastIdxBrsMatInt(M2)) && (GetLastIdxKolMatInt(M1) == GetLastIdxKolMatInt(M2)));
 }
 
 /* ********** Operasi lain ********** */
 int NBElmt_MATRIKS_INT (MATRIKS_INT M)
 /* Mengirimkan banyaknya elemen M */
 {
-    return GetLastIdxBrs(M) * GetLastIdxKol(M);
-}
-
-/* ********** KELOMPOK TEST TERHADAP MATRIKS ********** */
-boolean IsBujurSangkar_MATRIKS_INT (MATRIKS_INT M)
-/* Mengirimkan true jika M adalah matriks dg ukuran baris dan kolom sama */
-{
-    return GetLastIdxBrs(M) == GetLastIdxKol(M);
-}
-boolean IsSimetri_MATRIKS_INT (MATRIKS_INT M)
-/* Mengirimkan true jika M adalah matriks simetri : IsBujurSangkar(M)
-   dan untuk setiap elemen M, M(i,j)=M(j,i) */
-{
-    /* KAMUS LOKAL */
-    boolean found = false;
-    indeks i, j;
-    /* ALGORITMA */
-    if (!IsBujurSangkar(M)) {
-        return false;
-    } else {
-        i = BrsMin;
-        while (!found && i <= NBrsEff(M)) {
-            j = KolMin;
-            while (!found && j <= NKolEff(M)) {
-                if (Elmt(M, i, j) != Elmt(M, j, i)) {
-                    found = true;
-                } else {
-                    j++;
-                }
-            }
-            if (!found) { i++; }
-        } 
-    }
-
-    return !found;
+    return GetLastIdxBrsMatInt(M) * GetLastIdxKolMatInt(M);
 }

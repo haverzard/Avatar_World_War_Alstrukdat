@@ -103,9 +103,9 @@ void HUBUNGANBANGUNAN (MATRIKS_INT *Hubungan, FILE * pita) {
 	ADV();
 	IgnoreBlank_DATA();
 	MakeMATRIKS_INT(100, 100, Hubungan);
-	i = GetFirstIdxBrs(*Hubungan);
+	i = GetFirstIdxBrsMatInt(*Hubungan);
 	while (!feof(pita)) {
-		j = GetFirstIdxBrs(*Hubungan);
+		j = GetFirstIdxBrsMatInt(*Hubungan);
 		while (CC != ENDLINE) {
 			while (CC != BLANK) {
 				ElmtMatInt(*Hubungan, i, j) = KarakterToInt(CC);
