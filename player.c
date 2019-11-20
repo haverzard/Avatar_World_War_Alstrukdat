@@ -7,14 +7,20 @@
 #include "listlinier.h"
 #include "queue.h"
 #include "arraydinpos.h"
+#include "bangunan.h"
+
+//Global Variable
+int extraTurn=0;
+
 
 void InitPlayer(int num, Player *P) {
 	Color(*P) = num;
 	NoPemain(*P) = num;
 	CreateEmpty_LL(&ListBangunan(*P));
-	CreateEmpty_Queue(&Skill(*P), 100);
+	CreateEmpty_Queue(&Skill(*P), 10);
 	First(ListBangunan(*P)) = Alokasi(num);
 	Kepemilikan(ElmtArr(TB,num)) = num;
+	shieldDuration(*P) = 0;
 }
 
 void PrintListBangunan(int num, Player P1, Player P2) {
@@ -42,96 +48,81 @@ void LevelUpBP (int num, Player P1, Player P2, int idx) {
 }
 
 void InstantUpgrade(Player *P){ 
-//IS: .......................Cara peroleh: Hanya di awal permainan
-//FS: Semua bangunan pemain mengalami level up
     LevelUpAll(ListBangunan(*P));
 }
 
 void Shield (Player *P){
-//IS .............................Cara peroleh: pemain diserang ,bangunannya berkurang 1 dan bersisa 2
-//FS: Pertahanan Bangunan selama 2 kali turn, jika digunakan dua kali berturut-turut,durasi tidak bertambah,namun menjadi nilai maksimum 
     ShieldOn(ListBangunan(*P));
+	if(shieldDuration(*P)==0){
+		shieldDuration(*P) += 4; //2 round = 4 endturn
+	}else{
+		//Pertahanan jadi maksimum mksdnya apa ????
+	}
+	
 }
 
 void ExtraTurn (Player *P){
-//IS.........................Cara peroleh:Fort pemain tersebut direbut lawan
-//FS: Player dapat turn 2 kali
-    //diset up di menu
+	extraTurn = 2;
 }
 
-void AttackUp ( Player *attacker, Player *defender){
-//IS: ...................................Cara peroleh skill ini : pemain menyerang tower lawan dan jumlah towernya menjadi 3
-//FS: Pertahanan musuh tidak akan mempengaruhi penyerangan pd giliran ini setelah skill diaktifkan
-    //Kamus
-    // address addr;
-
-    //Algoritma
-    // addr = First(Bangunan(*defender));
-    // while (addr != Nil){
-    //     P(Bangunan(Info(addr))) = false;
-    //     addr = Next(addr);
-    // }
-    //Untuk turn berikutnya yang bangunan yg dulunya ada pertahanan harus diaktifkan balek
+void AttackUp (Player *attacker,Player *defender){
+	AttackUpAll(ListBangunan(*defender));
 }
 
 void CriticalHit (Player *user){
-//IS:.............................Cara peroleh: Jika lawan baru saja mengaktifkan skill Extra
-//FS: Pada giliran ini, setelah skill diaktifkan jumlah pasukan pada bangunan yang melakukan serangan tepat selanjutnya hanya berkurang 1/2 dari yang seharusnya
-    
-    //tambahin boolean critical sbg atribut player
     Critical(*user) = true;
-    //jika true jalanin proses supaya FS, ini realisasinya di command attack  
 }
 
 void InstantReinforcement (Player *P){
-//IS: ..........................Cara peroleh skill: pemain mendapat skill ini di akhir gilirannya bila semua bangunan yang ia miliki memiliki level 4
-//FS: Seluruh bangunan mendapatkan tambahan 5 pasukan
-
-    //Setiap endturn harus cek
     ReinforceAll(ListBangunan(*P));
 }
 
 void Barrage (Player *P){
-//IS..............................Pemain mendapat skill ini jika lawan baru saja bertaambah bangunannya menjadi 10 bangunan
-//FS Jumlah pasukan pada seluruh bangunan musuh akan berkurang sebanyak 10 pasukan 
     BarrageAll(ListBangunan(*P));
 }
 
 
 /* *** Keep Skill *** */
 void KeepSkill (Player *user, skilltype skillName){
-    //IS: skillName merupakan salah satu dari nama singkatan skill seperti definisi 
-    //FS
-    
-    //tambahin attribut Skill dengan datatype queue di player.h , misalnya Queue Skill;
-    //Anggap selektornya Skill(*user) 
-    Add(&Skill(*user),skillName); 
+	if (!IsFull_Queue(Skill(*user))){
+		Add(&Skill(*user),skillName);	
+	}
+     
 }
 
 /* *** Use Skill*** */
-void UseSkill(Player *user, Player *enemy) {
-//IS: Skill(user) tidak kosong
-//FS: elemen Head pada Queue Skill pada user dijalankan, dan skill hangus, Head dari Queue baru adalah skill berikutnya dari skill yang hangus dipakai
-    //Kamus
-    skilltype X;
+void UseSkillP (Player *user,Player *enemy){
+	skilltype X;
 
-    //Algoritma
-    if ((InfoHead(Skill(*user)) == 'U') || (InfoHead(Skill(*user)) == 'u')) {
-        InstantUpgrade(user);//ini belum tau parameternya bakalan player atau list
-    } else if ((InfoHead(Skill(*user)) == 'S') || (InfoHead(Skill(*user)) == 's')){
-        Shield(user);
-    } else if ((InfoHead(Skill(*user)) == 'E') || (InfoHead(Skill(*user)) == 'e')){
-        ExtraTurn(user);
-    } else if ((InfoHead(Skill(*user)) == 'A') || (InfoHead(Skill(*user)) == 'a')){
-        AttackUp(user,enemy);
-    } else if ((InfoHead(Skill(*user)) == 'H') || (InfoHead(Skill(*user)) == 'h')){
-        CriticalHit(user);
-    } else if ((InfoHead(Skill(*user)) == 'R') || (InfoHead(Skill(*user)) == 'r')){
-        InstantReinforcement(user);
-    } else {
-        Barrage(user);
-    }
-    Del(&Skill(*user),&X);
+	if (IsEmpty_Queue(Skill(*user))){
+		printf("Tidak ada skill yang available\n");
+	} else {
+		if ((InfoHead(Skill(*user)) == 'U') || (InfoHead(Skill(*user)) == 'u')) {
+			InstantUpgrade(user);//ini belum tau parameternya bakalan player atau list
+		} else if ((InfoHead(Skill(*user)) == 'S') || (InfoHead(Skill(*user)) == 's')){
+			Shield(user);
+		} else if ((InfoHead(Skill(*user)) == 'E') || (InfoHead(Skill(*user)) == 'e')){
+			ExtraTurn(user);
+			KeepSkill(enemy,'C');
+		} else if ((InfoHead(Skill(*user)) == 'A') || (InfoHead(Skill(*user)) == 'a')){
+			AttackUp(user,enemy);
+		} else if ((InfoHead(Skill(*user)) == 'H') || (InfoHead(Skill(*user)) == 'h')){
+			CriticalHit(user);
+		} else if ((InfoHead(Skill(*user)) == 'R') || (InfoHead(Skill(*user)) == 'r')){
+			InstantReinforcement(user);
+		} else {
+			Barrage(user);
+		}
+		Del(&Skill(*user),&X);
+	}
+}
+
+void UseSkill(int num, Player *P1, Player *P2) {
+	if (NoPemain(*P1) == num) {
+		UseSkillP(P1,P2);
+	} else{
+		UseSkillP(P2,P1);
+	}
 }
 
 void PrintSkill(Player P) {
@@ -164,3 +155,122 @@ void ShowSkill(int num, Player P1, Player P2) {
 	}
 	printf("\n");
 }
+
+//Kondisi peroleh skill
+void GetIUpgrade (Player *P){
+	KeepSkill(P,'U');
+}
+
+void GetIReinforcement(int num, Player *P1,Player *P2){
+	if (NoPemain(*P1) == num) {
+		if (isAllLevel4(*P1)){
+			KeepSkill(P1,'R');
+		}
+	} else if (NoPemain(*P2) == num) {
+		if (isAllLevel4(*P2)){
+			KeepSkill(P2,'R');
+		}
+	}
+}
+
+boolean isAllLevel4 (Player P){
+	//Kamus Lokal
+	address Q;
+	boolean level4;
+
+	//Algoritma
+	level4 = true;
+	if (IsEmpty_LL(ListBangunan(P))){
+		return false;
+	} else {
+		Q = First(ListBangunan(P));
+		while ((Q != Nil) && (level4)){
+			if (Level(ElmtArr(TB,Info(Q))) != 4){
+				level4 = false;
+			} else {
+				Q = Next(Q);
+			}
+		}
+		return (level4);
+	}
+}
+
+void HitungBangunan (Player P,int *C,int *T, int *F, int *V){
+	//Kamus Lokal
+	address Q;
+	int castle,tower,fort,village;
+	
+	//Algoritma
+	castle = 0;
+	tower = 0;
+	village = 0;
+	fort = 0;
+
+	Q = First(ListBangunan(P));
+	while (Q != Nil){
+		if (Jenis(ElmtArr(TB,Info(Q))) == 'C'){
+			castle +=1;
+		}
+		if (Jenis(ElmtArr(TB,Info(Q))) == 'T'){
+			tower +=1;
+		}
+		if (Jenis(ElmtArr(TB,Info(Q))) == 'F'){
+			fort +=1;
+		}
+		if (Jenis(ElmtArr(TB,Info(Q))) == 'V'){
+			village +=1;
+		}
+		Q = Next(Q);
+	}
+	*C = castle;
+	*T = tower;
+	*F = fort;
+	*V = village;
+}
+
+//procedure ini dipanggil di main ?????
+void SerangPlayer (int input,Player *attacker, Player *defender){
+	//Kamus Lokal
+	//attacker
+	int CAawal,TAawal,FAawal,VAawal; //A -> Attacker
+	int CAakhir,TAakhir,FAakhir,VAakhir;
+	int TotalAwalA,TotalAkhirA;
+	//defender
+	int CDawal,TDawal,FDawal,VDawal;//D -> Defender
+	int CDakhir,TDakhir,FDakhir,VDakhir;
+	int TotalAwalD,TotalAkhirD;
+	address ListDefender;
+
+	//Algoritma
+	HitungBangunan(*attacker,&CAawal,&TAawal,&FAawal,&VAawal);
+	HitungBangunan(*defender,&CDawal,&TDawal,&FDawal,&VDawal);
+	TotalAwalA  = CAawal+TAawal+FAawal+VAawal;
+	TotalAwalD  = CDakhir+TDakhir+FDakhir+VDakhir;
+	ListDefender = 	First(ListBangunan(*defender));
+	for (int i=1;i <= input;i++){ //anggap input valid
+		ListDefender = Next(ListDefender);
+	}
+	//Critical realisasi di sini ??????????
+	SerangBangunan(&ElmtArr(TB,Info(ListDefender)),JumlahPasukan(ElmtArr(TB,Info(ListDefender))));
+	HitungBangunan(*defender,&CDakhir,&TDakhir,&FDakhir,&VDakhir);
+	TotalAkhirA = CAakhir+TAakhir+FAakhir+VAakhir;
+	TotalAkhirD = CDakhir+TDakhir+FDakhir+VDakhir;
+	
+	if (TotalAwalD==3 && TotalAkhirD==2){
+		KeepSkill(defender,'S');
+	}
+	if (FDakhir == FDawal-1){
+		KeepSkill(defender,'E');
+	}
+	if (TDawal==4 && TDakhir==3){
+		KeepSkill(defender,'A');
+	}
+}
+
+//Diset up di main
+// void GetdExtraTurn();
+// void GetAttackUp();
+// void GetCriticalHit();
+// void GetBarrage();
+
+

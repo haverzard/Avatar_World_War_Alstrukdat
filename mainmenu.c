@@ -9,7 +9,7 @@
 #include "bangunan.h"
 #include "mesindata.h"
 #include "mesinkata.h"
-#include "stack.h"
+// #include "stack.h"
 
 #define printl(x) printf("%s\n", x);
 
@@ -73,7 +73,7 @@ void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
 	} else if (EQ_KATA(CKata, "LEVEL_UP")) {
 		LEVELUP(NoPemain, *P1, *P2);
 	} else if (EQ_KATA(CKata, "SKILL")) {
-		printl("SKILL!");
+		UseSkill(NoPemain,P1,P2);
 	} else if (EQ_KATA(CKata, "UNDO")) {
 		printl("UNDO!");
 	} else if (EQ_KATA(CKata, "END_TURN")) {
@@ -101,6 +101,7 @@ void ATTACK(int NoPemain, Player *P1, Player *P2) {
 	printf("Bangunan yang digunakan untuk menyerang: "); scanf("%d", &choice);
 	// Critical
 	SCAN();
+	
 }
 
 void LEVELUP(int NoPemain, Player P1, Player P2) {

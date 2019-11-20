@@ -12,7 +12,7 @@
 #include "point.h"
 #include "listlinier.h"
 #include "graph.h"
-#include "stack.h"
+// #include "stack.h"
 
 int main() {
 	/* Kamus */
@@ -21,9 +21,11 @@ int main() {
 	MATRIKS_INT Hubungan; 
 	Graph GHubungan;
 	Player p1, p2;
+	// Stack StatusP1, StatusP2;
 
 	/* Inisiasi */
 	Jenis(BangunanUndef) = JenisUndef;
+	// CreateEmpty(&StatusP1); CreateEmpty(&StatusP2);
 	
 	/* Algoritma */
 	STARTGAME();
@@ -31,7 +33,7 @@ int main() {
 		printf("HEHE");
 		INFOPETA(&Peta);
 		INFOBANGUNAN(&TB);
-		
+
 		for (i = 1; i <= MaxElArr(TB); i++) {
 			LOKASIBANGUNAN(&Peta, &TB, i);
 		}
@@ -41,17 +43,25 @@ int main() {
 		printf("\n");
 		TulisMATRIKS_INT(Hubungan); printf("\n");
 		CREATEPLAYER(&p1, &p2);
-		KeepSkill(&p1,'U');
-		CREATEPLAYER(&p1, &p2);
-		KeepSkill(&p1,'U');
-		KeepSkill(&p2,'U');
+		GetIUpgrade (&p1);
+		GetIUpgrade (&p2);
+		// UpdateStatus(&StatusP1, p1); UpdateStatus(&StatusP2, p2);
+		// GetIReinforcement(i,&p1,&p2);
 		i = 1;
 		while (!EndGame) {
 			while (!EndTurn) {
 				TURN(i, Peta, &p1, &p2);
 			}
 			UpdateListBangunan(i, p1, p2);
+			// ResetStatus(&StatusP1); ResetStatus(&StatusP2);
+			//Tambahin shield Duration
 			i = (i % 2 + 3) - 2;
+			if (extraTurn==0){
+				i = (i % 2 + 3) - 2; 
+			} else {
+				extraTurn -=1;
+			}
+
 			EndTurn = false;
 		}
 	}

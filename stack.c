@@ -1,5 +1,6 @@
-/* FILE : stack.c */
+/* File : stack.c MODIFIED */
 /* Deklarasi stack yang diimplementasi dengan tabel kontigu dan ukuran sama */
+/* TOP adalah alamat elemen puncak */
 /* ADT Stack untuk mekanisme command UNDO */
 
 #include <stdio.h>
@@ -38,8 +39,22 @@ void Push (Stack * S, infotype X){
 /* ************ Menghapus sebuah elemen Stack ************ */
 void Pop (Stack * S, infotype* X){
     (*X) = InfoTop(*S);
-    Top(*S) -= 1;
+    Top(*S) --;
 }
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
+
+// void UpdateStatus(Stack *S, Player P) 
+// {
+//     /* Kamus Lokal */
+//     infotype X;
+//     /* Algoritma */
+//     InfoPlayer(X) = P;
+//     // InfoBangunan(X) = B;
+//     Push(S, X);
+// }
+
+// void ResetStatus(Stack *S) {
+//     CreateEmpty(S);
+// }
