@@ -30,14 +30,15 @@ int main() {
 		printf("HEHE");
 		INFOPETA(&Peta);
 		INFOBANGUNAN(&TB);
+		
 		for (i = 1; i <= MaxElArr(TB); i++) {
 			LOKASIBANGUNAN(&Peta, &TB, i);
 		}
-		HUBUNGANBANGUNAN(&Hubungan);
+		HUBUNGANBANGUNAN(&Hubungan, NBElmt_Array(TB));
 		GenerateHubunganBangunan(&GHubungan, Hubungan);
 		PrintAllHubunganBangunan(GHubungan);
-		// printf("\n");
-		// TulisMATRIKS_INT(Hubungan); printf("\n");
+		printf("\n");
+		TulisMATRIKS_INT(Hubungan); printf("\n");
 		CREATEPLAYER(&p1, &p2);
 		KeepSkill(&p1,'U');
 		CREATEPLAYER(&p1, &p2);

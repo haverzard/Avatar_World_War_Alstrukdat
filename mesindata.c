@@ -96,18 +96,15 @@ void LOKASIBANGUNAN(MATRIKS *Peta, TabBangunan *P, int i) {
 	NEXTDATA();
 }
 
-void HUBUNGANBANGUNAN (MATRIKS_INT * Hubungan) {
+void HUBUNGANBANGUNAN (MATRIKS_INT * Hubungan, int BanyakBangunan) {
 	/* Kamus Lokal */ 
 	int i, j;
-	// boolean eofpita;
-	/* Algoritma */
 	IgnoreBlank_DATA();
 	MakeMATRIKS_INT(20, 30, Hubungan);
 	i = GetFirstIdxBrsMatInt(*Hubungan);
-	// eofpita = false;
-	while (CC != MARK) {
+	while (i <= BanyakBangunan) {
 		j = GetFirstIdxKolMatInt(*Hubungan);
-		while (CC != ENDLINE) {
+		while (j <= BanyakBangunan) {
 			if (CC != BLANK) {
 				ElmtMatInt(*Hubungan, i, j) = KarakterToInt(CC);
 				j++;
@@ -116,12 +113,8 @@ void HUBUNGANBANGUNAN (MATRIKS_INT * Hubungan) {
 		}
 		i++;
 		NEXTDATA();
-		// if (!feof(pita)) {
-		// 	NEXTDATA();
-		// } else {
-		// 	eofpita = true;
-		// }
 	}
+	printf("IIIII %d\n", i);
 	NBrsEff(*Hubungan) = i-1;
 	NKolEff(*Hubungan) = j-1;
 }
