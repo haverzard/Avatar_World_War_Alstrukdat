@@ -72,7 +72,7 @@ void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
 	} else if (EQ_KATA(CKata, "LEVEL_UP")) {
 		LEVELUP(NoPemain, *P1, *P2);
 	} else if (EQ_KATA(CKata, "SKILL")) {
-		printl("SKILL!");
+		UseSkill(NoPemain,P1,P2);
 	} else if (EQ_KATA(CKata, "UNDO")) {
 		printl("UNDO!");
 	} else if (EQ_KATA(CKata, "END_TURN")) {

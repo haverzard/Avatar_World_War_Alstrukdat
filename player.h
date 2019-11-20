@@ -8,13 +8,14 @@
 #include "listlinier.h"
 #include "queue.h"
 
+
 typedef struct {
 	int Color;
 	int NoPemain;
 	List ListBangunan;
 	Queue Skill;
 	boolean Critical; // Ini untuk skill Critical Hit
-	//int skillDuration;
+	int shieldDuration;
 } Player;
 
 #define Skill(P) (P).Skill
@@ -22,7 +23,7 @@ typedef struct {
 #define Color(P)  (P).Color
 #define Critical(P) (P).Critical 
 #define NoPemain(P) (P).NoPemain
-
+#define shieldDuration(P) (P).shieldDuration
 
 void InitPlayer(int num, Player *P);
 
@@ -72,12 +73,22 @@ void KeepSkill (Player *user, skilltype skillName);
     //Add()
 
 /* *** Use Skill*** */
-void UseSkill(Player *user, Player *enemy);
+void UseSkillP (Player *user,Player *enemy);
+
+void UseSkill(int num,Player *user, Player *enemy);
 //IS:
 //FS:
     //If (Player.S.Name == 's' or Player.S.name == 'S') then Shield()
     //Pake counter untuk track jumlah pemakaian suatu skill berturut''
 
 void ShowSkill(int num, Player P1, Player P2);
+
+void GetIUpgrade(Player *P);
+
+void GetIReinforcement(int num, Player *P1,Player *P2);
+
+boolean isAllLevel4 (Player P);
+
+// boolean isSisa2 
 
 #endif

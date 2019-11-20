@@ -427,9 +427,11 @@ void LevelUpAll(List L) {
 	/* Algoritma */
 	if (!IsEmpty_LL(L)) {
 		P = First(L);
+		JumlahPasukan(ElmtArr(TB,Info(P))) += M(ElmtArr(TB,Info(P)))/2;
 		LevelUpBangunan(&ElmtArr(TB,Info(P)));
 		while (Next(P) != Nil) {
 			P = Next(P);
+			JumlahPasukan(ElmtArr(TB,Info(P))) += M(ElmtArr(TB,Info(P)))/2;
 			LevelUpBangunan(&ElmtArr(TB,Info(P)));
 		}
 	}

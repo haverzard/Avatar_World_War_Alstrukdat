@@ -40,15 +40,14 @@ int main() {
 		printf("\n");
 		TulisMATRIKS_INT(Hubungan); printf("\n");
 		CREATEPLAYER(&p1, &p2);
-		KeepSkill(&p1,'U');
-		CREATEPLAYER(&p1, &p2);
-		KeepSkill(&p1,'U');
-		KeepSkill(&p2,'U');
+		GetIUpgrade (&p1);
+		GetIUpgrade (&p2);
 		i = 1;
 		while (!EndGame) {
 			while (!EndTurn) {
 				TURN(i, Peta, &p1, &p2);
 			}
+			GetIReinforcement(i,&p1,&p2);
 			UpdateListBangunan(i, p1, p2);
 			i = (i % 2 + 3) - 2;
 			EndTurn = false;
