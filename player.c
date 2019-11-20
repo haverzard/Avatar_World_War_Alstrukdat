@@ -158,11 +158,10 @@ void GetIReinforcement(int num, Player *P1,Player *P2){
 		if (isAllLevel4(*P1)){
 			KeepSkill(P1,'R');
 		}
-	} else if (NoPemain(*P2) == num) {
+	} else {
 		if (isAllLevel4(*P2)){
 			KeepSkill(P2,'R');
 		}
-	}
 }
 
 boolean isAllLevel4 (Player P){
