@@ -31,7 +31,11 @@ int main() {
 		for (i = 1; i <= MaxElArr(TB); i++) {
 			LOKASIBANGUNAN(&Peta, &TB, i);
 		}
-		HUBUNGANBANGUNAN(&Hubungan, pita);
+		// printf("\nMAU MASUK HUBUNGAN\n");
+		// BacaMATRIKS_INT(&Hubungan, 2, 2);
+		// TulisMATRIKS_INT(Hubungan);
+		HUBUNGANBANGUNAN(&Hubungan);
+		TulisMATRIKS_INT(Hubungan); printf("\n");
 		CREATEPLAYER(&p1, &p2);
 		KeepSkill(&p1,'U');
 		CREATEPLAYER(&p1, &p2);

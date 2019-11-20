@@ -39,6 +39,6 @@ void INFOBANGUNAN(TabBangunan *TB);
 
 void LOKASIBANGUNAN(MATRIKS *Peta, TabBangunan *TB, int i);
 
-void HUBUNGANBANGUNAN (MATRIKS_INT *Hubungan, FILE * pita);
+void HUBUNGANBANGUNAN (MATRIKS_INT *Hubungan);
 
 #endif

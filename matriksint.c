@@ -1,7 +1,6 @@
 /* ********** Implementasi Body TYPE MATRIKS dengan indeks dan elemen integer ********** */
 #include <stdio.h>
 #include "matriksint.h"
-#include "matriks.h"
 
 /* *** Konstruktor membentuk MATRIKS *** */
 void MakeMATRIKS_INT (int NB, int NK, MATRIKS_INT * M)
@@ -9,42 +8,42 @@ void MakeMATRIKS_INT (int NB, int NK, MATRIKS_INT * M)
 /* I.S. NB dan NK adalah valid untuk memori matriks yang dibuat */
 /* F.S. Matriks M sesuai dengan definisi di atas terbentuk */
 {
-    NBrsEff(*M) = NB;
-    NKolEff(*M) = NK;
+    NBrsEffMatInt(*M) = NB;
+    NKolEffMatInt(*M) = NK;
 }
 
 /* *** Selektor "DUNIA MATRIKS" *** */
 boolean IsIdxValid (int i, int j)
 /* Mengirimkan true jika i, j adalah indeks yang valid untuk matriks apa pun */
 {
-    return ((i >= BrsMin && i <= BrsMax)  &&(j >= KolMin && j <= KolMax));
+    return ((i >= BrsMinMatInt && i <= BrsMaxMatInt)  &&(j >= KolMinMatInt && j <= KolMaxMatInt));
 }
 
 /* *** Selektor: Untuk sebuah matriks M yang terdefinisi: *** */
-indeks GetFirstIdxBrsMatInt (MATRIKS_INT M)
+indeksMatInt GetFirstIdxBrsMatInt (MATRIKS_INT M)
 /* Mengirimkan indeks baris terkecil M */
 {
-    return BrsMin;
+    return BrsMinMatInt;
 }
-indeks GetFirstIdxKolMatInt (MATRIKS_INT M)
+indeksMatInt GetFirstIdxKolMatInt (MATRIKS_INT M)
 /* Mengirimkan indeks kolom terkecil M */
 {
-    return KolMin;
+    return KolMinMatInt;
 }
-indeks GetLastIdxBrsMatInt (MATRIKS_INT M)
+indeksMatInt GetLastIdxBrsMatInt (MATRIKS_INT M)
 /* Mengirimkan indeks baris terbesar M */
 {
-    return NBrsEff(M);
+    return NBrsEffMatInt(M);
 }
-indeks GetLastIdxKolMatInt (MATRIKS_INT M)
+indeksMatInt GetLastIdxKolMatInt (MATRIKS_INT M)
 /* Mengirimkan indeks kolom terbesar M */
 {
-    return NKolEff(M);
+    return NKolEffMatInt(M);
 }
-boolean IsIdxEffMatInt (MATRIKS_INT M, indeks i, indeks j)
+boolean IsIdxEffMatInt (MATRIKS_INT M, indeksMatInt i, indeksMatInt j)
 /* Mengirimkan true jika i, j adalah indeks efektif bagi M */
 {
-    return ((i >= BrsMin && i <= NBrsEff(M))  &&(j >= KolMin && j <= NKolEff(M)));
+    return ((i >= BrsMinMatInt && i <= NBrsEffMatInt(M))  &&(j >= KolMinMatInt && j <= NKolEffMatInt(M)));
 }
 
 /* ********** Assignment  MATRIKS ********** */
@@ -52,9 +51,9 @@ void CopyMATRIKS_INT (MATRIKS_INT MIn, MATRIKS_INT * MHsl)
 /* Melakukan assignment MHsl  MIn */
 {
     /* KAMUS LOKAL */
-    indeks i, j;
+    indeksMatInt i, j;
     /* ALGORITMA */
-    MakeMATRIKS_INT(NBrsEff(MIn), NKolEff(MIn), MHsl);
+    MakeMATRIKS_INT(NBrsEffMatInt(MIn), NKolEffMatInt(MIn), MHsl);
     for (i = GetFirstIdxBrsMatInt(MIn); i <= GetLastIdxBrsMatInt(MIn); i++) {
 		for (j = GetFirstIdxKolMatInt(MIn); j <= GetLastIdxKolMatInt(MIn); j++) {
             ElmtMatInt(*MHsl, i, j) = ElmtMatInt(MIn, i, j);
@@ -75,7 +74,7 @@ void BacaMATRIKS_INT (MATRIKS_INT * M, int NB, int NK)
 */
 {
     /* KAMUS LOKAL */
-    indeks i, j;
+    indeksMatInt i, j;
     /* ALGORITMA */
     MakeMATRIKS_INT(NB, NK, M);
 	for (i = GetFirstIdxBrsMatInt(*M); i <= NB; i++) {
@@ -96,7 +95,7 @@ void TulisMATRIKS_INT (MATRIKS_INT M)
 */
 {
     /* KAMUS LOKAL */
-    indeks i, j;
+    indeksMatInt i, j;
     /* ALGORITMA */
     for (i = GetFirstIdxBrsMatInt(M); i < GetLastIdxBrsMatInt(M); i++) {
 		for (j = GetFirstIdxKolMatInt(M); j < GetLastIdxKolMatInt(M); j++) {
@@ -121,15 +120,15 @@ boolean EQ_MATRIKS_INT (MATRIKS_INT M1, MATRIKS_INT M2)
 {   
     /* KAMUS LOKAL */
     boolean found = false;
-    indeks i, j;
+    indeksMatInt i, j;
     /* ALGORITMA */
     if (NBElmt_MATRIKS_INT(M1) != NBElmt_MATRIKS_INT(M2)) {
         return false;
     } else {
-        i = BrsMin;
-        while (!found && i <= NBrsEff(M1)) {
-            j = KolMin;
-            while (!found && j <= NKolEff(M1)) {
+        i = BrsMinMatInt;
+        while (!found && i <= NBrsEffMatInt(M1)) {
+            j = KolMinMatInt;
+            while (!found && j <= NKolEffMatInt(M1)) {
                 if (ElmtMatInt(M1, i, j) != ElmtMatInt(M2, i, j)) {
                     found = true;
                 } else {

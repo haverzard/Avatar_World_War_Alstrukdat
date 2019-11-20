@@ -4,18 +4,17 @@
 #define MATRIKS_INT_H
 
 #include "boolean.h"
-#include "matriks.h"
 
 /* Ukuran minimum dan maksimum baris dan kolom */
-// #define BrsMin 1
-// #define BrsMax 100
-// #define KolMin 1
-// #define KolMax 100
+#define BrsMinMatInt 1
+#define BrsMaxMatInt 20
+#define KolMinMatInt 1
+#define KolMaxMatInt 30
 
-typedef int indeks; /* indeks baris, kolom */
-typedef int ElType;
+typedef int indeksMatInt; /* indeks baris, kolom */
+typedef int ElTypeMatInt;
 typedef struct {
-    ElType Mem[BrsMax+1][KolMax+1];
+    ElTypeMatInt Mem[BrsMaxMatInt+1][KolMaxMatInt+1];
     int NBrsEff; /* banyaknya/ukuran baris yg terdefinisi */
     int NKolEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } MATRIKS_INT;
@@ -31,23 +30,23 @@ void MakeMATRIKS_INT (int NB, int NK, MATRIKS_INT * M);
 /* F.S. Matriks M sesuai dengan definisi di atas terbentuk */
 
 /* *** Selektor *** */
-// #define NBrsEff(M) (M).NBrsEff
-// #define NKolEff(M) (M).NKolEff
+#define NBrsEffMatInt(M) (M).NBrsEff
+#define NKolEffMatInt(M) (M).NKolEff
 #define ElmtMatInt(M,i,j) (M).Mem[(i)][(j)]
 /* *** Selektor "DUNIA MATRIKS" *** */
 boolean IsIdxValid (int i, int j);
 /* Mengirimkan true jika i, j adalah indeks yang valid untuk matriks apa pun */
 
 /* *** Selektor: Untuk sebuah matriks M yang terdefinisi: *** */
-indeks GetFirstIdxBrsMatInt (MATRIKS_INT M);
+indeksMatInt GetFirstIdxBrsMatInt (MATRIKS_INT M);
 /* Mengirimkan indeks baris terkecil M */
-indeks GetFirstIdxKolMatInt (MATRIKS_INT M);
+indeksMatInt GetFirstIdxKolMatInt (MATRIKS_INT M);
 /* Mengirimkan indeks kolom terkecil M */
-indeks GetLastIdxBrsMatInt (MATRIKS_INT M);
+indeksMatInt GetLastIdxBrsMatInt (MATRIKS_INT M);
 /* Mengirimkan indeks baris terbesar M */
-indeks GetLastIdxKolMatInt (MATRIKS_INT M);
+indeksMatInt GetLastIdxKolMatInt (MATRIKS_INT M);
 /* Mengirimkan indeks kolom terbesar M */
-boolean IsIdxEffMatInt (MATRIKS_INT M, indeks i, indeks j);
+boolean IsIdxEffMatInt (MATRIKS_INT M, indeksMatInt i, indeksMatInt j);
 /* Mengirimkan true jika i, j adalah indeks efektif bagi M */
 
 /* ********** Assignment  MATRIKS ********** */
