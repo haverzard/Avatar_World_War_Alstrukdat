@@ -12,7 +12,7 @@
 #include "point.h"
 #include "listlinier.h"
 #include "graph.h"
-#include "stack.h"
+// #include "stack.h"
 
 int main() {
 	/* Kamus */
@@ -31,7 +31,7 @@ int main() {
 		printf("HEHE");
 		INFOPETA(&Peta);
 		INFOBANGUNAN(&TB);
-		
+
 		for (i = 1; i <= MaxElArr(TB); i++) {
 			LOKASIBANGUNAN(&Peta, &TB, i);
 		}
@@ -43,14 +43,17 @@ int main() {
 		CREATEPLAYER(&p1, &p2);
 		GetIUpgrade (&p1);
 		GetIUpgrade (&p2);
+		// GetIReinforcement(i,&p1,&p2);
 		i = 1;
 		while (!EndGame) {
 			while (!EndTurn) {
 				TURN(i, Peta, &p1, &p2);
 			}
-			GetIReinforcement(i,&p1,&p2);
 			UpdateListBangunan(i, p1, p2);
-			i = (i % 2 + 3) - 2;
+			if (extraTurn==0){
+				i = (i % 2 + 3) - 2; 
+			}
+			// i = (i % 2 + 3) - 2; 
 			EndTurn = false;
 		}
 	}
