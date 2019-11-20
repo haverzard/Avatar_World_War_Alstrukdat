@@ -156,4 +156,9 @@ void ReinforceAll(List L);
 
 void BarrageAll(List L);
 
+void AttackUpAll (List L);
+
+void AttackUpAllOff (List L);
+
+
 #endif

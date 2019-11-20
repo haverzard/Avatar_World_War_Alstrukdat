@@ -18,12 +18,15 @@ typedef struct {
 	int shieldDuration;
 } Player;
 
+extern int extraTurn;
+
 #define Skill(P) (P).Skill
 #define ListBangunan(P) (P).ListBangunan
 #define Color(P)  (P).Color
 #define Critical(P) (P).Critical 
 #define NoPemain(P) (P).NoPemain
 #define shieldDuration(P) (P).shieldDuration
+#define extraTurn(P) (P).extraTurn
 
 void InitPlayer(int num, Player *P);
 
@@ -89,6 +92,6 @@ void GetIReinforcement(int num, Player *P1,Player *P2);
 
 boolean isAllLevel4 (Player P);
 
-// boolean isSisa2 
+void HitungBangunan (Player P,int *C,int *T, int *F, int *V);
 
 #endif

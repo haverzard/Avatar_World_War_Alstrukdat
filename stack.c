@@ -49,16 +49,16 @@ void Pop (Stack * S, infotype* X)
     Top(*S)--;
 }
 
-void UpdateStatus(Stack *S, Player P) 
-{
-    /* Kamus Lokal */
-    infotype X;
-    /* Algoritma */
-    InfoPlayer(X) = P;
-    // InfoBangunan(X) = B;
-    Push(S, X);
-}
+// void UpdateStatus(Stack *S, Player P) 
+// {
+//     /* Kamus Lokal */
+//     infotype X;
+//     /* Algoritma */
+//     InfoPlayer(X) = P;
+//     // InfoBangunan(X) = B;
+//     Push(S, X);
+// }
 
-void ResetStatus(Stack *S) {
-    CreateEmpty(S);
-}
+// void ResetStatus(Stack *S) {
+//     CreateEmpty(S);
+// }

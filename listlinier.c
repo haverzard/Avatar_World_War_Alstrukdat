@@ -460,12 +460,18 @@ void ShieldOff(List L) {
 	/* Algoritma */
 	if (!IsEmpty_LL(L)) {
 		P = First(L);
-		if (Jenis(ElmtArr(TB,Info(P))) != 'T') {
+		if (Jenis(ElmtArr(TB,Info(P))) != 'T'){
+			P(ElmtArr(TB,Info(P))) = false;
+		}
+		if ((Jenis(ElmtArr(TB,Info(P))) != 'F') && ((Level(ElmtArr(TB,Info(P))) == 3) || (Level(ElmtArr(TB,Info(P))) == 4 ))){
 			P(ElmtArr(TB,Info(P))) = false;
 		}
 		while (Next(P) != Nil) {
 			P = Next(P);
 			if (Jenis(ElmtArr(TB,Info(P))) != 'T') {
+				P(ElmtArr(TB,Info(P))) = false;
+			}
+			if ((Jenis(ElmtArr(TB,Info(P))) != 'F') && ((Level(ElmtArr(TB,Info(P))) == 3) || (Level(ElmtArr(TB,Info(P))) == 4 ))){
 				P(ElmtArr(TB,Info(P))) = false;
 			}
 		}
@@ -501,6 +507,45 @@ void BarrageAll(List L) {
 			P = Next(P);
 			if (JumlahPasukan(ElmtArr(TB,Info(P))) >= 10) {
 				JumlahPasukan(ElmtArr(TB,Info(P))) -= 10;
+			}
+		}
+	}
+}
+
+void AttackUpAll (List L){
+	/* Kamus Lokal */
+	address P;
+
+	/* Algoritma */
+	if (!IsEmpty_LL(L)) {
+		P = First(L);
+		while (P != Nil) {
+			P(ElmtArr(TB,Info(P))) = false;
+			P = Next(P);
+		}
+	}
+}
+
+void AttackUpAllOff (List L){ 
+	/* Kamus Lokal */
+	address P;
+
+	/* Algoritma */
+	if (!IsEmpty_LL(L)) {
+		P = First(L);
+		if (Jenis(ElmtArr(TB,Info(P))) != 'T'){
+			P(ElmtArr(TB,Info(P))) = true;
+		}
+		if ((Jenis(ElmtArr(TB,Info(P))) != 'F') && ((Level(ElmtArr(TB,Info(P))) == 3) || (Level(ElmtArr(TB,Info(P))) == 4 ))){
+			P(ElmtArr(TB,Info(P))) = true;
+		}
+		while (Next(P) != Nil) {
+			P = Next(P);
+			if (Jenis(ElmtArr(TB,Info(P))) != 'T') {
+				P(ElmtArr(TB,Info(P))) = true;
+			}
+			if ((Jenis(ElmtArr(TB,Info(P))) != 'F') && ((Level(ElmtArr(TB,Info(P))) == 3) || (Level(ElmtArr(TB,Info(P))) == 4 ))){
+				P(ElmtArr(TB,Info(P))) = true;
 			}
 		}
 	}

@@ -9,14 +9,18 @@
 #include "arraydinpos.h"
 #include "bangunan.h"
 
+//Global Variable
+int extraTurn=0;
+
 
 void InitPlayer(int num, Player *P) {
 	Color(*P) = num;
 	NoPemain(*P) = num;
 	CreateEmpty_LL(&ListBangunan(*P));
-	CreateEmpty_Queue(&Skill(*P), 100);
+	CreateEmpty_Queue(&Skill(*P), 10);
 	First(ListBangunan(*P)) = Alokasi(num);
 	Kepemilikan(ElmtArr(TB,num)) = num;
+	shieldDuration(*P) = 0;
 }
 
 void PrintListBangunan(int num, Player P1, Player P2) {
@@ -49,14 +53,15 @@ void InstantUpgrade(Player *P){
 
 void Shield (Player *P){
     ShieldOn(ListBangunan(*P));
-	shieldDuration(*P) = 4;
+	shieldDuration(*P) = 4; //2 round = 4 endturn
 }
 
 void ExtraTurn (Player *P){
-
+	extraTurn = 2;
 }
 
-void AttackUp ( Player *attacker, Player *defender){
+void AttackUp (Player *attacker,Player *defender){
+	AttackUpAll(ListBangunan(*defender));
 }
 
 void CriticalHit (Player *user){
@@ -90,6 +95,7 @@ void UseSkillP (Player *user,Player *enemy){
 			Shield(user);
 		} else if ((InfoHead(Skill(*user)) == 'E') || (InfoHead(Skill(*user)) == 'e')){
 			ExtraTurn(user);
+			KeepSkill(enemy,'C');
 		} else if ((InfoHead(Skill(*user)) == 'A') || (InfoHead(Skill(*user)) == 'a')){
 			AttackUp(user,enemy);
 		} else if ((InfoHead(Skill(*user)) == 'H') || (InfoHead(Skill(*user)) == 'h')){
@@ -181,8 +187,40 @@ boolean isAllLevel4 (Player P){
 	}
 }
 
+void HitungBangunan (Player P,int *C,int *T, int *F, int *V){
+	//Kamus Lokal
+	address Q;
+	int castle,tower,fort,village;
+	
+	//Algoritma
+	castle = 0;
+	tower = 0;
+	village = 0;
+	fort = 0;
 
-// void GetShield();
+	Q = First(ListBangunan(P));
+	while (Q != Nil){
+		if (Jenis(ElmtArr(TB,Info(Q))) == 'C'){
+			castle +=1;
+		}
+		if (Jenis(ElmtArr(TB,Info(Q))) == 'T'){
+			tower +=1;
+		}
+		if (Jenis(ElmtArr(TB,Info(Q))) == 'F'){
+			fort +=1;
+		}
+		if (Jenis(ElmtArr(TB,Info(Q))) == 'V'){
+			village +=1;
+		}
+		Q = Next(Q);
+	}
+	*C = castle;
+	*T = tower;
+	*F = fort;
+	*V = village;
+}
+
+//Diset up di main
 // void GetdExtraTurn();
 // void GetAttackUp();
 // void GetCriticalHit();

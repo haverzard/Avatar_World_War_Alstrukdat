@@ -120,6 +120,7 @@ void LevelUpBangunan(Bangunan *X) {
 		} else if (Level(*X) == 3) {
 			A(*X) = 30;
 			M(*X) = 60;
+			P(*X) = true; 
 		} else if (Level(*X) == 4) {
 			A(*X) = 40;
 			M(*X) = 80;

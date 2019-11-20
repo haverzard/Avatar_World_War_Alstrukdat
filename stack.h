@@ -6,8 +6,8 @@
 #define stack_H
 
 #include "boolean.h"
-#include "bangunan.h"
-#include "player.h"
+// #include "bangunan.h"
+// #include "player.h"
 
 #define Nil 0
 #define MaxEl 50  
@@ -16,7 +16,7 @@
 
 typedef int address;   /* indeks tabel */
 typedef struct {
-  Player InfoPlayer;
+  // Player InfoPlayer;
   // Bangunan InfoBangunan;
 } infotype;   
 
@@ -64,8 +64,8 @@ void Pop (Stack * S, infotype* X);
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
-void UpdateStatus(Stack *S, Player P);
+// void UpdateStatus(Stack *S, Player P);
 
-void ResetStatus(Stack *S);
+// void ResetStatus(Stack *S);
 
 #endif
