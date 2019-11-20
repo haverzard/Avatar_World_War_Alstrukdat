@@ -1,16 +1,18 @@
-/* File : stackt.h MODIFIED */
-/* deklarasi stack yang diimplementasi dengan tabel kontigu dan ukuran sama */
+/* File : stack.h MODIFIED */
+/* Deklarasi stack yang diimplementasi dengan tabel kontigu dan ukuran sama */
 /* TOP adalah alamat elemen puncak */
-/* Implementasi dalam bahasa C dengan alokasi statik */
-#ifndef stack_H
-#define stack_H
+/* ADT Stack untuk mekanisme command UNDO */
+
+#ifndef STACK_H
+#define STACK_H
 
 #include "boolean.h"
-// #include "bangunan.h"
-// #include "player.h"
+#include "bangunan.h"
+#include "player.h"
 
+/* KAMUS UMUM */
 #define Nil 0
-#define MaxEl 50  
+#define MaxElStack 50
 /* Nil adalah stack dengan elemen kosong . */
 /* Karena indeks dalam bhs C dimulai 0 maka tabel dg indeks 0 tidak dipakai */
 
@@ -18,28 +20,26 @@ typedef int address;   /* indeks tabel */
 typedef struct {
   // Player InfoPlayer;
   // Bangunan InfoBangunan;
-} infotype;   
+} infotype;
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
 /* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/
 typedef struct {
-  infotype T[MaxEl+1]; /* tabel penyimpan elemen */
-  address TOP;  /* alamat TOP: elemen puncak */
+	infotype T[MaxElStack+1]; /* tabel penyimpan elemen */
+	address TOP;  /* alamat TOP: elemen puncak */
 } Stack;
 /* Definisi stack S kosong : S.TOP = Nil */
 /* Elemen yang dipakai menyimpan nilai Stack T[1]..T[MaxEl] */
-/* Jika S adalah Stack maka akses elemen : */
-   /* S.T[(S.TOP)] untuk mengakses elemen TOP */
-   /* S.TOP adalah alamat elemen TOP */
 
+/* Jika S adalah Stack maka akses elemen : */
 /* Definisi akses dengan Selektor : Set dan Get */
-#define Top(S) (S).TOP
-#define InfoTop(S) (S).T[(S).TOP]
+#define Top(S) (S).TOP	/* S.T[(S.TOP)] untuk mengakses elemen TOP */
+#define InfoTop(S) (S).T[(S).TOP]	/* S.TOP adalah alamat elemen TOP */
 #define InfoPlayer(X) (X).InfoPlayer
 // #define InfoBangunan(X) (X).InfoBangunan
 
 /* ************ Prototype ************ */
-/* *** Konstruktor/Kreator *** */
+/* *** Konstruktor/Kreator Pembentuk Stack *** */
 void CreateEmpty (Stack *S);
 /* I.S. sembarang; */
 /* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxEl */

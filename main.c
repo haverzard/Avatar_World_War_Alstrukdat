@@ -54,12 +54,14 @@ int main() {
 			}
 			UpdateListBangunan(i, p1, p2);
 			// ResetStatus(&StatusP1); ResetStatus(&StatusP2);
+			//Tambahin shield Duration
 			i = (i % 2 + 3) - 2;
 			if (extraTurn==0){
 				i = (i % 2 + 3) - 2; 
 			} else {
 				extraTurn -=1;
-			} 
+			}
+
 			EndTurn = false;
 		}
 	}

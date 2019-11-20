@@ -550,3 +550,4 @@ void AttackUpAllOff (List L){
 		}
 	}
 }
+
