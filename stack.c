@@ -23,7 +23,7 @@ boolean IsEmpty (Stack S){
 }
 /* Mengirim true jika Stack kosong: lihat definisi di atas */
 boolean IsFull (Stack S){
-    return (Top(S) == MaxEl);
+    return (Top(S) == MaxElStack);
 }
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 
@@ -45,16 +45,18 @@ void Pop (Stack * S, infotype* X){
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
-// void UpdateStatus(Stack *S, Player P) 
-// {
-//     /* Kamus Lokal */
-//     infotype X;
-//     /* Algoritma */
-//     InfoPlayer(X) = P;
-//     // InfoBangunan(X) = B;
-//     Push(S, X);
-// }
+/* void UpdateStatus(Stack *S, Player P) 
+{
+    /* Kamus Lokal */
+    // infotype X;
+    /* Algoritma */
+    /* InfoPlayer(X) = P;
+    InfoBangunan(X) = B;
+    Push(S, X);
+} */
 
-// void ResetStatus(Stack *S) {
-//     CreateEmpty(S);
-// }
+
+/* void ResetStatus(Stack *S) {
+    CreateEmpty(S);
+}
+*/
