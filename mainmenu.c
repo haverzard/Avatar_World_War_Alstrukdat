@@ -9,6 +9,7 @@
 #include "bangunan.h"
 #include "mesindata.h"
 #include "mesinkata.h"
+#include "stack.h"
 
 #define printl(x) printf("%s\n", x);
 

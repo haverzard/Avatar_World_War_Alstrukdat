@@ -12,6 +12,7 @@
 #include "point.h"
 #include "listlinier.h"
 #include "graph.h"
+#include "stack.h"
 
 int main() {
 	/* Kamus */
