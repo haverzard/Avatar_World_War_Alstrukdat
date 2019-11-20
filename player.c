@@ -53,7 +53,12 @@ void InstantUpgrade(Player *P){
 
 void Shield (Player *P){
     ShieldOn(ListBangunan(*P));
-	shieldDuration(*P) = 4; //2 round = 4 endturn
+	if(shieldDuration(*P)==0){
+		shieldDuration(*P) += 4; //2 round = 4 endturn
+	}else{
+		//Pertahanan jadi maksimum mksdnya apa ????
+	}
+	
 }
 
 void ExtraTurn (Player *P){
@@ -79,7 +84,10 @@ void Barrage (Player *P){
 
 /* *** Keep Skill *** */
 void KeepSkill (Player *user, skilltype skillName){
-    Add(&Skill(*user),skillName); 
+	if (!IsFull_Queue(Skill(*user))){
+		Add(&Skill(*user),skillName);	
+	}
+     
 }
 
 /* *** Use Skill*** */
@@ -218,6 +226,45 @@ void HitungBangunan (Player P,int *C,int *T, int *F, int *V){
 	*T = tower;
 	*F = fort;
 	*V = village;
+}
+
+//procedure ini dipanggil di main ?????
+void SerangPlayer (int input,Player *attacker, Player *defender){
+	//Kamus Lokal
+	//attacker
+	int CAawal,TAawal,FAawal,VAawal; //A -> Attacker
+	int CAakhir,TAakhir,FAakhir,VAakhir;
+	int TotalAwalA,TotalAkhirA;
+	//defender
+	int CDawal,TDawal,FDawal,VDawal;//D -> Defender
+	int CDakhir,TDakhir,FDakhir,VDakhir;
+	int TotalAwalD,TotalAkhirD;
+	address ListDefender;
+
+	//Algoritma
+	HitungBangunan(*attacker,&CAawal,&TAawal,&FAawal,&VAawal);
+	HitungBangunan(*defender,&CDawal,&TDawal,&FDawal,&VDawal);
+	TotalAwalA  = CAawal+TAawal+FAawal+VAawal;
+	TotalAwalD  = CDakhir+TDakhir+FDakhir+VDakhir;
+	ListDefender = 	First(ListBangunan(*defender));
+	for (int i=1;i <= input;i++){ //anggap input valid
+		ListDefender = Next(ListDefender);
+	}
+	//Critical realisasi di sini ??????????
+	SerangBangunan(&ElmtArr(TB,Info(ListDefender)),JumlahPasukan(ElmtArr(TB,Info(ListDefender))));
+	HitungBangunan(*defender,&CDakhir,&TDakhir,&FDakhir,&VDakhir);
+	TotalAkhirA = CAakhir+TAakhir+FAakhir+VAakhir;
+	TotalAkhirD = CDakhir+TDakhir+FDakhir+VDakhir;
+	
+	if (TotalAwalD==3 && TotalAkhirD==2){
+		KeepSkill(defender,'S');
+	}
+	if (FDakhir == FDawal-1){
+		KeepSkill(defender,'E');
+	}
+	if (TDawal==4 && TDakhir==3){
+		KeepSkill(defender,'A');
+	}
 }
 
 //Diset up di main
