@@ -21,9 +21,11 @@ int main() {
 	MATRIKS_INT Hubungan; 
 	Graph GHubungan;
 	Player p1, p2;
+	Stack StatusP1, StatusP2;
 
 	/* Inisiasi */
 	Jenis(BangunanUndef) = JenisUndef;
+	CreateEmpty(&StatusP1); CreateEmpty(&StatusP2);
 	
 	/* Algoritma */
 	STARTGAME();
@@ -43,6 +45,7 @@ int main() {
 		CREATEPLAYER(&p1, &p2);
 		GetIUpgrade (&p1);
 		GetIUpgrade (&p2);
+		UpdateStatus(&StatusP1, p1); UpdateStatus(&StatusP2, p2);
 		i = 1;
 		while (!EndGame) {
 			while (!EndTurn) {
@@ -50,6 +53,7 @@ int main() {
 			}
 			GetIReinforcement(i,&p1,&p2);
 			UpdateListBangunan(i, p1, p2);
+			ResetStatus(&StatusP1); ResetStatus(&StatusP2);
 			i = (i % 2 + 3) - 2;
 			EndTurn = false;
 		}
