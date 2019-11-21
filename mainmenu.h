@@ -33,8 +33,8 @@ void MOVE(int NoPemain, Player P1, Player P2);
 
 void LEVELUP(int NoPemain, Player P1, Player P2);
 
-void UPDATESTATUS (int NoPemain, Player P1, Player P2); // UPDATE STATUS PLAYER DI STACK
+void UPDATESTATUS (Player P1, Player P2); // UPDATE STATUS PLAYER DI STACK
 
-void UNDO (int NoPemain, Player *P1, Player *P2); // UNDO STACK
+void UNDO (Player *P1, Player *P2, boolean isSkillUsed); // UNDO STACK
 
 #endif

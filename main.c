@@ -20,11 +20,10 @@ int main() {
 	MATRIKS Peta;
 	MATRIKS_INT Hubungan;
 	Player p1, p2;
-	Stack StatusP1, StatusP2;
+	Stack Status;
 
 	/* Inisiasi */
 	Jenis(BangunanUndef) = JenisUndef;
-	CreateEmpty_Stack(&StatusP1); CreateEmpty_Stack(&StatusP2);
 	
 	/* Algoritma */
 	STARTGAME();
@@ -39,7 +38,6 @@ int main() {
 		CREATEPLAYER(&p1, &p2);
 		GetIUpgrade (&p1);
 		GetIUpgrade (&p2);
-		// GetIReinforcement(i,&p1,&p2);
 		UpdateStatus_Stack(&StatusP1, p1, p2, TB);
 		i = 1;
 		while (!EndGame) {
@@ -50,6 +48,7 @@ int main() {
 			ResetStatus(&StatusP1); ResetStatus(&StatusP2);
 			GetIReinforcement(i,&p1,&p2);
 			MinShieldDuration(i,&p1,&p2);
+			//Tambahin shield Duration
 			i = (i % 2 + 3) - 2;
 			if (extraTurn = 0){
 				i = (i % 2 + 3) - 2; 

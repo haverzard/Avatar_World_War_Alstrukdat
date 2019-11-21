@@ -2,6 +2,7 @@
 /* Definisi Mesin Kata: Model Akuisisi Versi I */
 
 #include <stdio.h>
+#include <string.h>
 #include "mesinkar.h"
 #include "mesinkata.h"
 #include "boolean.h"
@@ -70,7 +71,7 @@ boolean EQ_KATA(Kata X, char Y[]) {
 	boolean sama;
 
 	/* Algoritma */
-	sama = true;
+	sama = X.Length == strlen(Y);
 	i = 1;
 	while (Y[i] && sama) {
 		sama = (X.TabKata[i] == Y[i-1]);

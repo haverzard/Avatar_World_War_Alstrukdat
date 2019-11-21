@@ -19,6 +19,7 @@
 int choice;
 boolean EndGame;
 boolean EndTurn = false;
+boolean SkillUsed = false;
 Stack Status;
 
 void STARTGAME() {
@@ -77,11 +78,13 @@ void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
 		LEVELUP(NoPemain, *P1, *P2);
 	} else if (EQ_KATA(CKata, "SKILL")) {
 		UseSkill(NoPemain, P1, P2);
+		SkillUsed = true;
 	} else if (EQ_KATA(CKata, "UNDO")) {
-		printl("UNDO!");
-		UNDO(NoPemain, P1, P2);
+		UNDO(P1, P2, SkillUsed);
 	} else if (EQ_KATA(CKata, "END_TURN")) {
 		EndTurn = true;
+		SkillUsed = false;
+		ResetStatus(&Status);
 	} else if (EQ_KATA(CKata, "SAVE")) {
 		printl("SAVE!");
 	} else if (EQ_KATA(CKata, "MOVE")) {
@@ -93,7 +96,7 @@ void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
 	} else {
 		printl("Inputnya yang benar dong!");
 	}
-	
+	printl("");
 }
 
 void ATTACK(int NoPemain, Player P1, Player P2) {
@@ -127,11 +130,15 @@ void ATTACK(int NoPemain, Player P1, Player P2) {
 						jumlahBangunanP1awal = NbElmt(ListBangunan(P1));
 						jumlahBangunanP2awal = NbElmt(ListBangunan(P2));
 						if (isCurrentPCritical(NoPemain,P1,P2)){
+							UPDATESTATUS(P1, P2);
 							SerangCritical(B1, B2, count);
 							CriticalOff(NoPemain,&P1,&P2);
 						} else {
+							UPDATESTATUS(P1, P2);
 							SerangBangunan(B1, B2, count);	
 						}
+						// UPDATESTATUS(P1, P2);
+						// SerangBangunan(B1, B2, count);
 						if (JumlahPasukan(*B2) <= 0) {
 							JumlahPasukan(*B2) = abs(JumlahPasukan(*B2));
 							CaptureBuilding(NoPemain, B2, P1, P2);
@@ -186,7 +193,7 @@ void MOVE(int NoPemain, Player P1, Player P2) {
 					printf("Jumlah pasukan: "); scanf("%d", &count);
 					B2 = &ElmtArr(TB, InfoConnectedBuilding(NoPemain, choice, choice2, P1, P2));
 					if (count > 0 && count <= JumlahPasukan(*B1)) {
-						UPDATESTATUS(NoPemain, P1, P2);
+						UPDATESTATUS(P1, P2);
 						Move(B1, B2, count);
 						printf("%d pasukan dari ", count); 
 						PrintJenisByCode(Jenis(*B1)); printf(" ");
@@ -224,15 +231,15 @@ void LEVELUP(int NoPemain, Player P1, Player P2) {
 	SCAN();
 }
 
-void UPDATESTATUS (int NoPemain, Player P1, Player P2) {
+void UPDATESTATUS (Player P1, Player P2) {
 	UpdateStatus_Stack(&Status, P1, P2, TB);
 	// infotypeStack X; Pop(&Status, &X); printf("INFO PLAYER: %d\n", NoPemain(InfoPlayer(X)));
 }
 
-void UNDO (int NoPemain, Player *P1, Player *P2) {
-	// printf("NOOOO %d\n", NoPemain);
-	Player temp1, temp2;
-	UndoStatus_Stack(&Status, P1, P2, &TB);
-	// *P1 = temp1; *P2 = temp2;
-	// infotypeStack X; Pop(&Status, &X); printf("INFO PLAYER: %d\n", NoPemain(InfoPlayer(X)));
+void UNDO (Player *P1, Player *P2, boolean isSkillUsed) {
+	if (!isSkillUsed) {
+		UndoStatus_Stack(&Status, P1, P2, &TB);
+	} else {
+		printf("Tidak bisa UNDO karena sudah menggunakan SKILL pada TURN ini.\n");
+	}
 }
