@@ -11,7 +11,7 @@
 #include "arraydinpos.h"
 
 #define NMax_DATA 600
-#define ENDLINE '\r'
+#define ENDLINE '\n'
 #define BLANK ' '
 
 extern FILE * pita;

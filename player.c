@@ -98,7 +98,7 @@ void UseSkillP (Player *user,Player *enemy){
 		printf("Tidak ada skill yang available\n");
 	} else {
 		if ((InfoHead(Skill(*user)) == 'U') || (InfoHead(Skill(*user)) == 'u')) {
-			InstantUpgrade(user);//ini belum tau parameternya bakalan player atau list
+			InstantUpgrade(user);
 		} else if ((InfoHead(Skill(*user)) == 'S') || (InfoHead(Skill(*user)) == 's')){
 			Shield(user);
 		} else if ((InfoHead(Skill(*user)) == 'E') || (InfoHead(Skill(*user)) == 'e')){
@@ -170,6 +170,7 @@ void GetIReinforcement(int num, Player *P1,Player *P2){
 		if (isAllLevel4(*P2)){
 			KeepSkill(P2,'R');
 		}
+	}
 }
 
 boolean isAllLevel4 (Player P){
@@ -249,22 +250,25 @@ void SerangPlayer (int input,Player *attacker, Player *defender){
 	for (int i=1;i <= input;i++){ //anggap input valid
 		ListDefender = Next(ListDefender);
 	}
-	//Critical realisasi di sini ??????????
+	//if CriticalHit .......
 	SerangBangunan(&ElmtArr(TB,Info(ListDefender)),JumlahPasukan(ElmtArr(TB,Info(ListDefender))));
 	HitungBangunan(*defender,&CDakhir,&TDakhir,&FDakhir,&VDakhir);
 	TotalAkhirA = CAakhir+TAakhir+FAakhir+VAakhir;
 	TotalAkhirD = CDakhir+TDakhir+FDakhir+VDakhir;
-	
 	if (TotalAwalD==3 && TotalAkhirD==2){
 		KeepSkill(defender,'S');
 	}
 	if (FDakhir == FDawal-1){
 		KeepSkill(defender,'E');
 	}
-	if (TDawal==4 && TDakhir==3){
+	if (TDawal==4 && TDakhir==3){// asumsi "towernya" itu tower lawan.
 		KeepSkill(defender,'A');
 	}
 }
+
+// void PlayerCriticalAttack(Player *attacker,Player *defender){
+
+// }
 
 //Diset up di main
 // void GetdExtraTurn();

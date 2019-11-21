@@ -94,4 +94,6 @@ boolean isAllLevel4 (Player P);
 
 void HitungBangunan (Player P,int *C,int *T, int *F, int *V);
 
+void SerangPlayer (int input,Player *attacker, Player *defender);
+
 #endif
