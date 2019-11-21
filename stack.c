@@ -53,13 +53,15 @@ void UpdateStatus_Stack(Stack *S, Player P1, Player P2, TabBangunan TB) {
     infotypeStack X;
     Player temp1, temp2;
     List L1, L2;
+    TabBangunan TB2;
     /* Algoritma */
     temp1 = P1; temp2 = P2;
     CopyList(ListBangunan(P1), &ListBangunan(temp1));
     CopyList(ListBangunan(P2), &ListBangunan(temp2));
+    CopyTab(TB, &TB2);
     InfoP1(X) = temp1;
     InfoP2(X) = temp2;
-    InfoTabBangunan(X) = TB;
+    InfoTabBangunan(X) = TB2;
     Push(S, X);
     printf("0000000000000000000000000\n"); PrintListBangunan(1, InfoP1(X), InfoP2(X)); printf("0000000000000000000000000\n"); 
 }
