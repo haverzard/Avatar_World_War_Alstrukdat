@@ -72,9 +72,9 @@ void TURN(int NoPemain, MATRIKS Peta, Player P1, Player P2) {
 	printl("4. UNDO		8. EXIT");
 	printf("ENTER COMMAND: ");
 	SCANKATA();
+	UPDATESTATUS(NoPemain, P1, P2);
 	if (EQ_KATA(CKata, "ATTACK")) {
 		ATTACK(NoPemain, P1, P2);
-		UPDATESTATUS(NoPemain, P1, P2);
 	} else if (EQ_KATA(CKata, "LEVEL_UP")) {
 		LEVELUP(NoPemain, P1, P2);
 	} else if (EQ_KATA(CKata, "SKILL")) {
@@ -213,6 +213,7 @@ void UNDO (int NoPemain, Player *P1, Player *P2) {
 	Player temp1, temp2;
 	UndoStatus_Stack(&StatusP1, P1, P2, &TB);
 	UndoStatus_Stack(&StatusP1, P1, P2, &TB);
+	PrintListBangunan(1,*P1,*P2);
 	// *P1 = temp1; *P2 = temp2;
 	// infotypeStack X; Pop(&StatusP1, &X); printf("INFO PLAYER: %d\n", NoPemain(InfoPlayer(X)));
 }
