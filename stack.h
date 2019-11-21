@@ -18,8 +18,8 @@
 
 typedef int addressStack;   /* indeks tabel */
 typedef struct {
-  // Player InfoPlayer;
-  // Bangunan InfoBangunan;
+	Player InfoPlayer;
+	Bangunan InfoBangunan;
 } infotypeStack;
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
@@ -36,6 +36,7 @@ typedef struct {
 #define Top(S) (S).TOP	/* S.T[(S.TOP)] untuk mengakses elemen TOP */
 #define InfoTop(S) (S).T[(S).TOP]	/* S.TOP adalah alamat elemen TOP */
 #define InfoPlayer(X) (X).InfoPlayer
+#define InfoBangunan(X) (X).InfoBangunan
 // #define InfoBangunan(X) (X).InfoBangunan
 
 /* ************ Prototype ************ */

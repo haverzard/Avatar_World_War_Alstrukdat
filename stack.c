@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "stack.h"
+#include "bangunan.h"
 
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator Untuk Membuat Stack Kosong *** */
@@ -48,7 +49,8 @@ void Pop (Stack * S, infotypeStack* X){
 void UpdateStatus(Stack *S, Player P) {
     /* Kamus Lokal */
     infotypeStack X;
-    
+    Bangunan B;
+
     /* Algoritma */
     InfoPlayer(X) = P;
     InfoBangunan(X) = B;
