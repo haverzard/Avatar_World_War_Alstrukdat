@@ -44,7 +44,7 @@ int main() {
 		i = 1;
 		while (!EndGame) {
 			while (!EndTurn) {
-				TURN(i, Peta, p1, p2);
+				TURN(i, Peta, &p1, &p2);
 			}
 			UpdateListBangunan(i, p1, p2);
 			ResetStatus(&StatusP1); ResetStatus(&StatusP2);

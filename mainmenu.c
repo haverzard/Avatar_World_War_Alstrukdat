@@ -59,12 +59,12 @@ void CREATEPLAYER(Player *P1, Player *P2) {
 	InitPlayer(2, P2);
 }
 
-void TURN(int NoPemain, MATRIKS Peta, Player P1, Player P2) {
+void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
 	// UPDATESTATUS(NoPemain, P1, P2);
 	TulisMATRIKSPETA(Peta);
 	printf("Player %d\n", NoPemain);
-	PrintListBangunan(NoPemain, P1, P2);
-	ShowSkill(NoPemain, P1, P2);
+	PrintListBangunan(NoPemain, *P1, *P2);
+	ShowSkill(NoPemain, *P1, *P2);
 	printl("COMMAND YANG TERSEDIA:");
 	printl("1. ATTACK	5. END_TURN");
 	printl("2. LEVEL_UP	6. SAVE");
@@ -73,21 +73,21 @@ void TURN(int NoPemain, MATRIKS Peta, Player P1, Player P2) {
 	printf("ENTER COMMAND: ");
 	SCANKATA();
 	if (EQ_KATA(CKata, "ATTACK")) {
-		ATTACK(NoPemain, P1, P2);
-		UPDATESTATUS(NoPemain, P1, P2);
+		ATTACK(NoPemain, *P1, *P2);
+		UPDATESTATUS(NoPemain, *P1, *P2);
 	} else if (EQ_KATA(CKata, "LEVEL_UP")) {
-		LEVELUP(NoPemain, P1, P2);
+		LEVELUP(NoPemain, *P1, *P2);
 	} else if (EQ_KATA(CKata, "SKILL")) {
-		UseSkill(NoPemain,&P1,&P2);
+		UseSkill(NoPemain, P1, P2);
 	} else if (EQ_KATA(CKata, "UNDO")) {
 		printl("UNDO!");
-		UNDO(NoPemain, &P1, &P2);
+		UNDO(NoPemain, P1, P2);
 	} else if (EQ_KATA(CKata, "END_TURN")) {
 		EndTurn = true;
 	} else if (EQ_KATA(CKata, "SAVE")) {
 		printl("SAVE!");
 	} else if (EQ_KATA(CKata, "MOVE")) {
-		MOVE(NoPemain, P1, P2);
+		MOVE(NoPemain, *P1, *P2);
 	} else if (EQ_KATA(CKata, "EXIT")) {
 		printl("EXIT!");
 		EndTurn = true;
