@@ -18,8 +18,6 @@ boolean EQ_Bangunan(Bangunan X1, Bangunan X2) {
 
 void InitCastle(Bangunan *X) {
 	Jenis(*X) = 'C';
-	Kepemilikan(*X) = 0;
-	Jenis(*X) = 'C';
 	JumlahPasukan(*X) = 40;
 	Level(*X) = 1;
 	A(*X) = 10;
@@ -28,8 +26,6 @@ void InitCastle(Bangunan *X) {
 }
 
 void InitTower(Bangunan *X) {
-	Jenis(*X) = 'T';
-	Kepemilikan(*X) = 0;
 	Jenis(*X) = 'T';
 	JumlahPasukan(*X) = 30;
 	Level(*X) = 1;
@@ -40,8 +36,6 @@ void InitTower(Bangunan *X) {
 
 void InitFort(Bangunan *X) {
 	Jenis(*X) = 'F';
-	Kepemilikan(*X) = 0;
-	Jenis(*X) = 'F';
 	JumlahPasukan(*X) = 80;
 	Level(*X) = 1;
 	A(*X) = 10;
@@ -51,8 +45,6 @@ void InitFort(Bangunan *X) {
 
 void InitVillage(Bangunan *X) {
 	Jenis(*X) = 'V';
-	Kepemilikan(*X) = 0;
-	Jenis(*X) = 'V';
 	JumlahPasukan(*X) = 20;
 	Level(*X) = 1;
 	A(*X) = 5;
@@ -61,6 +53,9 @@ void InitVillage(Bangunan *X) {
 }
 
 void InitBangunan(Bangunan *X, char jenisBangunan) {
+	Kepemilikan(*X) = 0;
+	MoveAvai(*X) = true;
+	AttackAvai(*X) = true;
 	if (jenisBangunan == 'C') {
 		InitCastle(X);
 	} else if (jenisBangunan == 'T') {
@@ -78,15 +73,31 @@ void UpdateBangunan(Bangunan *X) {
 	if (JumlahPasukan(*X) < M(*X)) {
 		JumlahPasukan(*X) += A(*X);
 	}
+	MoveAvai(*X) = true;
+	AttackAvai(*X) = true;
 }
 
-void SerangBangunan(Bangunan *X, int N) {
-	if (P(*X)) {
-		JumlahPasukan(*X) -= (3*N)/4;
+void SerangBangunan(Bangunan *B1, Bangunan *B2, int N) {
+	AttackAvai(*B1) = false;
+	if (P(*B2)) {
+		JumlahPasukan(*B1) -= N;
+		JumlahPasukan(*B2) -= (3*N)/4;
 	} else {
-		JumlahPasukan(*X) -= N;
+		JumlahPasukan(*B1) -= N;
+		JumlahPasukan(*B2) -= N;
 	}
 }
+
+// void SerangCritical(Bangunan *B1,Bangunan *B2,int N){
+// 	AttackAvai(*B1) = false;
+// 	if (P(*B2)) {
+// 		JumlahPasukan(*B1) -= N/2;
+// 		JumlahPasukan(*B2) -= (3*N)/4;
+// 	} else {
+// 		JumlahPasukan(*B1) -= N/2;
+// 		JumlahPasukan(*B2) -= N;
+// 	}
+// }
 
 void LevelUpBangunan(Bangunan *X) {
 	JumlahPasukan(*X) -= M(*X)/2;
@@ -139,16 +150,24 @@ void LevelUpBangunan(Bangunan *X) {
 	}
 }
 
+void Move(Bangunan *B1, Bangunan *B2, int x) {
+	MoveAvai(*B1) = false;
+	JumlahPasukan(*B1) -= x;
+	JumlahPasukan(*B2) += x;
+}
+
 void PrintInfoBangunan(Bangunan X) {
-	if (Jenis(X) == 'C') {
-		printf("Castle ");
-	} else  if (Jenis(X) == 'T') {
-		printf("Tower ");
-	} else  if (Jenis(X) == 'F') {
-		printf("Fort ");
-	} else  if (Jenis(X) == 'V') {
-		printf("Village ");
-	}
+	PrintJenisByCode(Jenis(X)); printf(" ");
 	TulisPOINT(Koordinat(X));
 	printf(" %d lv.%d\n", JumlahPasukan(X), Level(X));
 }
+
+void PrintJenisByCode(char X) {
+	switch(X) {
+	 	case 'C': printf("Castle"); break;
+	 	case 'T': printf("Tower"); break;
+	 	case 'F': printf("Fort"); break;
+	 	case 'V': printf("Village"); break;
+	}
+}
+

@@ -29,14 +29,14 @@ void SCANKATA()
     /* Algoritma */
     SCAN();
 	IgnoreBlank();
-	if (CC == ENDCOMMAND) { 
-		EndKata = true;
-	} else if (feof(stdin)) {
+	if (feof(stdin)) {
 		CKata.TabKata[1] = 'E';
 		CKata.TabKata[2] = 'X';
 		CKata.TabKata[3] = 'I';
 		CKata.TabKata[4] = 'T';
 		CKata.Length = 4;
+	} else if (CC == ENDCOMMAND) { 
+		EndKata = true;
 	} else { 
 		EndKata = false; 
 		SalinKata(); 

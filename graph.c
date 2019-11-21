@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include "graph.h"
 
+Graph GHubungan;
+
 /****************** PEMBUATAN GRAPH ******************/
 void CreateGraph(int X, Graph* G)
 /* I.S. G sembarang */

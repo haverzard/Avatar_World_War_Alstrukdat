@@ -14,15 +14,17 @@
 typedef char JenisBangunan;
 
 typedef struct {
-	int Kepemilikan;
-	JenisBangunan Jenis;
 	POINT Koordinat;
+	int Kepemilikan;
 	int JumlahPasukan;
 	int Level;
 	int A; //Penambahan pasukan
 	int M; //Max penambahan pasukan
 	int U; //Pasukan Awal
 	boolean P; //Pertahanan
+	boolean AttackAvai;
+	boolean MoveAvai;
+	JenisBangunan Jenis;
 } Bangunan;
 
 #define Kepemilikan(X) (X).Kepemilikan
@@ -30,6 +32,8 @@ typedef struct {
 #define Koordinat(X) (X).Koordinat
 #define JumlahPasukan(X) (X).JumlahPasukan
 #define Level(X) (X).Level
+#define AttackAvai(X) (X).AttackAvai
+#define MoveAvai(X) (X).MoveAvai
 #define A(X) (X).A
 #define M(X) (X).M
 #define P(X) (X).P
@@ -55,11 +59,17 @@ void InitBangunan(Bangunan *X, char jenisBangunan);
 
 void UpdateBangunan(Bangunan *X);
 
-void SerangBangunan(Bangunan *X, int N);
+void SerangBangunan(Bangunan *B1, Bangunan *B2, int N);
+
+void SerangCritical(Bangunan *B1,Bangunan *B2,int N)
 
 void LevelUpBangunan(Bangunan *X);
 /* Prekondisi: JumlahPasukan(*X) >= M(*X)/2 */
 
+void Move(Bangunan *B1, Bangunan *B2, int x);
+
 void PrintInfoBangunan(Bangunan X);
+
+void PrintJenisByCode(char X);
 
 #endif

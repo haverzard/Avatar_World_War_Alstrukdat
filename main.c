@@ -18,8 +18,7 @@ int main() {
 	/* Kamus */
 	int i;
 	MATRIKS Peta;
-	MATRIKS_INT Hubungan; 
-	Graph GHubungan;
+	MATRIKS_INT Hubungan;
 	Player p1, p2;
 	// Stack StatusP1, StatusP2;
 
@@ -30,7 +29,6 @@ int main() {
 	/* Algoritma */
 	STARTGAME();
 	if (!EndGame) {
-		printf("HEHE");
 		INFOPETA(&Peta);
 		INFOBANGUNAN(&TB);
 
@@ -39,9 +37,6 @@ int main() {
 		}
 		HUBUNGANBANGUNAN(&Hubungan, NBElmt_Array(TB));
 		GenerateHubunganBangunan(&GHubungan, Hubungan);
-		PrintAllHubunganBangunan(GHubungan);
-		printf("\n");
-		TulisMATRIKS_INT(Hubungan); printf("\n");
 		CREATEPLAYER(&p1, &p2);
 		GetIUpgrade (&p1);
 		GetIUpgrade (&p2);
@@ -50,18 +45,18 @@ int main() {
 		i = 1;
 		while (!EndGame) {
 			while (!EndTurn) {
-				TURN(i, Peta, &p1, &p2);
+				TURN(i, Peta, p1, p2);
 			}
 			UpdateListBangunan(i, p1, p2);
 			// ResetStatus(&StatusP1); ResetStatus(&StatusP2);
 			//Tambahin shield Duration
 			i = (i % 2 + 3) - 2;
-			if (extraTurn==0){
+			if (extraTurn > 0){
 				i = (i % 2 + 3) - 2; 
 			} else {
 				extraTurn -=1;
 			}
-
+			//Cek apakah AttackUp ???
 			EndTurn = false;
 		}
 	}

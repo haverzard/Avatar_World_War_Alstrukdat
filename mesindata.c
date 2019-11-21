@@ -114,7 +114,6 @@ void HUBUNGANBANGUNAN (MATRIKS_INT * Hubungan, int BanyakBangunan) {
 		i++;
 		NEXTDATA();
 	}
-	printf("IIIII %d\n", i);
 	NBrsEff(*Hubungan) = i-1;
 	NKolEff(*Hubungan) = j-1;
 }
