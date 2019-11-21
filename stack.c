@@ -45,18 +45,27 @@ void Pop (Stack * S, infotypeStack* X){
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
-/* void UpdateStatus(Stack *S, Player P) 
-{
+void UpdateStatus(Stack *S, Player P) {
     /* Kamus Lokal */
-    // infotypeStack X;
+    infotypeStack X;
+    
     /* Algoritma */
-    /* InfoPlayer(X) = P;
+    InfoPlayer(X) = P;
     InfoBangunan(X) = B;
     Push(S, X);
-} */
+}
+/* Mengisi Stack dengan ADT yang ada */
+/* I.S. Stack mungkin kosong mungkin terisi */
+/* F.S. Stack terisi dengan elemennya adalah keterangan pada pemain apa dan Bangunan*/
 
+void LoadStatus(Stack *S, Player P);
+/* Pop Stack untuk UNDO */
+/* I.S. Stack tidak kosong */
+/* F.S. Stack berkurang 1 elemen */
 
-/* void ResetStatus(Stack *S) {
+void ResetStatus(Stack *S) {
     CreateEmpty(S);
 }
-*/
+/* Mengosokan Isi Stack Saat bergantian Pemain */
+/* I.S. Stack Mungkin Kosong, mungkin berisi */
+/* F.S. Stack menjadi kosong */
