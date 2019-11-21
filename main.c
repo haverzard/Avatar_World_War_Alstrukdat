@@ -20,11 +20,12 @@ int main() {
 	MATRIKS Peta;
 	MATRIKS_INT Hubungan;
 	Player p1, p2;
-	Stack StatusP1, StatusP2;
+	Stack Status;
+	boolean SkillUsed = false;
 
 	/* Inisiasi */
 	Jenis(BangunanUndef) = JenisUndef;
-	CreateEmpty_Stack(&StatusP1); CreateEmpty_Stack(&StatusP2);
+	CreateEmpty_Stack(&Status);
 	
 	/* Algoritma */
 	STARTGAME();
@@ -40,14 +41,15 @@ int main() {
 		GetIUpgrade (&p1);
 		GetIUpgrade (&p2);
 		GetIReinforcement(i,&p1,&p2);
-		UpdateStatus_Stack(&StatusP1, p1, p2, TB);
+		UpdateStatus_Stack(&Status, p1, p2, TB);
 		i = 1;
 		while (!EndGame) {
 			while (!EndTurn) {
 				TURN(i, Peta, &p1, &p2);
 			}
+			SkillUsed = false;
 			UpdateListBangunan(i, p1, p2);
-			ResetStatus(&StatusP1); ResetStatus(&StatusP2);
+			ResetStatus(&Status);
 			//Tambahin shield Duration
 			i = (i % 2 + 3) - 2;
 			if (extraTurn > 0){
