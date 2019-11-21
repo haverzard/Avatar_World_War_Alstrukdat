@@ -29,7 +29,7 @@ int main() {
 	/* Algoritma */
 	STARTGAME();
 	if (!EndGame) {
-		INFOPETA(&Peta);
+		INFOPETA(&Peta);     
 		INFOBANGUNAN(&TB);
 		for (i = 1; i <= MaxElArr(TB); i++) {
 			LOKASIBANGUNAN(&Peta, &TB, i);
@@ -39,7 +39,7 @@ int main() {
 		CREATEPLAYER(&p1, &p2);
 		GetIUpgrade (&p1);
 		GetIUpgrade (&p2);
-		GetIReinforcement(i,&p1,&p2);
+		// GetIReinforcement(i,&p1,&p2);
 		UpdateStatus_Stack(&StatusP1, p1, p2, TB);
 		i = 1;
 		while (!EndGame) {
@@ -48,14 +48,17 @@ int main() {
 			}
 			UpdateListBangunan(i, p1, p2);
 			ResetStatus(&StatusP1); ResetStatus(&StatusP2);
-			//Tambahin shield Duration
+			GetIReinforcement(i,&p1,&p2);
+			MinShieldDuration(i,&p1,&p2);
 			i = (i % 2 + 3) - 2;
-			if (extraTurn > 0){
+			if (extraTurn = 0){
 				i = (i % 2 + 3) - 2; 
 			} else {
 				extraTurn -=1;
 			}
-			//Cek apakah AttackUp ???
+			if (attackUp){
+				attackUp = 0;
+			}
 			EndTurn = false;
 		}
 	}

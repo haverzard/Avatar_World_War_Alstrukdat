@@ -101,7 +101,7 @@ void ATTACK(int NoPemain, Player P1, Player P2) {
 	int choice, choice2, count, idx;
 	Bangunan *B1, *B2;
 	int Fdawal,Tdawal; //F itu Fort, T itu Tower, d itu defender
-	int Fdakhir Tdakhir;
+	int Fdakhir,Tdakhir;
 	int jumlahBangunanP1awal;
 	int jumlahBangunanP2awal;
 	int jumlahBangunanP1akhir;
@@ -122,24 +122,27 @@ void ATTACK(int NoPemain, Player P1, Player P2) {
 					printf("Jumlah pasukan: "); scanf("%d", &count);
 					B2 = &ElmtArr(TB, InfoConnectedBuilding2(NoPemain, choice, choice2, P1, P2));
 					if (count > 0 && count <= JumlahPasukan(*B1)) {
-						// HitungFort(NoPemain,P1,P2,&Fdawal);
-						// HitungTower(NoPemain,P1,P2,&Tdawal);
-						// jumlahBangunanP1awal = NbElmt(ListBangunan(P1));
-						// jumlahBangunanP2awal = NbElmt(ListBangunan(P2));
+						HitungFort(NoPemain,P1,P2,&Fdawal);
+						HitungTower(NoPemain,P1,P2,&Tdawal);
+						jumlahBangunanP1awal = NbElmt(ListBangunan(P1));
+						jumlahBangunanP2awal = NbElmt(ListBangunan(P2));
 						if (isCurrentPCritical(NoPemain,P1,P2)){
-							// SerangCritical(B1, B2, count);
-							// CriticalOff(NoPemain,P1,P2);
+							SerangCritical(B1, B2, count);
+							CriticalOff(NoPemain,&P1,&P2);
 						} else {
 							SerangBangunan(B1, B2, count);	
 						}
 						if (JumlahPasukan(*B2) <= 0) {
 							JumlahPasukan(*B2) = abs(JumlahPasukan(*B2));
 							CaptureBuilding(NoPemain, B2, P1, P2);
-							//Untuk cek bangunan setelah attack
-							// HitungFort(NoPemain,P1,P2,&Fdakhir);
-							// HitungTower(NoPemain,P1,P2,&Tdakhir);
-							// jumlahBangunanP1akhir = NbElmt(ListBangunan(P1));
-							// jumlahBangunanP2akhir = NbElmt(ListBangunan(P2));
+							HitungFort(NoPemain,P1,P2,&Fdakhir);
+							HitungTower(NoPemain,P1,P2,&Tdakhir);
+							jumlahBangunanP1akhir = NbElmt(ListBangunan(P1));
+							jumlahBangunanP2akhir = NbElmt(ListBangunan(P2));
+							GetShield(NoPemain,&P1,&P2,jumlahBangunanP1awal,jumlahBangunanP1akhir,jumlahBangunanP2awal,jumlahBangunanP2akhir);
+							GetExtraTurn(NoPemain,&P1,&P2,Fdawal,Fdakhir);
+							GetAttackUp(NoPemain,&P1,&P2,Tdawal,Tdakhir);
+							GetBarrage(NoPemain,&P1,&P2,jumlahBangunanP1awal,jumlahBangunanP1akhir,jumlahBangunanP2awal,jumlahBangunanP2akhir);
 							printf("Bangunan menjadi milikku!\n");
 						} else {
 							printf("Bangunan gagal direbut.\n");

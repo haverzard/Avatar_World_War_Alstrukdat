@@ -87,8 +87,5 @@ void ResetStatus(Stack *S) {
 /* Mengosokan Isi Stack Saat bergantian Pemain */
 /* I.S. Stack Mungkin Kosong, mungkin berisi */
 /* F.S. Stack menjadi kosong */
-<<<<<<< HEAD
-=======
     CreateEmpty_Stack(S);
 }
->>>>>>> a23030f6b593ef5e45ca87ee5854f21ee0d53474

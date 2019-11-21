@@ -16,9 +16,11 @@ typedef struct {
 	Queue Skill;
 	boolean Critical; // Ini untuk skill Critical Hit
 	int shieldDuration;
+	// boolean attackUpBool;
 } Player;
 
 extern int extraTurn;
+extern int attackUp;
 
 #define Skill(P) (P).Skill
 #define ListBangunan(P) (P).ListBangunan
@@ -27,6 +29,7 @@ extern int extraTurn;
 #define NoPemain(P) (P).NoPemain
 #define shieldDuration(P) (P).shieldDuration
 #define extraTurn(P) (P).extraTurn
+// #define attackUpBool(P) (P).attackUpBool
 
 void InitPlayer(int num, Player *P);
 
@@ -83,27 +86,29 @@ void ShowSkill(int num, Player P1, Player P2);
 
 void GetIUpgrade(Player *P);
 
-// void GetShield(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhirP1,int buildingAwalP2 ,int buildingAkhirP2);
+void GetShield(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhirP1,int buildingAwalP2 ,int buildingAkhirP2);
 
-// void GetExtraTurn(int num,Player *P1,Player *P2,int Fdawal,int Fdakhir);
+void GetExtraTurn(int num,Player *P1,Player *P2,int Fdawal,int Fdakhir);
 
-// void GetAttackUp (int num,Player *P1,Player *P2,int Tdawal,int Tdakhir);
+void GetAttackUp (int num,Player *P1,Player *P2,int Tdawal,int Tdakhir);
 
-// void GetBarage(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhirP1,int buildingAwalP2 ,int buildingAkhirP2);
+void GetBarrage(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhirP1,int buildingAwalP2 ,int buildingAkhirP2);
 
-// void GetIReinforcement(int num, Player *P1,Player *P2);
+void GetIReinforcement(int num, Player *P1,Player *P2);
 
-// boolean isAllLevel4 (Player P);
+boolean isAllLevel4 (Player P);
 
-// void HitungFort(int num,Player P1,Player P2,int *F);
+void HitungFort(int num,Player P1,Player P2,int *F);
 
-// void HitungTower(int num,Player P1,Player P2,int *T);
+void HitungTower(int num,Player P1,Player P2,int *T);
 
-// boolean isCurrentPCritical (int num,Player P1,Player P2);
+boolean isCurrentPCritical (int num,Player P1,Player P2);
 
-// void GetShield(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhirP1,int buildingAwalP2 ,int buildingAkhirP2)
+void GetShield(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhirP1,int buildingAwalP2 ,int buildingAkhirP2);
 
+void CriticalOff (int num,Player *P1,Player *P2);
 
+void MinShieldDuration (int num,Player *P1,Player *P2);
 // void SerangPlayer (int input,Player *attacker, Player *defender);
 // void HitungBangunan (Player P,int *C,int *T, int *F, int *V);
 

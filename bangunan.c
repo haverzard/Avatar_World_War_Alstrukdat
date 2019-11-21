@@ -88,16 +88,16 @@ void SerangBangunan(Bangunan *B1, Bangunan *B2, int N) {
 	}
 }
 
-// void SerangCritical(Bangunan *B1,Bangunan *B2,int N){
-// 	AttackAvai(*B1) = false;
-// 	if (P(*B2)) {
-// 		JumlahPasukan(*B1) -= N/2;
-// 		JumlahPasukan(*B2) -= (3*N)/4;
-// 	} else {
-// 		JumlahPasukan(*B1) -= N/2;
-// 		JumlahPasukan(*B2) -= N;
-// 	}
-// }
+void SerangCritical(Bangunan *B1,Bangunan *B2,int N){
+	AttackAvai(*B1) = false;
+	if (P(*B2)) {
+		JumlahPasukan(*B1) -= N/2;
+		JumlahPasukan(*B2) -= (3*N)/4;
+	} else {
+		JumlahPasukan(*B1) -= N/2;
+		JumlahPasukan(*B2) -= N;
+	}
+}
 
 void LevelUpBangunan(Bangunan *X) {
 	JumlahPasukan(*X) -= M(*X)/2;
