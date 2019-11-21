@@ -18,8 +18,8 @@
 
 typedef int address;   /* indeks tabel */
 typedef struct {
-  // Player InfoPlayer;
-  // Bangunan InfoBangunan;
+	// Player InfoPlayer;
+	// Bangunan InfoBangunan;
 } infotype;
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
@@ -64,8 +64,20 @@ void Pop (Stack * S, infotype* X);
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
-// void UpdateStatus(Stack *S, Player P);
+void UpdateStatus(Stack *S, Player P);
+/* Mengisi Stack dengan ADT yang ada */
+/* I.S. Stack mungkin kosong mungkin terisi */
+/* F.S. Stack terisi dengan elemennya adalah keterangan pada pemain apa dan Bangunan*/
 
-// void ResetStatus(Stack *S);
+void LoadStatus(Stack *S, Player P);
+/* Pop Stack untuk UNDO */
+/* I.S. Stack tidak kosong */
+/* F.S. Stack berkurang 1 elemen */
+
+void ResetStatus(Stack *S);
+/* Mengosokan Isi Stack Saat bergantian Pemain */
+/* I.S. Stack Mungkin Kosong, mungkin berisi */
+/* F.S. Stack menjadi kosong */
+
 
 #endif
