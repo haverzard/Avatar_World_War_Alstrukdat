@@ -25,12 +25,16 @@ void LOADGAME();
 
 void CREATEPLAYER(Player *P1, Player *P2);
 
-void TURN(int NoPemain, MATRIKS Peta, Player P1, Player P2);
+void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2);
 
 void ATTACK(int NoPemain, Player P1, Player P2);
 
 void MOVE(int NoPemain, Player P1, Player P2);
 
 void LEVELUP(int NoPemain, Player P1, Player P2);
+
+void UPDATESTATUS (int NoPemain, Player P1, Player P2); // UPDATE STATUS PLAYER DI STACK
+
+void UNDO (int NoPemain, Player *P1, Player *P2); // UNDO STACK
 
 #endif

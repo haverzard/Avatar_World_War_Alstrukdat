@@ -11,7 +11,7 @@
 #include "mesindata.h"
 #include "mesinkata.h"
 #include "arraydinpos.h"
-// #include "stack.h"
+#include "stack.h"
 
 #define printl(x) printf("%s\n", x);
 
@@ -19,6 +19,7 @@
 int choice;
 boolean EndGame;
 boolean EndTurn = false;
+Stack Status;
 
 void STARTGAME() {
 	/* Algoritma */
@@ -58,11 +59,11 @@ void CREATEPLAYER(Player *P1, Player *P2) {
 	InitPlayer(2, P2);
 }
 
-void TURN(int NoPemain, MATRIKS Peta, Player P1, Player P2) {
+void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
 	TulisMATRIKSPETA(Peta);
 	printf("Player %d\n", NoPemain);
-	PrintListBangunan(NoPemain, P1, P2);
-	ShowSkill(NoPemain, P1, P2);
+	PrintListBangunan(NoPemain, *P1, *P2);
+	ShowSkill(NoPemain, *P1, *P2);
 	printl("COMMAND YANG TERSEDIA:");
 	printl("1. ATTACK	5. END_TURN");
 	printl("2. LEVEL_UP	6. SAVE");
@@ -71,19 +72,20 @@ void TURN(int NoPemain, MATRIKS Peta, Player P1, Player P2) {
 	printf("ENTER COMMAND: ");
 	SCANKATA();
 	if (EQ_KATA(CKata, "ATTACK")) {
-		ATTACK(NoPemain, P1, P2);
+		ATTACK(NoPemain, *P1, *P2);
 	} else if (EQ_KATA(CKata, "LEVEL_UP")) {
-		LEVELUP(NoPemain, P1, P2);
+		LEVELUP(NoPemain, *P1, *P2);
 	} else if (EQ_KATA(CKata, "SKILL")) {
-		UseSkill(NoPemain,&P1,&P2);
+		UseSkill(NoPemain, P1, P2);
 	} else if (EQ_KATA(CKata, "UNDO")) {
 		printl("UNDO!");
+		UNDO(NoPemain, P1, P2);
 	} else if (EQ_KATA(CKata, "END_TURN")) {
 		EndTurn = true;
 	} else if (EQ_KATA(CKata, "SAVE")) {
 		printl("SAVE!");
 	} else if (EQ_KATA(CKata, "MOVE")) {
-		MOVE(NoPemain, P1, P2);
+		MOVE(NoPemain, *P1, *P2);
 	} else if (EQ_KATA(CKata, "EXIT")) {
 		printl("EXIT!");
 		EndTurn = true;
@@ -91,6 +93,7 @@ void TURN(int NoPemain, MATRIKS Peta, Player P1, Player P2) {
 	} else {
 		printl("Inputnya yang benar dong!");
 	}
+	
 }
 
 void ATTACK(int NoPemain, Player P1, Player P2) {
@@ -180,6 +183,7 @@ void MOVE(int NoPemain, Player P1, Player P2) {
 					printf("Jumlah pasukan: "); scanf("%d", &count);
 					B2 = &ElmtArr(TB, InfoConnectedBuilding(NoPemain, choice, choice2, P1, P2));
 					if (count > 0 && count <= JumlahPasukan(*B1)) {
+						UPDATESTATUS(NoPemain, P1, P2);
 						Move(B1, B2, count);
 						printf("%d pasukan dari ", count); 
 						PrintJenisByCode(Jenis(*B1)); printf(" ");
@@ -215,4 +219,17 @@ void LEVELUP(int NoPemain, Player P1, Player P2) {
 	printf("Bangunan yang akan di level up: "); scanf("%d", &choice);
 	LevelUpBP(NoPemain, P1, P2, choice);
 	SCAN();
+}
+
+void UPDATESTATUS (int NoPemain, Player P1, Player P2) {
+	UpdateStatus_Stack(&Status, P1, P2, TB);
+	// infotypeStack X; Pop(&Status, &X); printf("INFO PLAYER: %d\n", NoPemain(InfoPlayer(X)));
+}
+
+void UNDO (int NoPemain, Player *P1, Player *P2) {
+	// printf("NOOOO %d\n", NoPemain);
+	Player temp1, temp2;
+	UndoStatus_Stack(&Status, P1, P2, &TB);
+	// *P1 = temp1; *P2 = temp2;
+	// infotypeStack X; Pop(&Status, &X); printf("INFO PLAYER: %d\n", NoPemain(InfoPlayer(X)));
 }

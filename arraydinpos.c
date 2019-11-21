@@ -224,7 +224,7 @@ void CopyTab(TabBangunan Tin, TabBangunan *Tout)
 	IdxType i;
 	
 	/* Algoritma */
-	Dealokasi_Array(Tout);
+	//Dealokasi_Array(Tout);
 	MakeEmpty(Tout,MaxElArr(Tin));
 	for (i = GetFirstIdx(Tin); i <= GetLastIdx(Tin); i++) {
 		ElmtArr(*Tout,i) = ElmtArr(Tin,i);
