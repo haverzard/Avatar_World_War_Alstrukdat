@@ -20,7 +20,16 @@ void InitPlayer(int num, Player *P) {
 	CreateEmpty_Queue(&Skill(*P), 10);
 	First(ListBangunan(*P)) = Alokasi(num);
 	Kepemilikan(ElmtArr(TB,num)) = num;
+	IterateAndOwn(num, &ListBangunan(*P));
 	shieldDuration(*P) = 0;
+}
+
+int NBElmtListB(int NoPemain, Player P1, Player P2) {
+	if (NoPemain == 1) {
+		return NbElmt(ListBangunan(P1));
+	} else {
+		return NbElmt(ListBangunan(P2));
+	}
 }
 
 void PrintListBangunan(int num, Player P1, Player P2) {
@@ -28,6 +37,86 @@ void PrintListBangunan(int num, Player P1, Player P2) {
 		PrintInfo(ListBangunan(P1));
 	} else {
 		PrintInfo(ListBangunan(P2));
+	}
+}
+
+void PrintMyConnectedBuildings(int num, int IdxList, Player P1, Player P2) {
+	/* Algoritma */
+    if (num == 1) {
+    	ConnectedBuildings(InfoListByIndex(ListBangunan(P1), IdxList), ListBangunan(P1));
+    } else {
+    	ConnectedBuildings(InfoListByIndex(ListBangunan(P2), IdxList), ListBangunan(P2));
+    }
+}
+
+void PrintNotMyConnectedBuildings(int num, int IdxList, Player P1, Player P2) {
+	/* Algoritma */
+    if (num == 1) {
+    	ConnectedBuildings2(InfoListByIndex(ListBangunan(P1), IdxList), ListBangunan(P1));
+    } else {
+    	ConnectedBuildings2(InfoListByIndex(ListBangunan(P2), IdxList), ListBangunan(P2));
+    }
+}
+
+int NBMyConnectedBuildings(int num, int IdxList, Player P1, Player P2) {
+	/* Algoritma */
+    if (num == 1) {
+    	return NBConnectedBuildings(InfoListByIndex(ListBangunan(P1), IdxList), ListBangunan(P1));
+    } else {
+    	return NBConnectedBuildings(InfoListByIndex(ListBangunan(P2), IdxList), ListBangunan(P2));
+    }
+}
+
+int NBNotMyConnectedBuildings(int num, int IdxList, Player P1, Player P2) {
+	/* Algoritma */
+    if (num == 1) {
+    	return NBConnectedBuildings2(InfoListByIndex(ListBangunan(P1), IdxList), ListBangunan(P1));
+    } else {
+    	return NBConnectedBuildings2(InfoListByIndex(ListBangunan(P2), IdxList), ListBangunan(P2));
+    }
+}
+
+int InfoMyBuilding(int num, int IdxList, Player P1, Player P2) {
+	/* Algoritma */
+    if (num == 1) {
+    	return InfoListByIndex(ListBangunan(P1), IdxList);
+    } else {
+    	return InfoListByIndex(ListBangunan(P2), IdxList);
+    }
+}
+
+int InfoConnectedBuilding(int num, int IdxList, int IdxConnected, Player P1, Player P2) {
+	/* Algoritma */
+    if (num == 1) {
+    	return InfoConnectedBuildingByIdx(InfoListByIndex(ListBangunan(P1), IdxList), IdxConnected, ListBangunan(P1));
+    } else {
+    	return InfoConnectedBuildingByIdx(InfoListByIndex(ListBangunan(P2), IdxList), IdxConnected, ListBangunan(P2));
+    }
+}
+
+int InfoConnectedBuilding2(int num, int IdxList, int IdxConnected, Player P1, Player P2) {
+	/* Algoritma */
+    if (num == 1) {
+    	return InfoConnectedBuildingByIdx2(InfoListByIndex(ListBangunan(P1), IdxList), IdxConnected, ListBangunan(P1));
+    } else {
+    	return InfoConnectedBuildingByIdx2(InfoListByIndex(ListBangunan(P2), IdxList), IdxConnected, ListBangunan(P2));
+    }
+}
+
+void CaptureBuilding(int num, Bangunan *B, Player P1, Player P2) {
+	/* Algoritma */
+	if (num == 1) {
+		ChangeOwner(B, P1, P2);
+	} else {
+		ChangeOwner(B, P2, P1);
+	}
+}
+
+void ChangeOwner(Bangunan *B, Player Me, Player Enemy) {
+	Kepemilikan(*B) = NoPemain(Me);
+	InsVLast(&ListBangunan(Me), Search1(TB,*B));
+	if (Kepemilikan(*B) == NoPemain(Enemy)) {
+		DelP(&ListBangunan(Enemy),*B);
 	}
 }
 
@@ -229,6 +318,7 @@ void HitungBangunan (Player P,int *C,int *T, int *F, int *V){
 }
 
 //procedure ini dipanggil di main ?????
+/*
 void SerangPlayer (int input,Player *attacker, Player *defender){
 	//Kamus Lokal
 	//attacker
@@ -266,7 +356,7 @@ void SerangPlayer (int input,Player *attacker, Player *defender){
 		KeepSkill(defender,'A');
 	}
 }
-
+*/
 //Diset up di main
 // void GetdExtraTurn();
 // void GetAttackUp();

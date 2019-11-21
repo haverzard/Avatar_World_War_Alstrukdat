@@ -30,7 +30,27 @@ extern int extraTurn;
 
 void InitPlayer(int num, Player *P);
 
+int NBElmtListB(int NoPemain, Player P1, Player P2);
+
 void PrintListBangunan(int num, Player P1, Player P2);
+
+void PrintMyConnectedBuildings(int num, int NoBangunan, Player P1, Player P2);
+
+void PrintNotMyConnectedBuildings(int num, int IdxList, Player P1, Player P2);
+
+int NBMyConnectedBuildings(int num, int IdxList, Player P1, Player P2);
+
+int NBNotMyConnectedBuildings(int num, int IdxList, Player P1, Player P2);
+
+int InfoMyBuilding(int num, int IdxList, Player P1, Player P2);
+
+int InfoConnectedBuilding(int num, int IdxList, int IdxConnected, Player P1, Player P2);
+
+int InfoConnectedBuilding2(int num, int IdxList, int IdxConnected, Player P1, Player P2);
+
+void CaptureBuilding(int num, Bangunan *B, Player P1, Player P2);
+
+void ChangeOwner(Bangunan *B, Player Me, Player Enemy);
 
 void UpdateListBangunan(int num, Player P1, Player P2);
 

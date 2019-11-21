@@ -35,6 +35,8 @@ typedef struct {
 #define Succ(Pn) (Pn)->Succ
 #define NextG(Pn) (Pn)->Next
 
+extern Graph GHubungan;
+
 /****************** PEMBUATAN GRAPH ******************/
 void CreateGraph(int X, Graph* G);
 /* I.S. G sembarang */

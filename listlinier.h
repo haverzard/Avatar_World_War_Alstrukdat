@@ -59,6 +59,8 @@ address Search (List L, Bangunan X);
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
 
+address SearchInfo (List L, int X);
+
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
 void InsVFirst (List *L, infotype X);
@@ -126,12 +128,11 @@ void PrintInfo (List L);
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika list kosong : menulis [] */
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
+
+int InfoListByIndex (List L, int idx);
+
 int NbElmt (List L);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
-
-/*** Prekondisi untuk Max/Min/rata-rata : List tidak kosong ***/
-infotype Max (List L);
-/* Mengirimkan nilai Info(P) yang maksimum */
 
 /****************** PROSES TERHADAP LIST ******************/
 void Konkat1 (List *L1, List *L2, List *L3);
@@ -142,7 +143,21 @@ void Konkat1 (List *L1, List *L2, List *L3);
 /* dan L1 serta L2 menjadi list kosong.*/
 /* Tidak ada alokasi/dealokasi pada prosedur ini */
 
+void IterateAndOwn(int num, List *L);
+
 void UpdateAllBuildings(List L);
+
+void ConnectedBuildings(int NoBangunan, List L);
+
+void ConnectedBuildings2(int NoBangunan, List L);
+
+int InfoConnectedBuildingByIdx(int NoBangunan, int idx, List L);
+
+int InfoConnectedBuildingByIdx2(int NoBangunan, int idx, List L);
+
+int NBConnectedBuildings(int NoBangunan, List L);
+
+int NBConnectedBuildings2(int NoBangunan, List L);
 
 void IndexLevelUp(List L, int idx);
 

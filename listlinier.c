@@ -9,6 +9,7 @@
 #include "boolean.h"
 #include "bangunan.h"
 #include "arraydinpos.h"
+#include "graph.h"
 
 /* Definisi list : */
 /* List kosong : First(L) = Nil */
@@ -76,6 +77,25 @@ address Search (List L, Bangunan X)
 	while (Next(P) != Nil && !found) {
 		P = Next(P);
 		found  = EQ_Bangunan(ElmtArr(TB,Info(P)),X);
+	}
+	if (found) { return P; } else { return Nil; }
+}
+
+address SearchInfo (List L, int X)
+/* Mencari apakah ada elemen list dengan Info(P)= X */
+/* Jika ada, mengirimkan address elemen tersebut. */
+/* Jika tidak ada, mengirimkan Nil */
+{
+	/* Kamus Lokal */
+	address P;
+	boolean found;
+
+	/* Algoritma */
+	P = First(L);
+	found = Info(P) == X;
+	while (Next(P) != Nil && !found) {
+		P = Next(P);
+		found  = Info(P) == X;
 	}
 	if (found) { return P; } else { return Nil; }
 }
@@ -334,6 +354,30 @@ void PrintInfo (List L)
 	}
 }
 
+int InfoListByIndex (List L, int idx)
+/* I.S. List mungkin kosong */
+/* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
+/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
+/* Jika list kosong : menulis [] */
+/* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
+{
+	/* Kamus Lokal */
+	address P;
+	int i;
+
+	/* Algoritma */
+	if (!IsEmpty_LL(L)) {
+		i = 1;
+		P = First(L);
+		while (P != Nil && i < idx) {
+			i++;
+			P = Next(P);
+		}
+		return Info(P);
+	}
+	return 0;
+}
+
 int NbElmt (List L)
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 {
@@ -369,6 +413,22 @@ void Konkat1 (List *L1, List *L2, List *L3)
 	First(*L2) = Nil;
 }
 
+void IterateAndOwn(int num, List *L) {
+	/* Kamus Lokal */
+	int i;
+
+	/* Algoritma */
+	i = 3;
+	while (i <= NBElmt_Array(TB)) {
+		if (SearchEdge(GHubungan, num, i) != Nil) {
+			InsVLast(L,i);
+			Kepemilikan(ElmtArr(TB,i)) = num;
+		}
+		i++;
+	}
+
+}
+
 void UpdateAllBuildings(List L) {
 	/* Kamus Lokal */
 	address P;
@@ -376,12 +436,127 @@ void UpdateAllBuildings(List L) {
 	/* Algoritma */
 	if (!IsEmpty_LL(L)) {
 		P = First(L);
-		UpdateBangunan(&ElmtArr(TB,Info(P)));
-		while (Next(P) != Nil) {
-			P = Next(P);
+		while (P != Nil) {
 			UpdateBangunan(&ElmtArr(TB,Info(P)));
+			P = Next(P);
 		}
 	}
+}
+
+void ConnectedBuildings(int NoBangunan, List L) {
+	/* Kamus Lokal */
+	int i;
+	address P;
+
+	/* Algoritma */
+    i = 1;
+    P = First(L);
+    printf("Daftar bangunan terdekat: \n");
+    while (P != Nil) {
+    	if (SearchEdge(GHubungan, NoBangunan, Info(P)) != Nil) {
+            printf("%d. ", i);
+            PrintInfoBangunan(ElmtArr(TB,Info(P)));
+        	i++;
+    	}
+        P = Next(P);
+    }
+}
+
+void ConnectedBuildings2(int NoBangunan, List L) {
+	/* Kamus Lokal */
+	int i, idx;
+	address P;
+
+	/* Algoritma */
+	i = 1;
+	idx = 1;
+	printf("Daftar bangunan yang dapat diserang: \n");
+	while (idx <= NBElmt_Array(TB)) {
+    	if (SearchInfo(L,idx) == Nil && SearchEdge(GHubungan, NoBangunan, idx) != Nil) {
+            printf("%d. ", i);
+            PrintInfoBangunan(ElmtArr(TB,idx));
+            i++;
+    	}
+    	idx++;
+	}
+}
+
+int InfoConnectedBuildingByIdx(int NoBangunan, int idx, List L) {
+	/* Kamus Lokal */
+	int i;
+	address P;
+	adrSuccNode found;
+
+	/* Algoritma */
+	if (!IsEmpty_LL(L)) {
+        i = 1;
+        P = First(L);
+        found = SearchEdge(GHubungan, NoBangunan, Info(P));
+        while (P != Nil && (i != idx || found == Nil)) {
+        	if (found != Nil) {
+            	i++;
+        	}
+            P = Next(P);
+        	found = SearchEdge(GHubungan, NoBangunan, Info(P));
+        }
+    }
+    return Info(P);
+}
+
+int InfoConnectedBuildingByIdx2(int NoBangunan, int idx, List L) {
+	/* Kamus Lokal */
+	int i, idxtemp;
+	address P;
+	boolean found;
+
+	/* Algoritma */
+    i = 1;
+    idxtemp = 1;
+    found = SearchInfo(L,idxtemp) == Nil && SearchEdge(GHubungan, NoBangunan, idxtemp) != Nil;
+	while (idxtemp <= NBElmt_Array(TB) && (i != idx || !found)) {
+    	if (found) {
+            i++;
+    	}
+    	idxtemp++;
+    	found = SearchInfo(L,idxtemp) == Nil && SearchEdge(GHubungan, NoBangunan, idxtemp) != Nil;
+	}
+    return idxtemp;
+}
+
+int NBConnectedBuildings(int NoBangunan, List L) {
+	/* Kamus Lokal */
+	int i;
+	address P;
+
+	/* Algoritma */
+	if (!IsEmpty_LL(L)) {
+        i = 1;
+        P = First(L);
+        while (P != Nil) {
+        	if (SearchEdge(GHubungan, NoBangunan, Info(P)) != Nil) {
+            	i++;
+        	}
+            P = Next(P);
+        }
+    }
+    return i-1;
+}
+
+int NBConnectedBuildings2(int NoBangunan, List L) {
+	/* Kamus Lokal */
+	int i, idx;
+	address P;
+
+	/* Algoritma */
+    i = 1;
+    idx = 1;
+	while (idx <= NBElmt_Array(TB)) {
+    	if (SearchInfo(L,idx) == Nil && SearchEdge(GHubungan, NoBangunan, idx) != Nil) {
+            i++;
+    	}
+    	idx++;
+	}
+    return i-1;
 }
 
 void IndexLevelUp(List L, int idx) {
@@ -398,21 +573,11 @@ void IndexLevelUp(List L, int idx) {
 		if (JumlahPasukan(ElmtArr(TB,Info(P))) >= M(ElmtArr(TB,Info(P)))/2) {
 			LevelUpBangunan(&ElmtArr(TB,Info(P)));
 			printf("Level ");
-			switch(Jenis(ElmtArr(TB,Info(P)))) {
-			 	case 'C': printf("Castle"); break;
-			 	case 'T': printf("Tower"); break;
-			 	case 'F': printf("Fort"); break;
-			 	case 'V': printf("Village"); break;
-			}
+			PrintJenisByCode(Jenis(ElmtArr(TB,Info(P))));
 			printf("-mu meningkat menjadi %d.\n", Level(ElmtArr(TB,Info(P))));
 		} else {
 			printf("Jumlah pasukan ");
-			switch(Jenis(ElmtArr(TB,Info(P)))) {
-			 	case 'C': printf("Castle"); break;
-			 	case 'T': printf("Tower"); break;
-			 	case 'F': printf("Fort"); break;
-			 	case 'V': printf("Village"); break;
-			}
+			PrintJenisByCode(Jenis(ElmtArr(TB,Info(P))));
 			printf(" kurang untuk level up\n");
 		}
 	} else {
