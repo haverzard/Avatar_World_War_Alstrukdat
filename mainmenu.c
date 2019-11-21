@@ -11,7 +11,7 @@
 #include "mesindata.h"
 #include "mesinkata.h"
 #include "arraydinpos.h"
-// #include "stack.h"
+#include "stack.h"
 
 #define printl(x) printf("%s\n", x);
 
@@ -19,6 +19,7 @@
 int choice;
 boolean EndGame;
 boolean EndTurn = false;
+Stack StatusP1, StatusP2;
 
 void STARTGAME() {
 	/* Algoritma */
@@ -59,6 +60,7 @@ void CREATEPLAYER(Player *P1, Player *P2) {
 }
 
 void TURN(int NoPemain, MATRIKS Peta, Player P1, Player P2) {
+	// UPDATESTATUS(NoPemain, P1, P2);
 	TulisMATRIKSPETA(Peta);
 	printf("Player %d\n", NoPemain);
 	PrintListBangunan(NoPemain, P1, P2);
@@ -72,12 +74,14 @@ void TURN(int NoPemain, MATRIKS Peta, Player P1, Player P2) {
 	SCANKATA();
 	if (EQ_KATA(CKata, "ATTACK")) {
 		ATTACK(NoPemain, P1, P2);
+		UPDATESTATUS(NoPemain, P1, P2);
 	} else if (EQ_KATA(CKata, "LEVEL_UP")) {
 		LEVELUP(NoPemain, P1, P2);
 	} else if (EQ_KATA(CKata, "SKILL")) {
 		UseSkill(NoPemain,&P1,&P2);
 	} else if (EQ_KATA(CKata, "UNDO")) {
 		printl("UNDO!");
+		UNDO(NoPemain, &P1, &P2);
 	} else if (EQ_KATA(CKata, "END_TURN")) {
 		EndTurn = true;
 	} else if (EQ_KATA(CKata, "SAVE")) {
@@ -91,6 +95,7 @@ void TURN(int NoPemain, MATRIKS Peta, Player P1, Player P2) {
 	} else {
 		printl("Inputnya yang benar dong!");
 	}
+	
 }
 
 void ATTACK(int NoPemain, Player P1, Player P2) {
@@ -196,4 +201,18 @@ void LEVELUP(int NoPemain, Player P1, Player P2) {
 	printf("Bangunan yang akan di level up: "); scanf("%d", &choice);
 	LevelUpBP(NoPemain, P1, P2, choice);
 	SCAN();
+}
+
+void UPDATESTATUS (int NoPemain, Player P1, Player P2) {
+	UpdateStatus_Stack(&StatusP1, P1, P2, TB);
+	// infotypeStack X; Pop(&StatusP1, &X); printf("INFO PLAYER: %d\n", NoPemain(InfoPlayer(X)));
+}
+
+void UNDO (int NoPemain, Player *P1, Player *P2) {
+	// printf("NOOOO %d\n", NoPemain);
+	Player temp1, temp2;
+	UndoStatus_Stack(&StatusP1, P1, P2, &TB);
+	UndoStatus_Stack(&StatusP1, P1, P2, &TB);
+	// *P1 = temp1; *P2 = temp2;
+	// infotypeStack X; Pop(&StatusP1, &X); printf("INFO PLAYER: %d\n", NoPemain(InfoPlayer(X)));
 }

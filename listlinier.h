@@ -129,6 +129,8 @@ void PrintInfo (List L);
 /* Jika list kosong : menulis [] */
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
 
+void CopyList(List Lin, List *Lout);
+
 int InfoListByIndex (List L, int idx);
 
 int NbElmt (List L);

@@ -6,11 +6,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "stack.h"
-#include "bangunan.h"
 
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator Untuk Membuat Stack Kosong *** */
-void CreateEmpty (Stack *S){
+void CreateEmpty_Stack (Stack *S){
     Top(*S) = NilStack;
 }
 /* I.S. sembarang; */
@@ -19,11 +18,11 @@ void CreateEmpty (Stack *S){
 /* Ciri stack kosong : TOP bernilai NilStack */
 
 /* ************ Predikat Untuk test keadaan KOLEKSI ************ */
-boolean IsEmpty (Stack S){
+boolean IsEmpty_Stack (Stack S){
     return (Top(S) == NilStack);
 }
 /* Mengirim true jika Stack kosong: lihat definisi di atas */
-boolean IsFull (Stack S){
+boolean IsFull_Stack (Stack S){
     return (Top(S) == MaxElStack);
 }
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
@@ -40,34 +39,51 @@ void Push (Stack * S, infotypeStack X){
 /* ************ Menghapus sebuah elemen Stack ************ */
 void Pop (Stack * S, infotypeStack* X){
     (*X) = InfoTop(*S);
-    Top(*S) --;
+    Top(*S)--;
 }
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
-void UpdateStatus(Stack *S, Player P) {
-    /* Kamus Lokal */
-    infotypeStack X;
-    Bangunan B;
-
-    /* Algoritma */
-    InfoPlayer(X) = P;
-    InfoBangunan(X) = B;
-    Push(S, X);
-}
+void UpdateStatus_Stack(Stack *S, Player P1, Player P2, TabBangunan TB) {
 /* Mengisi Stack dengan ADT yang ada */
 /* I.S. Stack mungkin kosong mungkin terisi */
 /* F.S. Stack terisi dengan elemennya adalah keterangan pada pemain apa dan Bangunan*/
+    /* Kamus Lokal */
+    infotypeStack X;
+    Player temp1, temp2;
+    List L1, L2;
+    /* Algoritma */
+    temp1 = P1; temp2 = P2;
+    CopyList(ListBangunan(P1), &ListBangunan(temp1));
+    CopyList(ListBangunan(P2), &ListBangunan(temp2));
+    InfoP1(X) = temp1;
+    InfoP2(X) = temp2;
+    InfoTabBangunan(X) = TB;
+    Push(S, X);
+    printf("0000000000000000000000000\n"); PrintListBangunan(1, InfoP1(X), InfoP2(X)); printf("0000000000000000000000000\n"); 
+}
 
-void LoadStatus(Stack *S, Player P);
+void UndoStatus_Stack(Stack *S, Player *P1, Player *P2, TabBangunan *TB)
 /* Pop Stack untuk UNDO */
 /* I.S. Stack tidak kosong */
 /* F.S. Stack berkurang 1 elemen */
+{
+    infotypeStack X;
+    if (!IsEmpty_Stack(*S)) {
+        Pop(S, &X);
+        *P1 = InfoP1(X);
+        *P2 = InfoP2(X);
+        *TB = InfoTabBangunan(X);
+        printf("111111111111111111111111\n"); PrintListBangunan(1, *P1, *P2); printf("111111111111111111111111\n"); 
+    } else {
+        printf("Tidak bisa UNDO lagi!\n");
+    }
+}
 
 void ResetStatus(Stack *S) {
-    CreateEmpty(S);
-}
 /* Mengosokan Isi Stack Saat bergantian Pemain */
 /* I.S. Stack Mungkin Kosong, mungkin berisi */
 /* F.S. Stack menjadi kosong */
+    CreateEmpty_Stack(S);
+}

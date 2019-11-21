@@ -354,6 +354,16 @@ void PrintInfo (List L)
 	}
 }
 
+void CopyList(List Lin, List *Lout) {
+	address P;
+	CreateEmpty_LL(Lout);
+	P = First(Lin); 
+	while (P != Nil) {
+		InsVLast(Lout, Info(P));
+		P = Next(P);
+	}
+}
+
 int InfoListByIndex (List L, int idx)
 /* I.S. List mungkin kosong */
 /* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
