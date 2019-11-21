@@ -83,6 +83,8 @@ void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
 		UNDO(P1, P2, SkillUsed);
 	} else if (EQ_KATA(CKata, "END_TURN")) {
 		EndTurn = true;
+		SkillUsed = false;
+		ResetStatus(&Status);
 	} else if (EQ_KATA(CKata, "SAVE")) {
 		printl("SAVE!");
 	} else if (EQ_KATA(CKata, "MOVE")) {
