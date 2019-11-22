@@ -29,6 +29,9 @@ void STARTDATA();
    F.S. : Pembacaan sudah bisa dimulai dan CC ≠ BLANK */
 
 void NEXTDATA();
+/*	I.S. CC mungkin berisi ENDLINE atau BLANK
+	F.S. CC adalah karakter yang akan dibaca selanjutnya
+*/
 
 void INFOPETA(MATRIKS *Peta);
 /* Mengambil informasi ukuran peta dari data
@@ -36,9 +39,17 @@ void INFOPETA(MATRIKS *Peta);
    F.S. : Peta terdefinisi dengan ukuran dari data */
 
 void INFOBANGUNAN(TabBangunan *TB);
+/*	I.S. TB belum terdefinisi
+	F.S. TB terdefinisi dengan ukuran sesuai konfigurasi dari file eksternal
+*/
 
-void LOKASIBANGUNAN(MATRIKS *Peta, TabBangunan *TB, int i);
+void LOKASIBANGUNAN(MATRIKS *Peta, TabBangunan *TB);
+/*	I.S. TB sembarang 
+	F.S. Terbentuk TabBangunan TB sesuai konfigurasi dari file eksternal
+*/
 
 void HUBUNGANBANGUNAN (MATRIKS_INT *Hubungan, int BanyakBangunan);
-
+/*	I.S. Matriks Hubungan sembarang dan BanyakHubungan terdefinisi 
+	F.S. Terbentuk Matriks Hubungan sesuai konfigurasi dari file eksternal
+*/
 #endif

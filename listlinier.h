@@ -146,51 +146,79 @@ int NbElmt (List L);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 
 /****************** PROSES TERHADAP LIST ******************/
-void Konkat1 (List *L1, List *L2, List *L3);
-/* I.S. L1 dan L2 sembarang */
-/* F.S. L1 dan L2 kosong, L3 adalah hasil konkatenasi L1 & L2 */
-/* Konkatenasi dua buah list : L1 dan L2    */
-/* menghasilkan L3 yang baru (dengan elemen list L1 dan L2) */
-/* dan L1 serta L2 menjadi list kosong.*/
-/* Tidak ada alokasi/dealokasi pada prosedur ini */
-
 void IterateAndOwn(int num, List *L);
-/*	I.S. L dan GHubungan terdefinisi dan num adalah indeks pada TabBangunan TB
+/*	I.S. L, TB, dan GHubungan terdefinisi dan num adalah indeks TB yang valid
 	F.S. Semua bangunan yang terhubung dengan TB.TI[num] menjadi milik player bernomor num
 */
 
 void UpdateAllBuildings(List L);
-/*	I.S. L dan GHubungan terdefinisi dan num adalah indeks pada TabBangunan TB
-	F.S. Semua bangunan yang terhubung dengan TB.TI[num] menjadi milik player bernomor num
+/*	I.S. L dan TB terdefinisi
+	F.S. Semua elemen array berindeks info semua elemen L ditambah jumlah pasukannya sesuai spesifikasi
 */
 
 void ConnectedBuildings(int NoBangunan, List L);
+/*	I.S. L, TB, dan GHubungan terdefinisi dan NoBangunan adalah indeks TB yang valid
+	F.S. Ditampilkan semua bangunan dengan indeks TB dalam list L yang terhubung dengan TB.TI[NoBangunan]
+*/
 
 void ConnectedBuildings2(int NoBangunan, List L);
+/*	I.S. L, TB, dan GHubungan terdefinisi dan NoBangunan adalah indeks TB yang valid
+	F.S. Ditampilkan semua bangunan dengan indeks TB tidak dalam list L yang terhubung dengan TB.TI[NoBangunan]
+*/
 
 int InfoConnectedBuildingByIdx(int NoBangunan, int idx, List L);
+/*	Menghasilkan indeks TB yang direpresentasikan idx berdasarkan penomoran dari prosedur ConnectedBuildings*/
 
 int InfoConnectedBuildingByIdx2(int NoBangunan, int idx, List L);
+/*	Menghasilkan indeks TB yang direpresentasikan idx berdasarkan penomoran dari prosedur ConnectedBuildings2*/
 
 int NBConnectedBuildings(int NoBangunan, List L);
+/*	Menghasilkan jumlah bangunan dengan indeks TB dalam list L yang terhubung dengan TB.TI[NoBangunan] */
 
 int NBConnectedBuildings2(int NoBangunan, List L);
+/*	Menghasilkan jumlah bangunan dengan indeks TB tidak dalam list L yang terhubung dengan TB.TI[NoBangunan] */
 
 void IndexLevelUp(List L, int idx);
+/*	I.S. L dan TB terdefinisi
+	F.S. Jika idx tidak valid, ditampilkan pesan "Upgrade gagal!"
+		 Jika jumlah pasukan mencukupi, bangunan dengan indeks TB pada elemen L ke-idx di-levelup
+		 Jika jumlah pasukan tidak mencukupi, ditampilkan pesan "Jumlah pasukan <Jenis> kurang untuk level up"
+*/
 
 void LevelUpAll(List L);
+/*	I.S. L dan TB terdefinisi
+	F.S. Semua bangunan dengan indeks TB pada list L di-level up dengan prosedur IndexLevelUp.
+*/
 
 void ShieldOn(List L);
+/*	I.S. L dan TB terdefinisi
+	F.S. Semua bangunan dengan indeks TB pada list L diaktifkan pertahanannya
+*/
 
 void ShieldOff(List L);
+/*	I.S. L dan TB terdefinisi
+	F.S. Semua bangunan dengan indeks TB pada list L dikembalikan pertahanannya ke keadaan aslinya
+*/
 
 void ReinforceAll(List L);
+/*	I.S. L dan TB terdefinisi
+	F.S. Semua bangunan dengan indeks TB pada list L ditambahkan pasukannya sebanyaknya 5
+*/
 
 void BarrageAll(List L);
+/*	I.S. L dan TB terdefinisi
+	F.S. Semua bangunan dengan indeks TB pada list L dikurang pasukannya sebanyaknya 10
+*/
 
 void AttackUpAll (List L);
+/*	I.S. L dan TB terdefinisi
+	F.S. Semua bangunan dengan indeks TB pada list L dimatikan pertahanannya
+*/
 
 void AttackUpAllOff (List L);
+/*	I.S. L dan TB terdefinisi
+	F.S. Semua bangunan dengan indeks TB pada list L dikembalikan pertahanannya ke keadaan aslinya
+*/
 
 
 #endif

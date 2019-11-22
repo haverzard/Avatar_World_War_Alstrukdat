@@ -29,9 +29,7 @@ int main() {
 	if (!EndGame) {
 		INFOPETA(&Peta);     
 		INFOBANGUNAN(&TB);
-		for (i = 1; i <= MaxElArr(TB); i++) {
-			LOKASIBANGUNAN(&Peta, &TB, i);
-		}
+		LOKASIBANGUNAN(&Peta, &TB);
 		HUBUNGANBANGUNAN(&Hubungan, NBElmt_Array(TB));
 		GenerateHubunganBangunan(&GHubungan, Hubungan);
 		CREATEPLAYER(&p1, &p2);
@@ -43,14 +41,15 @@ int main() {
 				TURN(i, Peta, &p1, &p2);
 			}
 			UpdateListBangunan(i, p1, p2);
-			GetIReinforcement(i,&p1,&p2);
-			MinShieldDuration(i,&p1,&p2);
-			//Tambahin shield Duration
-			// if (extraTurn = 0){
-			// 	i = (i % 2 + 3) - 2; 
-			// } else {
-			// 	extraTurn -=1;
-			// }
+			// GetIReinforcement(i,&p1,&p2);
+			// MinShieldDuration(i,&p1,&p2);
+			// //Tambahin shield Duration
+			// // if (extraTurn = 0){
+			// // 	i = (i % 2 + 3) - 2; 
+			// // } else {
+			// // 	extraTurn -=1;
+			// // }
+			i = (i % 2 + 3) - 2; 
 			if (attackUp){
 				attackUp = 0;
 			}

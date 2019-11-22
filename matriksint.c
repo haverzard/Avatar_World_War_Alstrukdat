@@ -46,43 +46,7 @@ boolean IsIdxEffMatInt (MATRIKS_INT M, indeksMatInt i, indeksMatInt j)
     return ((i >= BrsMinMatInt && i <= NBrsEffMatInt(M))  &&(j >= KolMinMatInt && j <= NKolEffMatInt(M)));
 }
 
-/* ********** Assignment  MATRIKS ********** */
-void CopyMATRIKS_INT (MATRIKS_INT MIn, MATRIKS_INT * MHsl)
-/* Melakukan assignment MHsl  MIn */
-{
-    /* KAMUS LOKAL */
-    indeksMatInt i, j;
-    /* ALGORITMA */
-    MakeMATRIKS_INT(NBrsEffMatInt(MIn), NKolEffMatInt(MIn), MHsl);
-    for (i = GetFirstIdxBrsMatInt(MIn); i <= GetLastIdxBrsMatInt(MIn); i++) {
-		for (j = GetFirstIdxKolMatInt(MIn); j <= GetLastIdxKolMatInt(MIn); j++) {
-            ElmtMatInt(*MHsl, i, j) = ElmtMatInt(MIn, i, j);
-        }
-    }
-}
-
 /* ********** KELOMPOK BACA/TULIS ********** */
-void BacaMATRIKS_INT (MATRIKS_INT * M, int NB, int NK)
-/* I.S. IsIdxValid(NB,NK) */
-/* F.S. M terdefinisi nilai elemen efektifnya, berukuran NB x NK */
-/* Proses: Melakukan MakeMATRIKS(M,NB,NK) dan mengisi nilai efektifnya */
-/* Selanjutnya membaca nilai elemen per baris dan kolom */
-/* Contoh: Jika NB = 3 dan NK = 3, maka contoh cara membaca isi matriks :
-1 2 3
-4 5 6
-8 9 10
-*/
-{
-    /* KAMUS LOKAL */
-    indeksMatInt i, j;
-    /* ALGORITMA */
-    MakeMATRIKS_INT(NB, NK, M);
-	for (i = GetFirstIdxBrsMatInt(*M); i <= NB; i++) {
-		for (j = GetFirstIdxKolMatInt(*M); j <= NK; j++) {
-            scanf("%d", &ElmtMatInt(*M, i, j));
-        }
-    }
-}
 void TulisMATRIKS_INT (MATRIKS_INT M)
 /* I.S. M terdefinisi */
 /* F.S. Nilai M(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris
@@ -109,53 +73,4 @@ void TulisMATRIKS_INT (MATRIKS_INT M)
         printf("%d ", ElmtMatInt(M, i, j));
     }
     printf("%d", ElmtMatInt(M, i, j));
-}
-
-/* ********** KELOMPOK OPERASI RELASIONAL TERHADAP MATRIKS ********** */
-boolean EQ_MATRIKS_INT (MATRIKS_INT M1, MATRIKS_INT M2)
-/* Mengirimkan true jika M1 = M2, yaitu NBElmt_MATRIKS_INT(M1) = NBElmt_MATRIKS_INT(M2) dan */
-/* untuk setiap i,j yang merupakan indeks baris dan kolom M1(i,j) = M2(i,j) */
-/* Juga merupakan strong EQ karena GetFirstIdxBrsMatInt(M1) = GetFirstIdxBrsMatInt(M2)
-   dan GetLastIdxKolMatInt(M1) = GetLastIdxKolMatInt(M2) */
-{   
-    /* KAMUS LOKAL */
-    boolean found = false;
-    indeksMatInt i, j;
-    /* ALGORITMA */
-    if (NBElmt_MATRIKS_INT(M1) != NBElmt_MATRIKS_INT(M2)) {
-        return false;
-    } else {
-        i = BrsMinMatInt;
-        while (!found && i <= NBrsEffMatInt(M1)) {
-            j = KolMinMatInt;
-            while (!found && j <= NKolEffMatInt(M1)) {
-                if (ElmtMatInt(M1, i, j) != ElmtMatInt(M2, i, j)) {
-                    found = true;
-                } else {
-                    j++;
-                }
-            }
-            i++;
-        }
-    }
-
-    return !found;
-}
-boolean NEQ_MATRIKS_INT (MATRIKS_INT M1, MATRIKS_INT M2)
-/* Mengirimkan true jika M1 tidak sama dengan M2 */
-{
-    return !(EQ_MATRIKS_INT(M1, M2));
-}
-boolean EQSize_MATRIKS_INT (MATRIKS_INT M1, MATRIKS_INT M2)
-/* Mengirimkan true jika ukuran efektif matriks M1 sama dengan ukuran efektif M2 */
-/* yaitu GetBrsEff(M1) = GetNBrsEff (M2) dan GetNKolEff (M1) = GetNKolEff (M2) */
-{
-    return ((GetLastIdxBrsMatInt(M1) == GetLastIdxBrsMatInt(M2)) && (GetLastIdxKolMatInt(M1) == GetLastIdxKolMatInt(M2)));
-}
-
-/* ********** Operasi lain ********** */
-int NBElmt_MATRIKS_INT (MATRIKS_INT M)
-/* Mengirimkan banyaknya elemen M */
-{
-    return GetLastIdxBrsMatInt(M) * GetLastIdxKolMatInt(M);
 }

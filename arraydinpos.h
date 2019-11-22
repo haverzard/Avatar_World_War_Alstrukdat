@@ -1,5 +1,5 @@
-/* MODUL TABEL INTEGER */
-/* Berisi definisi dan semua primitif pemrosesan tabel integer */
+/* MODUL TABEL LOKASI TERMODIFIKASI */
+/* Berisi definisi dan semua primitif pemrosesan tabel berelemen Loc */
 /* Penempatan elemen selalu rapat kiri */
 /* Versi III : dengan banyaknya elemen didefinisikan secara implisit,
    memori tabel dinamik */
@@ -93,14 +93,6 @@ void BacaIsiPeta(TabBangunan *T, MATRIKS Peta);
 /* I.S. T sembarang dan sudah dialokasikan sebelumnya */
 /* F.S. Tabel T terdefinisi */
 /* Proses : membaca banyaknya elemen T dari Peta dan mengisi nilainya */
-void TulisIsiTab(TabBangunan T);
-/* Proses : Menuliskan isi tabel dengan traversal, tabel ditulis di antara kurung siku;
-   antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan karakter di depan,
-   di tengah, atau di belakang, termasuk spasi dan enter */
-/* I.S. T boleh kosong */
-/* F.S. Jika T tidak kosong: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika tabel kosong : menulis [] */
 
 /* ********** OPERATOR RELASIONAL ********** */
 /* *** Operasi pembandingan tabel : < =, > *** */
@@ -145,21 +137,6 @@ void DelLastEl(TabBangunan *T, ElType_Array *X);
 /*      Tabel T mungkin menjadi kosong */
 
 /* ********* MENGUBAH UKURAN ARRAY ********* */
-void GrowTab(TabBangunan *T, int num);
-/* Proses : Menambahkan max element sebanyak num */
-/* I.S. Tabel sudah terdefinisi */
-/* F.S. Ukuran tabel bertambah sebanyak num */
-
-void ShrinkTab(TabBangunan *T, int num);
-/* Proses : Mengurangi max element sebanyak num */
-/* I.S. Tabel sudah terdefinisi, ukuran MaxElArr > num, dan Neff < MaxElArr - num. */
-/* F.S. Ukuran tabel berkurang sebanyak num. */
-
-void CompactTab(TabBangunan *T);
-/* Proses : Mengurangi max element sehingga Neff = MaxElArr */
-/* I.S. Tabel tidak kosong */
-/* F.S. Ukuran MaxElArr = Neff */
-
 void DelEli (TabBangunan * T, IdxType i, ElType_Array * X);
 /* Menghapus elemen ke-i tabel tanpa mengganggu kontiguitas */
 /* I.S. Tabel tidak kosong, i adalah indeks efektif yang valid */
