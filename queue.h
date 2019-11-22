@@ -75,5 +75,8 @@ void Del (Queue * Q, skilltype * X);
         Q mungkin kosong */
 
 void CopyQueue (Queue Qin, Queue *Qout);
+/* I.S. Qin terdefinisi, Qout sembarang */
+/* F.S. Qout berisi salinan dari Qin */
+/* Proses : Menyalin isi Qin ke Qout */
 
 #endif

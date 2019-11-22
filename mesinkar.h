@@ -28,6 +28,13 @@ void ADV();
           CC mungkin = MARK
           Jika  CC = MARK maka EOP akan menyala (true) */
 
+void CLOSE();
+/* I.S. : sembarang
+   F.S. : pembacaan pita dihentikan dan pita di-close */
+
+
 void SCAN();
+/* I.S. : sembarang
+   F.S. : membaca karakter yang ada pada pita */
 
 #endif

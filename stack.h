@@ -1,10 +1,10 @@
-// /* File : stack.h MODIFIED */
-// /* Deklarasi stack yang diimplementasi dengan tabel kontigu dan ukuran sama */
-// /* TOP adalah alamat elemen puncak */
-// /* ADT Stack untuk mekanisme command UNDO */
+/* File : stack.h MODIFIED */
+/* Deklarasi stack yang diimplementasi dengan tabel kontigu dan ukuran sama */
+/* TOP adalah alamat elemen puncak */
+/* ADT Stack untuk mekanisme command UNDO */
 
-// #ifndef STACK_H
-// #define STACK_H
+#ifndef STACK_H
+#define STACK_H
 
 #include "boolean.h"
 #include "arraydinpos.h"
@@ -82,4 +82,4 @@ void ResetStatus(Stack *S);
 /* F.S. Stack menjadi kosong */
 
 
-// #endif
+#endif

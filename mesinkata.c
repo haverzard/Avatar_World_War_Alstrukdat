@@ -66,6 +66,7 @@ void SalinKata()
 }
 
 boolean EQ_KATA(Kata X, char Y[]) {
+/* mengirimkan true jika kata X sama secara urut dengan seluruh karakter yang ada pada array Y */
 	/* Kamus Lokal */
 	int i;
 	boolean sama;

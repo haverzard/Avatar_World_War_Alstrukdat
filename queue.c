@@ -6,30 +6,6 @@
 #include <stdlib.h>
 #include "queue.h"
 
-// #define NilQ 0
-// /* Konstanta untuk mendefinisikan addressQ tak terdefinisi */
-
-// /* Definisi elemen dan addressQ */
-// typedef int infotype;
-// typedef int addressQ;   /* indeks tabel */
-// /* Contoh deklarasi variabel bertype Queue : */
-// /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
-// typedef struct { skilltype * T;   /* tabel penyimpan elemen */
-//                  addressQ HEAD;  /* alamat penghapusan */
-//                  addressQ TAIL;  /* alamat penambahan */
-//                  int MaxElQ;     /* Max elemen queue */
-//                } Queue;
-// /* Definisi Queue kosong: HEAD=NilQ; TAIL=NilQ. */
-// /* Catatan implementasi: T[0] tidak pernah dipakai */
-
-// /* ********* AKSES (Selektor) ********* */
-// /* Jika Q adalah Queue, maka akses elemen : */
-// #define Head(Q) (Q).HEAD
-// #define Tail(Q) (Q).TAIL
-// #define InfoHead(Q) (Q).T[(Q).HEAD]
-// #define InfoTail(Q) (Q).T[(Q).TAIL]
-// #define MaxElQ(Q) (Q).MaxElQ
-
 /* ********* Prototype ********* */
 boolean IsEmpty_Queue (Queue Q){
     return (Head(Q)==NilQ && Tail(Q)==NilQ);
@@ -116,15 +92,12 @@ void CopyQueue (Queue Qin, Queue *Qout) {
     /* Algoritma */
     CreateEmpty_Queue(Qout, MaxElQ(Qin));
     NbEl = NBElmt(Qin);
-    // printf("00000000000000000000000000000000000000000000000000000000000000000000000000000\n");
-    // printf("%c %d %d %d %d\n", Qin.S[1], NbEl, Head(Qin), Tail(Qin), MaxElQ(Qin));
-    // printf("00000000000000000000000000000000000000000000000000000000000000000000000000000\n");
     if (NbEl > 0) {
         for (int i = 1; i <= NbEl; i++) {
-            // printf("00000000000000000000000000000000000000000000000000000000000000000000000000000\n");
-            // printf("%c", Qin.S[i]);
-            // printf("00000000000000000000000000000000000000000000000000000000000000000000000000000\n");
             Add(Qout, (Qin.S[i]));
         }
     }
 }
+/* I.S. Qin terdefinisi, Qout sembarang */
+/* F.S. Qout berisi salinan dari Qin */
+/* Proses : Menyalin isi Qin ke Qout */

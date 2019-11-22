@@ -14,7 +14,12 @@
 int extraTurn=0;
 int attackUp = 0;
 
-void InitPlayer(int num, Player *P) {
+void InitPlayer(int num, Player *P) 
+/*	I.S. P belum terdefinisi
+	F.S. P terdefinisi sebagai player ke-num
+*/
+{
+	/* Algoritma */
 	Color(*P) = num;
 	NoPemain(*P) = num;
 	CreateEmpty_LL(&ListBangunan(*P));
@@ -27,7 +32,10 @@ void InitPlayer(int num, Player *P) {
 	// attackUpBool(*P) = false;
 }
 
-int NBElmtListB(int NoPemain, Player P1, Player P2) {
+int NBElmtListB(int NoPemain, Player P1, Player P2) 
+/*	Menghasilkan nilai ukuran list untuk player ke-NoPemain*/
+{
+	/* Algoritma */
 	if (NoPemain == 1) {
 		return NbElmt(ListBangunan(P1));
 	} else {
@@ -35,7 +43,12 @@ int NBElmtListB(int NoPemain, Player P1, Player P2) {
 	}
 }
 
-void PrintListBangunan(int num, Player P1, Player P2) {
+void PrintListBangunan(int num, Player P1, Player P2) 
+/*	I.S. P1 dan P2 sembarang
+	F.S. Ditampilkan daftar bangunan berdasarkan ListBangunan player ke-num
+*/
+{
+	/* Algoritma */
 	if (num == 1) {
 		PrintInfo(ListBangunan(P1));
 	} else {
@@ -43,7 +56,11 @@ void PrintListBangunan(int num, Player P1, Player P2) {
 	}
 }
 
-void PrintMyConnectedBuildings(int num, int IdxList, Player P1, Player P2) {
+void PrintMyConnectedBuildings(int num, int IdxList, Player P1, Player P2) 
+/*	I.S. P1 dan P2 sembarang, TB terdefinisi
+	F.S. Ditampilkan daftar bangunan milik player ke-num yang terhubung dengan bangunan dengan indeks TB pada info list player ke-num ke-IdxList
+*/
+{
 	/* Algoritma */
     if (num == 1) {
     	ConnectedBuildings(InfoListByIndex(ListBangunan(P1), IdxList), ListBangunan(P1));
@@ -52,7 +69,11 @@ void PrintMyConnectedBuildings(int num, int IdxList, Player P1, Player P2) {
     }
 }
 
-void PrintNotMyConnectedBuildings(int num, int IdxList, Player P1, Player P2) {
+void PrintNotMyConnectedBuildings(int num, int IdxList, Player P1, Player P2) 
+/*	I.S. P1 dan P2 sembarang, TB terdefinisi
+	F.S. Ditampilkan daftar bangunan bukan milik player ke-num yang terhubung dengan bangunan dengan indeks TB pada info list player ke-num ke-IdxList
+*/
+{
 	/* Algoritma */
     if (num == 1) {
     	ConnectedBuildings2(InfoListByIndex(ListBangunan(P1), IdxList), ListBangunan(P1));
@@ -61,7 +82,9 @@ void PrintNotMyConnectedBuildings(int num, int IdxList, Player P1, Player P2) {
     }
 }
 
-int NBMyConnectedBuildings(int num, int IdxList, Player P1, Player P2) {
+int NBMyConnectedBuildings(int num, int IdxList, Player P1, Player P2) 
+/*	Menghasilkan banyaknya bangunan milik player ke-num yang terhubungan dengan  bangunan dengan indeks TB pada info list player ke-num ke-IdxList */
+{
 	/* Algoritma */
     if (num == 1) {
     	return NBConnectedBuildings(InfoListByIndex(ListBangunan(P1), IdxList), ListBangunan(P1));
@@ -70,7 +93,9 @@ int NBMyConnectedBuildings(int num, int IdxList, Player P1, Player P2) {
     }
 }
 
-int NBNotMyConnectedBuildings(int num, int IdxList, Player P1, Player P2) {
+int NBNotMyConnectedBuildings(int num, int IdxList, Player P1, Player P2)
+/*	Menghasilkan banyaknya bangunan bukan milik player ke-num yang terhubungan dengan  bangunan dengan indeks TB pada info list player ke-num ke-IdxList */
+{
 	/* Algoritma */
     if (num == 1) {
     	return NBConnectedBuildings2(InfoListByIndex(ListBangunan(P1), IdxList), ListBangunan(P1));
@@ -79,7 +104,9 @@ int NBNotMyConnectedBuildings(int num, int IdxList, Player P1, Player P2) {
     }
 }
 
-int InfoMyBuilding(int num, int IdxList, Player P1, Player P2) {
+int InfoMyBuilding(int num, int IdxList, Player P1, Player P2) 
+/*	Menghasilkan info list player ke-num ke-IdxList */
+{
 	/* Algoritma */
     if (num == 1) {
     	return InfoListByIndex(ListBangunan(P1), IdxList);
@@ -88,7 +115,9 @@ int InfoMyBuilding(int num, int IdxList, Player P1, Player P2) {
     }
 }
 
-int InfoConnectedBuilding(int num, int IdxList, int IdxConnected, Player P1, Player P2) {
+int InfoConnectedBuilding(int num, int IdxList, int IdxConnected, Player P1, Player P2) 
+/*	Menghasilkan indeks TB yang direpresentasikan IdxConnected sesuai urutan daftar bangunan dari prosedur PrintMyConnectedBuildings */
+{
 	/* Algoritma */
     if (num == 1) {
     	return InfoConnectedBuildingByIdx(InfoListByIndex(ListBangunan(P1), IdxList), IdxConnected, ListBangunan(P1));
@@ -97,7 +126,9 @@ int InfoConnectedBuilding(int num, int IdxList, int IdxConnected, Player P1, Pla
     }
 }
 
-int InfoConnectedBuilding2(int num, int IdxList, int IdxConnected, Player P1, Player P2) {
+int InfoConnectedBuilding2(int num, int IdxList, int IdxConnected, Player P1, Player P2) 
+/*	Menghasilkan indeks TB yang direpresentasikan IdxConnected sesuai urutan daftar bangunan dari prosedur PrintNotMyConnectedBuildings */
+{
 	/* Algoritma */
     if (num == 1) {
     	return InfoConnectedBuildingByIdx2(InfoListByIndex(ListBangunan(P1), IdxList), IdxConnected, ListBangunan(P1));
@@ -106,7 +137,11 @@ int InfoConnectedBuilding2(int num, int IdxList, int IdxConnected, Player P1, Pl
     }
 }
 
-void CaptureBuilding(int num, Bangunan *B, Player P1, Player P2) {
+void CaptureBuilding(int num, Bangunan *B, Player P1, Player P2) 
+/*	I.S. P1 dan P2 sembarang, TB terdefinisi
+	F.S. Bangunan B diubah kepemilikannya menjadi milik player ke-num
+*/
+{
 	/* Algoritma */
 	if (num == 1) {
 		ChangeOwner(B, P1, P2);
@@ -115,7 +150,12 @@ void CaptureBuilding(int num, Bangunan *B, Player P1, Player P2) {
 	}
 }
 
-void ChangeOwner(Bangunan *B, Player Me, Player Enemy) {
+void ChangeOwner(Bangunan *B, Player Me, Player Enemy) 
+/*	I.S. Me dan Enemy sembarang, TB terdefinisi
+	F.S. Bangunan B diubah kepemilikannya menjadi milik player Me
+		 Jika B milik Enemy, indeks TB untuk B dihapus dari ListBangunan Enemy
+*/
+{
 	Kepemilikan(*B) = NoPemain(Me);
 	InsVLast(&ListBangunan(Me), Search1(TB,*B));
 	if (Kepemilikan(*B) == NoPemain(Enemy)) {
@@ -123,7 +163,11 @@ void ChangeOwner(Bangunan *B, Player Me, Player Enemy) {
 	}
 }
 
-void UpdateListBangunan(int num, Player P1, Player P2) {
+void UpdateListBangunan(int num, Player P1, Player P2) 
+/*	I.S. P1 dan P2 sembarang
+	F.S. Semua Bangunan milik player ke-num ditambah pasukannya sesuai spesifikasi
+*/
+{
 	if (num == 1) {
 		UpdateAllBuildings(ListBangunan(P1));
 	} else {
@@ -131,7 +175,11 @@ void UpdateListBangunan(int num, Player P1, Player P2) {
 	}
 }
 
-void LevelUpBP (int num, Player P1, Player P2, int idx) {
+void LevelUpBP (int num, Player P1, Player P2, int idx) 
+/*	I.S. P1 dan P2 sembarang, TB terdefinisi, dan idx valid
+	F.S. indeks TB pada info ListBangunan player ke-num ke-idx dinaikkan levelnya
+*/
+{
 	if (num == 1) {
 		IndexLevelUp(ListBangunan(P1), idx);
 	} else {
@@ -280,23 +328,25 @@ void GetShield(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhi
 	if (num == NoPemain(*P1)){
 		if ((buildingAwalP2==3) && (buildingAkhirP2 ==2)){
 			KeepSkill(P2,'S');
+			printf("Lawanmu mendapat skill Shield\n");
 		}
 	} else {
 		if ((buildingAwalP1==3) && (buildingAkhirP1 ==2)){
 			KeepSkill(P1,'S');
+			printf("Lawanmu mendapat skill Shield\n");
 		}
 	}
-	printf("Lawanmu mendapat skill Shield\n");
 }
 
 void GetExtraTurn(int num,Player *P1,Player *P2,int Fdawal,int Fdakhir){
 	if (Fdakhir == Fdawal-1){
 		if (num == NoPemain(*P1)){
 			KeepSkill(P2,'E');
+			printf("Anda mendapat skill Extra Turn \n");
 		} else {
 			KeepSkill(P1,'E');
-		}
-		printf("Anda mendapat skill Extra Turn \n");	
+			printf("Anda mendapat skill Extra Turn \n");
+		}	
 	}
 }
 
@@ -304,37 +354,41 @@ void GetAttackUp (int num,Player *P1,Player *P2,int Tdawal,int Tdakhir){
 	if ((Tdawal == 4) && (Tdakhir ==3)){
 		if (num == NoPemain(*P1)){
 			KeepSkill(P1,'A');
+			printf("Lawanmu mendapat skill Attack Up\n");
 		} else {
 			KeepSkill(P2,'A');
-		}
-		printf("Lawanmu mendapat skill Attack Up\n");	
+			printf("Lawanmu mendapat skill Attack Up\n");
+		}		
 	}
 }
 
 void GetIReinforcement(int num, Player *P1,Player *P2){
 	if (NoPemain(*P1) == num) {
 		if (isAllLevel4(*P1)){
-			KeepSkill(P1,'R');
+			KeepSkill(P1,'R');	
+			printf("Kamu mendapatkan skill Instant Reinforcement");
 		}
 	} else {
 		if (isAllLevel4(*P2)){
 			KeepSkill(P2,'R');
+			printf("Kamu mendapatkan skill Instant Reinforcement");
 		}
 	}
-	printf("Kamu mendapatkan skill Instant Reinforcement");
 }
 
 void GetBarrage(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhirP1,int buildingAwalP2 ,int buildingAkhirP2){
 	if (num == NoPemain(*P1)){
 		if ((buildingAwalP1==9) && (buildingAkhirP1 ==10)){
 			KeepSkill(P2,'B');
+			printf("Lawanmu mendapat skill Barrage\n");
 		}
 	} else {
 		if ((buildingAwalP2==9) && (buildingAkhirP2 ==10)){
 			KeepSkill(P1,'B');
+			printf("Lawanmu mendapat skill Barrage\n");
 		}
 	}
-	printf("Lawanmu mendapat skill Barrage\n");
+	
 }
 
 

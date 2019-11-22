@@ -39,5 +39,6 @@ void SalinKata();
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
 boolean EQ_KATA(Kata X, char Y[]);
+/* mengirimkan true jika kata X sama secara urut dengan seluruh karakter yang ada pada array Y */
 
 #endif

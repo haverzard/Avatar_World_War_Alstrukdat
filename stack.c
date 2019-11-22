@@ -64,7 +64,6 @@ void UpdateStatus_Stack(Stack *S, Player P1, Player P2, TabBangunan TB) {
     InfoP2(X) = temp2;
     InfoTabBangunan(X) = TB2;
     Push(S, X);
-    // printf("0000000000000000000000000\n"); PrintListBangunan(1, InfoP1(X), InfoP2(X)); printf("0000000000000000000000000\n"); 
 }
 
 void UndoStatus_Stack(Stack *S, Player *P1, Player *P2, TabBangunan *TB)
@@ -78,7 +77,6 @@ void UndoStatus_Stack(Stack *S, Player *P1, Player *P2, TabBangunan *TB)
         *P1 = InfoP1(X);
         *P2 = InfoP2(X);
         *TB = InfoTabBangunan(X);
-        // printf("111111111111111111111111\n"); PrintListBangunan(1, *P1, *P2); printf("111111111111111111111111\n"); 
     } else {
         printf("Tidak bisa UNDO lagi!\n");
     }

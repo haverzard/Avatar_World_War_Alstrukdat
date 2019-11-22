@@ -35,11 +35,15 @@ void ADV() {
 }
 
 void CLOSE() {
+/* I.S. : sembarang
+   F.S. : pembacaan pita dihentikan dan pita di-close */
     /* Algoritma */
     fclose(pita);
 }
 
 void SCAN() {
+/* I.S. : sembarang
+   F.S. : membaca karakter yang ada pada pita */
     /* Algoritma */
     scanf("%c", &CC);
 }

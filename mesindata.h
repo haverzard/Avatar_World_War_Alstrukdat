@@ -18,6 +18,9 @@ extern FILE * pita;
 
 extern char Baris[NMax_DATA+1];
 
+int KarakterToInt(char x);
+/*	KarakterToInt mengonversi tipe data x menjadi integer	*/
+
 void IgnoreBlank_DATA();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : CC sembarang

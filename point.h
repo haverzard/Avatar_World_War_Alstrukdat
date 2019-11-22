@@ -27,6 +27,14 @@ typedef struct {
 POINT MakePOINT (int X, int Y);
 /* Membentuk sebuah POINT dari komponen-komponennya */
 
+void SetAbsis(POINT *P, int newX);
+/* I.S. POINT P dan newX terdefinisi */
+/* F.S. Mengeset Nilai Absis(P) = newX */
+
+void SetOrdinat(POINT *P, int newY);
+/* I.S. POINT P dan newY terdefinisi */
+/* F.S. Mengeset Nilai Ordinat(P) = newY */
+
 /* *** KELOMPOK Interaksi dengan I/O device, BACA/TULIS  *** */
 void BacaPOINT (POINT * P);
 /* Membaca nilai absis dan ordinat dari keyboard dan membentuk
