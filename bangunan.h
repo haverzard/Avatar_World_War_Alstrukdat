@@ -61,6 +61,8 @@ void UpdateBangunan(Bangunan *X);
 
 void SerangBangunan(Bangunan *B1, Bangunan *B2, int N);
 
+void SerangCritical(Bangunan *B1,Bangunan *B2,int N);
+
 void LevelUpBangunan(Bangunan *X);
 /* Prekondisi: JumlahPasukan(*X) >= M(*X)/2 */
 

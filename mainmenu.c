@@ -14,11 +14,13 @@
 #include "stack.h"
 
 #define printl(x) printf("%s\n", x);
+#define println() printf("\n");
 
 /* Variable Global */
 int choice;
 boolean EndGame;
 boolean EndTurn = false;
+boolean SkillUsed = false;
 Stack Status;
 
 void STARTGAME() {
@@ -39,7 +41,7 @@ void STARTGAME() {
 	printl("1. Start New Game");
 	printl("2. Load Game");
 	printf("Masukkan Anda: "); scanf("%d", &choice);
-	printl("HUHU -_-");
+	printl("HUHU -_-"); println();
 	SCAN();
 	LOADGAME();
 }
@@ -49,7 +51,7 @@ void LOADGAME() {
 	if (choice == 1 || choice == 2) {
 		STARTDATA();
 	} else {
-		printl("Inputnya yang benar dong!");
+		printl("Inputnya yang benar dong!"); println();
 		EndGame = true;
 	}
 }
@@ -60,10 +62,10 @@ void CREATEPLAYER(Player *P1, Player *P2) {
 }
 
 void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
-	TulisMATRIKSPETA(Peta);
+	TulisMATRIKSPETA(Peta); println();
 	printf("Player %d\n", NoPemain);
-	PrintListBangunan(NoPemain, *P1, *P2);
-	ShowSkill(NoPemain, *P1, *P2);
+	PrintListBangunan(NoPemain, *P1, *P2); println();
+	ShowSkill(NoPemain, *P1, *P2); println();
 	printl("COMMAND YANG TERSEDIA:");
 	printl("1. ATTACK	5. END_TURN");
 	printl("2. LEVEL_UP	6. SAVE");
@@ -77,11 +79,13 @@ void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
 		LEVELUP(NoPemain, *P1, *P2);
 	} else if (EQ_KATA(CKata, "SKILL")) {
 		UseSkill(NoPemain, P1, P2);
+		SkillUsed = true;
 	} else if (EQ_KATA(CKata, "UNDO")) {
-		printl("UNDO!");
-		UNDO(NoPemain, P1, P2);
+		UNDO(P1, P2, SkillUsed);
 	} else if (EQ_KATA(CKata, "END_TURN")) {
 		EndTurn = true;
+		SkillUsed = false;
+		ResetStatus(&Status);
 	} else if (EQ_KATA(CKata, "SAVE")) {
 		printl("SAVE!");
 	} else if (EQ_KATA(CKata, "MOVE")) {
@@ -91,21 +95,26 @@ void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
 		EndTurn = true;
 		EndGame = true;
 	} else {
-		printl("Inputnya yang benar dong!");
+		printl("Inputnya yang benar dong!"); println();
 	}
-	
+	printl("");
 }
 
 void ATTACK(int NoPemain, Player P1, Player P2) {
 	/* Kamus Lokal */
 	int choice, choice2, count, idx;
 	Bangunan *B1, *B2;
+	int Fdawal,Tdawal; //F itu Fort, T itu Tower, d itu defender
+	int Fdakhir,Tdakhir;
+	int jumlahBangunanP1awal;
+	int jumlahBangunanP2awal;
+	int jumlahBangunanP1akhir;
+	int jumlahBangunanP2akhir;
 
 	/* Algoritma */
 	printf("Daftar bangunan: \n");
 	PrintListBangunan(NoPemain, P1, P2);
 	printf("Bangunan yang digunakan untuk menyerang: "); scanf("%d", &choice);
-	// Critical
 	if (choice <= NBElmtListB(NoPemain, P1, P2) && choice > 0) {
 		B1 = &ElmtArr(TB, InfoMyBuilding(NoPemain, choice, P1, P2));
 		if (AttackAvai(*B1)) {
@@ -117,11 +126,31 @@ void ATTACK(int NoPemain, Player P1, Player P2) {
 					printf("Jumlah pasukan: "); scanf("%d", &count);
 					B2 = &ElmtArr(TB, InfoConnectedBuilding2(NoPemain, choice, choice2, P1, P2));
 					if (count > 0 && count <= JumlahPasukan(*B1)) {
-						UPDATESTATUS(NoPemain, P1, P2);
-						SerangBangunan(B1, B2, count);
+						HitungFort(NoPemain,P1,P2,&Fdawal);
+						HitungTower(NoPemain,P1,P2,&Tdawal);
+						jumlahBangunanP1awal = NbElmt(ListBangunan(P1));
+						jumlahBangunanP2awal = NbElmt(ListBangunan(P2));
+						if (isCurrentPCritical(NoPemain,P1,P2)){
+							UPDATESTATUS(P1, P2);
+							SerangCritical(B1, B2, count);
+							CriticalOff(NoPemain,&P1,&P2);
+						} else {
+							UPDATESTATUS(P1, P2);
+							SerangBangunan(B1, B2, count);	
+						}
+						// UPDATESTATUS(P1, P2);
+						// SerangBangunan(B1, B2, count);
 						if (JumlahPasukan(*B2) <= 0) {
 							JumlahPasukan(*B2) = abs(JumlahPasukan(*B2));
 							CaptureBuilding(NoPemain, B2, P1, P2);
+							HitungFort(NoPemain,P1,P2,&Fdakhir);
+							HitungTower(NoPemain,P1,P2,&Tdakhir);
+							jumlahBangunanP1akhir = NbElmt(ListBangunan(P1));
+							jumlahBangunanP2akhir = NbElmt(ListBangunan(P2));
+							GetShield(NoPemain,&P1,&P2,jumlahBangunanP1awal,jumlahBangunanP1akhir,jumlahBangunanP2awal,jumlahBangunanP2akhir);
+							GetExtraTurn(NoPemain,&P1,&P2,Fdawal,Fdakhir);
+							GetAttackUp(NoPemain,&P1,&P2,Tdawal,Tdakhir);
+							GetBarrage(NoPemain,&P1,&P2,jumlahBangunanP1awal,jumlahBangunanP1akhir,jumlahBangunanP2awal,jumlahBangunanP2akhir);
 							printf("Bangunan menjadi milikku!\n");
 						} else {
 							printf("Bangunan gagal direbut.\n");
@@ -152,7 +181,7 @@ void MOVE(int NoPemain, Player P1, Player P2) {
 
 	/* Algoritma */
 	printl("Daftar bangunan: ");
-	PrintListBangunan(NoPemain, P1, P2);
+	PrintListBangunan(NoPemain, P1, P2); println();
 	printf("Pilih bangunan: "); scanf("%d", &choice);
 	if (choice <= NBElmtListB(NoPemain, P1, P2) && choice > 0) {
 		B1 = &ElmtArr(TB, InfoMyBuilding(NoPemain, choice, P1, P2));
@@ -165,7 +194,7 @@ void MOVE(int NoPemain, Player P1, Player P2) {
 					printf("Jumlah pasukan: "); scanf("%d", &count);
 					B2 = &ElmtArr(TB, InfoConnectedBuilding(NoPemain, choice, choice2, P1, P2));
 					if (count > 0 && count <= JumlahPasukan(*B1)) {
-						UPDATESTATUS(NoPemain, P1, P2);
+						UPDATESTATUS(P1, P2);
 						Move(B1, B2, count);
 						printf("%d pasukan dari ", count); 
 						PrintJenisByCode(Jenis(*B1)); printf(" ");
@@ -203,15 +232,15 @@ void LEVELUP(int NoPemain, Player P1, Player P2) {
 	SCAN();
 }
 
-void UPDATESTATUS (int NoPemain, Player P1, Player P2) {
+void UPDATESTATUS (Player P1, Player P2) {
 	UpdateStatus_Stack(&Status, P1, P2, TB);
 	// infotypeStack X; Pop(&Status, &X); printf("INFO PLAYER: %d\n", NoPemain(InfoPlayer(X)));
 }
 
-void UNDO (int NoPemain, Player *P1, Player *P2) {
-	// printf("NOOOO %d\n", NoPemain);
-	Player temp1, temp2;
-	UndoStatus_Stack(&Status, P1, P2, &TB);
-	// *P1 = temp1; *P2 = temp2;
-	// infotypeStack X; Pop(&Status, &X); printf("INFO PLAYER: %d\n", NoPemain(InfoPlayer(X)));
+void UNDO (Player *P1, Player *P2, boolean isSkillUsed) {
+	if (!isSkillUsed) {
+		UndoStatus_Stack(&Status, P1, P2, &TB);
+	} else {
+		printf("Tidak bisa UNDO karena sudah menggunakan SKILL pada TURN ini.\n"); println();
+	}
 }
