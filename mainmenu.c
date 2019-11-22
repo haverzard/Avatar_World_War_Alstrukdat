@@ -23,9 +23,13 @@ boolean EndTurn = false;
 boolean SkillUsed = false;
 Stack Status;
 
-void STARTGAME() {
+void STARTGAME() 
+/* 	I.S. Menampilkan menu awal dan menerima masukan user 
+	F.S. Choice terisi dan game akan mulai di-load jika choice sesuai.
+		 Jika choice tidak sesuai, balik lagi ke menu utama.
+*/
+{
 	/* Algoritma */
-	//printf("\033[01;33m");
 	printl("█████████████████████████████████████████████████████");
 	printl("██                                                 ██");
 	printl("██       ███  █   █  ███  █████  ███  ███          ██");
@@ -56,12 +60,21 @@ void LOADGAME() {
 	}
 }
 
-void CREATEPLAYER(Player *P1, Player *P2) {
+void CREATEPLAYER(Player *P1, Player *P2) 
+/*	I.S. P1 dan P2 belum terdefinisi
+	F.S. P1 dan P2 sudah terdefinisi termasuk atribut-atributnya
+*/
+{
 	InitPlayer(1, P1);
 	InitPlayer(2, P2);
 }
 
-void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
+void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) 
+/*	I.S. Menampilkan informasi player dan menerima masukan command user
+	F.S. Memproses command player jika command ada di list command yang tersedia
+		 Jika tidak command tidak valid, ditampilkan pesan "Inputnya yang benar dong!". 
+*/
+{
 	TulisMATRIKSPETA(Peta); println();
 	printf("Player %d\n", NoPemain);
 	PrintListBangunan(NoPemain, *P1, *P2); println();
@@ -100,7 +113,13 @@ void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
 	printl("");
 }
 
-void ATTACK(int NoPemain, Player P1, Player P2) {
+void ATTACK(int NoPemain, Player P1, Player P2) 
+/*	I.S. Menampilkan daftar bangunan untuk menyerang.
+	F.S. Jika tidak ada bangunan untuk diserang, ditampilkan pesan "Tidak ada bangunan yang dapat diserang".
+		 Jika ada, pemain telah memilih bangunan untuk menyerang, bangunan untuk diserang, dan jumlah pasukan untuk menyerang.
+		 Untuk semua input tidak valid, ada pesan error masing-masing.
+*/
+{
 	/* Kamus Lokal */
 	int choice, choice2, count, idx;
 	Bangunan *B1, *B2;

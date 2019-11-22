@@ -44,15 +44,12 @@ boolean IsFull_Queue (Queue Q){
 
 int NBElmt (Queue Q){
     // return (((Tail(Q)-Head(Q))%MaxElQ(Q)) +1);
-    int x = Tail(Q)-Head(Q);
-    if (x>0){
-        return (x+1);
+    if (IsEmpty_Queue(Q)) {
+        return 0;
+    } else if (Tail(Q) >= Head(Q)) {
+        return Tail(Q)-Head(Q)+1;
     } else {
-        if (x==0){
-            return 0;
-        } else {
-            return (x+MaxElQ(Q)+1);
-        }
+        return Tail(Q)+(MaxElQ(Q)-Head(Q)+1);
     }
 }
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
@@ -79,7 +76,7 @@ void DeAlokasi(Queue * Q){
     free((*Q).S);
     MaxElQ(*Q) = 0;
 }
-/* Proses: Mengembalikan memori Q */
+/* Proses: Mengembali   kan memori Q */
 /* I.S. Q pernah dialokasi */
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxElQ(Q) diset 0 */
 
@@ -112,3 +109,22 @@ void Del (Queue * Q, skilltype * X){
 /* F.S. X = NilQai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
         Q mungkin kosong */
 
+void CopyQueue (Queue Qin, Queue *Qout) {
+    /* Kamus Lokal */
+    Queue Qtemp;
+    int NbEl;
+    /* Algoritma */
+    CreateEmpty_Queue(Qout, MaxElQ(Qin));
+    NbEl = NBElmt(Qin);
+    // printf("00000000000000000000000000000000000000000000000000000000000000000000000000000\n");
+    // printf("%c %d %d %d %d\n", Qin.S[1], NbEl, Head(Qin), Tail(Qin), MaxElQ(Qin));
+    // printf("00000000000000000000000000000000000000000000000000000000000000000000000000000\n");
+    if (NbEl > 0) {
+        for (int i = 1; i <= NbEl; i++) {
+            // printf("00000000000000000000000000000000000000000000000000000000000000000000000000000\n");
+            // printf("%c", Qin.S[i]);
+            // printf("00000000000000000000000000000000000000000000000000000000000000000000000000000\n");
+            Add(Qout, (Qin.S[i]));
+        }
+    }
+}

@@ -46,11 +46,11 @@ int main() {
 			GetIReinforcement(i,&p1,&p2);
 			MinShieldDuration(i,&p1,&p2);
 			//Tambahin shield Duration
-			if (extraTurn = 0){
-				i = (i % 2 + 3) - 2; 
-			} else {
-				extraTurn -=1;
-			}
+			// if (extraTurn = 0){
+			// 	i = (i % 2 + 3) - 2; 
+			// } else {
+			// 	extraTurn -=1;
+			// }
 			if (attackUp){
 				attackUp = 0;
 			}

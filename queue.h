@@ -34,7 +34,6 @@ typedef struct { skilltype * S;   /* tabel penyimpan elemen */
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika Q adalah Queue, maka akses elemen : */
-#define Name(Skill) (Skill).Name
 #define Head(Q) (Q).HEAD
 #define Tail(Q) (Q).TAIL
 #define InfoHead(Q) (Q).S[(Q).HEAD]
@@ -74,5 +73,7 @@ void Del (Queue * Q, skilltype * X);
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = NilQai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
         Q mungkin kosong */
+
+void CopyQueue (Queue Qin, Queue *Qout);
 
 #endif

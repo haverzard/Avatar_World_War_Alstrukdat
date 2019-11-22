@@ -53,11 +53,12 @@ void UpdateStatus_Stack(Stack *S, Player P1, Player P2, TabBangunan TB) {
     infotypeStack X;
     Player temp1, temp2;
     List L1, L2;
+    Queue Q1, Q2;
     TabBangunan TB2;
     /* Algoritma */
     temp1 = P1; temp2 = P2;
-    CopyList(ListBangunan(P1), &ListBangunan(temp1));
-    CopyList(ListBangunan(P2), &ListBangunan(temp2));
+    CopyList(ListBangunan(P1), &ListBangunan(temp1)); CopyList(ListBangunan(P2), &ListBangunan(temp2));
+    CopyQueue(Skill(P1), &Skill(temp1)); CopyQueue(Skill(P2), &Skill(temp2));
     CopyTab(TB, &TB2);
     InfoP1(X) = temp1;
     InfoP2(X) = temp2;
