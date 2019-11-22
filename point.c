@@ -3,13 +3,9 @@
 /* *** Realisasi ABSTRACT DATA TYPE POINT *** */
 
 
+#include <stdio.h>
 #include "boolean.h"
 #include "point.h"
-#include <stdio.h>
-#include <math.h>
-
-#define toDegrees(Sudut) Sudut*180/M_PI
-#define toRads(Sudut) Sudut*M_PI/180
 
 POINT MakePOINT(int x, int y) {
 	/* Kamus Lokal */
@@ -19,11 +15,6 @@ POINT MakePOINT(int x, int y) {
 	 P.X = x;
 	 P.Y = y;
 	 return P;
-}
-
-void FixZero(POINT *P) {
-	if ((int)(Absis(*P)*100) == 0) { GeserKeSbY(P); }
-	if ((int)(Ordinat(*P)*100) == 0) { GeserKeSbX(P); }
 }
 
 void SetAbsis(POINT *P, int newX) {
@@ -87,69 +78,5 @@ int Kuadran(POINT P) {
 		} else {
 			return 3;
 		}
-	}
-}
-
-POINT NextX(POINT P) {
-	/* Algoritma */
-	P.X += 1;
-	return P;
-}
-
-POINT NextY(POINT P) {
-	/* Algoritma */
-	P.Y += 1;
-	return P;
-}
-
-POINT PlusDelta(POINT P, int deltaX, int deltaY) {
-	/* Algoritma */
-	P.X += deltaX;
-	P.Y += deltaY;
-	return P;
-}
-
-POINT MirrorOf(POINT P, boolean SbX) {
-	/* Algoritma */
-	if (SbX) {
-		P.Y *= -1;
-	} else {
-		P.X *= -1;
-	}
-	return P;
-}
-
-int Jarak0(POINT P) {
-	/* Algoritma */
-	return (pow(pow(P.X,2)+pow(P.Y,2),0.5));
-}
-
-int Panjang(POINT P1, POINT P2) {
-	/* Algoritma */
-	return (pow(pow(P1.X-P2.X,2)+pow(P1.Y-P2.Y,2),0.5));
-}
-
-void Geser(POINT *P, int deltaX, int deltaY) {
-	/* Algoritma */
-	(*P).X += deltaX;
-	(*P).Y += deltaY;
-}
-
-void GeserKeSbX(POINT *P) {
-	/* Algoritma */
-	SetOrdinat(P, 0);
-}
-
-void GeserKeSbY(POINT *P) {
-	/* Algoritma */
-	SetAbsis(P, 0);
-}
-
-void Mirror(POINT *P, boolean SbX) {
-	/* Algoritma */
-	if (SbX) {
-		(*P).Y *= -1;
-	} else {
-		(*P).X *= -1;
 	}
 }

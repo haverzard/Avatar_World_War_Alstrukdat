@@ -87,13 +87,6 @@ boolean IsEmpty_Array(TabBangunan T);
 boolean IsFull_Array(TabBangunan T);
 /* Mengirimkan true jika tabel T penuh, mengirimkan false jika tidak */
 
-/* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
-/* *** Mendefinisikan isi tabel dari pembacaan *** */
-void BacaIsiPeta(TabBangunan *T, MATRIKS Peta);
-/* I.S. T sembarang dan sudah dialokasikan sebelumnya */
-/* F.S. Tabel T terdefinisi */
-/* Proses : membaca banyaknya elemen T dari Peta dan mengisi nilainya */
-
 /* ********** OPERATOR RELASIONAL ********** */
 /* *** Operasi pembandingan tabel : < =, > *** */
 boolean IsEQ(TabBangunan T1, TabBangunan T2);
@@ -117,10 +110,6 @@ void CopyTab(TabBangunan Tin, TabBangunan *Tout);
 /* I.S. Tin terdefinisi tidak kosong, Tout sembarang */
 /* F.S. Tout berisi salinan dari Tin (identik, Neff dan MaxElArr sama) */
 /* Proses : Menyalin isi Tin ke Tout */
-
-int CountJenisBangunan(TabBangunan T, JenisBangunan X);
-/* Menghasilkan berapa banyak kemunculan JenisBangunan X di T */
-/* Jika T kosong menghasilkan 0 */
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
@@ -146,5 +135,7 @@ void DelEli (TabBangunan * T, IdxType i, ElType_Array * X);
 /* Proses : Geser elemen ke-i+1 s.d. elemen terakhir */
 
 int CheckOwnerByPosition(TabBangunan T, int X, int Y);
+/* Cek Posisi Bangunan yang berlokasi (X,Y) pada TabBangunan T */
+/* Kemudian mengembalikan indeks T dimana bangunan yang berlokasi (X,Y) berada */
 
 #endif
