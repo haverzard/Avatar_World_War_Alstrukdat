@@ -14,6 +14,7 @@
 #include "stack.h"
 
 #define printl(x) printf("%s\n", x);
+#define println() printf("\n");
 
 /* Variable Global */
 int choice;
@@ -40,7 +41,7 @@ void STARTGAME() {
 	printl("1. Start New Game");
 	printl("2. Load Game");
 	printf("Masukkan Anda: "); scanf("%d", &choice);
-	printl("HUHU -_-");
+	printl("HUHU -_-"); println();
 	SCAN();
 	LOADGAME();
 }
@@ -50,7 +51,7 @@ void LOADGAME() {
 	if (choice == 1 || choice == 2) {
 		STARTDATA();
 	} else {
-		printl("Inputnya yang benar dong!");
+		printl("Inputnya yang benar dong!"); println();
 		EndGame = true;
 	}
 }
@@ -61,10 +62,10 @@ void CREATEPLAYER(Player *P1, Player *P2) {
 }
 
 void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
-	TulisMATRIKSPETA(Peta);
+	TulisMATRIKSPETA(Peta); println();
 	printf("Player %d\n", NoPemain);
-	PrintListBangunan(NoPemain, *P1, *P2);
-	ShowSkill(NoPemain, *P1, *P2);
+	PrintListBangunan(NoPemain, *P1, *P2); println();
+	ShowSkill(NoPemain, *P1, *P2); println();
 	printl("COMMAND YANG TERSEDIA:");
 	printl("1. ATTACK	5. END_TURN");
 	printl("2. LEVEL_UP	6. SAVE");
@@ -94,7 +95,7 @@ void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) {
 		EndTurn = true;
 		EndGame = true;
 	} else {
-		printl("Inputnya yang benar dong!");
+		printl("Inputnya yang benar dong!"); println();
 	}
 	printl("");
 }
@@ -180,7 +181,7 @@ void MOVE(int NoPemain, Player P1, Player P2) {
 
 	/* Algoritma */
 	printl("Daftar bangunan: ");
-	PrintListBangunan(NoPemain, P1, P2);
+	PrintListBangunan(NoPemain, P1, P2); println();
 	printf("Pilih bangunan: "); scanf("%d", &choice);
 	if (choice <= NBElmtListB(NoPemain, P1, P2) && choice > 0) {
 		B1 = &ElmtArr(TB, InfoMyBuilding(NoPemain, choice, P1, P2));
@@ -240,6 +241,6 @@ void UNDO (Player *P1, Player *P2, boolean isSkillUsed) {
 	if (!isSkillUsed) {
 		UndoStatus_Stack(&Status, P1, P2, &TB);
 	} else {
-		printf("Tidak bisa UNDO karena sudah menggunakan SKILL pada TURN ini.\n");
+		printf("Tidak bisa UNDO karena sudah menggunakan SKILL pada TURN ini.\n"); println();
 	}
 }
