@@ -8,12 +8,11 @@
 #include "queue.h"
 #include "arraydinpos.h"
 #include "bangunan.h"
+#include "mainmenu.h"
 
 //Global Variable
 int extraTurn=0;
 int attackUp = 0;
-
-
 
 void InitPlayer(int num, Player *P) {
 	Color(*P) = num;
@@ -206,6 +205,7 @@ void UseSkillP (Player *user,Player *enemy){
 			Barrage(user);
 		}
 		Del(&Skill(*user),&X);
+		SkillUsed = true;
 	}
 }
 

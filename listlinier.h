@@ -55,11 +55,14 @@ void Dealokasi (address *P);
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
 address Search (List L, Bangunan X);
-/* Mencari apakah ada elemen list dengan Info(P)= X */
+/* Mencari apakah ada elemen list dengan TB.TI[Info(P)]=B */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
 
 address SearchInfo (List L, int X);
+/* Mencari apakah ada elemen list dengan Info(P)= X */
+/* Jika ada, mengirimkan address elemen tersebut. */
+/* Jika tidak ada, mengirimkan Nil */
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
@@ -130,8 +133,14 @@ void PrintInfo (List L);
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
 
 void CopyList(List Lin, List *Lout);
+/*	I.S. Lout kosong.
+	F.S. Semua elemen dan indeks di Lout sama dengan semua elemen dan indeks di Lin.
+*/
 
 int InfoListByIndex (List L, int idx);
+/* Prekonsidi: idx tidak melebihi ukuran L */
+/* Menghasilkan info elemen ke-idx pada List; mengirimkan 0 jika list kosong */
+
 
 int NbElmt (List L);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
@@ -146,8 +155,14 @@ void Konkat1 (List *L1, List *L2, List *L3);
 /* Tidak ada alokasi/dealokasi pada prosedur ini */
 
 void IterateAndOwn(int num, List *L);
+/*	I.S. L dan GHubungan terdefinisi dan num adalah indeks pada TabBangunan TB
+	F.S. Semua bangunan yang terhubung dengan TB.TI[num] menjadi milik player bernomor num
+*/
 
 void UpdateAllBuildings(List L);
+/*	I.S. L dan GHubungan terdefinisi dan num adalah indeks pada TabBangunan TB
+	F.S. Semua bangunan yang terhubung dengan TB.TI[num] menjadi milik player bernomor num
+*/
 
 void ConnectedBuildings(int NoBangunan, List L);
 

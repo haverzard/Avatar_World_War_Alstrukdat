@@ -75,6 +75,7 @@ void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2)
 		 Jika tidak command tidak valid, ditampilkan pesan "Inputnya yang benar dong!". 
 */
 {
+	/* Algoritma */
 	TulisMATRIKSPETA(Peta); println();
 	printf("Player %d\n", NoPemain);
 	PrintListBangunan(NoPemain, *P1, *P2); println();
@@ -92,7 +93,7 @@ void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2)
 		LEVELUP(NoPemain, *P1, *P2);
 	} else if (EQ_KATA(CKata, "SKILL")) {
 		UseSkill(NoPemain, P1, P2);
-		SkillUsed = true;
+		
 	} else if (EQ_KATA(CKata, "UNDO")) {
 		UNDO(P1, P2, SkillUsed);
 	} else if (EQ_KATA(CKata, "END_TURN")) {
@@ -193,7 +194,13 @@ void ATTACK(int NoPemain, Player P1, Player P2)
 	
 }
 
-void MOVE(int NoPemain, Player P1, Player P2) {
+void MOVE(int NoPemain, Player P1, Player P2) 
+/*	I.S. Menampilkan daftar bangunan untuk pindah pasukan.
+	F.S. Jika tidak ada bangunan untuk menerima pasukan, ditampilkan pesan "Bangunan tidak memiliki keterhubungan!".
+		 Jika ada, Pemain telah memilih bangunan untuk pindah pasukan, bangunan untuk menerima pasukan, dan jumlah pasukan untuk dipindahkan.
+		 Untuk semua input tidak valid, ada pesan error masing-masing.
+*/
+{
 	/* Kamus Lokal */
 	int choice, choice2, count, idx;
 	Bangunan *B1, *B2;
@@ -240,7 +247,12 @@ void MOVE(int NoPemain, Player P1, Player P2) {
 	SCAN();
 }
 
-void LEVELUP(int NoPemain, Player P1, Player P2) {
+void LEVELUP(int NoPemain, Player P1, Player P2) 
+/*	I.S. Menampilkan daftar bangunan untuk dinaikkan level.
+	F.S. Pemain telah memilih bangunan untuk dinaikkan level dan level bangunan akan dinaikkan.
+		 Untuk semua input tidak valid, ada pesan error masing-masing.
+*/
+{
 	/* Kamus Lokal */
 	int choice;
 
@@ -251,12 +263,22 @@ void LEVELUP(int NoPemain, Player P1, Player P2) {
 	SCAN();
 }
 
-void UPDATESTATUS (Player P1, Player P2) {
+void UPDATESTATUS (Player P1, Player P2) 
+/*	I.S. Stack Global Status terdefinisi misal dengan isi keadaan permainan [A,B] (B adalah TOP) dan sekarang keadaan permainan di C.
+	F.S. Stack Global Status berisi [A,B,C].
+*/
+{
+	/* Algoritma */
 	UpdateStatus_Stack(&Status, P1, P2, TB);
 	// infotypeStack X; Pop(&Status, &X); printf("INFO PLAYER: %d\n", NoPemain(InfoPlayer(X)));
 }
 
-void UNDO (Player *P1, Player *P2, boolean isSkillUsed) {
+void UNDO (Player *P1, Player *P2, boolean isSkillUsed) 
+/*	I.S. Stack Global Status terdefinisi misal dengan isi keadaan permainan [A,B] (B adalah TOP) dan sekarang keadaan permainan di C.
+	F.S. Stack Global Status berisi [A] dan sekarang keadaan permainan di B.
+*/
+{
+	/* Algoritma */
 	if (!isSkillUsed) {
 		UndoStatus_Stack(&Status, P1, P2, &TB);
 	} else {

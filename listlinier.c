@@ -62,8 +62,8 @@ void Dealokasi (address *P)
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
 
-address Search (List L, Bangunan X)
-/* Mencari apakah ada elemen list dengan Info(P)= X */
+address Search (List L, Bangunan B)
+/* Mencari apakah ada elemen list dengan TB.TI[Info(P)]=B */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
 {
@@ -73,10 +73,10 @@ address Search (List L, Bangunan X)
 
 	/* Algoritma */
 	P = First(L);
-	found = EQ_Bangunan(ElmtArr(TB,Info(P)),X);
+	found = EQ_Bangunan(ElmtArr(TB,Info(P)),B);
 	while (Next(P) != Nil && !found) {
 		P = Next(P);
-		found  = EQ_Bangunan(ElmtArr(TB,Info(P)),X);
+		found  = EQ_Bangunan(ElmtArr(TB,Info(P)),B);
 	}
 	if (found) { return P; } else { return Nil; }
 }
@@ -354,7 +354,11 @@ void PrintInfo (List L)
 	}
 }
 
-void CopyList(List Lin, List *Lout) {
+void CopyList(List Lin, List *Lout) 
+/*	I.S. Lout kosong.
+	F.S. Semua elemen dan indeks di Lout sama dengan semua elemen dan indeks di Lin.
+*/
+{
 	address P;
 	CreateEmpty_LL(Lout);
 	P = First(Lin); 
@@ -365,11 +369,8 @@ void CopyList(List Lin, List *Lout) {
 }
 
 int InfoListByIndex (List L, int idx)
-/* I.S. List mungkin kosong */
-/* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika list kosong : menulis [] */
-/* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
+/* Prekonsidi: idx tidak melebihi ukuran L */
+/* Menghasilkan info elemen ke-idx pada List; mengirimkan 0 jika list kosong */
 {
 	/* Kamus Lokal */
 	address P;
@@ -423,7 +424,11 @@ void Konkat1 (List *L1, List *L2, List *L3)
 	First(*L2) = Nil;
 }
 
-void IterateAndOwn(int num, List *L) {
+void IterateAndOwn(int num, List *L) 
+/*	I.S. L dan GHubungan terdefinisi dan num adalah indeks pada TabBangunan TB
+	F.S. Semua bangunan yang terhubung dengan TB.TI[num] menjadi milik player bernomor num
+*/
+{
 	/* Kamus Lokal */
 	int i;
 

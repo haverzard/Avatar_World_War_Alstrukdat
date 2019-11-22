@@ -12,6 +12,7 @@
 extern int choice;
 extern boolean EndGame;
 extern boolean EndTurn;
+extern boolean SkillUsed;
 
 void STARTGAME();
 /* 	I.S. Menampilkan menu awal dan menerima masukan user 
@@ -55,8 +56,15 @@ void LEVELUP(int NoPemain, Player P1, Player P2);
 		 Untuk semua input tidak valid, ada pesan error masing-masing.
 */
 
-void UPDATESTATUS (Player P1, Player P2); // UPDATE STATUS PLAYER DI STACK
+void UPDATESTATUS (Player P1, Player P2); 
+/*	I.S. Stack Global Status terdefinisi misal dengan isi keadaan permainan [A,B] (B adalah TOP) dan sekarang keadaan permainan di C.
+	F.S. Stack Global Status berisi [A,B,C].
+*/
 
-void UNDO (Player *P1, Player *P2, boolean isSkillUsed); // UNDO STACK
+
+void UNDO (Player *P1, Player *P2, boolean isSkillUsed); 
+/*	I.S. Stack Global Status terdefinisi misal dengan isi keadaan permainan [A,B] (B adalah TOP) dan sekarang keadaan permainan di C.
+	F.S. Stack Global Status berisi [A] dan sekarang keadaan permainan di B.
+*/
 
 #endif
