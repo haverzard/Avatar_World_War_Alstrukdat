@@ -20,7 +20,6 @@ int main() {
 	MATRIKS Peta;
 	MATRIKS_INT Hubungan;
 	Player p1, p2;
-	Stack Status;
 
 	/* Inisiasi */
 	Jenis(BangunanUndef) = JenisUndef;
