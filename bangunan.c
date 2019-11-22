@@ -113,13 +113,8 @@ void SerangCritical(Bangunan *B1,Bangunan *B2,int N){
    JumlahPasukan pada B2 berkurang sebanyak N jika B2 tidak memiliki pertahanan 
    atau berkurang sebanyak (3/4)N jika B2 memiliki pertahanan */
 	AttackAvai(*B1) = false;
-	if (P(*B2)) {
-		JumlahPasukan(*B1) -= N/2;
-		JumlahPasukan(*B2) -= (3*N)/4;
-	} else {
-		JumlahPasukan(*B1) -= N/2;
-		JumlahPasukan(*B2) -= N;
-	}
+	JumlahPasukan(*B1) -= N;
+	JumlahPasukan(*B2) -= 2*N;
 }
 
 void LevelUpBangunan(Bangunan *X) {

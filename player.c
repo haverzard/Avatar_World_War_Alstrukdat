@@ -342,10 +342,10 @@ void GetExtraTurn(int num,Player *P1,Player *P2,int Fdawal,int Fdakhir){
 	if (Fdakhir == Fdawal-1){
 		if (num == NoPemain(*P1)){
 			KeepSkill(P2,'E');
-			printf("Anda mendapat skill Extra Turn \n");
+			printf("Lawanmu mendapat skill Extra Turn \n");
 		} else {
 			KeepSkill(P1,'E');
-			printf("Anda mendapat skill Extra Turn \n");
+			printf("Lawanmu mendapat skill Extra Turn \n");
 		}	
 	}
 }
