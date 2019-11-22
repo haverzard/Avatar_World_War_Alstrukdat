@@ -38,14 +38,12 @@ int main() {
 		CREATEPLAYER(&p1, &p2);
 		GetIUpgrade (&p1);
 		GetIUpgrade (&p2);
-		UpdateStatus_Stack(&StatusP1, p1, p2, TB);
 		i = 1;
 		while (!EndGame) {
 			while (!EndTurn) {
 				TURN(i, Peta, &p1, &p2);
 			}
 			UpdateListBangunan(i, p1, p2);
-			ResetStatus(&StatusP1); ResetStatus(&StatusP2);
 			GetIReinforcement(i,&p1,&p2);
 			MinShieldDuration(i,&p1,&p2);
 			//Tambahin shield Duration
