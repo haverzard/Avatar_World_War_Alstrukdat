@@ -408,24 +408,8 @@ int NbElmt (List L)
 }
 
 /****************** PROSES TERHADAP LIST ******************/
-void Konkat1 (List *L1, List *L2, List *L3)
-/* I.S. L1 dan L2 sembarang */
-/* F.S. L1 dan L2 kosong, L3 adalah hasil konkatenasi L1 & L2 */
-/* Konkatenasi dua buah list : L1 dan L2    */
-/* menghasilkan L3 yang baru (dengan elemen list L1 dan L2) */
-/* dan L1 serta L2 menjadi list kosong.*/
-/* Tidak ada alokasi/dealokasi pada prosedur ini */
-{
-	/* Algoritma */
-	CreateEmpty_LL(L3);
-	InsertFirst(L3,First(*L1));
-	InsertLast(L3,First(*L2));
-	First(*L1) = Nil;
-	First(*L2) = Nil;
-}
-
 void IterateAndOwn(int num, List *L) 
-/*	I.S. L dan GHubungan terdefinisi dan num adalah indeks pada TabBangunan TB
+/*	I.S. L dan GHubungan terdefinisi dan num adalah indeks TB yang valid
 	F.S. Semua bangunan yang terhubung dengan TB.TI[num] menjadi milik player bernomor num
 */
 {
@@ -444,7 +428,11 @@ void IterateAndOwn(int num, List *L)
 
 }
 
-void UpdateAllBuildings(List L) {
+void UpdateAllBuildings(List L) 
+/*	I.S. L, TB, dan GHubungan terdefinisi
+	F.S. Semua elemen array berindeks info semua elemen L ditambah jumlah pasukannya sesuai spesifikasi
+*/
+{
 	/* Kamus Lokal */
 	address P;
 
@@ -458,7 +446,11 @@ void UpdateAllBuildings(List L) {
 	}
 }
 
-void ConnectedBuildings(int NoBangunan, List L) {
+void ConnectedBuildings(int NoBangunan, List L) 
+/*	I.S. L, TB, dan GHubungan terdefinisi dan NoBangunan adalah indeks TB yang valid
+	F.S. Ditampilkan semua bangunan dengan indeks TB dalam list L yang terhubung dengan TB.TI[NoBangunan]
+*/
+{
 	/* Kamus Lokal */
 	int i;
 	address P;
@@ -477,7 +469,11 @@ void ConnectedBuildings(int NoBangunan, List L) {
     }
 }
 
-void ConnectedBuildings2(int NoBangunan, List L) {
+void ConnectedBuildings2(int NoBangunan, List L) 
+/*	I.S. L, TB, dan GHubungan terdefinisi dan NoBangunan adalah indeks TB yang valid
+	F.S. Ditampilkan semua bangunan dengan indeks TB tidak dalam list L yang terhubung dengan TB.TI[NoBangunan]
+*/
+{
 	/* Kamus Lokal */
 	int i, idx;
 	address P;
@@ -496,7 +492,9 @@ void ConnectedBuildings2(int NoBangunan, List L) {
 	}
 }
 
-int InfoConnectedBuildingByIdx(int NoBangunan, int idx, List L) {
+int InfoConnectedBuildingByIdx(int NoBangunan, int idx, List L) 
+/*	Menghasilkan indeks TB yang direpresentasikan idx berdasarkan penomoran dari prosedur ConnectedBuildings*/
+{
 	/* Kamus Lokal */
 	int i;
 	address P;
@@ -518,7 +516,9 @@ int InfoConnectedBuildingByIdx(int NoBangunan, int idx, List L) {
     return Info(P);
 }
 
-int InfoConnectedBuildingByIdx2(int NoBangunan, int idx, List L) {
+int InfoConnectedBuildingByIdx2(int NoBangunan, int idx, List L) 
+/*	Menghasilkan indeks TB yang direpresentasikan idx berdasarkan penomoran dari prosedur ConnectedBuildings2*/
+{
 	/* Kamus Lokal */
 	int i, idxtemp;
 	address P;
@@ -538,7 +538,9 @@ int InfoConnectedBuildingByIdx2(int NoBangunan, int idx, List L) {
     return idxtemp;
 }
 
-int NBConnectedBuildings(int NoBangunan, List L) {
+int NBConnectedBuildings(int NoBangunan, List L) 
+/*	Menghasilkan jumlah bangunan dengan indeks TB dalam list L yang terhubung dengan TB.TI[NoBangunan] */
+{
 	/* Kamus Lokal */
 	int i;
 	address P;
@@ -557,7 +559,9 @@ int NBConnectedBuildings(int NoBangunan, List L) {
     return i-1;
 }
 
-int NBConnectedBuildings2(int NoBangunan, List L) {
+int NBConnectedBuildings2(int NoBangunan, List L) 
+/*	Menghasilkan jumlah bangunan dengan indeks TB tidak dalam list L yang terhubung dengan TB.TI[NoBangunan] */
+{
 	/* Kamus Lokal */
 	int i, idx;
 	address P;
@@ -574,7 +578,13 @@ int NBConnectedBuildings2(int NoBangunan, List L) {
     return i-1;
 }
 
-void IndexLevelUp(List L, int idx) {
+void IndexLevelUp(List L, int idx) 
+/*	I.S. L dan TB terdefinisi
+	F.S. Jika idx tidak valid, ditampilkan pesan "Upgrade gagal!"
+		 Jika jumlah pasukan mencukupi, bangunan dengan indeks TB pada elemen L ke-idx di-levelup
+		 Jika jumlah pasukan tidak mencukupi, ditampilkan pesan "Jumlah pasukan <Jenis> kurang untuk level up"
+*/
+{
 	/* Kamus Lokal */
 	address P;
 	int i;
@@ -600,80 +610,82 @@ void IndexLevelUp(List L, int idx) {
 	}
 }
 
-void LevelUpAll(List L) {
+void LevelUpAll(List L) 
+/*	I.S. L dan TB terdefinisi
+	F.S. Semua bangunan dengan indeks TB pada list L di-level up dengan prosedur IndexLevelUp.
+*/
+{
 	/* Kamus Lokal */
 	address P;
 
 	/* Algoritma */
-	if (!IsEmpty_LL(L)) {
-		P = First(L);
+	P = First(L);
+	while (P != Nil) {
 		JumlahPasukan(ElmtArr(TB,Info(P))) += M(ElmtArr(TB,Info(P)))/2;
 		LevelUpBangunan(&ElmtArr(TB,Info(P)));
-		while (Next(P) != Nil) {
-			P = Next(P);
-			JumlahPasukan(ElmtArr(TB,Info(P))) += M(ElmtArr(TB,Info(P)))/2;
-			LevelUpBangunan(&ElmtArr(TB,Info(P)));
-		}
+		P = Next(P);
 	}
 }
 
-void ShieldOn(List L) {
+void ShieldOn(List L) 
+/*	I.S. L dan TB terdefinisi
+	F.S. Semua bangunan dengan indeks TB pada list L diaktifkan pertahanannya
+*/
+{
 	/* Kamus Lokal */
 	address P;
 
 	/* Algoritma */
-	if (!IsEmpty_LL(L)) {
-		P = First(L);
+	P = First(L);
+	while (P != Nil) {
 		P(ElmtArr(TB,Info(P))) = true;
-		while (Next(P) != Nil) {
-			P = Next(P);
-			P(ElmtArr(TB,Info(P))) = true;
-		}
+		P = Next(P);
 	}
 }
 
 
-void ShieldOff(List L) {
+void ShieldOff(List L) 
+/*	I.S. L dan TB terdefinisi
+	F.S. Semua bangunan dengan indeks TB pada list L dikembalikan pertahanannya ke keadaan aslinya
+*/
+{
 	/* Kamus Lokal */
 	address P;
 
 	/* Algoritma */
-	if (!IsEmpty_LL(L)) {
-		P = First(L);
-		if (Jenis(ElmtArr(TB,Info(P))) != 'T'){
+	P = First(L);
+	while (P != Nil) {
+		if (Jenis(ElmtArr(TB,Info(P))) != 'T') {
 			P(ElmtArr(TB,Info(P))) = false;
 		}
 		if ((Jenis(ElmtArr(TB,Info(P))) != 'F') && ((Level(ElmtArr(TB,Info(P))) == 3) || (Level(ElmtArr(TB,Info(P))) == 4 ))){
 			P(ElmtArr(TB,Info(P))) = false;
 		}
-		while (Next(P) != Nil) {
-			P = Next(P);
-			if (Jenis(ElmtArr(TB,Info(P))) != 'T') {
-				P(ElmtArr(TB,Info(P))) = false;
-			}
-			if ((Jenis(ElmtArr(TB,Info(P))) != 'F') && ((Level(ElmtArr(TB,Info(P))) == 3) || (Level(ElmtArr(TB,Info(P))) == 4 ))){
-				P(ElmtArr(TB,Info(P))) = false;
-			}
-		}
+		P = Next(P);
 	}
 }
 
-void ReinforceAll(List L) {
+void ReinforceAll(List L) 
+/*	I.S. L dan TB terdefinisi
+	F.S. Semua bangunan dengan indeks TB pada list L ditambahkan pasukannya sebanyaknya 5
+*/
+{
 	/* Kamus Lokal */
 	address P;
 
 	/* Algoritma */
-	if (!IsEmpty_LL(L)) {
-		P = First(L);
+	P = First(L);
+	while (P != Nil) {
 		JumlahPasukan(ElmtArr(TB,Info(P))) += 5;
-		while (Next(P) != Nil) {
-			P = Next(P);
-			JumlahPasukan(ElmtArr(TB,Info(P))) += 5;
-		}
+		P = Next(P);
 	}
 }
 
-void BarrageAll(List L) {
+void BarrageAll(List L) 
+/*	I.S. L dan TB terdefinisi
+	F.S. Semua bangunan dengan indeks TB pada list L dikurang pasukannya sebanyaknya 10
+*/
+{
 	/* Kamus Lokal */
 	address P;
 
@@ -692,7 +704,11 @@ void BarrageAll(List L) {
 	}
 }
 
-void AttackUpAll (List L){
+void AttackUpAll (List L)
+/*	I.S. L dan TB terdefinisi
+	F.S. Semua bangunan dengan indeks TB pada list L dimatikan pertahanannya
+*/
+{
 	/* Kamus Lokal */
 	address P;
 
@@ -706,7 +722,11 @@ void AttackUpAll (List L){
 	}
 }
 
-void AttackUpAllOff (List L){ 
+void AttackUpAllOff (List L)
+/*	I.S. L dan TB terdefinisi
+	F.S. Semua bangunan dengan indeks TB pada list L dikembalikan pertahanannya ke keadaan aslinya
+*/
+{ 
 	/* Kamus Lokal */
 	address P;
 

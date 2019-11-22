@@ -11,7 +11,8 @@
 #include "matriks.h"
 #include "bangunan.h"
 
-TabBangunan TB;
+/* Variabel Global */
+TabBangunan TB;	
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong  */
@@ -113,51 +114,6 @@ boolean IsFull_Array(TabBangunan T)
 	return (NBElmt_Array(T) == MaxElArr(T));
 }
 
-/* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
-/* *** Mendefinisikan isi tabel dari pembacaan *** */
-void BacaIsiPeta(TabBangunan *T, MATRIKS Peta);
-/* I.S. T sembarang dan sudah dialokasikan sebelumnya */
-/* F.S. Tabel T terdefinisi */
-/* Proses : membaca banyaknya elemen T dari Peta dan mengisi nilainya */
-/*
-{
-	IdxType i, j, k;
-	Loc temp;
-	
-	k = GetFirstIdx(*T);
-	for (i = BrsMin; i <= NBrsEff(Peta); i++) {
-		for (j = KolMin; j <= NKolEff(Peta); j++) {
-			if (isJenisBangunanValid(Elmt(Peta, i, j))) {
-				InitBangunan(&Bangunan(temp), Elmt(Peta, i, j));
-				Absis(Koordinat(temp)) = i;
-				Ordinat(Koordinat(temp)) = j;
-				ElmtArr(*T, k) = temp;
-				k++; 
-			}
-		}
-	}
-}
-*/
-
-void TulisIsiTab(TabBangunan T)
-/* Proses : Menuliskan isi tabel dengan traversal, tabel ditulis di antara kurung siku;
-   antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan karakter di depan,
-   di tengah, atau di belakang, termasuk spasi dan enter */
-/* I.S. T boleh kosong */
-/* F.S. Jika T tidak kosong: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika tabel kosong : menulis [] */
-{
-	/* Kamus Lokal */
-	IdxType i;
-	
-	/* Algoritma */
-	if (IsEmpty_Array(T)) {
-		printf("[]");
-	} else {
-	}
-}
-
 /* ********** OPERATOR RELASIONAL ********** */
 /* *** Operasi pembandingan tabel : < =, > *** */
 boolean IsEQ(TabBangunan T1, TabBangunan T2)
@@ -231,25 +187,6 @@ void CopyTab(TabBangunan Tin, TabBangunan *Tout)
 	}
 }
 
-int CountJenisBangunan(TabBangunan T, JenisBangunan X);
-/* Menghasilkan berapa banyak kemunculan JenisBangunan X di T */
-/* Jika T kosong menghasilkan 0 */
-/*
-{
-	int count;
-	IdxType i;
-	
-	count = 0;
-	if (!IsEmpty_Array(T)) {	
-		for (i = GetFirstIdx(T); i <= GetLastIdx(T); i++) {
-			if (Jenis(Building(ElmtArr(T,i))) == X) {
-				count++;
-			}
-		}
-	}
-	return count;
-}
-*/
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
 void AddAsLastEl(TabBangunan *T, ElType_Array X)
@@ -279,48 +216,6 @@ void DelLastEl(TabBangunan *T, ElType_Array *X)
 }
 
 /* ********* MENGUBAH UKURAN ARRAY ********* */
-void GrowTab(TabBangunan *T, int num)
-/* Proses : Menambahkan max element sebanyak num */
-/* I.S. Tabel sudah terdefinisi */
-/* F.S. Ukuran tabel bertambah sebanyak num */
-{
-	/* Kamus Lokal */
-	TabBangunan TX;
-	/* Algoritma */
-	MaxElArr(*T) += num;
-	MakeEmpty(&TX,MaxElArr(*T));
-	CopyTab(*T,&TX);
-	CopyTab(TX,T);
-}
-
-void ShrinkTab(TabBangunan *T, int num)
-/* Proses : Mengurangi max element sebanyak num */
-/* I.S. Tabel sudah terdefinisi, ukuran MaxElArr > num, dan Neff < MaxElArr - num. */
-/* F.S. Ukuran tabel berkurang sebanyak num. */
-{
-	/* Kamus Lokal */
-	TabBangunan TX;
-	/* Algoritma */
-	MaxElArr(*T) -= num;
-	MakeEmpty(&TX,MaxElArr(*T));
-	CopyTab(*T,&TX);
-	CopyTab(TX,T);
-}
-
-void CompactTab(TabBangunan *T)
-/* Proses : Mengurangi max element sehingga Neff = MaxElArr */
-/* I.S. Tabel tidak kosong */
-/* F.S. Ukuran MaxElArr = Neff */
-{
-	/* Kamus Lokal */
-	TabBangunan TX;
-	/* Algoritma */
-	MaxElArr(*T) = GetLastIdx(*T);
-	MakeEmpty(&TX,MaxElArr(*T));
-	CopyTab(*T,&TX);
-	CopyTab(TX,T);
-}
-
 void DelEli (TabBangunan * T, IdxType i, ElType_Array * X)
 /* Menghapus elemen ke-i tabel tanpa mengganggu kontiguitas */
 /* I.S. Tabel tidak kosong, i adalah indeks efektif yang valid */
@@ -341,6 +236,8 @@ void DelEli (TabBangunan * T, IdxType i, ElType_Array * X)
 }
 
 int CheckOwnerByPosition(TabBangunan T, int X, int Y) {
+/* Cek Posisi Bangunan yang berlokasi (X,Y) pada TabBangunan T */
+/* Kemudian mengembalikan indeks T dimana bangunan yang berlokasi (X,Y) berada */
 	/* Kamus Lokal */
 	int i;
 	POINT temp;

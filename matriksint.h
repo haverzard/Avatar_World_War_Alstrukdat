@@ -49,21 +49,7 @@ indeksMatInt GetLastIdxKolMatInt (MATRIKS_INT M);
 boolean IsIdxEffMatInt (MATRIKS_INT M, indeksMatInt i, indeksMatInt j);
 /* Mengirimkan true jika i, j adalah indeks efektif bagi M */
 
-/* ********** Assignment  MATRIKS ********** */
-void CopyMATRIKS_INT (MATRIKS_INT MIn, MATRIKS_INT * MHsl);
-/* Melakukan assignment MHsl  MIn */
-
 /* ********** KELOMPOK BACA/TULIS ********** */
-void BacaMATRIKS_INT (MATRIKS_INT * M, int NB, int NK);
-/* I.S. IsIdxValid(NB,NK) */
-/* F.S. M terdefinisi nilai elemen efektifnya, berukuran NB x NK */
-/* Proses: Melakukan MakeMATRIKS(M,NB,NK) dan mengisi nilai efektifnya */
-/* Selanjutnya membaca nilai elemen per baris dan kolom */
-/* Contoh: Jika NB = 3 dan NK = 3, maka contoh cara membaca isi matriks :
-1 2 3
-4 5 6
-8 9 10
-*/
 void TulisMATRIKS_INT (MATRIKS_INT M);
 /* I.S. M terdefinisi */
 /* F.S. Nilai M(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris
@@ -74,21 +60,5 @@ void TulisMATRIKS_INT (MATRIKS_INT M);
 4 5 6
 8 9 10
 */
-
-/* ********** KELOMPOK OPERASI RELASIONAL TERHADAP MATRIKS ********** */
-boolean EQ_MATRIKS_INT (MATRIKS_INT M1, MATRIKS_INT M2);
-/* Mengirimkan true jika M1 = M2, yaitu NBElmt(M1) = NBElmt(M2) dan */
-/* untuk setiap i,j yang merupakan indeks baris dan kolom M1(i,j) = M2(i,j) */
-/* Juga merupakan strong EQ karena GetFirstIdxBrs(M1) = GetFirstIdxBrs(M2)
-   dan GetLastIdxKol(M1) = GetLastIdxKol(M2) */
-boolean NEQ_MATRIKS_INT (MATRIKS_INT M1, MATRIKS_INT M2);
-/* Mengirimkan true jika M1 tidak sama dengan M2 */
-boolean EQSize_MATRIKS_INT (MATRIKS_INT M1, MATRIKS_INT M2);
-/* Mengirimkan true jika ukuran efektif matriks M1 sama dengan ukuran efektif M2 */
-/* yaitu GetBrsEff(M1) = GetNBrsEff (M2) dan GetNKolEff (M1) = GetNKolEff (M2) */
-
-/* ********** Operasi lain ********** */
-int NBElmt_MATRIKS_INT (MATRIKS_INT M);
-/* Mengirimkan banyaknya elemen M */
 
 #endif
