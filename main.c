@@ -16,33 +16,34 @@
 
 int main() {
 	/* Kamus */
-	int i;
 	Player p1, p2;
 
 	/* Inisiasi */
 	Jenis(BangunanUndef) = JenisUndef;
-	
+	turn = 0;
+
 	/* Algoritma */
 	STARTGAME(&p1, &p2);
-	
+
 	if (!EndGame) {
-		i = 1;
+		if (turn == 0) {
+			turn = 1;
+		}
 		while (!EndGame) {
 			while (!EndTurn) {
-				TURN(i, &p1, &p2);
+				TURN(turn, &p1, &p2);
 			}
-			UpdateListBangunan(i, p1, p2);
+			UpdateListBangunan(turn, p1, p2);
 			GetIUpgrade(&p1);GetIUpgrade(&p2);GetIUpgrade(&p1);GetIUpgrade(&p2);
-			GetIReinforcement(i, &p1, &p2);
-			//Ini buat testing doang
-			// MinShieldDuration(i,&p1,&p2);
-			// //Tambahin shield Duration
-			// // if (extraTurn = 0){
-			// // 	i = (i % 2 + 3) - 2; 
-			// // } else {
-			// // 	extraTurn -=1;
-			// // }
-			i = (i % 2 + 3) - 2; 
+			GetIReinforcement(turn, &p1, &p2);
+			if (extraTurn == 0){
+				turn = (turn % 2 + 3) - 2; 
+			} else {
+				extraTurn -=1;
+				printf("Anda memiliki extra turn %d kali\n",extraTurn);
+				MinShieldDuration(turn,&p1,&p2);
+			}
+			// turn = (turn % 2 + 3) - 2; 
 			if (attackUp){
 				attackUp = 0;
 			}

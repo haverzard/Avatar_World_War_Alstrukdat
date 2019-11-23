@@ -235,7 +235,7 @@ void Shield (Player *P){
 
 void ExtraTurn (Player *P){
 	/* Algoritma */
-	extraTurn = 1;
+	extraTurn += 1;
 }
 
 void AttackUp (Player *attacker,Player *defender){
@@ -265,7 +265,6 @@ void Barrage (Player *user, Player *enemy){
 void KeepSkill (Player *user, skilltype skillName){
 	/* Algoritma */
 	if (!IsFull_Queue(Skill(*user))){
-		printf("KEEEEEEEEEEEEEEEEEEEEEPPPPPPPPPPPPPPP");
 		Add(&Skill(*user),skillName);	
 	}    
 }
@@ -510,12 +509,14 @@ void MinShieldDuration (int num,Player *P1,Player *P2)
 {
 	/* Algoritma */
 	if(NoPemain(*P1) == num) {
-		if (shieldDuration(*P1)>0){
+		if (shieldDuration(*P1)>0) {
 			shieldDuration(*P1) -=1;
+			printf("Efek Shield tinggal %d turn\n",shieldDuration(*P2));
 		}
 	} else {
-		if (shieldDuration(*P2)>0){
+		if (shieldDuration(*P2)>0) {
 			shieldDuration(*P2) -=1;
+			printf("Efek Shield tinggal %d turn\n",shieldDuration(*P2));
 		}
 	}
 }

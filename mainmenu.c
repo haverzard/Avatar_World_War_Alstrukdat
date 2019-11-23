@@ -19,6 +19,7 @@
 #define println() printf("\n");
 
 /* Variable Global */
+int turn;
 boolean EndGame;
 boolean EndTurn = false;
 boolean SkillUsed = false;
@@ -68,6 +69,7 @@ void STARTGAME(Player *P1, Player *P2)
 		printf("Masukkan lokasi file data save: "); scanf("%100s", filename);
 		SCAN();
 		STARTDATA(filename);
+		INFOTURN(&turn);
 		INFOPETA(&Peta);
 		INFOBANGUNAN(&TB);
 		LOKASIBANGUNAN(&Peta, &TB);
@@ -250,14 +252,13 @@ void ATTACK(int NoPemain, Player *P1, Player *P2)
 						jumlahBangunanP2awal = NbElmt(ListBangunan(*P2));
 						if (isCurrentPCritical(NoPemain,*P1,*P2)){
 							UPDATESTATUS(*P1, *P2);
+							printf("Serangan Critical !!!\n");
 							SerangCritical(B1, B2, count);
 							CriticalOff(NoPemain,P1,P2);
 						} else {
 							UPDATESTATUS(*P1, *P2);
 							SerangBangunan(B1, B2, count);	
 						}
-						// UPDATESTATUS(P1, P2);
-						// SerangBangunan(B1, B2, count);
 						if (JumlahPasukan(*B2) <= 0) {
 							JumlahPasukan(*B2) = abs(JumlahPasukan(*B2));
 							CaptureBuilding(NoPemain, B2, P1, P2);
@@ -266,8 +267,6 @@ void ATTACK(int NoPemain, Player *P1, Player *P2)
 							jumlahBangunanP1akhir = NbElmt(ListBangunan(*P1));
 							jumlahBangunanP2akhir = NbElmt(ListBangunan(*P2));
 							GetShield(NoPemain,P1,P2,jumlahBangunanP1awal,jumlahBangunanP1akhir,jumlahBangunanP2awal,jumlahBangunanP2akhir);
-							printf("%d",Fdawal);
-							printf("%d",Fdakhir);
 							GetExtraTurn(NoPemain,P1,P2,Fdawal,Fdakhir);
 							GetAttackUp(NoPemain,P1,P2,TAawal,TAakhir);
 							GetBarrage(NoPemain,P1,P2,jumlahBangunanP1awal,jumlahBangunanP1akhir,jumlahBangunanP2awal,jumlahBangunanP2akhir);
