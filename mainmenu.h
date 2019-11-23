@@ -34,6 +34,7 @@ void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2);
 /*	I.S. Menampilkan informasi player dan menerima masukan command user
 	F.S. Memproses command player jika command ada di list command yang tersedia
 		 Jika tidak command tidak valid, ditampilkan pesan "Inputnya yang benar dong!". 
+		 Jika pemain menang, ditampilkan pesan selamat dan credits. 
 */
 
 void ATTACK(int NoPemain, Player P1, Player P2);

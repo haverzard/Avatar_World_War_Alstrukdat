@@ -37,3 +37,18 @@ void print_cyan(char c) {
     printf("%s%c", MAGENTA, c);
     printf("%s", NORMAL);
 }
+
+void printByColorNum(int num, char c) 
+/*  I.S. num terdefinisi
+    F.S. Ditampilkan karakter c dengan warna berdasarkan num
+*/
+{
+    switch(num) {
+        1: print_red(c); break;
+        2: print_green(c); break;
+        3: print_yellow(c); break;
+        4: print_blue(c); break;
+        5: print_magenta(c); break;
+        6: print_cyan(c); break;
+    }
+}

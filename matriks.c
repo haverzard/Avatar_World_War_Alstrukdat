@@ -71,7 +71,7 @@ boolean IsIdxEff_Matriks (MATRIKS M, indeks i, indeks j)
 }
 
 /* ********** KELOMPOK BACA/TULIS ********** */
-void TulisMATRIKSPETA (MATRIKS M) 
+void TulisMATRIKSPETA (MATRIKS M, Player P1, Player P2) 
 
 /* I.S. M terdefinisi */
 /* F.S. Nilai M(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris
@@ -125,9 +125,9 @@ void TulisMATRIKSPETA (MATRIKS M)
 		printf("*");
 		for (j = GetFirstIdxKol(M); j <= GetLastIdxKol(M); j++) {
 			if (ElmtMat(M,i,j) != ' ' && CheckOwnerByPosition(TB, i, j) == 1) {
-				print_blue(ElmtMat(M,i,j));
+				printByColorNum(Color(P1), ElmtMat(M,i,j));
 			} else if (ElmtMat(M,i,j) != ' ' && CheckOwnerByPosition(TB, i, j) == 2)  {
-				print_red(ElmtMat(M,i,j));
+				printByColorNum(Color(P2), ElmtMat(M,i,j));
 			} else {
 				printf("%c", ElmtMat(M,i,j));
 			}

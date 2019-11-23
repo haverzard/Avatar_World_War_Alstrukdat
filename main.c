@@ -32,6 +32,7 @@ int main() {
 		LOKASIBANGUNAN(&Peta, &TB);
 		HUBUNGANBANGUNAN(&Hubungan, NBElmt_Array(TB));
 		GenerateHubunganBangunan(&GHubungan, Hubungan);
+		PrintAllHubunganBangunan(GHubungan);
 		CREATEPLAYER(&p1, &p2);
 		GetIUpgrade (&p1);
 		GetIUpgrade (&p2);
@@ -40,7 +41,6 @@ int main() {
 			while (!EndTurn) {
 				TURN(i, Peta, &p1, &p2);
 			}
-			//terminal dong
 			UpdateListBangunan(i, p1, p2);
 			//Ini buat testing doang
 			GetIReinforcement(1,&p1,&p2);
