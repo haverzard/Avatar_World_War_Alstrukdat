@@ -128,7 +128,7 @@ void HUBUNGANBANGUNAN (MATRIKS_INT * Hubungan, int BanyakBangunan) {
 	/* Kamus Lokal */ 
 	int i, j;
 	IgnoreBlank_DATA();
-	MakeMATRIKS_INT(20, 30, Hubungan);
+	MakeMATRIKS_INT(BanyakBangunan,BanyakBangunan, Hubungan);
 	i = GetFirstIdxBrsMatInt(*Hubungan);
 	while (i <= BanyakBangunan) {
 		j = GetFirstIdxKolMatInt(*Hubungan);

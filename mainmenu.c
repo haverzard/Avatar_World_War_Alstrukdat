@@ -73,10 +73,11 @@ void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2)
 /*	I.S. Menampilkan informasi player dan menerima masukan command user
 	F.S. Memproses command player jika command ada di list command yang tersedia
 		 Jika tidak command tidak valid, ditampilkan pesan "Inputnya yang benar dong!". 
+		 Jika pemain menang, ditampilkan pesan selamat dan credits. 
 */
 {
 	/* Algoritma */
-	TulisMATRIKSPETA(Peta); println();
+	TulisMATRIKSPETA(Peta, P1, P2); println();
 	printf("Player %d\n", NoPemain);
 	PrintListBangunan(NoPemain, *P1, *P2); println();
 	ShowSkill(NoPemain, *P1, *P2); println();
@@ -110,6 +111,17 @@ void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2)
 		EndGame = true;
 	} else {
 		printl("Inputnya yang benar dong!"); println();
+	}
+	if (CheckWinOrNot(NoPemain, P1, P2)) {
+		printl("Selamat kepada Pemain bernomor %d! Anda menang!", NoPemain);
+		printl("***************CREDITS****************");
+		printl("CREATED BY:");
+		printl("   Kelompok ??? K-3 - Tony Eko");
+		printl("                      Arthur Edgar");
+		printl("                      Yonatan Viody");
+		printl("                      Stephen Thajeb");
+		EndTurn = true;
+		EndGame = true;
 	}
 	printl("");
 }
@@ -168,12 +180,12 @@ void ATTACK(int NoPemain, Player P1, Player P2)
 							jumlahBangunanP1akhir = NbElmt(ListBangunan(P1));
 							jumlahBangunanP2akhir = NbElmt(ListBangunan(P2));
 							GetShield(NoPemain,&P1,&P2,jumlahBangunanP1awal,jumlahBangunanP1akhir,jumlahBangunanP2awal,jumlahBangunanP2akhir);
+							printf("%d",Fdawal);
+							printf("%d",Fdakhir);
 							GetExtraTurn(NoPemain,&P1,&P2,Fdawal,Fdakhir);
 							GetAttackUp(NoPemain,&P1,&P2,TAawal,TAakhir);
 							GetBarrage(NoPemain,&P1,&P2,jumlahBangunanP1awal,jumlahBangunanP1akhir,jumlahBangunanP2awal,jumlahBangunanP2akhir);
 							printf("Bangunan menjadi milikku!\n");
-							// TEST
-							GetIReinforcement(1,&P1,&P2);
 						} else {
 							printf("Bangunan gagal direbut.\n");
 						}

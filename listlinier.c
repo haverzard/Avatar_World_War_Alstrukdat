@@ -581,6 +581,7 @@ int NBConnectedBuildings2(int NoBangunan, List L)
 void IndexLevelUp(List L, int idx) 
 /*	I.S. L dan TB terdefinisi
 	F.S. Jika idx tidak valid, ditampilkan pesan "Upgrade gagal!"
+		 Jika level sudah maksimum, ditampilkan pesan "Gagal! Level <Jenis> sudah bernilai maksimum"
 		 Jika jumlah pasukan mencukupi, bangunan dengan indeks TB pada elemen L ke-idx di-levelup
 		 Jika jumlah pasukan tidak mencukupi, ditampilkan pesan "Jumlah pasukan <Jenis> kurang untuk level up"
 */
@@ -595,15 +596,21 @@ void IndexLevelUp(List L, int idx)
 		for (i = 1; i < idx; i++) {
 			P = Next(P);
 		}
-		if (JumlahPasukan(ElmtArr(TB,Info(P))) >= M(ElmtArr(TB,Info(P)))/2) {
-			LevelUpBangunan(&ElmtArr(TB,Info(P)));
-			printf("Level ");
-			PrintJenisByCode(Jenis(ElmtArr(TB,Info(P))));
-			printf("-mu meningkat menjadi %d.\n", Level(ElmtArr(TB,Info(P))));
+		if (Level(ElmtArr(TB,Info(P))) < 4) {
+			if (JumlahPasukan(ElmtArr(TB,Info(P))) >= M(ElmtArr(TB,Info(P)))/2) {
+				LevelUpBangunan(&ElmtArr(TB,Info(P)));
+				printf("Level ");
+				PrintJenisByCode(Jenis(ElmtArr(TB,Info(P))));
+				printf("-mu meningkat menjadi %d.\n", Level(ElmtArr(TB,Info(P))));
+			} else {
+				printf("Jumlah pasukan ");
+				PrintJenisByCode(Jenis(ElmtArr(TB,Info(P))));
+				printf(" kurang untuk level up\n");
+			}
 		} else {
-			printf("Jumlah pasukan ");
+			printf("Gagal! Level ");
 			PrintJenisByCode(Jenis(ElmtArr(TB,Info(P))));
-			printf(" kurang untuk level up\n");
+			printf(" sudah bernilai maksimum!");
 		}
 	} else {
 		printf("Upgrade gagal!\n");
@@ -694,7 +701,7 @@ void BarrageAll(List Luser,List Lenemy) {
 		if (JumlahPasukan(ElmtArr(TB,Info(P))) > 10) {
 			JumlahPasukan(ElmtArr(TB,Info(P))) -= 10;
 		} else {
-			if (Kepemilikan(ElmtArr(TB,Info(P)))==0){
+			if (Kepemilikan(ElmtArr(TB,Info(P))) == 0){
 				Kepemilikan(ElmtArr(TB,Info(P)))=1;
 			} else {
 				Kepemilikan(ElmtArr(TB,Info(P)))=0;
