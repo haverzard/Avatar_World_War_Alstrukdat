@@ -8,11 +8,13 @@
 #include "../mesindata/mesindata.h"
 #include "../matrikskar/matriks.h"
 #include "../player/player.h"
+#include "../stack/stack.h"
 
 extern int turn;
 extern boolean EndGame;
 extern boolean EndTurn;
 extern boolean SkillUsed;
+extern Stack Status;
 
 void STARTGAME(Player *P1, Player *P2) ;
 /* 	I.S. Menampilkan menu awal dan menerima masukan user 
