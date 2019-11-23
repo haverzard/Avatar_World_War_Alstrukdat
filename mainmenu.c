@@ -78,8 +78,8 @@ void STARTGAME(Player *P1, Player *P2)
 		INFOTURN(&turn);
 		INFOCOLOR(P1, P2);
 		LOADBANGUNANPLAYER(P1, P2);
-		// LOADSKILL(P1, P2);
-		// CreateEmpty_Stack(&Status);
+		LOADSKILL(P1, P2);
+		CreateEmpty_Stack(&Status);
 		printf("File berhasil di load!\n");
 	} else {
 		printl("Input yang benar dong!");
