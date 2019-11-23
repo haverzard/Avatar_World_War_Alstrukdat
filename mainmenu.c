@@ -60,6 +60,21 @@ void LOADGAME() {
 	}
 }
 
+void SAVEGAME(Player P1, Player P2) 
+/*	I.S. P1, P2, TB, GHubungan terdefinisi
+*/
+{
+	/* Kamus Lokal */
+	FILE * save;
+
+	/* Algoritma */
+	SCANKATA();
+	if (!EQ_KATA(CKata, "EXIT")) {
+		save = fopen(CKata.TabKata,"w");
+		fprintf(save,"%d %d\n", NBrsEff(Peta), NKolEff(Peta));
+	}
+}
+
 void CREATEPLAYER(Player *P1, Player *P2) 
 /*	I.S. P1 dan P2 belum terdefinisi
 	F.S. P1 dan P2 sudah terdefinisi termasuk atribut-atributnya
@@ -69,7 +84,7 @@ void CREATEPLAYER(Player *P1, Player *P2)
 	InitPlayer(2, P2);
 }
 
-void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2) 
+void TURN(int NoPemain, Player *P1, Player *P2)
 /*	I.S. Menampilkan informasi player dan menerima masukan command user
 	F.S. Memproses command player jika command ada di list command yang tersedia
 		 Jika tidak command tidak valid, ditampilkan pesan "Inputnya yang benar dong!". 

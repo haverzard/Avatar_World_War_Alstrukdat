@@ -23,7 +23,7 @@ void InitPlayer(int num, Player *P)
 	int choice;
 
 	/* Algoritma */
-	printf("Player %d\n");
+	printf("Player %d\n", num);
 	printf("Silahkan pilih warna!\n");
 	printf("1. Red		4. Blue\n");
 	printf("2. Green	5. Magenta\n");

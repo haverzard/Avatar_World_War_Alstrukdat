@@ -688,7 +688,7 @@ void ReinforceAll(List L)
 	}
 }
 
-void Barrage(List Lenemy) {
+void BarrageAll(List Lenemy) {
 /*	I.S. L dan TB terdefinisi
 	F.S. Semua bangunan dengan indeks TB pada list L dikurang pasukannya sebanyaknya 10
 */

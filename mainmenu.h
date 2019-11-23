@@ -30,7 +30,7 @@ void CREATEPLAYER(Player *P1, Player *P2);
 	F.S. P1 dan P2 sudah terdefinisi termasuk atribut-atributnya
 */
 
-void TURN(int NoPemain, MATRIKS Peta, Player *P1, Player *P2);
+void TURN(int NoPemain, Player *P1, Player *P2);
 /*	I.S. Menampilkan informasi player dan menerima masukan command user
 	F.S. Memproses command player jika command ada di list command yang tersedia
 		 Jika tidak command tidak valid, ditampilkan pesan "Inputnya yang benar dong!". 

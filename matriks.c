@@ -7,6 +7,9 @@
 #include "arraydinpos.h"
 #include "player.h"
 
+/* Variabel Global */
+MATRIKS Peta;
+
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
 /* *** Konstruktor membentuk MATRIKS *** */
 void MakeMATRIKS (int NB, int NK, MATRIKS * M)

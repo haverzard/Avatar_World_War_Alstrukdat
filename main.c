@@ -17,7 +17,6 @@
 int main() {
 	/* Kamus */
 	int i;
-	MATRIKS Peta;
 	MATRIKS_INT Hubungan;
 	Player p1, p2;
 
@@ -32,7 +31,7 @@ int main() {
 		LOKASIBANGUNAN(&Peta, &TB);
 		HUBUNGANBANGUNAN(&Hubungan, NBElmt_Array(TB));
 		GenerateHubunganBangunan(&GHubungan, Hubungan);
-		PrintAllHubunganBangunan(GHubungan);
+		// PrintAllHubunganBangunan(GHubungan);
 		CREATEPLAYER(&p1, &p2);
 		GetIUpgrade (&p1);
 		GetIUpgrade (&p2);
