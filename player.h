@@ -105,7 +105,7 @@ void CriticalHit (Player *user);
 
 void InstantReinforcement (Player *P);
 
-void Barrage (Player *enemy);
+void Barrage (Player *user, Player *enemy);
 
 /* *** Keep Skill *** */
 void KeepSkill (Player *user, skilltype skillName);

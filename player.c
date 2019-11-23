@@ -45,7 +45,10 @@ void InitPlayer(int num, Player *P)
 	// attackUpBool(*P) = false;
 }
 
-boolean CheckWinOrNot(NoPemain, P1, P2) {
+boolean CheckWinOrNot(int num, Player P1, Player P2) 
+/*	Mengecek apakah semua bangunan player ke-num sudah dikalahkan atau diambil alih */
+{
+	/* Algoritma */
 	if (num == 1) {
 		return IsEmpty_LL(ListBangunan(P2));
 	} else {
@@ -251,9 +254,9 @@ void InstantReinforcement (Player *P){
     ReinforceAll(ListBangunan(*P));
 }
 
-void Barrage (Player *enemy){
+void Barrage (Player *user, Player *enemy){
 	/* Algoritma */	
-    BarrageAll()
+   BarrageAll(ListBangunan(*enemy));
 }
 
 

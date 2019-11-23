@@ -205,7 +205,7 @@ void ReinforceAll(List L);
 	F.S. Semua bangunan dengan indeks TB pada list L ditambahkan pasukannya sebanyaknya 5
 */
 
-void BarrageAll(List Luser,List Lenemy);
+void BarrageAll(List Lenemy);
 /*	I.S. Luser, Lenemy, dan TB terdefinisi
 	F.S. Semua bangunan dengan indeks TB pada list L dikurang pasukannya sebanyaknya 10
 */

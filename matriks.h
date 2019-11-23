@@ -51,8 +51,8 @@ boolean IsIdxEff_Matriks (MATRIKS M, indeks i, indeks j);
 /* Mengirimkan true jika i, j adalah indeks efektif bagi M */
 
 /* ********** KELOMPOK BACA/TULIS ********** */
-void TulisMATRIKSPETA (MATRIKS M);
-/* I.S. M terdefinisi */
+void TulisMATRIKSPETA (MATRIKS M, Player P1, Player P2);
+/* I.S. M, P1, P2 terdefinisi */
 /* F.S. Nilai M(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris
    dipisahkan sebuah spasi */
 /* Proses: Menulis nilai setiap elemen M ke layar dengan traversal per baris dan per kolom */

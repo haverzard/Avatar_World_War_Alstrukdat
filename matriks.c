@@ -5,6 +5,7 @@
 #include "boolean.h"
 #include "pcolor.h"
 #include "arraydinpos.h"
+#include "player.h"
 
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
 /* *** Konstruktor membentuk MATRIKS *** */
@@ -72,8 +73,7 @@ boolean IsIdxEff_Matriks (MATRIKS M, indeks i, indeks j)
 
 /* ********** KELOMPOK BACA/TULIS ********** */
 void TulisMATRIKSPETA (MATRIKS M, Player P1, Player P2) 
-
-/* I.S. M terdefinisi */
+/* I.S. M, P1, P2 terdefinisi */
 /* F.S. Nilai M(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris
    dipisahkan sebuah spasi */
 /* Proses: Menulis nilai setiap elemen M ke layar dengan traversal per baris dan per kolom */

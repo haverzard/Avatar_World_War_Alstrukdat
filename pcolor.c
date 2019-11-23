@@ -44,11 +44,11 @@ void printByColorNum(int num, char c)
 */
 {
     switch(num) {
-        1: print_red(c); break;
-        2: print_green(c); break;
-        3: print_yellow(c); break;
-        4: print_blue(c); break;
-        5: print_magenta(c); break;
-        6: print_cyan(c); break;
+        case 1: print_red(c); break;
+        case 2: print_green(c); break;
+        case 3: print_yellow(c); break;
+        case 4: print_blue(c); break;
+        case 5: print_magenta(c); break;
+        case 6: print_cyan(c); break;
     }
 }
