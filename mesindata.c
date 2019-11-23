@@ -179,6 +179,13 @@ void MOREINFOBANGUNAN(TabBangunan *TB)
 			A = A * 10 + KarakterToInt(CC);
 			ADV();
 		}
+		Level(ElmtArr(*TB,i)) = A;
+		IgnoreBlank_DATA();
+		A = 0;
+		while (CC != BLANK) {
+			A = A * 10 + KarakterToInt(CC);
+			ADV();
+		}
 		A(ElmtArr(*TB,i)) = A;
 		IgnoreBlank_DATA();
 		A = 0;

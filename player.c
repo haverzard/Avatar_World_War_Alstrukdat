@@ -453,9 +453,9 @@ void HitungFort(int num,Player P1,Player P2,int *F){
 	
 	/* Algoritma */
 	fort = 0;
-	if (num = NoPemain(P1)){
+	if (num == NoPemain(P1)){
 		Q = First(ListBangunan(P2));
-	} else if (num = NoPemain(P2)) {
+	} else {
 		Q = First(ListBangunan(P1));
 	}
 	while (Q != Nil){
@@ -474,7 +474,7 @@ void HitungTower(int num,Player P1,Player P2,int *T){
 	
 	/* Algoritma */
 	tower = 0;
-	if (num = NoPemain(P1)){
+	if (num == NoPemain(P1)){
 		Q = First(ListBangunan(P2));
 	} else {
 		Q = First(ListBangunan(P1));
