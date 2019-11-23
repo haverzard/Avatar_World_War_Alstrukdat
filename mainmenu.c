@@ -69,6 +69,7 @@ void STARTGAME(Player *P1, Player *P2)
 		printf("Masukkan lokasi file data save: "); scanf("%100s", filename);
 		SCAN();
 		STARTDATA(filename);
+		NoPemain(*P1) = 1; NoPemain(*P2) = 2;
 		INFOPETA(&Peta);
 		INFOBANGUNAN(&TB);
 		LOKASIBANGUNAN(&Peta, &TB);
