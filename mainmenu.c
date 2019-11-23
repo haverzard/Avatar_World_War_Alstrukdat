@@ -132,7 +132,7 @@ void TURN(int NoPemain, Player *P1, Player *P2)
 	printf("ENTER COMMAND: ");
 	SCANKATA();
 	if (EQ_KATA(CKata, "ATTACK")) {
-		ATTACK(NoPemain, *P1, *P2);
+		ATTACK(NoPemain, P1, P2);
 	} else if (EQ_KATA(CKata, "LEVEL_UP")) {
 		LEVELUP(NoPemain, *P1, *P2);
 	} else if (EQ_KATA(CKata, "SKILL")) {
@@ -170,7 +170,7 @@ void TURN(int NoPemain, Player *P1, Player *P2)
 	println();
 }
 
-void ATTACK(int NoPemain, Player P1, Player P2) 
+void ATTACK(int NoPemain, Player *P1, Player *P2) 
 /*	I.S. Menampilkan daftar bangunan untuk menyerang.
 	F.S. Jika tidak ada bangunan untuk diserang, ditampilkan pesan "Tidak ada bangunan yang dapat diserang".
 		 Jika ada, pemain telah memilih bangunan untuk menyerang, bangunan untuk diserang, dan jumlah pasukan untuk menyerang.
@@ -189,24 +189,24 @@ void ATTACK(int NoPemain, Player P1, Player P2)
 
 	/* Algoritma */
 	printf("Daftar bangunan: \n");
-	PrintListBangunan(NoPemain, P1, P2);
+	PrintListBangunan(NoPemain, *P1, *P2);
 	printf("Bangunan yang digunakan untuk menyerang: "); scanf("%d", &choice);
-	if (choice <= NBElmtListB(NoPemain, P1, P2) && choice > 0) {
-		B1 = &ElmtArr(TB, InfoMyBuilding(NoPemain, choice, P1, P2));
+	if (choice <= NBElmtListB(NoPemain, *P1, *P2) && choice > 0) {
+		B1 = &ElmtArr(TB, InfoMyBuilding(NoPemain, choice, *P1, *P2));
 		if (AttackAvai(*B1)) {
-			count = NBNotMyConnectedBuildings(NoPemain, choice, P1, P2);
+			count = NBNotMyConnectedBuildings(NoPemain, choice, *P1, *P2);
 			if (count) {
-				PrintNotMyConnectedBuildings(NoPemain, choice, P1, P2);
+				PrintNotMyConnectedBuildings(NoPemain, choice, *P1, *P2);
 				printf("Bangunan yang diserang: "); scanf("%d", &choice2);
 				if (choice2 <= count && choice2 > 0) {
 					printf("Jumlah pasukan: "); scanf("%d", &count);
-					B2 = &ElmtArr(TB, InfoConnectedBuilding2(NoPemain, choice, choice2, P1, P2));
+					B2 = &ElmtArr(TB, InfoConnectedBuilding2(NoPemain, choice, choice2, *P1, *P2));
 					if (count > 0 && count <= JumlahPasukan(*B1)) {
-						HitungFort(NoPemain,P1,P2,&Fdawal);
-						HitungTower(NoPemain,P1,P2,&TAawal);
-						jumlahBangunanP1awal = NbElmt(ListBangunan(P1));
-						jumlahBangunanP2awal = NbElmt(ListBangunan(P2));
-						if (isCurrentPCritical(NoPemain,P1,P2)){
+						HitungFort(NoPemain,*P1,*P2,&Fdawal);
+						HitungTower(NoPemain,*P1,*P2,&TAawal);
+						jumlahBangunanP1awal = NbElmt(ListBangunan(*P1));
+						jumlahBangunanP2awal = NbElmt(ListBangunan(*P2));
+						if (isCurrentPCritical(NoPemain,*P1,*P2)){
 							// UPDATESTATUS(P1, P2);
 							SerangCritical(B1, B2, count);
 							CriticalOff(NoPemain,&P1,&P2);
@@ -219,10 +219,10 @@ void ATTACK(int NoPemain, Player P1, Player P2)
 						if (JumlahPasukan(*B2) <= 0) {
 							JumlahPasukan(*B2) = abs(JumlahPasukan(*B2));
 							CaptureBuilding(NoPemain, B2, P1, P2);
-							HitungFort(NoPemain,P1,P2,&Fdakhir);
-							HitungTower(NoPemain,P1,P2,&TAakhir);
-							jumlahBangunanP1akhir = NbElmt(ListBangunan(P1));
-							jumlahBangunanP2akhir = NbElmt(ListBangunan(P2));
+							HitungFort(NoPemain,*P1,*P2,&Fdakhir);
+							HitungTower(NoPemain,*P1,*P2,&TAakhir);
+							jumlahBangunanP1akhir = NbElmt(ListBangunan(*P1));
+							jumlahBangunanP2akhir = NbElmt(ListBangunan(*P2));
 							GetShield(NoPemain,&P1,&P2,jumlahBangunanP1awal,jumlahBangunanP1akhir,jumlahBangunanP2awal,jumlahBangunanP2akhir);
 							printf("%d",Fdawal);
 							printf("%d",Fdakhir);

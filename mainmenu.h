@@ -37,7 +37,7 @@ void TURN(int NoPemain, Player *P1, Player *P2);
 		 Jika pemain menang, ditampilkan pesan selamat dan credits. 
 */
 
-void ATTACK(int NoPemain, Player P1, Player P2);
+void ATTACK(int NoPemain, Player *P1, Player *P2);
 /*	I.S. Menampilkan daftar bangunan untuk menyerang.
 	F.S. Jika tidak ada bangunan untuk diserang, ditampilkan pesan "Tidak ada bangunan yang dapat diserang".
 		 Jika ada, pemain telah memilih bangunan untuk menyerang, bangunan untuk diserang, dan jumlah pasukan untuk menyerang.

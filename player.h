@@ -75,12 +75,12 @@ int InfoConnectedBuilding(int num, int IdxList, int IdxConnected, Player P1, Pla
 int InfoConnectedBuilding2(int num, int IdxList, int IdxConnected, Player P1, Player P2);
 /*	Menghasilkan indeks TB yang direpresentasikan IdxConnected sesuai urutan daftar bangunan dari prosedur PrintNotMyConnectedBuildings */
 
-void CaptureBuilding(int num, Bangunan *B, Player P1, Player P2);
+void CaptureBuilding(int num, Bangunan *B, Player *P1, Player *P2);
 /*	I.S. P1 dan P2 sembarang, TB terdefinisi
 	F.S. Bangunan B diubah kepemilikannya menjadi milik player ke-num
 */
 
-void ChangeOwner(Bangunan *B, Player Me, Player Enemy);
+void ChangeOwner(Bangunan *B, Player *Me, Player *Enemy);
 /*	I.S. Me dan Enemy sembarang, TB terdefinisi
 	F.S. Bangunan B diubah kepemilikannya menjadi milik player Me
 		 Jika B milik Enemy, indeks TB untuk B dihapus dari ListBangunan Enemy

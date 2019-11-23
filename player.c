@@ -162,7 +162,7 @@ int InfoConnectedBuilding2(int num, int IdxList, int IdxConnected, Player P1, Pl
     }
 }
 
-void CaptureBuilding(int num, Bangunan *B, Player P1, Player P2) 
+void CaptureBuilding(int num, Bangunan *B, Player *P1, Player *P2) 
 /*	I.S. P1 dan P2 sembarang, TB terdefinisi
 	F.S. Bangunan B diubah kepemilikannya menjadi milik player ke-num
 */
@@ -175,7 +175,7 @@ void CaptureBuilding(int num, Bangunan *B, Player P1, Player P2)
 	}
 }
 
-void ChangeOwner(Bangunan *B, Player Me, Player Enemy) 
+void ChangeOwner(Bangunan *B, Player *Me, Player *Enemy) 
 /*	I.S. Me dan Enemy sembarang, TB terdefinisi
 	F.S. Bangunan B diubah kepemilikannya menjadi milik player Me
 		 Jika B milik Enemy, indeks TB untuk B dihapus dari ListBangunan Enemy
@@ -185,15 +185,13 @@ void ChangeOwner(Bangunan *B, Player Me, Player Enemy)
 	int JumlahPasukanNow;
 	/* Algoritma */
 	JumlahPasukanNow = JumlahPasukan(*B);
-	if (Kepemilikan(*B) == NoPemain(Enemy)) {
-		PrintInfo(ListBangunan(Enemy));
-		DelP(&ListBangunan(Enemy),*B);
-		PrintInfo(ListBangunan(Enemy));
+	if (Kepemilikan(*B) == NoPemain(*Enemy)) {
+		DelP(&ListBangunan(*Enemy),*B);
 	}
 	InitBangunan(B, Jenis(*B));
-	Kepemilikan(*B) = NoPemain(Me);
+	Kepemilikan(*B) = NoPemain(*Me);
 	JumlahPasukan(*B) = JumlahPasukanNow;
-	InsVLast(&ListBangunan(Me), Search1(TB,*B));
+	InsVLast(&ListBangunan(*Me), Search1(TB,*B));
 }
 
 void UpdateListBangunan(int num, Player P1, Player P2) 
