@@ -216,8 +216,8 @@ void InstantReinforcement (Player *P){
     ReinforceAll(ListBangunan(*P));
 }
 
-void Barrage (Player *P){
-    BarrageAll(ListBangunan(*P));
+void Barrage (Player *user, Player *enemy){
+    BarrageAll(ListBangunan(*user),ListBangunan(*enemy));
 }
 
 
@@ -250,7 +250,7 @@ void UseSkillP (Player *user,Player *enemy){
 		} else if ((InfoHead(Skill(*user)) == 'R') || (InfoHead(Skill(*user)) == 'r')){
 			InstantReinforcement(user);
 		} else {
-			Barrage(user);
+			Barrage (user,enemy);
 		}
 		Del(&Skill(*user),&X);
 		SkillUsed = true;
@@ -350,15 +350,15 @@ void GetExtraTurn(int num,Player *P1,Player *P2,int Fdawal,int Fdakhir){
 	}
 }
 
-void GetAttackUp (int num,Player *P1,Player *P2,int Tdawal,int Tdakhir){
-	if ((Tdawal == 4) && (Tdakhir ==3)){
+void GetAttackUp (int num,Player *P1,Player *P2,int TAawal,int TAakhir){
+	if ((TAawal == 2) && (TAakhir ==3)){
 		if (num == NoPemain(*P1)){
 			KeepSkill(P1,'A');
-			printf("Lawanmu mendapat skill Attack Up\n");
+			printf("Kamu mendapat skill Attack Up\n");	
 		} else {
 			KeepSkill(P2,'A');
-			printf("Lawanmu mendapat skill Attack Up\n");
-		}		
+			printf("Kamu mendapat skill Attack Up\n");	
+		}
 	}
 }
 
@@ -366,12 +366,12 @@ void GetIReinforcement(int num, Player *P1,Player *P2){
 	if (NoPemain(*P1) == num) {
 		if (isAllLevel4(*P1)){
 			KeepSkill(P1,'R');	
-			printf("Kamu mendapatkan skill Instant Reinforcement");
+			printf("Kamu mendapatkan skill Instant Reinforcement\n");
 		}
 	} else {
 		if (isAllLevel4(*P2)){
 			KeepSkill(P2,'R');
-			printf("Kamu mendapatkan skill Instant Reinforcement");
+			printf("Kamu mendapatkan skill Instant Reinforcement\n");
 		}
 	}
 }
@@ -470,126 +470,3 @@ void CriticalOff (int num,Player *P1,Player *P2){
 		Critical(*P2) = false;
 	}
 }
-
-// void HitungBangunan (Player P,int *C,int *T, int *F, int *V){
-	// //Kamus Lokal
-	// address Q;
-	// int castle,tower,fort,village;
-	
-	// //Algoritma
-	// castle = 0;
-	// tower = 0;
-	// village = 0;
-	// fort = 0;
-
-	// Q = First(ListBangunan(P));
-	// while (Q != Nil){
-	// 	if (Jenis(ElmtArr(TB,Info(Q))) == 'C'){
-	// 		castle +=1;
-	// 	}
-	// 	if (Jenis(ElmtArr(TB,Info(Q))) == 'T'){
-	// 		tower +=1;
-	// 	}
-	// 	if (Jenis(ElmtArr(TB,Info(Q))) == 'F'){
-	// 		fort +=1;
-	// 	}
-	// 	if (Jenis(ElmtArr(TB,Info(Q))) == 'V'){
-	// 		village +=1;
-	// 	}
-	// 	Q = Next(Q);
-	// }
-	// *C = castle;
-	// *T = tower;
-	// *F = fort;
-	// *V = village;
-// }
-
-
-//procedure ini dipanggil di main ?????
-
-// void SerangPlayer (int input,Player *attacker, Player *defender){
-// 	//Kamus Lokal
-// 	//attacker
-// 	int CAawal,TAawal,FAawal,VAawal; //A -> Attacker
-// 	int CAakhir,TAakhir,FAakhir,VAakhir;
-// 	int TotalAwalA,TotalAkhirA;
-// 	//defender
-// 	int CDawal,TDawal,FDawal,VDawal;//D -> Defender
-// 	int CDakhir,TDakhir,FDakhir,VDakhir;
-// 	int TotalAwalD,TotalAkhirD;
-// 	address ListDefender;
-
-// 	//Algoritma
-// 	HitungBangunan(*attacker,&CAawal,&TAawal,&FAawal,&VAawal);
-// 	HitungBangunan(*defender,&CDawal,&TDawal,&FDawal,&VDawal);
-// 	TotalAwalA  = CAawal+TAawal+FAawal+VAawal;
-// 	TotalAwalD  = CDakhir+TDakhir+FDakhir+VDakhir;
-// 	ListDefender = 	First(ListBangunan(*defender));
-// 	for (int i=1;i <= input;i++){ //anggap input valid
-// 		ListDefender = Next(ListDefender);
-// 	}
-// 	//if CriticalHit .......
-// 	SerangBangunan(&ElmtArr(TB,Info(ListDefender)),JumlahPasukan(ElmtArr(TB,Info(ListDefender))));
-// 	HitungBangunan(*defender,&CDakhir,&TDakhir,&FDakhir,&VDakhir);
-// 	TotalAkhirA = CAakhir+TAakhir+FAakhir+VAakhir;
-// 	TotalAkhirD = CDakhir+TDakhir+FDakhir+VDakhir;
-// 	if (TotalAwalD==3 && TotalAkhirD==2){
-// 		KeepSkill(defender,'S');
-// 	}
-// 	if (FDakhir == FDawal-1){
-// 		KeepSkill(defender,'E');
-// 	}
-// 	if (TDawal==4 && TDakhir==3){// asumsi "towernya" itu tower lawan.
-// 		KeepSkill(defender,'A');
-// 	}
-// }
-
-// void PlayerCriticalAttack(Player *attacker,Player *defender){
-
-// }
-
-
-// void HitungFnT (int num,Player P1,Player 2,int *F,int *T){//hitung jumlah Fort dan Tower dari lawan
-// 	//Kamus Lokal
-// 	address Q;
-// 	int castle,tower,fort,village;
-	
-// 	//Algoritma
-// 	tower = 0;
-// 	fort = 0;
-// 	if (num = NoPemain(P1)){
-// 		Q = First(ListBangunan(P2));
-// 		while (Q != Nil){
-// 			if (Jenis(ElmtArr(TB,Info(Q))) == 'T'){
-// 				tower +=1;
-// 			}
-// 			if (Jenis(ElmtArr(TB,Info(Q))) == 'F'){
-// 				fort +=1;
-// 			}
-// 			Q = Next(Q);
-// 		}
-// 		*T = tower;
-// 		*F = fort;
-// 	} else {
-// 		Q = First(ListBangunan(P1));
-// 		while (Q != Nil){
-// 			if (Jenis(ElmtArr(TB,Info(Q))) == 'T'){
-// 				tower +=1;
-// 			}
-// 			if (Jenis(ElmtArr(TB,Info(Q))) == 'F'){
-// 				fort +=1;
-// 			}
-// 			Q = Next(Q);
-// 		}
-// 		*T = tower;
-// 		*F = fort;
-// 	}
-// }
-
-//Diset up di main
-// void GetdExtraTurn();
-// void GetAttackUp();
-// void GetCriticalHit();
-// void GetBarrage();
-
-

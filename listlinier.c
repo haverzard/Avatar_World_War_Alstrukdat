@@ -681,24 +681,39 @@ void ReinforceAll(List L)
 	}
 }
 
-void BarrageAll(List L) 
+void BarrageAll(List Luser,List Lenemy) {
 /*	I.S. L dan TB terdefinisi
 	F.S. Semua bangunan dengan indeks TB pada list L dikurang pasukannya sebanyaknya 10
 */
-{
 	/* Kamus Lokal */
 	address P;
 
 	/* Algoritma */
-	if (!IsEmpty_LL(L)) {
-		P = First(L);
-		if (JumlahPasukan(ElmtArr(TB,Info(P))) >= 10) {
+	if (!IsEmpty_LL(Lenemy)) {
+		P = First(Lenemy);
+		if (JumlahPasukan(ElmtArr(TB,Info(P))) > 10) {
 			JumlahPasukan(ElmtArr(TB,Info(P))) -= 10;
+		} else {
+			if (Kepemilikan(ElmtArr(TB,Info(P)))==0){
+				Kepemilikan(ElmtArr(TB,Info(P)))=1;
+			} else {
+				Kepemilikan(ElmtArr(TB,Info(P)))=0;
+			}
+			DelP(&Lenemy,ElmtArr(TB,Info(P)));
+			InsVLast(&Luser,Info(P));
 		}
 		while (Next(P) != Nil) {
 			P = Next(P);
-			if (JumlahPasukan(ElmtArr(TB,Info(P))) >= 10) {
+			if (JumlahPasukan(ElmtArr(TB,Info(P))) > 10) {
 				JumlahPasukan(ElmtArr(TB,Info(P))) -= 10;
+			}else {
+				if (Kepemilikan(ElmtArr(TB,Info(P)))==0){
+					Kepemilikan(ElmtArr(TB,Info(P)))=1;
+				} else {
+					Kepemilikan(ElmtArr(TB,Info(P)))=0;
+				}
+				DelP(&Lenemy,ElmtArr(TB,Info(P)));
+				InsVLast(&Luser,Info(P));
 			}
 		}
 	}

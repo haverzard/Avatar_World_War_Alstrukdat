@@ -105,7 +105,7 @@ void CriticalHit (Player *user);
 
 void InstantReinforcement (Player *P);
 
-void Barrage (Player *P);
+void Barrage (Player *user, Player *enemy);
 
 /* *** Keep Skill *** */
 void KeepSkill (Player *user, skilltype skillName);
@@ -123,7 +123,7 @@ void GetShield(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhi
 
 void GetExtraTurn(int num,Player *P1,Player *P2,int Fdawal,int Fdakhir);
 
-void GetAttackUp (int num,Player *P1,Player *P2,int Tdawal,int Tdakhir);
+void GetAttackUp (int num,Player *P1,Player *P2,int TAawal,int TAakhir);
 
 void GetBarrage(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhirP1,int buildingAwalP2 ,int buildingAkhirP2);
 

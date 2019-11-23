@@ -172,6 +172,8 @@ void ATTACK(int NoPemain, Player P1, Player P2)
 							GetAttackUp(NoPemain,&P1,&P2,Tdawal,Tdakhir);
 							GetBarrage(NoPemain,&P1,&P2,jumlahBangunanP1awal,jumlahBangunanP1akhir,jumlahBangunanP2awal,jumlahBangunanP2akhir);
 							printf("Bangunan menjadi milikku!\n");
+							// TEST
+							GetIReinforcement(1,&P1,&P2);
 						} else {
 							printf("Bangunan gagal direbut.\n");
 						}
