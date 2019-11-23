@@ -32,7 +32,7 @@ extern int attackUp;
 // #define attackUpBool(P) (P).attackUpBool
 
 /* ********* List x Player ********* */
-void InitPlayer(int num, Player *P);
+void InitPlayer(int num, Player *P, Player Pother);
 /*	I.S. P belum terdefinisi
 	F.S. P terdefinisi sebagai player ke-num
 */

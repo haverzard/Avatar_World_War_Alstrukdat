@@ -158,18 +158,20 @@ void HUBUNGANBANGUNAN (MATRIKS_INT * Hubungan, int BanyakBangunan) {
 	IgnoreBlank_DATA();
 	MakeMATRIKS_INT(BanyakBangunan,BanyakBangunan, Hubungan);
 	i = GetFirstIdxBrsMatInt(*Hubungan);
-	while (i <= BanyakBangunan && !feof(pita)) {
+	while (i <= BanyakBangunan) {
 		j = GetFirstIdxKolMatInt(*Hubungan);
-		while (j <= BanyakBangunan && !feof(pita)) {
+		while (j <= BanyakBangunan) {
 			if (CC != BLANK) {
 				if (CC == '1' || CC == '0') {
 					ElmtMatInt(*Hubungan, i, j) = KarakterToInt(CC);
 					j++;
+					ADV();
 				} else {
 					ERROR();
 				}
-			} 
-			ADV();
+			} else {
+				ADV();
+			}
 		}
 		i++;
 		NEXTDATA();
@@ -192,14 +194,13 @@ void MOREINFOBANGUNAN(TabBangunan *TB)
 
 	/* Algoritma */
 	for (i = 1; i <= MaxElArr(*TB); i++) {
-		ADV();
 		IgnoreBlank_DATA();
 		A = 0;
 		while (CC != BLANK && !feof(pita)) {
 			A = A * 10 + KarakterToInt(CC);
 			ADV();
 		}
-		if (feof(pita) || A != 2 || A != 1) { ERROR(); }
+		if (feof(pita) || (A != 2 && A != 1 && A != 0)) { ERROR(); }
 		Kepemilikan(ElmtArr(*TB,i)) = A;
 		IgnoreBlank_DATA();
 		A = 0;
@@ -239,7 +240,7 @@ void MOREINFOBANGUNAN(TabBangunan *TB)
 			A = A * 10 + KarakterToInt(CC);
 			ADV();
 		}
-		if (feof(pita) || A != true || A != false) { ERROR(); }
+		if (feof(pita) || (A != true && A != false)) { ERROR(); }
 		P(ElmtArr(*TB,i)) = A;
 		IgnoreBlank_DATA();
 		A = 0;
@@ -247,7 +248,7 @@ void MOREINFOBANGUNAN(TabBangunan *TB)
 			A = A * 10 + KarakterToInt(CC);
 			ADV();
 		}
-		if (feof(pita) || A != true || A != false) { ERROR(); }
+		if (feof(pita) || (A != true && A != false)) { ERROR(); }
 		AttackAvai(ElmtArr(*TB,i)) = A;
 		IgnoreBlank_DATA();
 		A = 0;
@@ -255,7 +256,7 @@ void MOREINFOBANGUNAN(TabBangunan *TB)
 			A = A * 10 + KarakterToInt(CC);
 			ADV();
 		}
-		if (feof(pita) || A != true || A != false) { ERROR(); }
+		if (feof(pita) || (A != true && A != false)) { ERROR(); }
 		MoveAvai(ElmtArr(*TB,i)) = A;
 		NEXTDATA();
 	}
@@ -267,11 +268,125 @@ void INFOTURN(int *turn)
 */
 {
 	/* Algoritma */
+	IgnoreBlank_DATA();
 	*turn = 0;
 	while (CC != ENDLINE && CC != ENDLINE2 && !feof(pita)) {
 		*turn = *turn * 10 + KarakterToInt(CC);
 		ADV();
 	}
-	if (feof(pita) || *turn != 2 || *turn != 1) { ERROR(); }
+	if (feof(pita) || (*turn != 2 && *turn != 1)) { ERROR(); }
 	NEXTDATA();
+}
+
+void INFOCOLOR(Player *P1, Player *P2) 
+/*  I.S. Color pada P1 dan P2 sembarang
+    F.S. Color pada P1 dan P2 terdefinisi
+*/
+{
+	/* Algoritma */
+	IgnoreBlank_DATA();
+	Color(*P1) = 0;
+	while (CC != BLANK && !feof(pita)) {
+		Color(*P1) = Color(*P1) * 10 + KarakterToInt(CC);
+		ADV();
+	}
+	IgnoreBlank_DATA();
+	Color(*P2) = 0;
+	while (CC != ENDLINE && CC != ENDLINE2 && !feof(pita)) {
+		Color(*P2) = Color(*P2) * 10 + KarakterToInt(CC);
+		ADV();
+	}
+	if (feof(pita) || Color(*P1) < 1 || Color(*P1) > 6 || Color(*P2) < 1 || Color(*P2) > 6 || Color(*P1) == Color(*P2)) {
+		ERROR();
+	}
+	NEXTDATA();
+}
+
+void LOADBANGUNANPLAYER(Player *P1, Player *P2) 
+{
+	/* Kamus Lokal */
+	int temp;
+
+	/* Algoritma */
+	CreateEmpty_LL(&ListBangunan(*P1));
+	CreateEmpty_LL(&ListBangunan(*P2));
+	while (CC != ENDLINE && CC != ENDLINE2 && !feof(pita)) {
+		IgnoreBlank_DATA();
+		temp = 0;
+		while (CC != BLANK && CC != ENDLINE && CC != ENDLINE2 && !feof(pita)) {
+			temp = temp * 10 + KarakterToInt(CC);
+			ADV();
+		}
+		if (temp < 1 || temp > MaxElArr(TB) || SearchInfo(ListBangunan(*P1), temp) != Nil) {
+			ERROR();
+		} else {
+			InsVLast(&ListBangunan(*P1), temp);
+		}
+	}
+	if (!feof(pita)) {
+		NEXTDATA();
+	}
+	while (CC != ENDLINE && CC != ENDLINE2 && !feof(pita)) {
+		IgnoreBlank_DATA();
+		temp = 0;
+		while (CC != BLANK && CC != ENDLINE && CC != ENDLINE2 && !feof(pita)) {
+			temp = temp * 10 + KarakterToInt(CC);
+			ADV();
+		}
+		if (temp < 1 || temp > MaxElArr(TB) || SearchInfo(ListBangunan(*P1), temp) != Nil || SearchInfo(ListBangunan(*P2), temp) != Nil) {
+			ERROR();
+		} else {
+			InsVLast(&ListBangunan(*P2), temp);
+		}
+	}
+	if (!feof(pita)) {
+		NEXTDATA();
+	} else {
+		ERROR();
+	}
+}
+
+void LOADSKILL(Player *P1, Player *P2)
+/*  I.S. skill milik P1 dan P2 sembarang
+    F.S. skill milik P1 dan P2 terdefinisi
+*/
+{
+	/* Kamus Lokal */
+	char temp;
+
+	/* Algoritma */
+	CreateEmpty_Queue(&Skill(*P1), 10); CreateEmpty_Queue(&Skill(*P2), 10);
+	while (CC != ENDLINE && CC != ENDLINE2 && !feof(pita)) {
+		IgnoreBlank_DATA();
+		temp = ENDLINE;
+		while (CC != BLANK && CC != ENDLINE && CC != ENDLINE2 && !feof(pita)) {
+			temp = CC;
+			ADV();
+		}
+		if (temp != 'U' && temp != 'S' && temp != 'E' && temp != 'A' && temp != 'H' && temp != 'R' && temp != 'B' && temp != ENDLINE) {
+			ERROR();
+		} else if (temp != ENDLINE) {
+			KeepSkill(P1, temp);
+			// Add(&Skill(*P1), temp);
+		}
+	}
+	if (!feof(pita)) {
+		NEXTDATA();
+	} else {
+		ERROR();
+	}
+	while (CC != ENDLINE && CC != ENDLINE2 && !feof(pita)) {
+		IgnoreBlank_DATA();
+		temp = ENDLINE;
+		while (CC != BLANK && CC != ENDLINE && CC != ENDLINE2 && !feof(pita)) {
+			temp = CC;
+			ADV();
+		}
+		if (temp != 'U' && temp != 'S' && temp != 'E' && temp != 'A' && temp != 'H' && temp != 'R' && temp != 'B' && temp != ENDLINE) {
+			ERROR();
+		} else if (temp != ENDLINE) {
+			KeepSkill(P1, temp);
+			// Add(&Skill(*P2), temp);
+		}
+	}
 }

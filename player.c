@@ -14,7 +14,7 @@
 int extraTurn=0;
 int attackUp = 0;
 
-void InitPlayer(int num, Player *P) 
+void InitPlayer(int num, Player *P, Player Pother) 
 /*	I.S. P belum terdefinisi
 	F.S. P terdefinisi sebagai player ke-num dengan nama dan warna yang benar
 */
@@ -29,8 +29,8 @@ void InitPlayer(int num, Player *P)
 	printf("2. Green	5. Magenta\n");
 	printf("3. Yellow	6. Cyan\n");
 	printf("Masukan: "); scanf("%d", &choice);
-	while (choice > 6 || choice < 1) {
-		printf("Input yang benar dong!\n");
+	while (choice > 6 || choice < 1 || (num == 2 && Color(Pother) == choice)) {
+		printf("Input yang benar dong! Pastikan warna Anda berbeda!\n");
 		printf("Masukan: "); scanf("%d", &choice);
 	}
 	Color(*P) = choice;
@@ -43,7 +43,6 @@ void InitPlayer(int num, Player *P)
 	IterateAndOwn(num, &ListBangunan(*P));
 	shieldDuration(*P) = 0;
 	Critical(*P) = false;
-	// attackUpBool(*P) = false;
 }
 
 boolean CheckWinOrNot(int num, Player P1, Player P2) 
@@ -512,11 +511,17 @@ void MinShieldDuration (int num,Player *P1,Player *P2)
 		if (shieldDuration(*P1)>0) {
 			shieldDuration(*P1) -=1;
 			printf("Efek Shield tinggal %d turn\n",shieldDuration(*P2));
+		} else {
+			ShieldOff(ListBangunan(*P1));
+			printf("Efek Shield habis!");
 		}
 	} else {
 		if (shieldDuration(*P2)>0) {
 			shieldDuration(*P2) -=1;
 			printf("Efek Shield tinggal %d turn\n",shieldDuration(*P2));
+		} else {
+			ShieldOff(ListBangunan(*P2));
+			printf("Efek Shield habis!");
 		}
 	}
 }
