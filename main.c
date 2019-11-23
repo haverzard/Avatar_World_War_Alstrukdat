@@ -41,13 +41,9 @@ int main() {
 				TURN(i, &p1, &p2);
 			}
 			UpdateListBangunan(i, p1, p2);
+			GetIUpgrade(&p1);GetIUpgrade(&p1);GetIUpgrade(&p1);GetIUpgrade(&p1);
+			GetIReinforcement(i, &p1, &p2);
 			//Ini buat testing doang
-			GetIReinforcement(1,&p1,&p2);
-			GetIReinforcement(1,&p1,&p2);
-			GetIReinforcement(1,&p1,&p2);
-			GetIReinforcement(1,&p1,&p2);
-			GetIReinforcement(1,&p1,&p2);
-			GetIReinforcement(1,&p1,&p2);
 			// MinShieldDuration(i,&p1,&p2);
 			// //Tambahin shield Duration
 			// // if (extraTurn = 0){

@@ -419,15 +419,15 @@ void GetAttackUp (int num,Player *P1,Player *P2,int TAawal,int TAakhir){
 void GetIReinforcement(int num, Player *P1,Player *P2){
 	/* Algoritma */
 	if (NoPemain(*P1) == num) {
-		// if (isAllLevel4(*P1)){
+		if (isAllLevel4(*P1)){
 			KeepSkill(P1,'R');	
 			printf("Kamu mendapatkan skill Instant Reinforcement\n");
-		// }
-	// } else {
-	// 	if (isAllLevel4(*P2)){
-	// 		KeepSkill(P2,'R');
-	// 		printf("Kamu mendapatkan skill Instant Reinforcement\n");
-	// 	}
+		}
+	} else {
+		if (isAllLevel4(*P2)){
+			KeepSkill(P2,'R');
+			printf("Kamu mendapatkan skill Instant Reinforcement\n");
+		}
 	}
 }
 
