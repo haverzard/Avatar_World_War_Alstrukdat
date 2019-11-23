@@ -12,23 +12,27 @@
 #include "mesinkata.h"
 #include "arraydinpos.h"
 #include "stack.h"
+#include "graph.h"
 
 #define printl(x) printf("%s\n", x);
 #define println() printf("\n");
 
 /* Variable Global */
-int choice;
 boolean EndGame;
 boolean EndTurn = false;
 boolean SkillUsed = false;
 Stack Status;
 
-void STARTGAME() 
+void STARTGAME(Player *P1, Player *P2) 
 /* 	I.S. Menampilkan menu awal dan menerima masukan user 
 	F.S. Choice terisi dan game akan mulai di-load jika choice sesuai.
 		 Jika choice tidak sesuai, balik lagi ke menu utama.
 */
 {
+	/* Kamus Lokal */
+	int choice;
+	char filename[100];
+
 	/* Algoritma */
 	printl("█████████████████████████████████████████████████████");
 	printl("██                                                 ██");
@@ -47,15 +51,31 @@ void STARTGAME()
 	printf("Masukkan Anda: "); scanf("%d", &choice);
 	printl("HUHU -_-"); println();
 	SCAN();
-	LOADGAME();
-}
-
-void LOADGAME() {
-	/* Algoritma */
-	if (choice == 1 || choice == 2) {
-		STARTDATA();
+	if (choice == 1) {
+		scanf("%100s", filename);
+		SCAN();
+		STARTDATA(filename);
+		INFOPETA(&Peta);
+		INFOBANGUNAN(&TB);
+		LOKASIBANGUNAN(&Peta, &TB);
+		HUBUNGANBANGUNAN(&Hubungan, NBElmt_Array(TB));
+		GenerateHubunganBangunan(&GHubungan, Hubungan);
+		CREATEPLAYER(P1, P2);
+		GetIUpgrade (P1);
+		GetIUpgrade (P2);
+	} else if (choice == 2) {
+		scanf("%100s", filename);
+		SCAN();
+		STARTDATA(filename);
+		INFOPETA(&Peta);
+		INFOBANGUNAN(&TB);
+		LOKASIBANGUNAN(&Peta, &TB);
+		HUBUNGANBANGUNAN(&Hubungan, NBElmt_Array(TB));
+		GenerateHubunganBangunan(&GHubungan, Hubungan);
+		CREATEPLAYER(P1, P2);
+		MOREINFOBANGUNAN(&TB);
 	} else {
-		printl("Inputnya yang benar dong!"); println();
+		printl("Input yang benar dong!");
 		EndGame = true;
 	}
 }
@@ -66,15 +86,18 @@ void SAVEGAME(int num, Player P1, Player P2)
 {
 	/* Kamus Lokal */
 	FILE * save;
-	int i, j;
+	int i, j, NbSkill1, NbSkill2;
 	Bangunan B;
 
 	/* Algoritma */
 	SCANKATA();
 	if (!EQ_KATA(CKata, "EXIT")) {
-		save = fopen(CKata.TabKata,"w");
+		// save = fopen(CKata.TabKata,"w");
+		save = fopen("tes.dat","w");
 		/* Turn */
 		fprintf(save,"%d\n", num);
+		/* Warna Pemain */
+		fprintf(save,"%d %d\n", Color(P1), Color(P2));
 		/* Ukuran Peta */
 		fprintf(save,"%d %d\n", NBrsEff(Peta), NKolEff(Peta));
 		/* Ukuran Array */
@@ -90,7 +113,7 @@ void SAVEGAME(int num, Player P1, Player P2)
 			for (j = 2; j <= MaxElArr(TB); j++) {
 				fprintf(save, " %d", ElmtMatInt(Hubungan,i,j));
 			}
-			printf("\n");
+			fprintf(save, "\n");
 		}
 		/* Info Bangunan */
 		for (i = 1; i <= MaxElArr(TB); i++) {
@@ -98,8 +121,19 @@ void SAVEGAME(int num, Player P1, Player P2)
 			fprintf(save, "%d %d %d %d %d %d %d %d\n", Kepemilikan(B), JumlahPasukan(B), Level(B), A(B), M(B), P(B), AttackAvai(B), MoveAvai(B));
 		}
 		/* Isi Stack */
-		/* Isi Queue P1 */
-		/* Isi Queue P2 */ 
+		
+		/* Isi Queue Skill P1 */
+		NbSkill1 = NbElmt(Skill(P1));
+		if (NbSkill1 > 0) {
+			fprintf(save, '%c', Skill(P1).S[i]);
+			for (i = 2; i <= NbSkill1; i++) {
+        	    fprintf(save, ' %c', Skill(P1).S[i]);
+     	   }
+		}
+		/* Isi Queue Skill P2 */ 
+		
+		printf("Game berhasil di save!\n");
+		fclose(save);
 	}
 }
 

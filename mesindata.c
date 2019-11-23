@@ -29,13 +29,13 @@ void IgnoreBlank_DATA()
 	}
 }
 
-void STARTDATA() 
+void STARTDATA(char *filename) 
 /* Memulai pembacaan data
    I.S. : File data belum diakses
    F.S. : Pembacaan sudah bisa dimulai dan CC ≠ BLANK */
 {
 	/* Algoritma */
-	START();
+	START(filename);
 	IgnoreBlank_DATA();
 }
 

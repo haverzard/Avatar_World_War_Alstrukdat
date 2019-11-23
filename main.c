@@ -23,18 +23,9 @@ int main() {
 	Jenis(BangunanUndef) = JenisUndef;
 	
 	/* Algoritma */
-	STARTGAME();
-
+	STARTGAME(&p1, &p2);
+	
 	if (!EndGame) {
-		INFOPETA(&Peta);
-		INFOBANGUNAN(&TB);
-		LOKASIBANGUNAN(&Peta, &TB);
-		HUBUNGANBANGUNAN(&Hubungan, NBElmt_Array(TB));
-		GenerateHubunganBangunan(&GHubungan, Hubungan);
-		// PrintAllHubunganBangunan(GHubungan);
-		CREATEPLAYER(&p1, &p2);
-		GetIUpgrade (&p1);
-		GetIUpgrade (&p2);
 		i = 1;
 		while (!EndGame) {
 			while (!EndTurn) {

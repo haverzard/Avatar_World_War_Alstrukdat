@@ -26,7 +26,7 @@ void IgnoreBlank_DATA();
    I.S. : CC sembarang
    F.S. : CC ≠ BLANK atau CC = ENDLINE */
 
-void STARTDATA();
+void STARTDATA(char *filename);
 /* Memulai pembacaan data
    I.S. : File data belum diakses
    F.S. : Pembacaan sudah bisa dimulai dan CC ≠ BLANK */
