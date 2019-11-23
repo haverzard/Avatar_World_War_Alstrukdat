@@ -59,16 +59,4 @@ boolean EQ_POINT (POINT P1, POINT P2);
 boolean NEQ_POINT (POINT P1, POINT P2);
 /* Mengirimkan true jika P1 tidak sama dengan P2 */
 
-/* *** Kelompok menentukan di mana P berada *** */
-boolean IsOrigin (POINT P);
-/* Menghasilkan true jika P adalah titik origin */
-boolean IsOnSbX (POINT P);
-/* Menghasilkan true jika P terletak Pada sumbu X */
-boolean IsOnSbY (POINT P);
-/* Menghasilkan true jika P terletak pada sumbu Y */
-int Kuadran (POINT P);
-/* Menghasilkan kuadran dari P: 1, 2, 3, atau 4 */
-/* Prekondisi : P bukan titik origin, */
-/*              dan P tidak terletak di salah satu sumbu */
-
 #endif

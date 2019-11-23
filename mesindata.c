@@ -19,7 +19,11 @@ int KarakterToInt(char x) {
 	return (int) x-48;
 }
 
-void ERROR() {
+void ERROR() 
+/*	I.S. sembarang
+	F.S. Menampilkan pesan error "File eksternal tidak sesuai spesifikasi! Load file gagal!"
+*/
+{
 	printf("File eksternal tidak sesuai spesifikasi! Load file gagal!\n");
 	exit(1);
 }
@@ -27,7 +31,7 @@ void ERROR() {
 void IgnoreBlank_DATA()
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : CC sembarang
-   F.S. : CC ≠ BLANK atau CC = ENDLINE */
+   F.S. : CC ≠ BLANK atau CC = ENDLINE atau CC = ENDLINE2 atau EOF */
 {
     /* Algoritma */
 	while (CC == BLANK && CC != ENDLINE && CC != ENDLINE2 && !feof(pita)) {
@@ -50,7 +54,7 @@ void STARTDATA(char *filename)
 }
 
 void NEXTDATA() 
-/*	I.S. CC mungkin berisi ENDLINE atau BLANK
+/*	I.S. CC mungkin berisi ENDLINE atau ENDLINE2 atau BLANK
 	F.S. CC adalah karakter yang akan dibaca selanjutnya
 */
 {
@@ -303,6 +307,9 @@ void INFOCOLOR(Player *P1, Player *P2)
 }
 
 void LOADBANGUNANPLAYER(Player *P1, Player *P2) 
+/*  I.S. bangunan milik P1 dan P2 sembarang
+    F.S. bangunan milik P1 dan P2 terdefinisi
+*/
 {
 	/* Kamus Lokal */
 	int temp;
@@ -367,7 +374,6 @@ void LOADSKILL(Player *P1, Player *P2)
 			ERROR();
 		} else if (temp != ENDLINE) {
 			KeepSkill(P1, temp);
-			// Add(&Skill(*P1), temp);
 		}
 	}
 	if (!feof(pita)) {
@@ -386,7 +392,6 @@ void LOADSKILL(Player *P1, Player *P2)
 			ERROR();
 		} else if (temp != ENDLINE) {
 			KeepSkill(P1, temp);
-			// Add(&Skill(*P2), temp);
 		}
 	}
 }

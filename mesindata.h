@@ -22,10 +22,15 @@ extern char Baris[NMax_DATA+1];
 int KarakterToInt(char x);
 /* KarakterToInt mengonversi tipe data x menjadi integer */
 
+void ERROR();
+/*	I.S. sembarang
+	F.S. Menampilkan pesan error "File eksternal tidak sesuai spesifikasi! Load file gagal!"
+*/
+
 void IgnoreBlank_DATA();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : CC sembarang
-   F.S. : CC ≠ BLANK atau CC = ENDLINE */
+   F.S. : CC ≠ BLANK atau CC = ENDLINE atau CC = ENDLINE2 atau EOF */
 
 void STARTDATA(char *filename);
 /* Memulai pembacaan data
@@ -33,7 +38,7 @@ void STARTDATA(char *filename);
    F.S. : Pembacaan sudah bisa dimulai dan CC ≠ BLANK */
 
 void NEXTDATA();
-/* I.S. CC mungkin berisi ENDLINE atau BLANK
+/* I.S. CC mungkin berisi ENDLINE atau ENDLINE2 atau BLANK
    F.S. CC adalah karakter yang akan dibaca selanjutnya
 */
 

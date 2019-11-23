@@ -312,19 +312,12 @@ void PrintSkill(Player P) {
 	/* Algoritma */
 	switch(InfoHead(Skill(P))) {
 		case 'U': printf("Instant Upgrade"); break;
-		case 'u': printf("Instant Upgrade"); break;
 		case 'S': printf("Shield"); break;
-		case 's': printf("Shield"); break;
 		case 'E': printf("Extra Turn"); break;
-		case 'e': printf("Extra Turn"); break;
 		case 'A': printf("Attack Up"); break;
-		case 'a': printf("Attack Up"); break;
 		case 'H': printf("Critical Hit"); break;
-		case 'h': printf("Critical Hit"); break;
 		case 'R': printf("Instant Reinforcement"); break;
-		case 'r': printf("Instant Reinforcement"); break;
 		case 'B': printf("Barrage"); break;
-		case 'b': printf("Barrage"); break;
 	}
 }
 

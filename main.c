@@ -34,8 +34,6 @@ int main() {
 				TURN(turn, &p1, &p2);
 			}
 			UpdateListBangunan(turn, p1, p2);
-			GetIUpgrade(&p1);GetIUpgrade(&p2);GetIUpgrade(&p1);GetIUpgrade(&p2);
-			GetIReinforcement(turn, &p1, &p2);
 			if (extraTurn == 0){
 				turn = (turn % 2 + 3) - 2; 
 				MinShieldDuration(turn,&p1,&p2);

@@ -20,6 +20,11 @@ void STARTGAME(Player *P1, Player *P2) ;
 		 Jika choice tidak sesuai, balik lagi ke menu utama.
 */
 
+void SAVEGAME(int num, Player P1, Player P2);
+/*	I.S. P1, P2, TB, GHubungan terdefinisi
+	F.S. Terbentuk file data save sesuai inputan player dengan spesifikasi khusus
+*/
+
 void CREATEPLAYER(Player *P1, Player *P2);
 /*	I.S. P1 dan P2 belum terdefinisi
 	F.S. P1 dan P2 sudah terdefinisi termasuk atribut-atributnya

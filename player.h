@@ -119,7 +119,11 @@ void UseSkillP (Player *user,Player *enemy);
 
 void UseSkill(int num,Player *user, Player *enemy);
 
+void PrintSkill(Player P);
+
 void ShowSkill(int num, Player P1, Player P2);
+
+boolean isAllLevel4 (Player P);
 
 void GetIUpgrade(Player *P);
 
@@ -129,12 +133,10 @@ void GetExtraTurn(int num,Player *P1,Player *P2,int Fdawal,int Fdakhir);
 
 void GetAttackUp (int num,Player *P1,Player *P2,int TAawal,int TAakhir);
 
-void GetBarrage(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhirP1,int buildingAwalP2 ,int buildingAkhirP2);
-// void GetBarrage(int num,Player *P1,Player *P2);
-
 void GetIReinforcement(int num, Player *P1,Player *P2);
 
-boolean isAllLevel4 (Player P);
+void GetBarrage(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhirP1,int buildingAwalP2 ,int buildingAkhirP2);
+// void GetBarrage(int num,Player *P1,Player *P2);
 
 void HitungFort(int num,Player P1,Player P2,int *F);
 
@@ -144,9 +146,10 @@ boolean isCurrentPCritical (int num,Player P1,Player P2);
 
 void GetShield(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhirP1,int buildingAwalP2 ,int buildingAkhirP2);
 
+void MinShieldDuration (int num,Player *P1,Player *P2);
+
 void CriticalOff (int num,Player *P1,Player *P2);
 
-void MinShieldDuration (int num,Player *P1,Player *P2);
 // void SerangPlayer (int input,Player *attacker, Player *defender);
 // void HitungBangunan (Player P,int *C,int *T, int *F, int *V);
 

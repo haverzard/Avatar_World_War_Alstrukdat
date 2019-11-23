@@ -92,6 +92,7 @@ void STARTGAME(Player *P1, Player *P2)
 
 void SAVEGAME(int num, Player P1, Player P2) 
 /*	I.S. P1, P2, TB, GHubungan terdefinisi
+	F.S. Terbentuk file data save sesuai inputan player dengan spesifikasi khusus
 */
 {
 	/* Kamus Lokal */
@@ -398,7 +399,6 @@ void UPDATESTATUS (Player P1, Player P2)
 {
 	/* Algoritma */
 	UpdateStatus_Stack(&Status, P1, P2, TB);
-	// infotypeStack X; Pop(&Status, &X); printf("INFO PLAYER: %d\n", NoPemain(InfoPlayer(X)));
 }
 
 void UNDO (Player *P1, Player *P2, boolean isSkillUsed) 
