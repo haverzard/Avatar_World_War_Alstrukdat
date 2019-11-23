@@ -145,7 +145,8 @@ void TURN(int NoPemain, Player *P1, Player *P2)
 		SkillUsed = false;
 		ResetStatus(&Status);
 	} else if (EQ_KATA(CKata, "SAVE")) {
-		printl("SAVE!");
+		printl("Lokasi save file: "); 
+		SAVEGAME(NoPemain, *P1, *P2);
 	} else if (EQ_KATA(CKata, "MOVE")) {
 		MOVE(NoPemain, *P1, *P2);
 	} else if (EQ_KATA(CKata, "EXIT")) {
