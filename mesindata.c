@@ -308,6 +308,8 @@ void LOADBANGUNANPLAYER(Player *P1, Player *P2)
 	int temp;
 
 	/* Algoritma */
+	CreateEmpty_LL(&ListBangunan(*P1));
+	CreateEmpty_LL(&ListBangunan(*P2));
 	while (CC != ENDLINE && CC != ENDLINE2 && !feof(pita)) {
 		IgnoreBlank_DATA();
 		temp = 0;
@@ -361,7 +363,7 @@ void LOADSKILL(Player *P1, Player *P2)
 			temp = CC;
 			ADV();
 		}
-		if (temp != 'U' || temp != 'u' || temp != 'S' || temp != 'E' || temp != 'A' || temp != 'H' || temp != 'R' || temp != 'B') {
+		if (temp != 'U' || temp != 'S' || temp != 'E' || temp != 'A' || temp != 'H' || temp != 'R' || temp != 'B') {
 			ERROR();
 		} else if (temp != ENDLINE) {
 			Add(&Skill(*P1), temp);
@@ -379,7 +381,7 @@ void LOADSKILL(Player *P1, Player *P2)
 			temp = CC;
 			ADV();
 		}
-		if (temp != 'U' || temp != 'u' || temp != 'S' || temp != 'E' || temp != 'A' || temp != 'H' || temp != 'R' || temp != 'B') {
+		if (temp != 'U' || temp != 'S' || temp != 'E' || temp != 'A' || temp != 'H' || temp != 'R' || temp != 'B') {
 			ERROR();
 		} else if (temp != ENDLINE) {
 			Add(&Skill(*P2), temp);

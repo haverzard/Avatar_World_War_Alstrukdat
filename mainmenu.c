@@ -74,13 +74,12 @@ void STARTGAME(Player *P1, Player *P2)
 		LOKASIBANGUNAN(&Peta, &TB);
 		HUBUNGANBANGUNAN(&Hubungan, NBElmt_Array(TB));
 		GenerateHubunganBangunan(&GHubungan, Hubungan);
-		// CREATEPLAYER(P1, P2);
 		MOREINFOBANGUNAN(&TB);
 		INFOTURN(&turn);
 		INFOCOLOR(P1, P2);
 		LOADBANGUNANPLAYER(P1, P2);
-		LOADSKILL(P1, P2);
-		CreateEmpty_Stack(&Status);
+		// LOADSKILL(P1, P2);
+		// CreateEmpty_Stack(&Status);
 		printf("File berhasil di load!\n");
 	} else {
 		printl("Input yang benar dong!");
@@ -100,6 +99,7 @@ void SAVEGAME(int num, Player P1, Player P2)
 	address temp1, temp2;
 	/* Algoritma */
 	printf("Masukkan lokasi file data save: "); scanf("%100s", filename);
+	SCAN();
 	save = fopen(filename,"w");
 	/* Ukuran Peta */
 	fprintf(save,"%d %d\n", NBrsEff(Peta), NKolEff(Peta));
