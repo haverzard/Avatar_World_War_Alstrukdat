@@ -100,12 +100,14 @@ void SAVEGAME(int num, Player P1, Player P2)
 {
 	/* Kamus Lokal */
 	FILE * save;
-	char filename[100];
+	char filename[150], temp[100];
 	int i, j, NbSkill1, NbSkill2;
 	Bangunan B;
 	address temp1, temp2;
+
 	/* Algoritma */
-	printf("Masukkan lokasi file data save: "); scanf("%100s", filename);
+	printf("Masukkan nama data save: "); scanf("%100s", temp);
+	strcpy(filename, "savefiles/"); strcat(filename, temp);
 	SCAN();
 	save = fopen(filename,"w");
 	/* Ukuran Peta */
