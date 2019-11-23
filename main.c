@@ -40,8 +40,15 @@ int main() {
 			while (!EndTurn) {
 				TURN(i, Peta, &p1, &p2);
 			}
+			//terminal dong
 			UpdateListBangunan(i, p1, p2);
-			// GetIReinforcement(i,&p1,&p2);
+			//Ini buat testing doang
+			GetIReinforcement(1,&p1,&p2);
+			GetIReinforcement(1,&p1,&p2);
+			GetIReinforcement(1,&p1,&p2);
+			GetIReinforcement(1,&p1,&p2);
+			GetIReinforcement(1,&p1,&p2);
+			GetIReinforcement(1,&p1,&p2);
 			// MinShieldDuration(i,&p1,&p2);
 			// //Tambahin shield Duration
 			// // if (extraTurn = 0){
