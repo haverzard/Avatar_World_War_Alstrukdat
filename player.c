@@ -29,11 +29,12 @@ void InitPlayer(int num, Player *P)
 	printf("2. Green	5. Magenta\n");
 	printf("3. Yellow	6. Cyan\n");
 	printf("Masukan: "); scanf("%d", &choice);
-	while (choice > 6 && choice < 1) {
+	while (choice > 6 || choice < 1) {
 		printf("Input yang benar dong!\n");
 		printf("Masukan: "); scanf("%d", &choice);
 	}
 	Color(*P) = choice;
+	printf("\n");
 	NoPemain(*P) = num;
 	CreateEmpty_LL(&ListBangunan(*P));
 	CreateEmpty_Queue(&Skill(*P), 10);
