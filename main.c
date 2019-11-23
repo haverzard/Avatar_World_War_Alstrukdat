@@ -38,10 +38,10 @@ int main() {
 			GetIReinforcement(turn, &p1, &p2);
 			if (extraTurn == 0){
 				turn = (turn % 2 + 3) - 2; 
+				MinShieldDuration(turn,&p1,&p2);
 			} else {
 				extraTurn -=1;
 				printf("Anda memiliki extra turn %d kali\n",extraTurn);
-				MinShieldDuration(turn,&p1,&p2);
 			}
 			// turn = (turn % 2 + 3) - 2; 
 			if (attackUp){

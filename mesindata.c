@@ -267,11 +267,11 @@ void INFOTURN(int *turn)
 */
 {
 	/* Algoritma */
-	turn = 0;
+	*turn = 0;
 	while (CC != ENDLINE && CC != ENDLINE2 && !feof(pita)) {
-		turn = turn * 10 + KarakterToInt(CC);
+		*turn = *turn * 10 + KarakterToInt(CC);
 		ADV();
 	}
-	if (feof(pita) || turn != 2 || turn != 1) { ERROR(); }
+	if (feof(pita) || *turn != 2 || *turn != 1) { ERROR(); }
 	NEXTDATA();
 }
