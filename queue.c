@@ -62,9 +62,12 @@ void Add (Queue * Q, skilltype X){
         Head(*Q)     = 1;
         Tail(*Q)     = 1;
         InfoTail(*Q) = X;
+        printf("aaaa");
     } else { //Not Empty
+        printf("Masuk ke Add\n");
         Tail(*Q) = (Tail(*Q) % MaxElQ(*Q)) +1;
         InfoTail(*Q) = X;
+        printf("berhasil ditambah ke ADD");
     }
 }
 /* Proses: Menambahkan X pada Q dengan aturan FIFO */
@@ -73,11 +76,11 @@ void Add (Queue * Q, skilltype X){
 
 void Del (Queue * Q, skilltype * X){
     *X = InfoHead(*Q);
-    if (Tail(*Q)==Head(*Q)) { //Tail(*Q)=1 karena prekondisi tidak mungkin kosong
+    if (NBElmt(*Q) == 1) { //Tail(*Q)=1 karena prekondisi tidak mungkin kosong
         Head(*Q) = NilQ;
         Tail(*Q) = NilQ;
     } else {
-        Head(*Q) =(Head(*Q)%MaxElQ(*Q)+1);
+        Head(*Q) = (Head(*Q) % MaxElQ(*Q) +1);
     }
 }
 /* Proses: Menghapus X pada Q dengan aturan FIFO */

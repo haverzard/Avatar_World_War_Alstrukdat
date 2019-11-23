@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include "matriksint.h"
 
+/* Variable Global */
+MATRIKS_INT Hubungan;
+
 /* *** Konstruktor membentuk MATRIKS *** */
 void MakeMATRIKS_INT (int NB, int NK, MATRIKS_INT * M)
 /* Membentuk sebuah MATRIKS "kosong" yang siap diisi berukuran NB x NK di "ujung kiri" memori */

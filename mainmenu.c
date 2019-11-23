@@ -60,18 +60,46 @@ void LOADGAME() {
 	}
 }
 
-void SAVEGAME(Player P1, Player P2) 
+void SAVEGAME(int num, Player P1, Player P2) 
 /*	I.S. P1, P2, TB, GHubungan terdefinisi
 */
 {
 	/* Kamus Lokal */
 	FILE * save;
+	int i, j;
+	Bangunan B;
 
 	/* Algoritma */
 	SCANKATA();
 	if (!EQ_KATA(CKata, "EXIT")) {
 		save = fopen(CKata.TabKata,"w");
+		/* Turn */
+		fprintf(save,"%d\n", num);
+		/* Ukuran Peta */
 		fprintf(save,"%d %d\n", NBrsEff(Peta), NKolEff(Peta));
+		/* Ukuran Array */
+		fprintf(save,"%d\n", MaxElArr(TB));
+		/* Posisi Bangunan */
+		for (i = 1; i <= MaxElArr(TB); i++) {
+			B = ElmtArr(TB,i);
+			fprintf(save, "%c %d %d\n", Jenis(B), Absis(Koordinat(B)), Ordinat(Koordinat(B)));
+		}
+		/* Hubungan Graph */
+		for (i = 1; i <= MaxElArr(TB); i++) {
+			fprintf(save, "%d", ElmtMatInt(Hubungan,i,1));
+			for (j = 2; j <= MaxElArr(TB); j++) {
+				fprintf(save, " %d", ElmtMatInt(Hubungan,i,j));
+			}
+			printf("\n");
+		}
+		/* Info Bangunan */
+		// for (i = 1; i <= MaxElArr(TB); i++) {
+		// 	B = ElmtArr(TB,i);
+		// 	fprintf(save, "%d %d %d %d %d %d %d %d\n", Kepemilikan(B), JumlahPasukan(B), A(B), M(B), P(B), AttackAvai(B), MoveAvai(B));
+		// }
+		/* Isi Stack */
+		/* Isi Queue P1 */
+		/* Isi Queue P2 */ 
 	}
 }
 

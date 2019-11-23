@@ -17,7 +17,6 @@
 int main() {
 	/* Kamus */
 	int i;
-	MATRIKS_INT Hubungan;
 	Player p1, p2;
 
 	/* Inisiasi */
@@ -25,8 +24,9 @@ int main() {
 	
 	/* Algoritma */
 	STARTGAME();
+
 	if (!EndGame) {
-		INFOPETA(&Peta);     
+		INFOPETA(&Peta);
 		INFOBANGUNAN(&TB);
 		LOKASIBANGUNAN(&Peta, &TB);
 		HUBUNGANBANGUNAN(&Hubungan, NBElmt_Array(TB));
@@ -38,7 +38,7 @@ int main() {
 		i = 1;
 		while (!EndGame) {
 			while (!EndTurn) {
-				TURN(i, Peta, &p1, &p2);
+				TURN(i, &p1, &p2);
 			}
 			UpdateListBangunan(i, p1, p2);
 			//Ini buat testing doang

@@ -264,7 +264,7 @@ void Barrage (Player *user, Player *enemy){
 void KeepSkill (Player *user, skilltype skillName){
 	/* Algoritma */
 	if (!IsFull_Queue(Skill(*user))){
-		printf("keeeeppppppppppppppppppppppppppppppppppppppppp");
+		printf("KEEEEEEEEEEEEEEEEEEEEEPPPPPPPPPPPPPPP");
 		Add(&Skill(*user),skillName);	
 	}    
 }
@@ -392,6 +392,7 @@ void GetExtraTurn(int num,Player *P1,Player *P2,int Fdawal,int Fdakhir){
 		if (num == NoPemain(*P1)){
 			KeepSkill(P2,'E');
 			printf("Lawanmu mendapat skill Extra Turn \n");
+			printf("SKILLL %c\n", InfoTail(Skill(*P2)));
 		} else {
 			KeepSkill(P1,'E');
 			printf("Lawanmu mendapat skill Extra Turn \n");

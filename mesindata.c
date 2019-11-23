@@ -59,6 +59,7 @@ void INFOPETA(MATRIKS *Peta)
 	int NB, NK;
 
 	/* Algoritma */
+	IgnoreBlank_DATA();
 	NB = 0;
 	NK = 0;
 	while (CC != BLANK) {
@@ -83,6 +84,7 @@ void INFOBANGUNAN(TabBangunan *TB)
 	int size;
 
 	/* Algoritma */
+	IgnoreBlank_DATA();
 	size = 0;
 	while (CC != ENDLINE && CC != BLANK) {
 		size = size * 10 + KarakterToInt(CC);
@@ -92,7 +94,7 @@ void INFOBANGUNAN(TabBangunan *TB)
 	NEXTDATA();
 }
 
-void LOKASIBANGUNAN(MATRIKS *Peta, TabBangunan *P) 
+void LOKASIBANGUNAN(MATRIKS *Peta, TabBangunan *TB) 
 /*	I.S. TB sembarang 
 	F.S. Terbentuk TabBangunan TB sesuai konfigurasi dari file eksternal
 */
@@ -101,8 +103,8 @@ void LOKASIBANGUNAN(MATRIKS *Peta, TabBangunan *P)
 	int X, Y, i;
 
 	/* Algoritma */
-	for (i = 1; i <= MaxElArr(TB); i++) {
-		InitBangunan(&ElmtArr(*P,i), CC);
+	for (i = 1; i <= MaxElArr(*TB); i++) {
+		InitBangunan(&ElmtArr(*TB,i), CC);
 		ADV();
 		IgnoreBlank_DATA();
 		X = 0;
@@ -116,8 +118,8 @@ void LOKASIBANGUNAN(MATRIKS *Peta, TabBangunan *P)
 			X = X * 10 + KarakterToInt(CC);
 			ADV();
 		}
-		Koordinat(ElmtArr(*P,i)) = MakePOINT(Y, X);
-		ElmtMat(*Peta,Y,X) = Jenis(ElmtArr(*P,i));
+		Koordinat(ElmtArr(*TB,i)) = MakePOINT(Y, X);
+		ElmtMat(*Peta,Y,X) = Jenis(ElmtArr(*TB,i));
 		NEXTDATA();
 	}
 }
@@ -144,4 +146,68 @@ void HUBUNGANBANGUNAN (MATRIKS_INT * Hubungan, int BanyakBangunan) {
 	}
 	NBrsEff(*Hubungan) = i-1;
 	NKolEff(*Hubungan) = j-1;
+}
+
+void MOREINFOBANGUNAN(TabBangunan *TB)
+/*	I.S. TB terdefinisi
+	F.S. Informasi Bangunan TB di-load dari file eksternal
+*/
+{
+	/* Kamus Lokal */
+	int i, A;
+
+	/* Algoritma */
+	for (i = 1; i <= MaxElArr(*TB); i++) {
+		ADV();
+		IgnoreBlank_DATA();
+		A = 0;
+		while (CC != BLANK) {
+			A = A * 10 + KarakterToInt(CC);
+			ADV();
+		}
+		Kepemilikan(ElmtArr(*TB,i)) = A;
+		IgnoreBlank_DATA();
+		A = 0;
+		while (CC != BLANK) {
+			A = A * 10 + KarakterToInt(CC);
+			ADV();
+		}
+		JumlahPasukan(ElmtArr(*TB,i)) = A;
+		IgnoreBlank_DATA();
+		A = 0;
+		while (CC != BLANK) {
+			A = A * 10 + KarakterToInt(CC);
+			ADV();
+		}
+		A(ElmtArr(*TB,i)) = A;
+		IgnoreBlank_DATA();
+		A = 0;
+		while (CC != BLANK) {
+			A = A * 10 + KarakterToInt(CC);
+			ADV();
+		}
+		M(ElmtArr(*TB,i)) = A;
+		IgnoreBlank_DATA();
+		A = 0;
+		while (CC != BLANK) {
+			A = A * 10 + KarakterToInt(CC);
+			ADV();
+		}
+		P(ElmtArr(*TB,i)) = A;
+		IgnoreBlank_DATA();
+		A = 0;
+		while (CC != BLANK) {
+			A = A * 10 + KarakterToInt(CC);
+			ADV();
+		}
+		AttackAvai(ElmtArr(*TB,i)) = A;
+		IgnoreBlank_DATA();
+		A = 0;
+		while (CC != ENDLINE) {
+			A = A * 10 + KarakterToInt(CC);
+			ADV();
+		}
+		MoveAvai(ElmtArr(*TB,i)) = A;
+		NEXTDATA();
+	}
 }
