@@ -62,7 +62,7 @@ void Add (Queue * Q, skilltype X){
         Head(*Q)     = 1;
         Tail(*Q)     = 1;
         InfoTail(*Q) = X;
-        printf("aaaa");
+        printf("AAAAAAAAAAaaaa\n");
     } else { //Not Empty
         printf("Masuk ke Add\n");
         Tail(*Q) = (Tail(*Q) % MaxElQ(*Q)) +1;
