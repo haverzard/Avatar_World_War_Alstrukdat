@@ -455,7 +455,7 @@ void HitungFort(int num,Player P1,Player P2,int *F){
 	fort = 0;
 	if (num = NoPemain(P1)){
 		Q = First(ListBangunan(P2));
-	} else {
+	} else if (num = NoPemain(P2)) {
 		Q = First(ListBangunan(P1));
 	}
 	while (Q != Nil){

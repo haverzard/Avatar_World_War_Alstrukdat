@@ -209,7 +209,7 @@ void ATTACK(int NoPemain, Player *P1, Player *P2)
 						if (isCurrentPCritical(NoPemain,*P1,*P2)){
 							// UPDATESTATUS(P1, P2);
 							SerangCritical(B1, B2, count);
-							CriticalOff(NoPemain,&P1,&P2);
+							CriticalOff(NoPemain,P1,P2);
 						} else {
 							// UPDATESTATUS(P1, P2);
 							SerangBangunan(B1, B2, count);	
@@ -223,12 +223,12 @@ void ATTACK(int NoPemain, Player *P1, Player *P2)
 							HitungTower(NoPemain,*P1,*P2,&TAakhir);
 							jumlahBangunanP1akhir = NbElmt(ListBangunan(*P1));
 							jumlahBangunanP2akhir = NbElmt(ListBangunan(*P2));
-							GetShield(NoPemain,&P1,&P2,jumlahBangunanP1awal,jumlahBangunanP1akhir,jumlahBangunanP2awal,jumlahBangunanP2akhir);
+							GetShield(NoPemain,P1,P2,jumlahBangunanP1awal,jumlahBangunanP1akhir,jumlahBangunanP2awal,jumlahBangunanP2akhir);
 							printf("%d",Fdawal);
 							printf("%d",Fdakhir);
-							GetExtraTurn(NoPemain,&P1,&P2,Fdawal,Fdakhir);
-							GetAttackUp(NoPemain,&P1,&P2,TAawal,TAakhir);
-							GetBarrage(NoPemain,&P1,&P2,jumlahBangunanP1awal,jumlahBangunanP1akhir,jumlahBangunanP2awal,jumlahBangunanP2akhir);
+							GetExtraTurn(NoPemain,P1,P2,Fdawal,Fdakhir);
+							GetAttackUp(NoPemain,P1,P2,TAawal,TAakhir);
+							GetBarrage(NoPemain,P1,P2,jumlahBangunanP1awal,jumlahBangunanP1akhir,jumlahBangunanP2awal,jumlahBangunanP2akhir);
 							printf("Bangunan menjadi milikku!\n");
 						} else {
 							printf("Bangunan gagal direbut.\n");
