@@ -37,6 +37,10 @@ void InitPlayer(int num, Player *P);
 	F.S. P terdefinisi sebagai player ke-num
 */
 
+
+boolean CheckWinOrNot(int num, Player P1, Player P2);
+/*	Mengecek apakah semua bangunan player ke-num sudah dikalahkan atau diambil alih */
+
 int NBElmtListB(int NoPemain, Player P1, Player P2);
 /*	Menghasilkan nilai ukuran list untuk player ke-NoPemain*/
 
