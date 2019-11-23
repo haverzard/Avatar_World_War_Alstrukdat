@@ -100,7 +100,11 @@ void SerangBangunan(Bangunan *B1, Bangunan *B2, int N) {
 	AttackAvai(*B1) = false;
 	if (P(*B2)) {
 		JumlahPasukan(*B1) -= N;
-		JumlahPasukan(*B2) -= (3*N)/4;
+		if (JumlahPasukan(*B2) < floor((3*N)/4)) {
+			JumlahPasukan(*B2) = ceiling((4*JumlahPasukan(*B2))/3) - N;
+		} else {
+			JumlahPasukan(*B2) -= floor((3*N)/4);
+		}
 	} else {
 		JumlahPasukan(*B1) -= N;
 		JumlahPasukan(*B2) -= N;
@@ -114,7 +118,11 @@ void SerangCritical(Bangunan *B1,Bangunan *B2,int N){
    atau berkurang sebanyak (3/4)N jika B2 memiliki pertahanan */
 	AttackAvai(*B1) = false;
 	JumlahPasukan(*B1) -= N;
-	JumlahPasukan(*B2) -= 2*N;
+	if (JumlahPasukan(*B2) < 2*N) {
+		JumlahPasukan(*B2) = ceiling(JumlahPasukan(*B2)/2) - N;
+	} else {
+		JumlahPasukan(*B2) -= 2*N;
+	}
 }
 
 void LevelUpBangunan(Bangunan *X) {
