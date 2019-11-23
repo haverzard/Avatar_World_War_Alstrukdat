@@ -391,7 +391,7 @@ void LOADSKILL(Player *P1, Player *P2)
 		if (temp != 'U' && temp != 'S' && temp != 'E' && temp != 'A' && temp != 'H' && temp != 'R' && temp != 'B' && temp != ENDLINE) {
 			ERROR();
 		} else if (temp != ENDLINE) {
-			KeepSkill(P1, temp);
+			KeepSkill(P2, temp);
 		}
 	}
 }
