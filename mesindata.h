@@ -67,4 +67,18 @@ void INFOTURN(int *turn);
     F.S. turn terdefinisi
 */
 
+void INFOCOLOR(Player *P1, Player *P2);
+/*  I.S. Color pada P1 dan P2 sembarang
+    F.S. Color pada P1 dan P2 terdefinisi
+*/
+
+void LOADBANGUNANPLAYER(Player *P1, Player *P2);
+/*  I.S. bangunan milik P1 dan P2 sembarang
+    F.S. bangunan milik P1 dan P2 terdefinisi
+*/
+
+void LOADSKILL(Player *P1, Player *P2);
+/*  I.S. skill milik P1 dan P2 sembarang
+    F.S. skill milik P1 dan P2 terdefinisi
+*/
 #endif

@@ -512,11 +512,17 @@ void MinShieldDuration (int num,Player *P1,Player *P2)
 		if (shieldDuration(*P1)>0) {
 			shieldDuration(*P1) -=1;
 			printf("Efek Shield tinggal %d turn\n",shieldDuration(*P2));
+		} else {
+			ShieldOff(ListBangunan(*P1));
+			printf("Efek Shield habis!");
 		}
 	} else {
 		if (shieldDuration(*P2)>0) {
 			shieldDuration(*P2) -=1;
 			printf("Efek Shield tinggal %d turn\n",shieldDuration(*P2));
+		} else {
+			ShieldOff(ListBangunan(*P2));
+			printf("Efek Shield habis!");
 		}
 	}
 }

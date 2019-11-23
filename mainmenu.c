@@ -69,16 +69,19 @@ void STARTGAME(Player *P1, Player *P2)
 		printf("Masukkan lokasi file data save: "); scanf("%100s", filename);
 		SCAN();
 		STARTDATA(filename);
-		INFOTURN(&turn);
 		INFOPETA(&Peta);
 		INFOBANGUNAN(&TB);
 		LOKASIBANGUNAN(&Peta, &TB);
 		HUBUNGANBANGUNAN(&Hubungan, NBElmt_Array(TB));
 		GenerateHubunganBangunan(&GHubungan, Hubungan);
-		CREATEPLAYER(P1, P2);
+		// CREATEPLAYER(P1, P2);
 		MOREINFOBANGUNAN(&TB);
-		// BacaSkill P1
-		// BacaSkill P2
+		INFOTURN(&turn);
+		INFOCOLOR(P1, P2);
+		LOADBANGUNANPLAYER(P1, P2);
+		LOADSKILL(P1, P2);
+		CreateEmpty_Stack(&Status);
+		printf("File berhasil di load!\n");
 	} else {
 		printl("Input yang benar dong!");
 		EndGame = true;
@@ -94,14 +97,10 @@ void SAVEGAME(int num, Player P1, Player P2)
 	char filename[100];
 	int i, j, NbSkill1, NbSkill2;
 	Bangunan B;
-
+	address temp1, temp2;
 	/* Algoritma */
 	printf("Masukkan lokasi file data save: "); scanf("%100s", filename);
 	save = fopen(filename,"w");
-	/* Turn */
-	fprintf(save,"%d\n", num);
-	/* Warna Pemain */
-	fprintf(save,"%d %d\n", Color(P1), Color(P2));
 	/* Ukuran Peta */
 	fprintf(save,"%d %d\n", NBrsEff(Peta), NKolEff(Peta));
 	/* Ukuran Array */
@@ -119,11 +118,38 @@ void SAVEGAME(int num, Player P1, Player P2)
 		}
 		fprintf(save, "\n");
 	}
+	// =============== SUDAH BEDA SAMA PITAKAR =========================== 
 	/* Info Bangunan */
 	for (i = 1; i <= MaxElArr(TB); i++) {
 		B = ElmtArr(TB,i);
 		fprintf(save, "%d %d %d %d %d %d %d %d\n", Kepemilikan(B), JumlahPasukan(B), Level(B), A(B), M(B), P(B), AttackAvai(B), MoveAvai(B));
 	}
+	/* Turn */
+	fprintf(save,"%d\n", num);
+	/* Warna Pemain */
+	fprintf(save,"%d %d\n", Color(P1), Color(P2));
+	/* List Bangunan P1 */
+	temp1 = First(ListBangunan(P1));
+	if (temp1 != Nil) {
+		fprintf(save, "%d", Info(temp1));
+		temp1 = Next(temp1);
+		while (temp1 != Nil) {
+			fprintf(save, " %d", Info(temp1));
+			temp1 = Next(temp1);
+		}
+	}
+	fprintf(save, "\n");
+	/* List Bangunan P2 */
+	temp2 = First(ListBangunan(P2));
+	if (temp2 != Nil) {
+		fprintf(save, "%d", Info(temp2));
+		temp2 = Next(temp2);
+		while (temp2 != Nil) {
+			fprintf(save, " %d", Info(temp2));
+			temp2 = Next(temp2);
+		}
+	}
+	fprintf(save, "\n");
 	/* Isi Queue Skill P1 */
 	NbSkill1 = NBElmt_Queue(Skill(P1));
 	if (NbSkill1 > 0) {
@@ -131,8 +157,8 @@ void SAVEGAME(int num, Player P1, Player P2)
 		for (i = 2; i <= NbSkill1; i++) {
 			fprintf(save, " %c", Skill(P1).S[i]);
 		}
-		fprintf(save, "\n");
 	}
+	fprintf(save, "\n");
 	/* Isi Queue Skill P2 */ 
 	NbSkill2 = NBElmt_Queue(Skill(P2));
 	if (NbSkill2 > 0) {
