@@ -9,7 +9,7 @@
 #include "matriks.h"
 #include "player.h"
 
-extern int choice;
+extern int turn;
 extern boolean EndGame;
 extern boolean EndTurn;
 extern boolean SkillUsed;
