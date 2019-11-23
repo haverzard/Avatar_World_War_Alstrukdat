@@ -186,7 +186,9 @@ void ChangeOwner(Bangunan *B, Player Me, Player Enemy)
 	/* Algoritma */
 	JumlahPasukanNow = JumlahPasukan(*B);
 	if (Kepemilikan(*B) == NoPemain(Enemy)) {
+		PrintInfo(ListBangunan(Enemy));
 		DelP(&ListBangunan(Enemy),*B);
+		PrintInfo(ListBangunan(Enemy));
 	}
 	InitBangunan(B, Jenis(*B));
 	Kepemilikan(*B) = NoPemain(Me);

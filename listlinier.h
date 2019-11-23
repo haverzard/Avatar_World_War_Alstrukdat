@@ -187,7 +187,7 @@ void IndexLevelUp(List L, int idx);
 
 void LevelUpAll(List L);
 /*	I.S. L dan TB terdefinisi
-	F.S. Semua bangunan dengan indeks TB pada list L di-level up dengan prosedur IndexLevelUp.
+	F.S. Semua bangunan dengan level di bawah 4 dengan indeks TB pada list L di-level up dengan prosedur LevelUpBangunan.
 */
 
 void ShieldOn(List L);

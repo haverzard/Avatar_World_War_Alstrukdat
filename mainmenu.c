@@ -207,11 +207,11 @@ void ATTACK(int NoPemain, Player P1, Player P2)
 						jumlahBangunanP1awal = NbElmt(ListBangunan(P1));
 						jumlahBangunanP2awal = NbElmt(ListBangunan(P2));
 						if (isCurrentPCritical(NoPemain,P1,P2)){
-							UPDATESTATUS(P1, P2);
+							// UPDATESTATUS(P1, P2);
 							SerangCritical(B1, B2, count);
 							CriticalOff(NoPemain,&P1,&P2);
 						} else {
-							UPDATESTATUS(P1, P2);
+							// UPDATESTATUS(P1, P2);
 							SerangBangunan(B1, B2, count);	
 						}
 						// UPDATESTATUS(P1, P2);
@@ -278,7 +278,7 @@ void MOVE(int NoPemain, Player P1, Player P2)
 					printf("Jumlah pasukan: "); scanf("%d", &count);
 					B2 = &ElmtArr(TB, InfoConnectedBuilding(NoPemain, choice, choice2, P1, P2));
 					if (count > 0 && count <= JumlahPasukan(*B1)) {
-						UPDATESTATUS(P1, P2);
+						// UPDATESTATUS(P1, P2);
 						Move(B1, B2, count);
 						printf("%d pasukan dari ", count); 
 						PrintJenisByCode(Jenis(*B1)); printf(" ");

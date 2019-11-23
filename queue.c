@@ -98,6 +98,7 @@ void CopyQueue (Queue Qin, Queue *Qout) {
     if (NbEl > 0) {
         for (int i = 1; i <= NbEl; i++) {
             Add(Qout, (Qin.S[i]));
+            printf("XXXXXXXXXXXXXXXXXXXXX");
         }
     }
 }
