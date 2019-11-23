@@ -366,7 +366,8 @@ void LOADSKILL(Player *P1, Player *P2)
 		if (temp != 'U' && temp != 'S' && temp != 'E' && temp != 'A' && temp != 'H' && temp != 'R' && temp != 'B' && temp != ENDLINE) {
 			ERROR();
 		} else if (temp != ENDLINE) {
-			Add(&Skill(*P1), temp);
+			KeepSkill(P1, temp);
+			// Add(&Skill(*P1), temp);
 		}
 	}
 	if (!feof(pita)) {
@@ -374,7 +375,7 @@ void LOADSKILL(Player *P1, Player *P2)
 	} else {
 		ERROR();
 	}
-	while (CC != ENDLINE && CC != ENDLINE2) {
+	while (CC != ENDLINE && CC != ENDLINE2 && !feof(pita)) {
 		IgnoreBlank_DATA();
 		temp = ENDLINE;
 		while (CC != BLANK && CC != ENDLINE && CC != ENDLINE2 && !feof(pita)) {
@@ -384,7 +385,8 @@ void LOADSKILL(Player *P1, Player *P2)
 		if (temp != 'U' && temp != 'S' && temp != 'E' && temp != 'A' && temp != 'H' && temp != 'R' && temp != 'B' && temp != ENDLINE) {
 			ERROR();
 		} else if (temp != ENDLINE) {
-			Add(&Skill(*P2), temp);
+			KeepSkill(P1, temp);
+			// Add(&Skill(*P2), temp);
 		}
 	}
 }

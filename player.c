@@ -14,7 +14,7 @@
 int extraTurn=0;
 int attackUp = 0;
 
-void InitPlayer(int num, Player *P) 
+void InitPlayer(int num, Player *P, Player Pother) 
 /*	I.S. P belum terdefinisi
 	F.S. P terdefinisi sebagai player ke-num dengan nama dan warna yang benar
 */
@@ -29,7 +29,7 @@ void InitPlayer(int num, Player *P)
 	printf("2. Green	5. Magenta\n");
 	printf("3. Yellow	6. Cyan\n");
 	printf("Masukan: "); scanf("%d", &choice);
-	while (choice > 6 || choice < 1) {
+	while (choice > 6 || choice < 1 || (num == 2 && Color(Pother) == choice)) {
 		printf("Input yang benar dong!\n");
 		printf("Masukan: "); scanf("%d", &choice);
 	}
@@ -43,7 +43,6 @@ void InitPlayer(int num, Player *P)
 	IterateAndOwn(num, &ListBangunan(*P));
 	shieldDuration(*P) = 0;
 	Critical(*P) = false;
-	// attackUpBool(*P) = false;
 }
 
 boolean CheckWinOrNot(int num, Player P1, Player P2) 

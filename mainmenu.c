@@ -80,6 +80,8 @@ void STARTGAME(Player *P1, Player *P2)
 		LOADBANGUNANPLAYER(P1, P2);
 		LOADSKILL(P1, P2);
 		CreateEmpty_Stack(&Status);
+		shieldDuration(*P1) = 0; shieldDuration(*P2) = 0;
+		Critical(*P1) = false; Critical(*P2) = false;
 		printf("File berhasil di load!\n");
 	} else {
 		printl("Input yang benar dong!");
@@ -178,8 +180,8 @@ void CREATEPLAYER(Player *P1, Player *P2)
 	F.S. P1 dan P2 sudah terdefinisi termasuk atribut-atributnya
 */
 {
-	InitPlayer(1, P1);
-	InitPlayer(2, P2);
+	InitPlayer(1, P1, *P2);
+	InitPlayer(2, P2, *P1);
 }
 
 void TURN(int NoPemain, Player *P1, Player *P2)
