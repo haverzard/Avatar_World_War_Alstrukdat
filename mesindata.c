@@ -363,7 +363,7 @@ void LOADSKILL(Player *P1, Player *P2)
 			temp = CC;
 			ADV();
 		}
-		if (temp != 'U' && temp != 'S' && temp != 'E' && temp != 'A' && temp != 'H' && temp != 'R' && temp != 'B') {
+		if (temp != 'U' && temp != 'S' && temp != 'E' && temp != 'A' && temp != 'H' && temp != 'R' && temp != 'B' && temp != ENDLINE) {
 			ERROR();
 		} else if (temp != ENDLINE) {
 			Add(&Skill(*P1), temp);
@@ -381,7 +381,7 @@ void LOADSKILL(Player *P1, Player *P2)
 			temp = CC;
 			ADV();
 		}
-		if (temp != 'U' && temp != 'S' && temp != 'E' && temp != 'A' && temp != 'H' && temp != 'R' && temp != 'B') {
+		if (temp != 'U' && temp != 'S' && temp != 'E' && temp != 'A' && temp != 'H' && temp != 'R' && temp != 'B' && temp != ENDLINE) {
 			ERROR();
 		} else if (temp != ENDLINE) {
 			Add(&Skill(*P2), temp);
