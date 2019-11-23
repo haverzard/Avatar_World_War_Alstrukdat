@@ -72,13 +72,17 @@ address Search (List L, Bangunan B)
 	boolean found;
 
 	/* Algoritma */
-	P = First(L);
-	found = EQ_Bangunan(ElmtArr(TB,Info(P)),B);
-	while (Next(P) != Nil && !found) {
-		P = Next(P);
-		found  = EQ_Bangunan(ElmtArr(TB,Info(P)),B);
+	if (!IsEmpty_LL(L)) {
+		P = First(L);
+		found = EQ_Bangunan(ElmtArr(TB,Info(P)),B);
+		while (Next(P) != Nil && !found) {
+			P = Next(P);
+			found  = EQ_Bangunan(ElmtArr(TB,Info(P)),B);
+		}
+		if (found) { return P; } else { return Nil; }
+	} else {
+		return Nil;
 	}
-	if (found) { return P; } else { return Nil; }
 }
 
 address SearchInfo (List L, int X)
@@ -91,13 +95,17 @@ address SearchInfo (List L, int X)
 	boolean found;
 
 	/* Algoritma */
-	P = First(L);
-	found = Info(P) == X;
-	while (Next(P) != Nil && !found) {
-		P = Next(P);
-		found  = Info(P) == X;
+	if (!IsEmpty_LL(L)) {
+		P = First(L);
+		found = Info(P) == X;
+		while (Next(P) != Nil && !found) {
+			P = Next(P);
+			found  = Info(P) == X;
+		}
+		if (found) { return P; } else { return Nil; }
+	} else {
+		return Nil;
 	}
-	if (found) { return P; } else { return Nil; }
 }
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
