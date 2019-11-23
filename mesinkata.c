@@ -74,7 +74,7 @@ boolean EQ_KATA(Kata X, char Y[]) {
 	/* Algoritma */
 	sama = X.Length == strlen(Y);
 	i = 1;
-	while (Y[i] && sama) {
+	while (i <= X.Length && sama) {
 		sama = (X.TabKata[i] == Y[i-1]);
 		i++;
 	}

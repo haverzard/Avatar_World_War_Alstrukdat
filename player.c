@@ -229,6 +229,8 @@ void Shield (Player *P){
     ShieldOn(ListBangunan(*P));
 	if(shieldDuration(*P)==0){
 		shieldDuration(*P) += 4; //2 round = 4 endturn
+	} else { // Pemakaian Shield yg kedua kali
+		shieldDuration(*P) = 4; //2 round = 4 endturn
 	}
 }
 
@@ -283,7 +285,7 @@ void UseSkillP (Player *user,Player *enemy){
 			Shield(user);
 		} else if ((InfoHead(Skill(*user)) == 'E') || (InfoHead(Skill(*user)) == 'e')){
 			ExtraTurn(user);
-			KeepSkill(enemy,'C');
+			KeepSkill(enemy,'H');
 			printf("Lawan anda mendapatkan skill Critical Hit");
 		} else if ((InfoHead(Skill(*user)) == 'A') || (InfoHead(Skill(*user)) == 'a')){
 			AttackUp(user,enemy);
