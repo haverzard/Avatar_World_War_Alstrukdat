@@ -11,7 +11,7 @@
 /* Konstanta untuk mendefinisikan addressQ tak terdefinisi */
 
 //Nama Skill
-//Instant Upgrade       U atau u
+//Instant Upgrade       U atau uz
 //Shield                S atau s
 //Extra Turn            E atau e
 //Attack Up             A atau a
@@ -46,7 +46,7 @@ boolean IsEmpty_Queue (Queue Q);
 boolean IsFull_Queue (Queue Q);
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
 /* yaitu mengandung elemen sebanyak MaxElQ */
-int NBElmt (Queue Q);
+int NBElmt_Queue (Queue Q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
 
 /* *** Kreator *** */

@@ -13,12 +13,12 @@ boolean IsEmpty_Queue (Queue Q){
 /* Mengirim true jika Q kosong: lihat definisi di atas */
 
 boolean IsFull_Queue (Queue Q){
-    return (NBElmt(Q) == MaxElQ(Q));
+    return (NBElmt_Queue(Q) == MaxElQ(Q));
 }
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
 /* yaitu mengandung elemen sebanyak MaxElQ */
 
-int NBElmt (Queue Q){
+int NBElmt_Queue (Queue Q){
     // return (((Tail(Q)-Head(Q))%MaxElQ(Q)) +1);
     if (IsEmpty_Queue(Q)) {
         return 0;
@@ -76,7 +76,7 @@ void Add (Queue * Q, skilltype X){
 
 void Del (Queue * Q, skilltype * X){
     *X = InfoHead(*Q);
-    if (NBElmt(*Q) == 1) { //Tail(*Q)=1 karena prekondisi tidak mungkin kosong
+    if (NBElmt_Queue(*Q) == 1) { //Tail(*Q)=1 karena prekondisi tidak mungkin kosong
         Head(*Q) = NilQ;
         Tail(*Q) = NilQ;
     } else {
@@ -94,11 +94,10 @@ void CopyQueue (Queue Qin, Queue *Qout) {
     int NbEl;
     /* Algoritma */
     CreateEmpty_Queue(Qout, MaxElQ(Qin));
-    NbEl = NBElmt(Qin);
+    NbEl = NBElmt_Queue(Qin);
     if (NbEl > 0) {
         for (int i = 1; i <= NbEl; i++) {
             Add(Qout, (Qin.S[i]));
-            printf("XXXXXXXXXXXXXXXXXXXXX");
         }
     }
 }

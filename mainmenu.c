@@ -13,6 +13,7 @@
 #include "arraydinpos.h"
 #include "stack.h"
 #include "graph.h"
+#include "queue.h"
 
 #define printl(x) printf("%s\n", x);
 #define println() printf("\n");
@@ -49,10 +50,10 @@ void STARTGAME(Player *P1, Player *P2)
 	printl("1. Start New Game");
 	printl("2. Load Game");
 	printf("Masukkan Anda: "); scanf("%d", &choice);
-	printl("HUHU -_-"); println();
+	println();
 	SCAN();
 	if (choice == 1) {
-		scanf("%100s", filename);
+		printf("Masukkan lokasi data template: "); scanf("%100s", filename);
 		SCAN();
 		STARTDATA(filename);
 		INFOPETA(&Peta);
@@ -64,7 +65,7 @@ void STARTGAME(Player *P1, Player *P2)
 		GetIUpgrade (P1);
 		GetIUpgrade (P2);
 	} else if (choice == 2) {
-		scanf("%100s", filename);
+		printf("Masukkan lokasi file data save: "); scanf("%100s", filename);
 		SCAN();
 		STARTDATA(filename);
 		INFOPETA(&Peta);
@@ -74,6 +75,8 @@ void STARTGAME(Player *P1, Player *P2)
 		GenerateHubunganBangunan(&GHubungan, Hubungan);
 		CREATEPLAYER(P1, P2);
 		MOREINFOBANGUNAN(&TB);
+		// BacaSkill P1
+		// BacaSkill P2
 	} else {
 		printl("Input yang benar dong!");
 		EndGame = true;
@@ -86,55 +89,60 @@ void SAVEGAME(int num, Player P1, Player P2)
 {
 	/* Kamus Lokal */
 	FILE * save;
+	char filename[100];
 	int i, j, NbSkill1, NbSkill2;
 	Bangunan B;
 
 	/* Algoritma */
-	SCANKATA();
-	if (!EQ_KATA(CKata, "EXIT")) {
-		// save = fopen(CKata.TabKata,"w");
-		save = fopen("tes.dat","w");
-		/* Turn */
-		fprintf(save,"%d\n", num);
-		/* Warna Pemain */
-		fprintf(save,"%d %d\n", Color(P1), Color(P2));
-		/* Ukuran Peta */
-		fprintf(save,"%d %d\n", NBrsEff(Peta), NKolEff(Peta));
-		/* Ukuran Array */
-		fprintf(save,"%d\n", MaxElArr(TB));
-		/* Posisi Bangunan */
-		for (i = 1; i <= MaxElArr(TB); i++) {
-			B = ElmtArr(TB,i);
-			fprintf(save, "%c %d %d\n", Jenis(B), Absis(Koordinat(B)), Ordinat(Koordinat(B)));
-		}
-		/* Hubungan Graph */
-		for (i = 1; i <= MaxElArr(TB); i++) {
-			fprintf(save, "%d", ElmtMatInt(Hubungan,i,1));
-			for (j = 2; j <= MaxElArr(TB); j++) {
-				fprintf(save, " %d", ElmtMatInt(Hubungan,i,j));
-			}
-			fprintf(save, "\n");
-		}
-		/* Info Bangunan */
-		for (i = 1; i <= MaxElArr(TB); i++) {
-			B = ElmtArr(TB,i);
-			fprintf(save, "%d %d %d %d %d %d %d %d\n", Kepemilikan(B), JumlahPasukan(B), Level(B), A(B), M(B), P(B), AttackAvai(B), MoveAvai(B));
-		}
-		/* Isi Stack */
-		
-		/* Isi Queue Skill P1 */
-		NbSkill1 = NbElmt(Skill(P1));
-		if (NbSkill1 > 0) {
-			fprintf(save, '%c', Skill(P1).S[i]);
-			for (i = 2; i <= NbSkill1; i++) {
-        	    fprintf(save, ' %c', Skill(P1).S[i]);
-     	   }
-		}
-		/* Isi Queue Skill P2 */ 
-		
-		printf("Game berhasil di save!\n");
-		fclose(save);
+	printf("Masukkan lokasi file data save: "); scanf("%100s", filename);
+	save = fopen(filename,"w");
+	/* Turn */
+	fprintf(save,"%d\n", num);
+	/* Warna Pemain */
+	fprintf(save,"%d %d\n", Color(P1), Color(P2));
+	/* Ukuran Peta */
+	fprintf(save,"%d %d\n", NBrsEff(Peta), NKolEff(Peta));
+	/* Ukuran Array */
+	fprintf(save,"%d\n", MaxElArr(TB));
+	/* Posisi Bangunan */
+	for (i = 1; i <= MaxElArr(TB); i++) {
+		B = ElmtArr(TB,i);
+		fprintf(save, "%c %d %d\n", Jenis(B), Absis(Koordinat(B)), Ordinat(Koordinat(B)));
 	}
+	/* Hubungan Graph */
+	for (i = 1; i <= MaxElArr(TB); i++) {
+		fprintf(save, "%d", ElmtMatInt(Hubungan,i,1));
+		for (j = 2; j <= MaxElArr(TB); j++) {
+			fprintf(save, " %d", ElmtMatInt(Hubungan,i,j));
+		}
+		fprintf(save, "\n");
+	}
+	/* Info Bangunan */
+	for (i = 1; i <= MaxElArr(TB); i++) {
+		B = ElmtArr(TB,i);
+		fprintf(save, "%d %d %d %d %d %d %d %d\n", Kepemilikan(B), JumlahPasukan(B), Level(B), A(B), M(B), P(B), AttackAvai(B), MoveAvai(B));
+	}
+	/* Isi Queue Skill P1 */
+	NbSkill1 = NBElmt_Queue(Skill(P1));
+	if (NbSkill1 > 0) {
+		fprintf(save, "%c", Skill(P1).S[1]); 
+		for (i = 2; i <= NbSkill1; i++) {
+			fprintf(save, " %c", Skill(P1).S[i]);
+		}
+		fprintf(save, "\n");
+	}
+	/* Isi Queue Skill P2 */ 
+	NbSkill2 = NBElmt_Queue(Skill(P2));
+	if (NbSkill2 > 0) {
+		fprintf(save, "%c", Skill(P2).S[1]);
+		for (i = 2; i <= NbSkill2; i++) {
+			fprintf(save, " %c", Skill(P2).S[i]);
+		}
+	}
+	/* Stack */
+	/* Setelah Proses Load diasumsikan pemain tidak dapat UNDO */
+	printf("Game berhasil di save!\n");
+	fclose(save);
 }
 
 void CREATEPLAYER(Player *P1, Player *P2) 
@@ -171,7 +179,6 @@ void TURN(int NoPemain, Player *P1, Player *P2)
 		LEVELUP(NoPemain, *P1, *P2);
 	} else if (EQ_KATA(CKata, "SKILL")) {
 		UseSkill(NoPemain, P1, P2);
-		
 	} else if (EQ_KATA(CKata, "UNDO")) {
 		UNDO(P1, P2, SkillUsed);
 	} else if (EQ_KATA(CKata, "END_TURN")) {
@@ -179,12 +186,11 @@ void TURN(int NoPemain, Player *P1, Player *P2)
 		SkillUsed = false;
 		ResetStatus(&Status);
 	} else if (EQ_KATA(CKata, "SAVE")) {
-		printl("Lokasi save file: "); 
 		SAVEGAME(NoPemain, *P1, *P2);
 	} else if (EQ_KATA(CKata, "MOVE")) {
 		MOVE(NoPemain, *P1, *P2);
 	} else if (EQ_KATA(CKata, "EXIT")) {
-		printl("EXIT!");
+		printl("Selamat tinggal!");
 		EndTurn = true;
 		EndGame = true;
 	} else {
@@ -193,6 +199,7 @@ void TURN(int NoPemain, Player *P1, Player *P2)
 	if (CheckWinOrNot(NoPemain, *P1, *P2)) {
 		println();
 		printf("Selamat kepada Pemain bernomor %d! Anda menang!\n", NoPemain);
+		println();
 		printl("***************CREDITS****************");
 		printl("CREATED BY:");
 		printl("   Kelompok ??? K-3 - Tony Eko");

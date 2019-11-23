@@ -55,4 +55,10 @@ void HUBUNGANBANGUNAN (MATRIKS_INT *Hubungan, int BanyakBangunan);
 /*	I.S. Matriks Hubungan sembarang dan BanyakHubungan terdefinisi 
 	F.S. Terbentuk Matriks Hubungan sesuai konfigurasi dari file eksternal
 */
+
+void MOREINFOBANGUNAN(TabBangunan *TB);
+/*	I.S. TB terdefinisi
+	F.S. Informasi Bangunan TB di-load dari file eksternal
+*/
+
 #endif
