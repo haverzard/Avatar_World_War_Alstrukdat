@@ -11,6 +11,8 @@
 #include "../arraydinpos/arraydinpos.h"
 #include "../bangunan/bangunan.h"
 #include "../point/point.h"
+#include "../queue/queue.h"
+#include "../listlinier/listlinier.h"
 
 char Baris[NMax_DATA+1];
 
