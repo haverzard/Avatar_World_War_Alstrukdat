@@ -60,21 +60,27 @@ void TulisMATRIKSPETA (MATRIKS M, Player P1, Player P2);
    dipisahkan sebuah spasi */
 /* Proses: Menulis nilai setiap elemen M ke layar dengan traversal per baris dan per kolom */
 /* Contoh: menulis matriks 10x15 (ingat di akhir tiap baris, tidak ada spasi)
-=================
-=  PETA ARENA   =
-=================
-*****************
-*        V   T C*
-*  C            *
-*T      V     C *
-*    F          *
-*           F   *
-*  T            *
-*         T     *
-* C   V        T*
-*            C  *
-*C T            *
-*****************
+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+OOOOOOOOOO================================OOOOOOOOOO
+OOOOOOOOOO=          PETA ARENA          =OOOOOOOOOO
+OOOOOOOOOO================================OOOOOOOOOO
+OOOOOOOOOO********************************OOOOOOOOOO
+OOOOOOOOOO********        V   T C*********OOOOOOOOOO
+OOOOOOOOOO********  C            *********OOOOOOOOOO
+OOOOOOOOOO********T      V     C *********OOOOOOOOOO
+OOOOOOOOOO********    F          *********OOOOOOOOOO
+OOOOOOOOOO********           F   *********OOOOOOOOOO
+OOOOOOOOOO********  T            *********OOOOOOOOOO
+OOOOOOOOOO********         T     *********OOOOOOOOOO
+OOOOOOOOOO******** C   V        T*********OOOOOOOOOO
+OOOOOOOOOO********            C  *********OOOOOOOOOO
+OOOOOOOOOO********C T            *********OOOOOOOOOO
+OOOOOOOOOO********************************OOOOOOOOOO
+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 */
 
 #endif

@@ -243,10 +243,12 @@ int CheckOwnerByPosition(TabBangunan T, int X, int Y) {
 	POINT temp;
 
 	/* Algoritma */
-	temp = MakePOINT(X,Y);
-	i = 0;
-	do {
-		i++;
-	} while (!EQ_POINT(Koordinat(ElmtArr(T,i)),temp) && i < MaxElArr(T));
-	return Kepemilikan(ElmtArr(T,i));
+	if (!IsEmpty_Array(T)) {
+		temp = MakePOINT(X,Y);
+		i = 0;
+		do {
+			i++;
+		} while (!EQ_POINT(Koordinat(ElmtArr(T,i)),temp) && i < MaxElArr(T));
+		return Kepemilikan(ElmtArr(T,i));
+	}
 }

@@ -81,51 +81,92 @@ void TulisMATRIKSPETA (MATRIKS M, Player P1, Player P2)
    dipisahkan sebuah spasi */
 /* Proses: Menulis nilai setiap elemen M ke layar dengan traversal per baris dan per kolom */
 /* Contoh: menulis matriks 10x15 (ingat di akhir tiap baris, tidak ada spasi)
-=================
-=  PETA ARENA   =
-=================
-*****************
-*        V   T C*
-*  C            *
-*T      V     C *
-*    F          *
-*           F   *
-*  T            *
-*         T     *
-* C   V        T*
-*            C  *
-*C T            *
-*****************
+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+OOOOOOOOOO================================OOOOOOOOOO
+OOOOOOOOOO=          PETA ARENA          =OOOOOOOOOO
+OOOOOOOOOO================================OOOOOOOOOO
+OOOOOOOOOO********************************OOOOOOOOOO
+OOOOOOOOOO********        V   T C*********OOOOOOOOOO
+OOOOOOOOOO********  C            *********OOOOOOOOOO
+OOOOOOOOOO********T      V     C *********OOOOOOOOOO
+OOOOOOOOOO********    F          *********OOOOOOOOOO
+OOOOOOOOOO********           F   *********OOOOOOOOOO
+OOOOOOOOOO********  T            *********OOOOOOOOOO
+OOOOOOOOOO********         T     *********OOOOOOOOOO
+OOOOOOOOOO******** C   V        T*********OOOOOOOOOO
+OOOOOOOOOO********            C  *********OOOOOOOOOO
+OOOOOOOOOO********C T            *********OOOOOOOOOO
+OOOOOOOOOO********************************OOOOOOOOOO
+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 */
 {
 	/* Kamus Lokal */
-	int i, j;
+	int i, j, k;
 	
 	/* Algoritma */
-	for (j = GetFirstIdxKol(M); j <= GetLastIdxKol(M)+2; j++) {
+	for (i = 1; i <= 3; i++) {
+		for (j = GetFirstIdxKol(M); j <= 20+KolMax+2; j++) {
+			printf("O");
+		}
+		printf("\n");
+	}
+	for (j = GetFirstIdxKol(M); j <= 10; j++) {
+		printf("O");
+	}
+	for (j = GetFirstIdxKol(M); j <= KolMax+2; j++) {
 		printf("=");
 	}
+	for (j = GetFirstIdxKol(M); j <= 10; j++) {
+		printf("O");
+	}
 	printf("\n");
+	for (j = GetFirstIdxKol(M); j <= 10; j++) {
+		printf("O");
+	}
 	printf("=");
-	for (j = GetFirstIdxKol(M); j <= GetLastIdxKol(M)/2-5; j++) {
+	for (j = GetFirstIdxKol(M); j <= KolMax/2-5; j++) {
 		printf(" ");
 	}
 	printf("PETA ARENA");
-	for (j = GetFirstIdxKol(M); j <= GetLastIdxKol(M)-5-GetLastIdxKol(M)/2; j++) {
+	for (j = GetFirstIdxKol(M); j <= KolMax-5-KolMax/2; j++) {
 		printf(" ");
 	}
 	printf("=");
-	printf("\n");
-	for (j = GetFirstIdxKol(M); j <= GetLastIdxKol(M)+2; j++) {
-		printf("=");
+	for (j = GetFirstIdxKol(M); j <= 10; j++) {
+		printf("O");
 	}
 	printf("\n");
-	for (j = GetFirstIdxKol(M); j <= GetLastIdxKol(M)+2; j++) {
+	for (j = GetFirstIdxKol(M); j <= 10; j++) {
+		printf("O");
+	}
+	for (j = GetFirstIdxKol(M); j <= KolMax+2; j++) {
+		printf("=");
+	}
+	for (j = GetFirstIdxKol(M); j <= 10; j++) {
+		printf("O");
+	}
+	printf("\n");
+	for (j = GetFirstIdxKol(M); j <= 10; j++) {
+		printf("O");
+	}
+	for (j = GetFirstIdxKol(M); j <= KolMax+2; j++) {
 		printf("*");
+	}
+	for (j = GetFirstIdxKol(M); j <= 10; j++) {
+		printf("O");
 	}
 	printf("\n");
 	for (i = GetFirstIdxBrs(M); i <= GetLastIdxBrs(M); i++) {
-		printf("*");
+		for (k = GetFirstIdxKol(M); k <= 10; k++) {
+			printf("O");
+		}
+		for (k = GetFirstIdxKol(M); k <= (KolMax-GetLastIdxKol(M)+2)/2; k++) {
+			printf("*");
+		}
 		for (j = GetFirstIdxKol(M); j <= GetLastIdxKol(M); j++) {
 			if (ElmtMat(M,i,j) != ' ' && CheckOwnerByPosition(TB, i, j) == 1) {
 				printByColorNum(Color(P1), ElmtMat(M,i,j));
@@ -135,10 +176,28 @@ void TulisMATRIKSPETA (MATRIKS M, Player P1, Player P2)
 				printf("%c", ElmtMat(M,i,j));
 			}
 		}
-		printf("*\n");
+		for (k = GetFirstIdxKol(M); k <= KolMax-GetLastIdxKol(M)+2-(KolMax-GetLastIdxKol(M)+2)/2; k++) {
+			printf("*");
+		}
+		for (k = GetFirstIdxKol(M); k <= 10; k++) {
+			printf("O");
+		}
+		printf("\n");
 	}
-	for (j = GetFirstIdxKol(M); j <= GetLastIdxKol(M)+2; j++) {
+	for (j = GetFirstIdxKol(M); j <= 10; j++) {
+		printf("O");
+	}
+	for (j = GetFirstIdxKol(M); j <= KolMax+2; j++) {
 		printf("*");
 	}
+	for (j = GetFirstIdxKol(M); j <= 10; j++) {
+		printf("O");
+	}
 	printf("\n");
+	for (i = 1; i <= 3; i++) {
+		for (j = GetFirstIdxKol(M); j <= 20+KolMax+2; j++) {
+			printf("O");
+		}
+		printf("\n");
+	}
 }
