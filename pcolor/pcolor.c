@@ -52,3 +52,20 @@ void printByColorNum(int num, char c)
         case 6: print_cyan(c); break;
     }
 }
+
+
+void printSByColorNum(int num)
+/*  I.S. num terdefinisi
+    F.S. Ditampilkan string selanjutnya dengan warna berdasarkan num
+*/
+{
+    switch(num) {
+        case 1: printf("%s",RED); break;
+        case 2: printf("%s",GREEN); break;
+        case 3: printf("%s",YELLOW); break;
+        case 4: printf("%s",BLUE); break;
+        case 5: printf("%s",MAGENTA); break;
+        case 6: printf("%s",CYAN); break;
+        default: printf("%s",NORMAL);
+    }
+}

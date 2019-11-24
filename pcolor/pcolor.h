@@ -31,3 +31,8 @@ void printByColorNum(int num, char c);
 /*  I.S. num terdefinisi
     F.S. Ditampilkan karakter c dengan warna berdasarkan num
 */
+
+void printSByColorNum(int num);
+/*  I.S. num terdefinisi
+    F.S. Ditampilkan string selanjutnya dengan warna berdasarkan num
+*/

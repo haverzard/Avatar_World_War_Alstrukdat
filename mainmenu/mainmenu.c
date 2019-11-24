@@ -15,6 +15,7 @@
 #include "../stack/stack.h"
 #include "../graph/graph.h"
 #include "../queue/queue.h"
+#include "../pcolor/pcolor.h"
 
 #define printl(x) printf("%s\n", x);
 #define println() printf("\n");
@@ -200,15 +201,19 @@ void TURN(int NoPemain, Player *P1, Player *P2)
 {
 	/* Algoritma */
 	TulisMATRIKSPETA(Peta, *P1, *P2); println();
+	if (NoPemain == 1) { printSByColorNum(Color(*P1)); } else { printSByColorNum(Color(*P2)); }
 	printf("Player %d\n", NoPemain);
 	PrintListBangunan(NoPemain, *P1, *P2); println();
+	if (NoPemain == 1) { printSByColorNum((Color(*P1)+2)%6+1); } else { printSByColorNum((Color(*P2)+4)%6+1); }
 	ShowSkill(NoPemain, *P1, *P2); println();
+	if (NoPemain == 1) { printSByColorNum((Color(*P1)+4)%6+1); } else { printSByColorNum((Color(*P2)+2)%6+1); }
 	printl("COMMAND YANG TERSEDIA:");
 	printl("1. ATTACK	5. END_TURN");
 	printl("2. LEVEL_UP	6. SAVE");
 	printl("3. SKILL	7. MOVE");
 	printl("4. UNDO		8. EXIT");
 	printf("ENTER COMMAND: ");
+	printSByColorNum(0);
 	SCANKATA();
 	if (EQ_KATA(CKata, "ATTACK")) {
 		ATTACK(NoPemain, P1, P2);
