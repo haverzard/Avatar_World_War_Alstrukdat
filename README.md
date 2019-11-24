@@ -11,6 +11,7 @@ Avatar World War adalah permainan *turn-based strategy* yang dibuat dengan mengg
 ### Platform : Linux (Recommended Ubuntu)
 
 ### Cara Instalasi
+
 Pastikan Anda memiliki gcc terlebih dahulu. Lalu gunakan perintah "gcc mainprogram/main/main.c */*.c -o main" sehingga dihasilkan sebuah program binary bernama main. Jalankan binary tersebut dengan perintah "./main" dan permainan siap dimulai.
 
 Untuk test driver sendiri, dapat dilakukan dengan perintah "gcc <nama_adt>/driver/<nama_adt>.c */*.c -o test".
