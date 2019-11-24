@@ -239,7 +239,7 @@ void TURN(int NoPemain, Player *P1, Player *P2)
 		println();
 		printl("***************CREDITS****************");
 		printl("CREATED BY:");
-		printl("   Kelompok ??? K-3 - Tony Eko");
+		printl("   Kelompok 03 K-03 - Tony Eko");
 		printl("                      Arthur Edgar");
 		printl("                      Yonatan Viody");
 		printl("                      Stephen Thajeb");
