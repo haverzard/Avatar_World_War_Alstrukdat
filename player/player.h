@@ -16,7 +16,6 @@ typedef struct {
 	Queue Skill;
 	boolean Critical; // Ini untuk skill Critical Hit
 	int shieldDuration;
-	// boolean attackUpBool;
 } Player;
 
 extern int extraTurn;
@@ -29,14 +28,12 @@ extern int attackUp;
 #define NoPemain(P) (P).NoPemain
 #define shieldDuration(P) (P).shieldDuration
 #define extraTurn(P) (P).extraTurn
-// #define attackUpBool(P) (P).attackUpBool
 
 /* ********* List x Player ********* */
 void InitPlayer(int num, Player *P, Player Pother);
 /*	I.S. P belum terdefinisi
 	F.S. P terdefinisi sebagai player ke-num
 */
-
 
 boolean CheckWinOrNot(int num, Player P1, Player P2);
 /*	Mengecek apakah semua bangunan player ke-num sudah dikalahkan atau diambil alih */
@@ -96,61 +93,125 @@ void LevelUpBP (int num, Player P1, Player P2, int idx);
 	F.S. indeks TB pada info ListBangunan player ke-num ke-idx dinaikkan levelnya
 */
 
-/* ********* Prototype ********* */
 void InstantUpgrade(Player *P);
+/*	I.S. P dan TB terdefinisi
+	F.S. semua bangunan milik player P pada TB dinaikkan levelnya
+*/
 
 void Shield (Player *P);
+/*	I.S. P dan TB terdefinisi
+	F.S. semua bangunan milik player P pada TB diaktifkan pertahannya (P(*P) == true)
+*/
 
 void ExtraTurn (Player *P);
+/*	I.S. P dan variabel global extraTurn terdefinisi
+	F.S. extraTurn nilainya ditambah satu
+*/
 
 void AttackUp (Player *attacker, Player *defender);
+/*	I.S. attacker, defender, dan TB terdefinisi
+	F.S. semua bangunan milik player defender pada TB dinonaktifkan pertahannya (P(*defender) == false)
+*/
 
 void CriticalHit (Player *user);
+/*	I.S. user terdefinisi
+	F.S. atribut Critical pada user bernilai true
+*/
 
 void InstantReinforcement (Player *P);
+/*	I.S. P dan TB terdefinisi
+	F.S. semua bangunan milik player defender pada TB ditambah pasukannya sebanyak lima
+*/
 
 void Barrage (Player *user, Player *enemy);
+/*	I.S. user, enemy, dan TB terdefinisi
+	F.S. semua bangunan milik player enemy pada TB berkurang pasukannya sebanyak sepuluh
+		 Jika JumlahPasukan <= 10, maka JumlahPasukan menjadi nol
+*/
 
 /* *** Keep Skill *** */
 void KeepSkill (Player *user, skilltype skillName);
+/*	I.S. user sembarang, skillName dan Queue Skill terdefinisi
+	F.S. Queue Skill pada user betambah satu elemen yaitu skillName
+*/
 
 /* *** Use Skill*** */
 void UseSkillP (Player *user,Player *enemy);
+/*	I.S. user dan enemy terdefinisi
+	F.S. Queue Skill pada user berkurang satu elemen di Head 
+*/
 
 void UseSkill(int num,Player *user, Player *enemy);
+/*	I.S. user dan enemy terdefinisi
+	F.S. memanggil prosedur UseSkillP dengan user = num dan enemy adalah lawannya
+*/
 
 void PrintSkill(Player P);
+/*	I.S. P terdefinisi
+	F.S. menampilkan nama skill pada Head Queue Skill
+*/
 
 void ShowSkill(int num, Player P1, Player P2);
+/*	I.S. num, P1, dan P2 terdefinisi
+	F.S. menampilkan nama skill pada Head Queue Skill jika skill tersedia,
+		 jika tidak maka menampilkan "-"
+*/
 
 boolean isAllLevel4 (Player P);
+/* isAllLevel4 bernilai true jika semua bangunan player P memiliki level empat */
 
+/****************** PROSEDUR UNTUK MEMPEROLEH SKILL ******************/  
 void GetIUpgrade(Player *P);
+/*	I.S. P terdefinisi
+	F.S. Player P mendapat Skill Instant Upgrade (U)
+*/
 
 void GetShield(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhirP1,int buildingAwalP2 ,int buildingAkhirP2);
+/*	I.S. num, P1, P2, buildingAwalP1, buildingAkhirP1, buildingAwalP2, dan buildingAkhirP2 terdefinisi
+	F.S. lawan dari Player num mendapat Skill Shield (S)
+*/
 
 void GetExtraTurn(int num,Player *P1,Player *P2,int Fdawal,int Fdakhir);
+/*	I.S. num, P1, P2, Fdawal, dan Fdakhir terdefinisi
+	F.S. lawan dari Player num mendapat Skill Extra Turn (E) apabila Fort-nya berkurang satu
+*/
 
 void GetAttackUp (int num,Player *P1,Player *P2,int TAawal,int TAakhir);
+/*	I.S. num, P1, P2, TAawal, dan TAakhir terdefinisi
+	F.S. Player num mendapat Skill Attack Up (A) apabila Tower-nya bertambah menjadi tiga
+*/
 
 void GetIReinforcement(int num, Player *P1,Player *P2);
+/*	I.S. num, P1 dan P2 terdefinisi
+	F.S. Player num mendapat Skill Instant Reinforcement (R) apabila semua bangunannya berlevel empat
+*/
 
 void GetBarrage(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhirP1,int buildingAwalP2 ,int buildingAkhirP2);
-// void GetBarrage(int num,Player *P1,Player *P2);
+/*	I.S. num, P1, P2, buildingAwalP1, buildingAkhirP1, buildingAwalP2, dan buildingAkhirP2 terdefinisi
+	F.S. lawan dari Player num mendapat Skill Barrage (B) apabila player num bertambah jumlah bangunannya menjadi sepuluh
+*/
 
 void HitungFort(int num,Player P1,Player P2,int *F);
+/*	I.S. P1 dan P2 terdefinisi, F sembarang
+	F.S. F berisi banyak Fort yang dimiliki lawan dari player num
+*/
 
 void HitungTower(int num,Player P1,Player P2,int *T);
+/*	I.S. P1 dan P2 terdefinisi, T sembarang
+	F.S. F berisi banyak Tower yang dimiliki lawan dari player num
+*/
 
 boolean isCurrentPCritical (int num,Player P1,Player P2);
-
-void GetShield(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhirP1,int buildingAwalP2 ,int buildingAkhirP2);
+/* bernilai true apabila atribut Critical pada player num bernilai true */
 
 void MinShieldDuration (int num,Player *P1,Player *P2);
+/*	I.S. num, P1, dan P2 terdefinisi
+	F.S. Jika shieldDuration =0 tidak terjadi perubahan, Jika shieldDuration nilai shildDuration berkurang satu
+*/
 
 void CriticalOff (int num,Player *P1,Player *P2);
-
-// void SerangPlayer (int input,Player *attacker, Player *defender);
-// void HitungBangunan (Player P,int *C,int *T, int *F, int *V);
+/*	I.S. num, P1, dan P2 terdefinisi
+	F.S. jika NoPemain(P) == num, maka Critical(P) adalah true 
+*/
 
 #endif

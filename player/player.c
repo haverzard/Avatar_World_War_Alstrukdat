@@ -223,11 +223,18 @@ void LevelUpBP (int num, Player P1, Player P2, int idx)
 }
 
 void InstantUpgrade(Player *P){ 
+/*	I.S. P sembarang, TB terdefinisi
+	F.S. semua bangunan milik player P pada TB dinaikkan levelnya
+*/
 	/* Algoritma */
     LevelUpAll(ListBangunan(*P));
 }
 
 void Shield (Player *P){
+/*	I.S. P sembarang, TB terdefinisi
+	F.S. semua bangunan milik player P pada TB diaktifkan pertahannya (P(*P) == true)
+*/
+
 	/* Algoritma */
     ShieldOn(ListBangunan(*P));
 	if(shieldDuration(*P)==0){
@@ -238,28 +245,43 @@ void Shield (Player *P){
 }
 
 void ExtraTurn (Player *P){
+/*	I.S. P sembarang, variabel global extraTurn terdefinisi
+	F.S. extraTurn nilainya ditambah satu
+*/
 	/* Algoritma */
 	extraTurn += 1;
 }
 
 void AttackUp (Player *attacker,Player *defender){
+/*	I.S. attacker dan defender sembarang, TB terdefinisi
+	F.S. semua bangunan milik player defender pada TB dinonaktifkan pertahannya (P(*defender) == false)
+*/
 	/* Algoritma */
 	AttackUpAll(ListBangunan(*defender));
 	attackUp = 1;
-	// attackUpBool(*attacker) = true;
 }
 
 void CriticalHit (Player *user){
+/*	I.S. user sembarang
+	F.S. atribut Critical pada user bernilai true
+*/
 	/* Algoritma */
     Critical(*user) = true;
 }
 
 void InstantReinforcement (Player *P){
+/*	I.S. P sembarang, TB terdefinisi
+	F.S. semua bangunan milik player defender pada TB ditambah pasukannya sebanyak lima
+*/
 	/* Algoritma */
     ReinforceAll(ListBangunan(*P));
 }
 
 void Barrage (Player *user, Player *enemy){
+/*	I.S. user dan enemy sembarang, TB terdefinisi
+	F.S. semua bangunan milik player enemy pada TB berkurang pasukannya sebanyak sepuluh
+		 Jika JumlahPasukan <= 10, maka JumlahPasukan menjadi nol
+*/
 	/* Algoritma */	
    BarrageAll(ListBangunan(*enemy));
 }
@@ -267,6 +289,10 @@ void Barrage (Player *user, Player *enemy){
 
 /* *** Keep Skill *** */
 void KeepSkill (Player *user, skilltype skillName){
+/*	I.S. user sembarang, skillName dan Queue Skill terdefinisi
+	F.S. Queue Skill pada user betambah satu elemen yaitu skillName
+*/
+
 	/* Algoritma */
 	if (!IsFull_Queue(Skill(*user))){
 		Add(&Skill(*user),skillName);	
@@ -275,6 +301,9 @@ void KeepSkill (Player *user, skilltype skillName){
 
 /* *** Use Skill*** */
 void UseSkillP (Player *user,Player *enemy){
+/*	I.S. user dan enemy terdefinisi
+	F.S. Queue Skill pada user berkurang satu elemen di Head 
+*/
 	/* Kamus Lokal */
 	skilltype X;
 
@@ -305,6 +334,9 @@ void UseSkillP (Player *user,Player *enemy){
 }
 
 void UseSkill(int num, Player *P1, Player *P2) {
+/*	I.S. user dan enemy terdefinisi
+	F.S. memanggil prosedur UseSkillP dengan user = num dan enemy adalah lawannya
+*/
 	/* Algoritma */
 	if (NoPemain(*P1) == num) {
 		UseSkillP(P1,P2);
@@ -314,6 +346,9 @@ void UseSkill(int num, Player *P1, Player *P2) {
 }
 
 void PrintSkill(Player P) {
+/*	I.S. user dan enemy terdefinisi
+	F.S. memanggil prosedur UseSkillP dengan user = num dan enemy adalah lawannya
+*/
 	/* Algoritma */
 	switch(InfoHead(Skill(P))) {
 		case 'U': printf("Instant Upgrade"); break;
@@ -327,6 +362,10 @@ void PrintSkill(Player P) {
 }
 
 void ShowSkill(int num, Player P1, Player P2) {
+/*	I.S. num, P1, dan P2 terdefinisi
+	F.S. menampilkan nama skill pada Head Queue Skill jika skill tersedia,
+		 jika tidak maka menampilkan "-"
+*/
 	/* Algoritma */
 	printf("Skill Available: ");
 	if (NoPemain(P1) == num && !IsEmpty_Queue(Skill(P1))) {
@@ -340,6 +379,7 @@ void ShowSkill(int num, Player P1, Player P2) {
 }
 
 boolean isAllLevel4 (Player P){
+/* isAllLevel4 bernilai true jika semua bangunan player P memiliki level empat */
 	/* Kamus Lokal */
 	address Q;
 	boolean level4;
@@ -364,11 +404,17 @@ boolean isAllLevel4 (Player P){
 
 //Kondisi peroleh skill
 void GetIUpgrade (Player *P){
+/*	I.S. P terdefinisi
+	F.S. Player P mendapat Skill Instant Upgrade (U)
+*/
 	/* Algoritma */
 	KeepSkill(P,'U');
 }
 
 void GetShield(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhirP1,int buildingAwalP2 ,int buildingAkhirP2){
+/*	I.S. num, P1, P2, buildingAwalP1, buildingAkhirP1, buildingAwalP2, dan buildingAkhirP2 terdefinisi
+	F.S. lawan dari Player num mendapat Skill Shield (S)
+*/	
 	/* Algoritma */
 	if (num == NoPemain(*P1)){
 		if ((buildingAwalP2==3) && (buildingAkhirP2 ==2)){
@@ -384,6 +430,9 @@ void GetShield(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhi
 }
 
 void GetExtraTurn(int num,Player *P1,Player *P2,int Fdawal,int Fdakhir){
+/*	I.S. num, P1, P2, Fdawal, dan Fdakhir terdefinisi
+	F.S. lawan dari Player num mendapat Skill Extra Turn (E) apabila Fort-nya berkurang satu
+*/
 	/* Algoritma */
 	if (Fdakhir == Fdawal-1){
 		if (num == NoPemain(*P1)){
@@ -398,6 +447,9 @@ void GetExtraTurn(int num,Player *P1,Player *P2,int Fdawal,int Fdakhir){
 }
 
 void GetAttackUp (int num,Player *P1,Player *P2,int TAawal,int TAakhir){
+/*	I.S. num, P1, P2, TAawal, dan TAakhir terdefinisi
+	F.S. Player num mendapat Skill Attack Up (A) apabila Tower-nya bertambah menjadi tiga
+*/
 	/* Algoritma */
 	if ((TAawal == 2) && (TAakhir ==3)){
 		if (num == NoPemain(*P1)){
@@ -411,6 +463,9 @@ void GetAttackUp (int num,Player *P1,Player *P2,int TAawal,int TAakhir){
 }
 
 void GetIReinforcement(int num, Player *P1,Player *P2){
+/*	I.S. num, P1 dan P2 terdefinisi
+	F.S. Player num mendapat Skill Instant Reinforcement (R) apabila semua bangunannya berlevel empat
+*/
 	/* Algoritma */
 	if (NoPemain(*P1) == num) {
 		if (isAllLevel4(*P1)){
@@ -427,6 +482,9 @@ void GetIReinforcement(int num, Player *P1,Player *P2){
 
 
 void GetBarrage(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkhirP1,int buildingAwalP2 ,int buildingAkhirP2){
+/*	I.S. num, P1, P2, buildingAwalP1, buildingAkhirP1, buildingAwalP2, dan buildingAkhirP2 terdefinisi
+	F.S. lawan dari Player num mendapat Skill Barrage (B) apabila player num bertambah jumlah bangunannya menjadi sepuluh
+*/
 	/* Algoritma */
 	if (num == NoPemain(*P1)){
 		if ((buildingAwalP1==9) && (buildingAkhirP1 ==10)){
@@ -443,6 +501,9 @@ void GetBarrage(int num,Player *P1,Player *P2,int buildingAwalP1,int buildingAkh
 
 
 void HitungFort(int num,Player P1,Player P2,int *F){
+/*	I.S. P1 dan P2 terdefinisi, F sembarang
+	F.S. F berisi banyak Fort yang dimiliki lawan dari player num
+*/
 	/* Kamus Lokal */
 	address Q;
 	int fort;
@@ -464,6 +525,9 @@ void HitungFort(int num,Player P1,Player P2,int *F){
 }
 
 void HitungTower(int num,Player P1,Player P2,int *T){
+/*	I.S. P1 dan P2 terdefinisi, T sembarang
+	F.S. F berisi banyak Tower yang dimiliki lawan dari player num
+*/
 	/* Kamus Lokal */
 	address Q;
 	int tower;
@@ -485,6 +549,7 @@ void HitungTower(int num,Player P1,Player P2,int *T){
 }
 
 boolean isCurrentPCritical (int num,Player P1,Player P2){
+/* bernilai true apabila atribut Critical pada player num bernilai true */
 	/* Algoritma */
 	if (NoPemain(P1) == num) {
 		if (Critical(P1)){
@@ -502,7 +567,9 @@ boolean isCurrentPCritical (int num,Player P1,Player P2){
 }
 
 void MinShieldDuration (int num,Player *P1,Player *P2)
-//FS: Jika shieldDuration =0 tidak terjadi perubahan, Jika shieldDuration tidak nol maka dikurangin 1
+/*	I.S. num, P1, dan P2 terdefinisi
+	F.S. Jika shieldDuration =0 tidak terjadi perubahan, Jika shieldDuration nilai shildDuration berkurang satu
+*/
 {
 	/* Algoritma */
 	if(NoPemain(*P1) == num) {
@@ -523,7 +590,9 @@ void MinShieldDuration (int num,Player *P1,Player *P2)
 }
 
 void CriticalOff (int num,Player *P1,Player *P2)
-//Prekondisi jika NoPemain(P) == num, maka Critical(P) adalah true 
+/*	I.S. num, P1, dan P2 terdefinisi
+	F.S. jika NoPemain(P) == num, maka Critical(P) adalah true 
+*/
 {
 	/* Algoritma */
 	if (NoPemain(*P1) == num) {
