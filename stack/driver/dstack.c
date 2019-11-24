@@ -1,7 +1,7 @@
 /* Driver STACK */
 
 #include <stdio.h>
-#include "../../stack/stack.c"
+#include "../../stack/stack.h"
 
 #define printnull() printf("Tidak Ada Isi Dalam Stack!\n")
 #define printfull() printf("Stack Sudah Penuh!\n")
@@ -18,8 +18,8 @@ int main () {
 
     /* ALGORITMA */
     
-    /* Test Create Graph */
-    printf("Test Create Graph\n"); println();
+    /* Test Create Stack */
+    printf("Test Create Stack\n"); println();
     CreateEmpty_Stack(&S);
 
     /* Test Isi Stack */
@@ -55,12 +55,6 @@ int main () {
     else if (IsFull_Stack(S)) printfull();
     else prints();
     println();
-
-    /* Test Update Status */
-
-
-    /* Test Undo Status */
-
 
     /* Test Reset Status */
     printf("TEST RESET STATUS"); println();
