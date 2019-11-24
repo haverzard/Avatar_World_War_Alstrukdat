@@ -40,9 +40,12 @@ int main() {
 				MinShieldDuration(turn,&p1,&p2);
 			} else {
 				extraTurn -=1;
-				printf("Anda memiliki extra turn %d kali\n",extraTurn);
+				if (extraTurn > 0) {
+					printf("Anda memiliki extra turn %d kali\n",extraTurn);
+				} else {
+					printf("Ini extra turn yang terakhir!\n");
+				}
 			}
-			// turn = (turn % 2 + 3) - 2; 
 			if (attackUp){
 				attackUp = 0;
 			}

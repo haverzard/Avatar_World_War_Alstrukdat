@@ -438,7 +438,6 @@ void GetExtraTurn(int num,Player *P1,Player *P2,int Fdawal,int Fdakhir){
 		if (num == NoPemain(*P1)){
 			KeepSkill(P2,'E');
 			printf("Lawanmu mendapat skill Extra Turn \n");
-			printf("SKILLL %c\n", InfoTail(Skill(*P2)));
 		} else {
 			KeepSkill(P1,'E');
 			printf("Lawanmu mendapat skill Extra Turn \n");
@@ -573,18 +572,26 @@ void MinShieldDuration (int num,Player *P1,Player *P2)
 {
 	/* Algoritma */
 	if(NoPemain(*P1) == num) {
-		if (shieldDuration(*P1)>0) {
-			shieldDuration(*P1) -=1;
-			printf("Efek Shield tinggal %d turn\n",shieldDuration(*P2));
-		} else {
-			ShieldOff(ListBangunan(*P1));
-		}
-	} else {
 		if (shieldDuration(*P2)>0) {
 			shieldDuration(*P2) -=1;
-			printf("Efek Shield tinggal %d turn\n",shieldDuration(*P2));
+			if (shieldDuration(*P2) > 0) {
+				printf("Efek Shield P2 tinggal %d turn\n",shieldDuration(*P2));
+			} else {
+				printf("Efek Shield P2 telah habis\n");
+			}
 		} else {
 			ShieldOff(ListBangunan(*P2));
+		}
+	} else {
+		if (shieldDuration(*P1)>0) {
+			shieldDuration(*P1) -=1;
+			if (shieldDuration(*P1) > 0) {
+				printf("Efek Shield P1 tinggal %d turn\n",shieldDuration(*P1));
+			} else {
+				printf("Efek Shield P1 telah habis\n");
+			}
+		} else {
+			ShieldOff(ListBangunan(*P1));
 		}
 	}
 }

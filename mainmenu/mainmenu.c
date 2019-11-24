@@ -244,10 +244,11 @@ void TURN(int NoPemain, Player *P1, Player *P2)
 		println();
 		printl("***************CREDITS****************");
 		printl("CREATED BY:");
-		printl("   Kelompok 03 K-03 - Tony Eko");
+		printl("   Kelompok 03 K-03 - Tony Eko Yuwono");
 		printl("                      Arthur Edgar");
 		printl("                      Yonatan Viody");
 		printl("                      Stephen Thajeb");
+		printl("                      Dafi Ihsandiya Faraz");
 		EndTurn = true;
 		EndGame = true;
 	}
