@@ -91,7 +91,7 @@ void INFOPETA(MATRIKS *Peta)
 		NK = NK * 10 + KarakterToInt(CC);
 		ADV();
 	}
-	if (NB > 0 && NB <= 20 && NK > 0 && NK <= 30 && !feof(pita)) {
+	if (IsIdxValid_Matriks(NB, NK) && !feof(pita)) {
 		MakeMATRIKS(NB,NK,Peta);
 	} else {
 		ERROR();
