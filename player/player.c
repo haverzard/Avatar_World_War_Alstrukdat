@@ -30,11 +30,11 @@ void InitPlayer(int num, Player *P, Player Pother)
 	printf("2. Green	5. Magenta\n");
 	printf("3. Yellow	6. Cyan\n");
 	printf("Masukan: "); scanf("%d", &choice);
-	SCANKATA();
+	SCAN();
 	while (choice > 6 || choice < 1 || (num == 2 && Color(Pother) == choice)) {
 		printf("Input yang benar dong! Pastikan warna Anda berbeda!\n");
 		printf("Masukan: "); scanf("%d", &choice);
-		SCANKATA();
+		SCAN();
 	}
 	Color(*P) = choice;
 	printf("\n");
