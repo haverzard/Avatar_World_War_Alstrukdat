@@ -43,7 +43,6 @@ void InitPlayer(int num, Player *P, Player Pother)
 	CreateEmpty_Queue(&Skill(*P), 10);
 	First(ListBangunan(*P)) = Alokasi(num);
 	Kepemilikan(ElmtArr(TB,num)) = num;
-	IterateAndOwn(num, &ListBangunan(*P));
 	shieldDuration(*P) = 0;
 	Critical(*P) = false;
 }
