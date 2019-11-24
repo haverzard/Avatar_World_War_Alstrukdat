@@ -211,7 +211,7 @@ void MinShieldDuration (int num,Player *P1,Player *P2);
 
 void CriticalOff (int num,Player *P1,Player *P2);
 /*	I.S. num, P1, dan P2 terdefinisi
-	F.S. jika NoPemain(P) == num, maka Critical(P) adalah true 
+	F.S. jika NoPemain(P) == num, dan Critical (P) bernilai true maka Critical(P) adalah menjadi false,Jika Critical(P) = false, tidak terjadi perubahan 
 */
 
 #endif
