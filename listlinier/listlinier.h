@@ -146,11 +146,6 @@ int NbElmt (List L);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 
 /****************** PROSES TERHADAP LIST ******************/
-void IterateAndOwn(int num, List *L);
-/*	I.S. L, TB, dan GHubungan terdefinisi dan num adalah indeks TB yang valid
-	F.S. Semua bangunan yang terhubung dengan TB.TI[num] menjadi milik player bernomor num
-*/
-
 void UpdateAllBuildings(List L);
 /*	I.S. L dan TB terdefinisi
 	F.S. Semua elemen array berindeks info semua elemen L ditambah jumlah pasukannya sesuai spesifikasi

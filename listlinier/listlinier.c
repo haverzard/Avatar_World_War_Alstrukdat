@@ -416,26 +416,6 @@ int NbElmt (List L)
 }
 
 /****************** PROSES TERHADAP LIST ******************/
-void IterateAndOwn(int num, List *L) 
-/*	I.S. L dan GHubungan terdefinisi dan num adalah indeks TB yang valid
-	F.S. Semua bangunan yang terhubung dengan TB.TI[num] menjadi milik player bernomor num
-*/
-{
-	/* Kamus Lokal */
-	int i;
-
-	/* Algoritma */
-	i = 3;
-	while (i <= NBElmt_Array(TB)) {
-		if (SearchEdge(GHubungan, num, i) != Nil) {
-			InsVLast(L,i);
-			Kepemilikan(ElmtArr(TB,i)) = num;
-		}
-		i++;
-	}
-
-}
-
 void UpdateAllBuildings(List L) 
 /*	I.S. L, TB, dan GHubungan terdefinisi
 	F.S. Semua elemen array berindeks info semua elemen L ditambah jumlah pasukannya sesuai spesifikasi
